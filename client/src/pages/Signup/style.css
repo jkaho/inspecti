@@ -29,6 +29,10 @@
   margin: 0 auto;
 }
 
+.field-div {
+  width: 400px;
+}
+
 .signup-form-div h1 {
   margin-bottom: 10px;
 }
@@ -40,4 +44,52 @@
 .signup-form-div form {
   width: 400px;
   margin-top: 20px;
+}
+
+.signup-btn {
+  width: fit-content;
+}
+
+@media (max-width: 600px) {
+  .signup-seg {
+    min-height: 0;
+  }
+
+  #left-seg {
+    height: 200px;
+    min-height: 200px;
+  }
+
+  #left-seg {
+    padding-right: 0;
+  }
+
+  #inner-left-seg {
+    max-width: 600px;
+    height: 100%;
+  }
+
+  .seg-text {
+    padding-top: 50px;
+  }
+
+  .signup-form-div {
+    padding-right: 0;
+    padding-top: 20px;
+    width: 300px;
+    padding-bottom: 75px;
+  }
+
+  .signup-form-div h1 {
+    text-align: center;
+  }
+
+  .signup-form-div form, .field-div {
+    width: 300px;
+  }
+  
+  .signup-btn {
+    display: block;
+    margin: 0 auto;
+  }
 }

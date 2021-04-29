@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white"
   },
   input: {
-    width: 400,
+    width: "100%",
     marginBottom: 20,
   }
 }));
@@ -36,7 +36,7 @@ export default function CenteredGrid() {
   return (
     <div className={classes.root}>
       <Grid container spacing={0} className={classes.page}>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <div id="left-seg" className="signup-seg">
             <div id="inner-left-seg">
               <div className="seg-text">
@@ -52,16 +52,24 @@ export default function CenteredGrid() {
             </div>
           </div>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <div id="right-seg" className="signup-seg">
             <div className="signup-form-div">
               <h1>Welcome to Inspecti</h1>
               <span id="signup-subtext">Create an account to start sharing your property inspection experiences.</span>
               <form>
-                <TextField required variant="outlined" label="First Name" className={classes.input}></TextField>
-                <TextField required variant="outlined" label="Last Name" className={classes.input}></TextField>
-                <TextField required variant="outlined" label="Email" className={classes.input}></TextField>
-                <TextField required variant="outlined" label="Password" helperText="Must be at least 8 characters" className={classes.input}></TextField>
+                <div className="field-div">
+                  <TextField required variant="outlined" label="First Name" className={classes.input}></TextField>
+                </div>
+                <div className="field-div">
+                  <TextField required variant="outlined" label="Last Name" className={classes.input}></TextField>
+                </div>
+                <div className="field-div">
+                  <TextField required variant="outlined" label="Email" className={classes.input}></TextField>
+                </div>
+                <div className="field-div">
+                  <TextField required variant="outlined" label="Password" helperText="Must be at least 8 characters" className={classes.input}></TextField>
+                </div>
                 <div className="signup-btn">
                   <Button variant="contained" className={classes.button}>SIGN UP</Button>
                 </div>
