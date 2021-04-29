@@ -47,18 +47,18 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.appBarHome}>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.titleHome}>
+          <Typography variant="h6" className={classes.title}>
             Inspecti
           </Typography>
-          <Button className={classes.colorWhite}>Home</Button>
-          <Button className={classes.colorWhite}>Reviews</Button>
-          <Typography variant="body1" className={classes.colorWhite}>
+          <Button className={classes.colorBlack}>Home</Button>
+          <Button className={classes.colorBlack}>Reviews</Button>
+          <Typography variant="body1" className={classes.colorBlack}>
             &nbsp;&nbsp;|&nbsp;&nbsp;
           </Typography>
-          <Button className={classes.colorWhite}>Login</Button>
-          <Button className={classes.joinBtnHome}>Join</Button>
+          <Button className={classes.colorBlack}>Login</Button>
+          <Button className={classes.joinBtn}>Join</Button>
         </Toolbar>
       </AppBar>
     </div>

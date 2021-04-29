@@ -1,0 +1,33 @@
+.login-seg {
+  height: 100%;
+  min-height: 100vh;
+}
+
+#left-seg {
+  padding-right: 10%;
+}
+
+#inner-left-seg {
+  height: 100%;
+  background: rgb(248, 233, 250);
+}
+
+.seg-text {
+  padding-top: 200px;
+  text-align: center;
+}
+
+.no-account-text {
+  margin-bottom: 10px;
+}
+
+.login-form-div {
+  padding-right: 10%;
+  padding-top: 100px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.login-form-div form {
+  width: 400px;
+}
