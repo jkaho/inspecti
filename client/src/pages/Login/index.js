@@ -57,8 +57,8 @@ export default function CenteredGrid() {
             <div className="login-form-div">
               <h1>Welcome back to Inspecti</h1>
               <form>
-                <TextField variant="outlined" label="email" className={classes.input}></TextField>
-                <TextField variant="outlined" label="password" className={classes.input}></TextField>
+                <TextField variant="outlined" label="Email" className={classes.input}></TextField>
+                <TextField variant="outlined" label="Password" className={classes.input}></TextField>
                 <div className="login-btn">
                   <Button variant="contained" className={classes.button}>LOG IN</Button>
                 </div>

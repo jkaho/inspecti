@@ -1,0 +1,43 @@
+.signup-seg {
+  height: 100%;
+  min-height: 100vh;
+}
+
+#left-seg {
+  padding-right: 10%;
+}
+
+#inner-left-seg {
+  height: 100%;
+  max-width: 500px;
+  background: rgb(248, 233, 250);
+}
+
+.seg-text {
+  padding-top: 200px;
+  text-align: center;
+}
+
+.no-account-text {
+  margin-bottom: 10px;
+}
+
+.signup-form-div {
+  padding-right: 10%;
+  padding-top: 5%;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.signup-form-div h1 {
+  margin-bottom: 10px;
+}
+
+.signup-form-div #signup-subtext {
+  color: rgb(128, 128, 128);
+}
+
+.signup-form-div form {
+  width: 400px;
+  margin-top: 20px;
+}
