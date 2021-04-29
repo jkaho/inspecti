@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white"
   },
   input: {
-    width: 400,
+    width: "100%",
     marginBottom: 20,
   }
 }));
@@ -36,7 +36,7 @@ export default function CenteredGrid() {
   return (
     <div className={classes.root}>
       <Grid container spacing={0} className={classes.page}>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <div id="left-seg" className="login-seg">
             <div id="inner-left-seg">
               <div className="seg-text">
@@ -52,13 +52,17 @@ export default function CenteredGrid() {
             </div>
           </div>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <div id="right-seg" className="login-seg">
             <div className="login-form-div">
               <h1>Welcome back to Inspecti</h1>
               <form>
-                <TextField variant="outlined" label="Email" className={classes.input}></TextField>
-                <TextField variant="outlined" label="Password" className={classes.input}></TextField>
+                <div className="field-div">
+                  <TextField variant="outlined" label="Email" className={classes.input}></TextField>
+                </div>
+                <div className="field-div">
+                  <TextField variant="outlined" label="Password" className={classes.input}></TextField>
+                </div>
                 <div className="login-btn">
                   <Button variant="contained" className={classes.button}>LOG IN</Button>
                 </div>

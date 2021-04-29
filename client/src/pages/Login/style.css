@@ -9,6 +9,7 @@
 
 #inner-left-seg {
   height: 100%;
+  max-width: 500px;
   background: rgb(248, 233, 250);
 }
 
@@ -23,11 +24,74 @@
 
 .login-form-div {
   padding-right: 10%;
-  padding-top: 100px;
+  padding-top: 5%;
   width: fit-content;
   margin: 0 auto;
 }
 
+.field-div {
+  width: 400px;
+}
+
+.login-form-div h1 {
+  margin-bottom: 10px;
+}
+
+.login-form-div #login-subtext {
+  color: rgb(128, 128, 128);
+}
+
 .login-form-div form {
   width: 400px;
+  margin-top: 20px;
+}
+
+.login-btn {
+  width: fit-content;
+}
+
+/* ------- MEDIA QUERIES ------- */
+
+@media (max-width: 600px) {
+  .login-seg {
+    min-height: 0;
+  }
+
+  #left-seg {
+    height: 200px;
+    min-height: 200px;
+  }
+
+  #left-seg {
+    padding-right: 0;
+  }
+
+  #inner-left-seg {
+    max-width: 600px;
+    height: 100%;
+  }
+
+  .seg-text {
+    padding-top: 50px;
+  }
+
+  .login-form-div {
+    padding-right: 0;
+    padding-top: 20px;
+    width: 300px;
+    padding-bottom: 75px;
+  }
+
+  .login-form-div h1 {
+    text-align: center;
+  }
+
+  .login-form-div form, .field-div {
+    width: 300px;
+  }
+  
+  .login-btn {
+    display: block;
+    margin: 0 auto;
+  }
 }
