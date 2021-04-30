@@ -1,0 +1,45 @@
+.note-list-div {
+  width: 220px;
+}
+
+/* .current-note-div {
+  min-width: 270px;
+} */
+
+.note-search-div {
+  padding: 10px;
+}
+
+.note-search-div input {
+  height: 30px;
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 2px;
+}
+
+#note-area {
+  width: calc(100% - 240px);
+}
+
+.note-title-input-div {
+  width: 100%;
+}
+
+.note-title-input-div input {
+  width: 100%;
+  height: 50px;
+  font-size: 25px;
+  border: none;
+  padding-left: 20px;
+}
+
+.note-title-input-div input:focus {
+  outline: none;
+}
+
+/* ------- MEDIA QUERIES ------- */
+
+@media (max-width: 850px) {
+  #note-bar {
+    display: none;
+  }
+}
