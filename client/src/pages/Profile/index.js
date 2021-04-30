@@ -1,13 +1,13 @@
 import React from "react";
 import SideMenu from "../../components/SideMenu";
+import BoxContainer from "../../components/BoxContainer";
 import "./style.css";
 
 export default function Profile() {
   return (
     <div>
       <SideMenu />
-      <main className="main-profile">
-        <div className="box-container">
+      <BoxContainer>
           <table className="profile-table">
             <tbody>
               <tr className="info-tr">
@@ -66,8 +66,7 @@ export default function Profile() {
               </tr>
             </tbody>
           </table>
-        </div>
-      </main>
+      </BoxContainer>
     </div>
   );
 };
