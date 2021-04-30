@@ -1,0 +1,29 @@
+.main-profile {
+  position: fixed;
+  top: 65px;
+  left: 240px;
+  height: 100%;
+  width: calc(100vw - 240px);
+}
+
+.box-container {
+  border: 1px solid grey;
+  border-radius: 2px;
+  background: white;
+  height: 70%;
+  width: 85%;
+  margin: 40px auto;
+}
+
+/* -------MEDIA QUERIES------- */
+@media (max-width: 600px) {
+  .main-profile {
+    left: 0;
+    width: 100%;
+  }
+
+  .box-container {
+    margin: 20px auto;
+    width: 90%;
+  }
+}
