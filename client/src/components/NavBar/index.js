@@ -47,7 +47,7 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
+      <AppBar position="static" className={classes.appBar} elevation={0}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Inspecti
