@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
 import { Icon } from "@material-ui/core";
 
@@ -93,6 +94,11 @@ export default function Notes(props) {
           </Grid>
           <Grid item id="note-area" className={classes.note}>
             <div className="current-note-div box-seg">
+              <div className="new-note-btn">
+                <IconButton>
+                  <AddCircleOutlineIcon />
+                </IconButton>
+              </div>
               <div className="note-title-input-div">
                 <input type="text" placeholder="Title"/>
               </div>
