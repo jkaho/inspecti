@@ -1,4 +1,5 @@
 import React from "react";
+import ReviewCard from "../../components/ReviewCard";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
 import IconButton from "@material-ui/core/IconButton";
@@ -89,6 +90,9 @@ export default function Reviews() {
             </tr>
           </tbody>
         </table>
+      </div>
+      <div className="review-container">
+        <ReviewCard />
       </div>
     </div>
   );

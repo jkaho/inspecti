@@ -58,3 +58,8 @@
   margin: 2px;
   vertical-align: top;
 }
+
+.review-container {
+  width: 620px;
+  margin: 0 auto;
+}
