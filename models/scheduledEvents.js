@@ -1,9 +1,16 @@
 // Creates User model
 module.exports = function(sequelize, DataTypes) {
-  const InspectedProperties = sequelize.define("inspectedProperties", {
-    dateInspected: {
+  const ScheduledEvents = sequelize.define("scheduledEvents", {
+    eventType: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 20]
+      }
+    },
+    date: {
       type: DataTypes.DATE,
-      allowNull: true,
+      allowNull: false,
     },
     address: {
       type: DataTypes.STRING,
@@ -36,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    hadAuction: {
+    hasAuction: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
