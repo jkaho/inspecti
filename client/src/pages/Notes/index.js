@@ -7,7 +7,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import IconButton from "@material-ui/core/IconButton";
+import PresentToAllIcon from "@material-ui/icons/PresentToAll";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import "./style.css";
+import { Icon } from "@material-ui/core";
 
 const useStyles = makeStyles({
   noteSection: {
@@ -90,6 +95,121 @@ export default function Notes(props) {
             <div className="current-note-div box-seg">
               <div className="note-title-input-div">
                 <input type="text" placeholder="Title"/>
+              </div>
+              <div className="note-address note-seg">
+                <div className="note-address-btn">
+                  <button>Link an address</button>
+                </div>
+                <div className="note-address-input">
+                  <input type="text" placeholder="Search an address" />
+                </div>
+                <div className="note-address-text"></div>
+                <div className="note-address-specs"></div>
+              </div>
+              <div className="note-review-section note-seg">
+                <button>Create a review</button>
+                <table>
+                  <thead>
+                    <tr>
+                      <th className="note-section-heading">PROPERTY REVIEW</th>
+                      <th className="note-action-btns">
+                        <IconButton aria-label="share">
+                          <PresentToAllIcon />
+                        </IconButton>
+                        <IconButton aria-label="edit">
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton aria-label="delete">
+                          <DeleteIcon />
+                        </IconButton>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="review-criteria-row">
+                      <td>Property condition</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                    <tr className="review-criteria-row">
+                      <td>Potential to capitalise</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                    <tr className="review-criteria-row">
+                      <td>Surroundings</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                    <tr className="review-criteria-row">
+                      <td>Consistency with neighbours</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                    <tr className="review-criteria-row">
+                      <td>Accessibility</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                    <tr className="review-criteria-row">
+                      <td>Privacy</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                    <tr className="review-criteria-row">
+                      <td>Floorplan</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                    <tr className="review-criteria-row">
+                      <td>Outdoor space</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                    <tr className="review-criteria-row">
+                      <td>Indoor-to-outdoow flow</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="note-text-section note-seg">
+                <table>
+                  <thead>
+                    <tr>
+                      <th className="note-section-heading">PROPERTY NOTES</th>
+                      <th className="note-action-btns">
+                        <IconButton>
+                          <EditIcon />
+                        </IconButton>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <textarea></textarea>
+                      </td>
+                    </tr>
+                  </thead>
+                </table>
               </div>
             </div>
           </Grid>

@@ -17,7 +17,7 @@
 }
 
 #note-area {
-  width: calc(100% - 240px);
+  width: calc(100% - 237px);
 }
 
 .note-title-input-div {
@@ -36,10 +36,38 @@
   outline: none;
 }
 
+.note-seg {
+  padding: 10px;
+}
+
+.note-address-input {
+  display: none;
+}
+
+.note-review-section table, .note-text-section table {
+  width: 100%;
+}
+
+.note-review-section table {
+  display: none;
+}
+
+.note-section-heading {
+  text-align: left;
+}
+
+.review-criteria-row td:nth-child(2), .note-action-btns {
+  text-align: right;
+}
+
 /* ------- MEDIA QUERIES ------- */
 
 @media (max-width: 850px) {
   #note-bar {
     display: none;
+  }
+
+  #note-area {
+    width: 100%;
   }
 }
