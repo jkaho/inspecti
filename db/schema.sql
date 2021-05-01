@@ -14,7 +14,7 @@ CREATE TABLE users (
   PRIMARY KEY(id)
 );
 
-CREATE TABLE notes (
+CREATE TABLE reviews (
   id INT AUTO_INCREMENT NOT NULL,
   shared BOOLEAN NOT NULL,
   propertyConditionRating INT,

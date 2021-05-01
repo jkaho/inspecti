@@ -1,6 +1,6 @@
 // Creates User model
 module.exports = function(sequelize, DataTypes) {
-  const Note = sequelize.define("note", {
+  const Review = sequelize.define("review", {
     shared: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -47,5 +47,5 @@ module.exports = function(sequelize, DataTypes) {
     },
   });
 
-  return Note;
+  return Review;
 };
