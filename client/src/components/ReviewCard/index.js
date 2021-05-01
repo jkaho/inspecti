@@ -122,6 +122,13 @@ export default function ReviewCard(props) {
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
+                    <tr>
+                      <td className="review-criteria">Natural light</td>
+                      <td className="review-score">
+                        <span className="score">5</span>
+                        <span className="out-of">/5</span>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </td>

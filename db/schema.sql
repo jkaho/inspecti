@@ -13,3 +13,22 @@ CREATE TABLE users (
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(id)
 );
+
+CREATE TABLE notes (
+  id INT AUTO_INCREMENT NOT NULL,
+  shared BOOLEAN NOT NULL,
+  propertyConditionRating INT,
+  potentialRating INT,
+  surroundingsRating INT,
+  neighbourComparisonRating INT,
+  accessibilityRating INT,
+  privacyRating INT,
+  floorplanRating INT,
+  outdoorSpaceRating INT,
+  indoorOutdoorFlowRating INT,
+  naturalLightRating INT,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(id),
+  -- FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
+);
