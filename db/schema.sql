@@ -40,3 +40,20 @@ CREATE TABLE reviews (
   PRIMARY KEY(id),
   -- FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE inspectedProperties (
+  id INT AUTO_INCREMENT NOT NULL,
+  dateInspected DATETIME,
+  address VARCHAR(255),
+  propertyType VARCHAR(20) NOT NULL,
+  bedrooms INT,
+  bathrooms INT,
+  carSpaces INT,
+  landSize INT,
+  priceGuide INT,
+  hadAuction BOOLEAN NOT NULL,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(id),
+  -- FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
+);
