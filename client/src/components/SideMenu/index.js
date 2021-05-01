@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,6 +25,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
+import "./style.css";
 
 const drawerWidth = 240;
 
@@ -85,31 +87,39 @@ export default function SideMenu(props) {
     <div>
     <Toolbar />
     <div className={classes.drawerContainer}>
-      <List>
-        <ListItem button>
-          <ListItemIcon>
-            <InsertChartOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Profile & Stats" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <DescriptionOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Notes & Reviews" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <EventIcon />
-          </ListItemIcon>
-          <ListItemText primary="Inspection Schedule" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <TableChartOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Inspected Properties" />
-        </ListItem>
+      <List className="link-list">
+        <Link to="/profile">
+          <ListItem button>
+            <ListItemIcon>
+              <InsertChartOutlinedIcon />
+            </ListItemIcon>
+              <ListItemText primary="Profile & Stats" />
+          </ListItem>
+        </Link>
+        <Link to="/notes">
+          <ListItem button>
+            <ListItemIcon>
+              <DescriptionOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Notes & Reviews" />
+          </ListItem>
+        </Link>
+        <Link to="/monthly">
+          <ListItem button>
+            <ListItemIcon>
+              <EventIcon />
+            </ListItemIcon>
+            <ListItemText primary="Inspection Schedule" />
+          </ListItem>
+        </Link>
+        <Link to="/inspected">
+          <ListItem button>
+            <ListItemIcon>
+              <TableChartOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Inspected Properties" />
+          </ListItem>
+        </Link>
       </List>
     </div>
     </div>
@@ -191,7 +201,7 @@ export default function SideMenu(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar} elevation={0}>
-        <Toolbar>
+        <Toolbar className="link-list">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -204,8 +214,12 @@ export default function SideMenu(props) {
           <Typography variant="h6" noWrap className={classes.title}>
             Inspecti
           </Typography>
-          <Button className={classes.colorBlack}>Home</Button>
-          <Button className={classes.colorBlack}>Reviews</Button>
+          <Button className={classes.colorBlack}>
+            <Link to="/">Home</Link>
+          </Button>
+          <Button className={classes.colorBlack}>
+            <Link to="/reviews">Reviews</Link>
+          </Button>
           <Typography variant="body1" className={classes.colorBlack}>
             &nbsp;&nbsp;|&nbsp;&nbsp;
           </Typography>

@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 // import IconButton from '@material-ui/core/IconButton';
+import "./style.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,18 +49,78 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar} elevation={0}>
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+      <AppBar
+        position="static"
+        className={
+          window.location.href === "http://localhost:3000/" ?
+          classes.appBarHome :
+          classes.appBar
+        }
+        elevation={0}
+      >
+        <Toolbar
+          className={
+            window.location.href === "http://localhost:3000/" ?
+            "nav-toolbar-home" :
+            "nav-toolbar"          
+          }
+        >
+          <Typography
+            variant="h6"
+            className={
+              window.location.href === "http://localhost:3000/" ?
+              classes.titleHome :
+              classes.title
+            }
+          >
             Inspecti
           </Typography>
-          <Button className={classes.colorBlack}>Home</Button>
-          <Button className={classes.colorBlack}>Reviews</Button>
-          <Typography variant="body1" className={classes.colorBlack}>
+          <Button
+            className={
+              window.location.href === "http://localhost:3000/" ?
+              classes.colorWhite :
+              classes.colorBlack
+            }
+          >
+            <Link to="/">Home</Link>
+          </Button>
+          <Button
+            className={
+              window.location.href === "http://localhost:3000/" ?
+              classes.colorWhite :
+              classes.colorBlack
+            }
+          >
+            <Link to="/reviews">Reviews</Link>
+          </Button>
+          <Typography
+            variant="body1"
+            className={
+              window.location.href === "http://localhost:3000/" ?
+              classes.colorWhite :
+              classes.colorBlack
+            }
+          >
             &nbsp;&nbsp;|&nbsp;&nbsp;
           </Typography>
-          <Button className={classes.colorBlack}>Login</Button>
-          <Button className={classes.joinBtn}>Join</Button>
+          <Button
+            className={
+              window.location.href === "http://localhost:3000/" ?
+              classes.colorWhite :
+              classes.colorBlack
+            }          
+          >
+            <Link to="/login">Log in</Link>
+          </Button>
+          <Button
+            className={
+              window.location.href === "http://localhost:3000/" ?
+              classes.joinBtnHome :
+              classes.joinBtn
+            }          
+          >
+            <Link to="/signup">Sign up</Link>
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

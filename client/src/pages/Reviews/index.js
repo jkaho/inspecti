@@ -1,4 +1,5 @@
 import React from "react";
+import NavBar from "../../components/NavBar";
 import ReviewCard from "../../components/ReviewCard";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
@@ -30,6 +31,7 @@ export default function Reviews() {
   
   return (
     <div>
+      <NavBar />
       <div className="review-search-div">
         <div className="review-search-box">
           <input type="text" placeholder="Search reviews by suburb, state or postcode" />
