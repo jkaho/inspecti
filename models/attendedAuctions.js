@@ -42,5 +42,9 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, { freezeTableName: true });
 
+  AttendedAuctions.associate = models => {
+    AttendedAuctions.belongsTo(models.user);
+  };
+  
   return AttendedAuctions;
 };

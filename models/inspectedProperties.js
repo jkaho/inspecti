@@ -46,5 +46,9 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, { freezeTableName: true });
 
+  InspectedProperties.associate = models => {
+    InspectedProperties.belongsTo(models.user);
+  };
+  
   return InspectedProperties;
 };

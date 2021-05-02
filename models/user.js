@@ -27,10 +27,45 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        is: ["^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"]
+        len: [8, 50],
+        // is: ["^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"]
       }
     },
   });
+
+  User.associate = models => {
+    User.hasMany(models.notes, {
+      foreignKey: {
+        name: "userId",
+        allowNull: true
+      },
+      onDelete: "CASCADE"
+    });
+    
+    User.hasMany(models.inspectedProperties, {
+      foreignKey: {
+        name: "userId",
+        allowNull: true
+      },
+      onDelete: "CASCADE"
+    });
+
+    User.hasMany(models.attendedAuctions, {
+      foreignKey: {
+        name: "userId",
+        allowNull: true
+      },
+      onDelete: "CASCADE"
+    });
+
+    User.hasMany(models.scheduledEvents, {
+      foreignKey: {
+        name: "userId",
+        allowNull: true
+      },
+      onDelete: "CASCADE"
+    });
+  };
 
   return User;
 };

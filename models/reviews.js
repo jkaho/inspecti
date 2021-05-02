@@ -47,5 +47,9 @@ module.exports = function(sequelize, DataTypes) {
     },
   });
 
+  Review.associate = models => {
+    Review.belongsTo(models.note)
+  }
+
   return Review;
 };

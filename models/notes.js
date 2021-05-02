@@ -18,5 +18,17 @@ module.exports = function(sequelize, DataTypes) {
     },
   });
 
+  Note.associate = models => {
+    Note.hasOne(models.review, {
+      foreignKey: {
+        name: "noteId",
+        allowNull: false
+      },
+      onDelete: "CASCADE"
+    });
+
+    Note.belongsTo(models.user)
+  };
+
   return Note;
 };

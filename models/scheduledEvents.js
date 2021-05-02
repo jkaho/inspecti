@@ -49,5 +49,9 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, { freezeTableName: true });
 
+  ScheduledEvents.associate = models => {
+    ScheduledEvents.belongsTo(models.user);
+  };
+  
   return ScheduledEvents;
 };
