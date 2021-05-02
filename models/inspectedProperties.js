@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true,
     },
-    address: {
+    propertyAddress: {
       type: DataTypes.STRING,
       allowNull: false,
     },

@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    address: {
+    propertyAddress: {
       type: DataTypes.STRING,
       allowNull: false,
     },

@@ -1,10 +1,6 @@
 // Creates User model
 module.exports = function(sequelize, DataTypes) {
   const Note = sequelize.define("note", {
-    shared: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -13,6 +9,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     text: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    propertyAddress: {
       type: DataTypes.STRING,
       allowNull: true,
     },

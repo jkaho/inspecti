@@ -18,13 +18,15 @@ CREATE TABLE notes (
   id INT AUTO_INCREMENT NOT NULL,
   title VARCHAR(40) NOT NULL,
   text VARCHAR(255), 
+  propertyAddress VARCHAR(255),
+  starred BOOLEAN NOT NULL DEFAULT FALSE,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   userId INT NOT NULL,
-  inspectedPropertyId INT NOT NULL,
+  reviewId INT,
   PRIMARY KEY(id)
   FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY(inspectedPropertyId) REFERENCES inspectedProperties(id) ON DELETE SET NULL
+  FOREIGN KEY(reviewId) REFERENCES reviews(id) ON DELETE SET NULL
 );
 
 CREATE TABLE reviews (
@@ -51,7 +53,7 @@ CREATE TABLE reviews (
 CREATE TABLE inspectedProperties (
   id INT AUTO_INCREMENT NOT NULL,
   dateInspected DATETIME,
-  address VARCHAR(255) NOT NULL,
+  propertyAddress VARCHAR(255) NOT NULL,
   propertyType VARCHAR(20) NOT NULL,
   bedrooms INT,
   bathrooms INT,
@@ -70,12 +72,13 @@ CREATE TABLE inspectedProperties (
 CREATE TABLE attendedAuctions (
   id INT AUTO_INCREMENT NOT NULL,
   dateAttended DATETIME,
-  address VARCHAR(255) NOT NULL,
+  propertyAddress VARCHAR(255) NOT NULL,
   propertyType VARCHAR(20) NOT NULL,
   bedrooms INT,
   bathrooms INT,
   carSpaces INT,
   landSize INT,
+  priceGuide INT,
   soldPrice INT,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -88,7 +91,7 @@ CREATE TABLE scheduledEvents (
   id INT AUTO_INCREMENT NOT NULL,
   eventType VARCHAR(20) NOT NULL,
   date DATETIME,
-  address VARCHAR(255) NOT NULL,
+  propertyAddress VARCHAR(255) NOT NULL,
   propertyType VARCHAR(20) NOT NULL,
   bedrooms INT,
   bathrooms INT,
