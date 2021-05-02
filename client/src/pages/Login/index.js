@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CenteredGrid() {
+export default function LogIn() {
   const classes = useStyles();
 
   return (
@@ -46,7 +47,9 @@ export default function CenteredGrid() {
                   </Typography>
                 </div>
                 <div>
-                  <Button variant="contained" className={classes.button}>SIGN UP</Button>
+                  <Link to="/signup" style={{ textDecoration: "none" }}>
+                    <Button variant="contained" className={classes.button}>SIGN UP</Button>
+                  </Link>
                 </div>
               </div>
             </div>

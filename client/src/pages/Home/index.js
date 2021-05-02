@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CenteredGrid() {
+export default function Home() {
   const classes = useStyles();
 
   return (
@@ -30,8 +30,8 @@ export default function CenteredGrid() {
       <Grid item xs={12}>
         <div className="bg"></div>
       </Grid>
-      <Grid container spacing={2} className={classes.guide}>
-        <Grid item xs={12} alignItems="center">
+      <Grid container spacing={2} className={classes.guide} alignItems="center">
+        <Grid item xs={12}>
           <Typography variant="h4" align="center">
             How to use Inspecti
           </Typography>

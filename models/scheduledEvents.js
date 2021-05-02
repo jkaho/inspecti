@@ -49,5 +49,5 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, { freezeTableName: true });
 
-  return InspectedProperties;
+  return ScheduledEvents;
 };

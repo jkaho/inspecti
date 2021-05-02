@@ -1,6 +1,7 @@
 // Require dependencies
 const express = require("express");
 const session = require("express-session");
+const routes = require("./routes");
 
 // Require models for syncing 
 const db = require("./models");;
@@ -24,7 +25,6 @@ app.use(
 );
 
 // API Routes
-const routes = require("./routes");
 app.use(routes);
 
 // Send every other request to the React app

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { Typography, Button, TextField } from "@material-ui/core";
+import API from "../../utils/API";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +32,65 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CenteredGrid() {
+export default function SignUp() {
   const classes = useStyles();
+
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const handleSignUpFormSubmit = (event) => {
+    event.preventDefault();
+    // Create user data object
+    const userData = {
+      firstName: firstNameRef.current.children[1].children[0].value.trim(),
+      lastName: lastNameRef.current.children[1].children[0].value.trim(),
+      email: emailRef.current.children[1].children[0].value.trim(),
+      password: passwordRef.current.children[1].children[0].value.trim(),
+    }
+
+    console.log(userData)
+
+    // Check that all values have been provided
+    if (
+      !userData.firstName || 
+      !userData.lastName ||
+      !userData.email || 
+      !userData.password
+    ) {
+      // RETURN "PLEASE FILL IN ALL DETAILS" ERROR MESSAGE
+      console.log("Value is missing.")
+      return;
+    }
+
+    // If all values have been provided, sign user up 
+    signUpUser(
+      userData.firstName,
+      userData.lastName,
+      userData.email,
+      userData.password
+    );
+
+    // Empty inputs
+    firstNameRef.current.children[1].children[0].value = "";
+    lastNameRef.current.children[1].children[0].value = "";
+    emailRef.current.children[1].children[0].value = "";
+    passwordRef.current.children[1].children[0].value = "";
+  }
+
+  const signUpUser = (firstName, lastName, email, password) => {
+    const userData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    };
+
+    API.signUpUser(userData)
+      .then(() => console.log("User successfully signed up!"))
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className={classes.root}>
@@ -46,7 +105,9 @@ export default function CenteredGrid() {
                   </Typography>
                 </div>
                 <div>
-                  <Button variant="contained" className={classes.button}>LOG IN</Button>
+                  <Link to="/login" style={{ textDecoration: "none" }}>
+                    <Button variant="contained" className={classes.button}>LOG IN</Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -57,21 +118,49 @@ export default function CenteredGrid() {
             <div className="signup-form-div">
               <h1>Welcome to Inspecti</h1>
               <span id="signup-subtext">Create an account to start sharing your property inspection experiences.</span>
-              <form>
+              <form
+                onSubmit={handleSignUpFormSubmit}
+              >
                 <div className="field-div">
-                  <TextField required variant="outlined" label="First Name" className={classes.input}></TextField>
+                  <TextField
+                    required
+                    variant="outlined"
+                    label="First Name"
+                    className={classes.input}
+                    ref={firstNameRef}
+                  ></TextField>
                 </div>
                 <div className="field-div">
-                  <TextField required variant="outlined" label="Last Name" className={classes.input}></TextField>
+                  <TextField
+                    required
+                    variant="outlined"
+                    label="Last Name"
+                    className={classes.input}
+                    ref={lastNameRef}
+                  ></TextField>
                 </div>
                 <div className="field-div">
-                  <TextField required variant="outlined" label="Email" className={classes.input}></TextField>
+                  <TextField 
+                    required 
+                    variant="outlined" 
+                    label="Email" 
+                    className={classes.input}
+                    ref={emailRef}
+                  ></TextField>
                 </div>
                 <div className="field-div">
-                  <TextField required variant="outlined" label="Password" helperText="Must be at least 8 characters" className={classes.input}></TextField>
+                  <TextField 
+                    required 
+                    variant="outlined" 
+                    label="Password" 
+                    type="password"
+                    helperText="Must be at least 8 characters" 
+                    className={classes.input}
+                    ref={passwordRef}
+                  ></TextField>
                 </div>
                 <div className="signup-btn">
-                  <Button variant="contained" className={classes.button}>SIGN UP</Button>
+                  <Button type="submit" variant="contained" className={classes.button}>SIGN UP</Button>
                 </div>
               </form>
             </div>

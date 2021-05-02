@@ -13,7 +13,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
-import { Icon } from "@material-ui/core";
+// import { Icon } from "@material-ui/core";
 
 const useStyles = makeStyles({
   noteSection: {
