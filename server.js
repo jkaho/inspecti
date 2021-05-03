@@ -5,6 +5,9 @@ const session = require("express-session");
 // Require models for syncing 
 const db = require("./models");;
 
+// Require configured passport file 
+const passport = require("./config/passport");
+
 // Set up PORT 
 const PORT = process.env.PORT || 3001;
 
@@ -13,6 +16,11 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Use passport middleware 
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Require CORS for sending front-end API to back-end server across urls
 const cors = require('cors');
 app.use(cors());
 
