@@ -1,0 +1,9 @@
+.filter-div {
+  width: 500px;
+  margin: 10px auto;
+}
+
+.category-select-div {
+  display: inline-block;
+  margin: 0 5px;
+}

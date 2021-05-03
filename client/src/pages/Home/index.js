@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "../../components/NavBar";
 import SearchBar from "../../components/SearchBar";
+import FilterDiv from "../../components/FilterDiv";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -40,6 +41,7 @@ export default function Home() {
           <SearchBar
             placeholder="Search by suburb, state or postcode"
           />
+          <FilterDiv />
         </div>
       </Grid>
       <Grid container spacing={2} className={classes.guide} alignItems="center">
