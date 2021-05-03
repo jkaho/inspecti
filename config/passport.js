@@ -51,3 +51,5 @@ passport.serializeUser((user, cb) => {
 passport.deserializeUser((obj, cb) => {
   cb(null, obj);
 });
+
+module.exports = passport;
