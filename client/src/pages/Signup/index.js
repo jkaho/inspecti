@@ -50,7 +50,7 @@ export default function SignUp() {
       password: passwordRef.current.children[1].children[0].value.trim(),
     }
 
-    console.log(userData)
+    console.log(userData);
 
     // Check that all values have been provided
     if (
@@ -77,7 +77,7 @@ export default function SignUp() {
     lastNameRef.current.children[1].children[0].value = "";
     emailRef.current.children[1].children[0].value = "";
     passwordRef.current.children[1].children[0].value = "";
-  }
+  };
 
   const signUpUser = (firstName, lastName, email, password) => {
     const userData = {
@@ -90,7 +90,7 @@ export default function SignUp() {
     API.signUpUser(userData)
       .then(() => console.log("User successfully signed up!"))
       .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <div className={classes.root}>

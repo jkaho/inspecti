@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { Typography, Button, TextField } from "@material-ui/core";
+import API from "../../utils/API";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,49 @@ const useStyles = makeStyles((theme) => ({
 export default function LogIn() {
   const classes = useStyles();
 
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const handleLogInFormSubmit = (event) => {
+    event.preventDefault();
+    // Create user data object
+    const userData = {
+      email: emailRef.current.children[1].children[0].value,
+      password: passwordRef.current.children[1].children[0].value,
+    }
+
+    console.log(userData);
+    // Check that all values have been provided
+    if (
+      !userData.email || 
+      !userData.password
+    ) {
+      // RETURN "PLEASE FILL IN ALL DETAILS" ERROR MESSAGE
+      console.log("Value is missing.")
+      return;
+    }
+
+    logInUser(
+      userData.email,
+      userData.password
+    );
+
+    // Empty inputs
+    emailRef.current.children[1].children[0].value = "";
+    passwordRef.current.children[1].children[0].value = "";
+  };
+
+  const logInUser = (email, password) => {
+    const userData = {
+      email: email,
+      password: password
+    };
+
+    API.logInUser(userData)
+      .then(() => console.log("User successfully logged in!"))
+      .catch(err => console.log(err));
+  };
+
   return (
     <div className={classes.root}>
       <Grid container spacing={0} className={classes.page}>
@@ -59,15 +103,25 @@ export default function LogIn() {
           <div id="right-seg" className="login-seg">
             <div className="login-form-div">
               <h1>Welcome back to Inspecti</h1>
-              <form>
+              <form onSubmit={handleLogInFormSubmit}>
                 <div className="field-div">
-                  <TextField variant="outlined" label="Email" className={classes.input}></TextField>
+                  <TextField 
+                    variant="outlined" 
+                    label="Email" 
+                    className={classes.input}
+                    ref={emailRef}
+                  ></TextField>
                 </div>
                 <div className="field-div">
-                  <TextField variant="outlined" label="Password" className={classes.input}></TextField>
+                  <TextField 
+                    variant="outlined" 
+                    label="Password" 
+                    className={classes.input}
+                    ref={passwordRef}
+                  ></TextField>
                 </div>
                 <div className="login-btn">
-                  <Button variant="contained" className={classes.button}>LOG IN</Button>
+                  <Button type="submit" variant="contained" className={classes.button}>LOG IN</Button>
                 </div>
               </form>
             </div>
