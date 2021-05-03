@@ -1,3 +1,6 @@
+// Require bcrypt for password hashing 
+const bcrypt = require("bcryptjs");
+
 // Creates User model
 module.exports = function(sequelize, DataTypes) {
   const User = sequelize.define("user", {
@@ -67,5 +70,19 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
 
+  // Create custom method for user model to check if unhashed pw can be compared to db-stored pw
+  User.prototype.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+
+  // Hash passwords before user is created
+  User.addHook("beforeCreate", user => {
+    user.password = bcrypt.hashSync(
+      user.password,
+      bcrypt.genSaltSync(10),
+      null
+    );
+  });
+  
   return User;
 };
