@@ -13,6 +13,9 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const cors = require('cors');
+app.use(cors());
+
 // Serve up static assets (on Heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
