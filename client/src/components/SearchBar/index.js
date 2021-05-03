@@ -4,11 +4,11 @@ import "./style.css";
 
 export default function SearchBar(props) {
   return (
-    <div className="search-box">
-      <input type="text" placeholder={props.placeholder} />
-      <button id="search-reviews-btn">
+    <form className="search-box" onSubmit={props.onSubmit}>
+      <input type="text" placeholder={props.placeholder} ref={props.inputRef} onChange={props.onChange} />
+      <button id="search-reviews-btn" type="submit">
         <SearchIcon />
       </button>
-    </div>
+    </form>
   );
 };

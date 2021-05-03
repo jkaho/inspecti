@@ -7,3 +7,19 @@
   display: inline-block;
   margin: 0 5px;
 }
+
+#bed-select, #size-select {
+  width: 30px;
+}
+
+#bath-select, #type-select {
+  width: 35px;
+}
+
+#car-select {
+  width: 25px;
+}
+
+#price-select {
+  width: 38px;
+}

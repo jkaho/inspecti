@@ -1,0 +1,5 @@
+#suggestion-box {
+  left: calc((100% - 500px) / 2 - 25px);
+  border: 1px solid rgb(219, 219, 219);
+  display: none;
+}

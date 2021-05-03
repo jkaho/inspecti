@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import NavBar from "../../components/NavBar";
 import SearchBar from "../../components/SearchBar";
+import SuggestionMenu from "../../components/SuggestionMenu";
 import FilterDiv from "../../components/FilterDiv";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { Typography } from "@material-ui/core";
+import API from "../../utils/API";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +33,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
+  const searchRef = useRef();
+  // const [search, setSearch] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleInputChange = () => {
+    const query = searchRef.current.value;
+    API.getPropertyListings(query)
+    .then(res => {
+      console.log(res.data);
+      setSuggestions(res.data);
+    })
+    .catch(err => console.log(err));
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log("submitted!")
+  };
 
   return (
     <div className={classes.root}>
@@ -40,6 +60,12 @@ export default function Home() {
           <Typography variant="h4" className={classes.heading}>Search properties for sale</Typography>
           <SearchBar
             placeholder="Search by suburb, state or postcode"
+            inputRef={searchRef}
+            onSubmit={handleFormSubmit}
+            onChange={handleInputChange}
+          />
+          <SuggestionMenu
+            suggestions={suggestions}
           />
           <FilterDiv />
         </div>

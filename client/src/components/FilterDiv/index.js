@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10
   },
   selectEmpty: {
-    width: 50,
+    color: "rgb(102, 4, 148)"
   },
   toggleBtn: {
     verticalAlign: "top",
@@ -77,7 +77,7 @@ function MinMaxToggle() {
 function CategorySelect(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    category: 'hai',
+    category: '',
   });
 
   const handleChange = (event) => {
@@ -91,8 +91,9 @@ function CategorySelect(props) {
   return (
     <div className="category-select-div">
       <NativeSelect
-        className={classes.selectEmpty}
-        value={state.age}
+        id={props.selectId}
+        className={classes.bedWidth}
+        value={state.category}
         category={props.category}
         onChange={handleChange}
         inputProps={{ 'aria-label': props.category }}
@@ -101,10 +102,9 @@ function CategorySelect(props) {
           {props.category}
         </option>
         {props.options.map(option => (
-          <option value={option.value}>{option.text}</option>
+          <option key={option.value} value={option.value}>{option.text}</option>
         ))}
       </NativeSelect>
-      <FormHelperText>{props.category}</FormHelperText>
     </div>
   );
 };
@@ -116,6 +116,7 @@ export default function FilterDiv() {
     <div className="filter-div">
       <MinMaxToggle />
       <CategorySelect
+        selectId="bed-select"
         category="Bed"
         options={[
           { value: 1, text: "1" },
@@ -126,6 +127,7 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        selectId="bath-select"
         category="Bath"
         options={[
           { value: 1, text: "1" },
@@ -136,6 +138,7 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        selectId="car-select"
         category="Car"
         options={[
           { value: 1, text: "1" },
@@ -146,6 +149,7 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        selectId="price-select"
         category="Price"
         options={[
           { value: 500000, text: "$500k" },
@@ -160,6 +164,7 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        selectId="size-select"
         category="Size"
         options={[
           { value: 100, text: "100m²" },
@@ -179,6 +184,7 @@ export default function FilterDiv() {
       />
       <span className={classes.span}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       <CategorySelect
+        selectId="type-select"
         category="Type"
         options={[
           { value: "House", text: "House" },
