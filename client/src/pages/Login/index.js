@@ -77,6 +77,7 @@ export default function LogIn() {
 
     API.logInUser(userData)
       .then(() => console.log("User successfully logged in!"))
+      .then(() => window.location.replace("/profile"))
       .catch(err => {
         console.log(err);
         setOpen(true);
