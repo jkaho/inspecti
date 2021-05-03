@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import PopupMessage from "../../components/PopupMessage";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -89,7 +91,18 @@ export default function SignUp() {
 
     API.signUpUser(userData)
       .then(() => console.log("User successfully signed up!"))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setOpen(true);
+      });
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -167,6 +180,12 @@ export default function SignUp() {
           </div>
         </Grid>
       </Grid>
+      <PopupMessage 
+        handleClose={handleClose}
+        open={open}
+        message="Please format your inputs correctly"
+        severity="error"
+      />
     </div>
   );
 }

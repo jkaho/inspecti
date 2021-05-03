@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import PopupMessage from "../../components/PopupMessage";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LogIn() {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -75,7 +77,18 @@ export default function LogIn() {
 
     API.logInUser(userData)
       .then(() => console.log("User successfully logged in!"))
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setOpen(true);
+      });
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -128,6 +141,12 @@ export default function LogIn() {
           </div>
         </Grid>
       </Grid>
+      <PopupMessage 
+        handleClose={handleClose}
+        open={open}
+        message="You have inputted an incorrect email or password"
+        severity="error"
+      />
     </div>
   );
 }
