@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../../components/NavBar";
+import SearchBar from "../../components/SearchBar";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -19,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     margin: 0
   },
+  heading: {
+    textAlign: "center",
+    color: "white",
+    paddingTop: 20,
+    paddingBottom: 20
+  }
 }));
 
 export default function Home() {
@@ -28,7 +35,12 @@ export default function Home() {
     <div className={classes.root}>
       <NavBar />
       <Grid item xs={12}>
-        <div className="bg"></div>
+        <div className="bg">
+          <Typography variant="h4" className={classes.heading}>Search properties for sale</Typography>
+          <SearchBar
+            placeholder="Search by suburb, state or postcode"
+          />
+        </div>
       </Grid>
       <Grid container spacing={2} className={classes.guide} alignItems="center">
         <Grid item xs={12}>

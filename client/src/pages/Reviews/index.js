@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../../components/NavBar";
 import ReviewCard from "../../components/ReviewCard";
-import SearchIcon from "@material-ui/icons/Search";
+import SearchBar from "../../components/SearchBar";
 import TextField from '@material-ui/core/TextField';
 import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -33,12 +33,9 @@ export default function Reviews() {
     <div>
       <NavBar />
       <div className="review-search-div">
-        <div className="review-search-box">
-          <input type="text" placeholder="Search reviews by suburb, state or postcode" />
-          <button id="search-reviews-btn">
-            <SearchIcon />
-          </button>
-        </div>
+        <SearchBar
+          placeholder="Search reviews by suburb, state or postcode"
+        />
       </div>
       <div className="review-sort-div">
         <table>

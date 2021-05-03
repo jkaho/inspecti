@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.associate = models => {
-    User.hasMany(models.notes, {
+    User.hasMany(models.note, {
       foreignKey: {
         name: "userId",
         allowNull: true
