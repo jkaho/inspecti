@@ -3,7 +3,10 @@ const url = "http://localhost:3001";
 
 const API = {
   signUpUser: function(userData) {
-    return axios.post(url + "/api/user", userData);
+    return axios.post(url + "/api/user/signup", userData);
+  },
+  logInUser: function(userData) {
+    return axios.post(url + "/api/user/login", userData);
   },
   getPropertyListings: function(query) {
     return axios.get(
