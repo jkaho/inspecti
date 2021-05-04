@@ -16,23 +16,23 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Use passport middleware 
-app.use(passport.initialize());
-app.use(passport.session());
-
 // Require CORS for sending front-end API to back-end server across urls
 const cors = require('cors');
 app.use(cors());
+
+// Set up sessions to keep track of user's login status
+app.use(
+  session({ secret: "happy donkey", resave: false, saveUninitialized: false })
+);
+
+// Use passport middleware 
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve up static assets (on Heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-// Set up sessions to keep track of user's login status
-app.use(
-  session({ secret: "happy donkey", resave: true, saveUninitialized: true })
-);
 
 // API Routes
 const routes = require("./routes");

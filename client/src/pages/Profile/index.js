@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
 import "./style.css";
+// import authenticationAPI from "../../utils/authenticationAPI";
 
 export default function Profile() {
+  // useEffect(() => {
+  //   authenticateUser();
+  // }, []);
+
+  // function authenticateUser() {
+  //   authenticationAPI.authenticated()
+  //     .then((res) => {
+  //       console.log(res)
+  //     })
+  //     .catch(err => console.log(err))
+  // }
+
   return (
     <div>
       <SideMenu />

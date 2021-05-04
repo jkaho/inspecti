@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -8,9 +9,19 @@ import MonthlySchedule from "./pages/MonthlySchedule";
 import DailySchedule from "./pages/DailySchedule";
 import InspectedProperties from "./pages/InspectedProperties";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import authenticationAPI from "./utils/authenticationAPI";
 
 function App() {
+  useEffect(() => {
+    authenticateUser();
+  }, []);
+
+  function authenticateUser() {
+    authenticationAPI.authenticated()
+      .then((res) => console.log(res))
+      .catch(err => console.log(err))
+  }
+  
   return (
     <Router>
       <div className="App">

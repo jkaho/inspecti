@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PopupMessage from "../../components/PopupMessage";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { Typography, Button, TextField } from "@material-ui/core";
 import API from "../../utils/API";
+import authenticationAPI from "../../utils/authenticationAPI";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,9 +37,21 @@ const useStyles = makeStyles((theme) => ({
 export default function LogIn() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
+  const [authorisationStatus, setAuthorisationStatus] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  // useEffect(() => {
+  //   authenticateUser();
+  // }, []);
+
+  // function authenticateUser() {
+  //   authenticationAPI.authenticated()
+  //     .then((res) => {
+  //       console.log(res)
+  //     })
+  //     .catch(err => console.log(err))
+  // }
 
   const handleLogInFormSubmit = (event) => {
     event.preventDefault();
@@ -76,8 +89,11 @@ export default function LogIn() {
     };
 
     API.logInUser(userData)
-      .then(() => console.log("User successfully logged in!"))
-      .then(() => window.location.replace("/profile"))
+      .then((res) => {
+        console.log("User successfully logged in!");
+        console.log(res)
+      })
+      // .then(() => window.location.replace("/profile"))
       .catch(err => {
         console.log(err);
         setOpen(true);

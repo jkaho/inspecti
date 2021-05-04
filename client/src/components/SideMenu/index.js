@@ -26,6 +26,7 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import "./style.css";
+import API from "../../utils/API";
 
 const drawerWidth = 240;
 
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SideMenu(props) {
   const classes = useStyles();
 
-  const { window } = props;
+  const { window1 } = props;
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -125,7 +126,7 @@ export default function SideMenu(props) {
     </div>
   )
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container = window1 !== undefined ? () => window().document.body : undefined;
 
   function MyPages() {
     const classes = useStyles();
@@ -197,6 +198,13 @@ export default function SideMenu(props) {
     );
   }
 
+  const logOut = () => {
+    API.logOutUser()
+      .then(() => console.log("User successfully logged out"))
+      // .then(() => window.location.replace("/login"))
+      .catch(err => console.log(err))
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -227,7 +235,7 @@ export default function SideMenu(props) {
             My Pages
           </Button> */}
           <MyPages />
-          <Button className={classes.joinBtn}>Log Out</Button>
+          <Button className={classes.joinBtn} onClick={logOut}>Log Out</Button>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="">

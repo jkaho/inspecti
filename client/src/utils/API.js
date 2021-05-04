@@ -8,6 +8,9 @@ const API = {
   logInUser: function(userData) {
     return axios.post(url + "/api/user/login", userData);
   },
+  logOutUser: function() {
+    return axios.get(url + "/api/user/logout");
+  },
   getPropertyListings: function(query) {
     return axios.get(
       "https://api.domain.com.au/v1/listings/locations?terms=" + query,
