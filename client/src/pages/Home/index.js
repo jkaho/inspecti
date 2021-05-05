@@ -37,12 +37,14 @@ export default function Home() {
   // const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionOpen, setSuggestionOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   const handleInputChange = () => {
     const query = searchRef.current.value;
+    setSearch(query);
     setSuggestions([]);
     if (query !== "") {
-      API.getPropertyListings(query)
+      API.getLocationSuggestions(query)
       .then(res => {
         setSuggestions(res.data);
         if (res.data.length > 0) {
@@ -59,6 +61,23 @@ export default function Home() {
     event.preventDefault();
     setSuggestionOpen(false);
     setSuggestions([]);
+    // API.getPropertyListings(search)
+    //   .then(res => console.log(res.data))
+    //   .catch(err => console.log(err))
+  };
+
+  const handleLocationSuggestionClick = (event) => {
+    event.stopPropagation();
+    const locationEl = event.target;
+    let locationQuery = "";
+    if (locationEl.value) {
+      locationQuery += locationEl.value.trim();
+    } else {
+      locationQuery += locationEl.textContent.trim();
+    }
+
+    setSearch(locationQuery);
+    searchRef.current.value = locationQuery;
   };
 
   return (
@@ -76,6 +95,7 @@ export default function Home() {
           <SuggestionMenu
             suggestions={suggestions}
             open={suggestionOpen}
+            onClick={handleLocationSuggestionClick}
           />
           <FilterDiv />
         </div>

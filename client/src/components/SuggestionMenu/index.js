@@ -46,6 +46,7 @@ export default function SuggestionMenu(props) {
           <ListItem button
             key={formatLocationSuggestion(suggestion)}
             value={formatLocationSuggestion(suggestion)}
+            onClick={props.onClick}
           >
             <ListItemText primary={formatLocationSuggestion(suggestion)} />
           </ListItem>
