@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { Typography, Button, TextField } from "@material-ui/core";
-import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -89,7 +89,7 @@ export default function SignUp() {
       password: password
     };
 
-    API.signUpUser(userData)
+    userAPI.signUpUser(userData)
       .then(() => console.log("User successfully signed up!"))
       .catch((err) => {
         console.log(err);

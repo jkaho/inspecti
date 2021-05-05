@@ -8,7 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { Typography } from "@material-ui/core";
-import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +44,7 @@ export default function Home() {
     setSearch(query);
     setSuggestions([]);
     if (query !== "") {
-      API.getLocationSuggestions(query)
+      userAPI.getLocationSuggestions(query)
       .then(res => {
         setSuggestions(res.data);
         if (res.data.length > 0) {

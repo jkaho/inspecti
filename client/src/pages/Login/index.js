@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { Typography, Button, TextField } from "@material-ui/core";
-import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 import authenticationAPI from "../../utils/authenticationAPI";
 
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +88,7 @@ export default function LogIn() {
       password: password
     };
 
-    API.logInUser(userData)
+    userAPI.logInUser(userData)
       // .then((res) => {
       //   console.log("User successfully logged in!");
       //   console.log(res)

@@ -20,7 +20,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Hidden from "@material-ui/core/Hidden";
 import "./style.css";
-import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 
 const drawerWidth = 240;
 
@@ -123,7 +123,7 @@ export default function SideMenu(props) {
   const container = window1 !== undefined ? () => window().document.body : undefined;
 
   const logOut = () => {
-    API.logOutUser()
+    userAPI.logOutUser()
       // .then(() => console.log("User successfully logged out"))
       .then(() => window.location.replace("/login"))
       .catch(err => console.log(err))

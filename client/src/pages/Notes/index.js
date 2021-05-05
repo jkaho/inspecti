@@ -14,6 +14,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
 // import { Icon } from "@material-ui/core";
+import notesAPI from "../../utils/notesAPI";
 
 const useStyles = makeStyles({
   noteSection: {
@@ -48,6 +49,12 @@ export default function Notes(props) {
 
   useEffect(() => {
     userId = props.id;
+    const user = {
+      userId: userId
+    }
+    notesAPI.getAllNotes(user)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }, []);
 
   const handleTitleInputChange = () => {

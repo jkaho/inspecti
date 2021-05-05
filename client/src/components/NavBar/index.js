@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 // import IconButton from '@material-ui/core/IconButton';
 import "./style.css";
 import authenticationAPI from "../../utils/authenticationAPI";
-import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 import MyPagesMenu from "../MyPagesMenu";
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +63,7 @@ export default function ButtonAppBar() {
   }, []);
 
   const logOut = () => {
-    API.logOutUser()
+    userAPI.logOutUser()
       // .then(() => console.log("User successfully logged out"))
       .then(() => window.location.replace("/login"))
       .catch(err => console.log(err))
