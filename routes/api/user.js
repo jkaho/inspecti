@@ -2,11 +2,21 @@ const router = require("express").Router();
 const passport = require("../../config/passport");
 const usersController = require("../../controllers/usersController");
 
-router.post("/signup", usersController.signUp);
+router.post("/signup", usersController.signUp, (req, res) => {
+  req.login(user, function(err) {
+    if (err) { return next(err); }
+    return res.json(req.user);
+  });
+});
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  req.session.user = req.user;
-  res.json(req.user)
+router.post("/login", passport.authenticate("local", { session: true }), (req, res) => {
+  console.log(req.user)
+  return res.json(req.user);
+});
+
+router.get("/login", passport.authenticate("local", { session: true }), (req, res) => {
+  console.log(req.user)
+  return res.json(req.user);
 });
 
 router.get("/logout", (req, res) => {
@@ -22,8 +32,5 @@ router.get("/authenticated", (req, res) => {
   } 
   return res.json({ isAuthenticated: false });
 });
-
-
-
 
 module.exports = router;

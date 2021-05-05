@@ -154,6 +154,7 @@ export default function LogIn() {
                   <Button type="submit" variant="contained" className={classes.button}>LOG IN</Button>
                 </div>
               </form>
+              <button onClick={() => authenticationAPI.authenticated().then(res => console.log(res)).catch(err => console.log(err))}>Authenticated?</button>
             </div>
           </div>
         </Grid>
