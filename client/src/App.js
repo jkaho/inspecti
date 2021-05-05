@@ -8,33 +8,75 @@ import Notes from "./pages/Notes";
 import MonthlySchedule from "./pages/MonthlySchedule";
 import DailySchedule from "./pages/DailySchedule";
 import InspectedProperties from "./pages/InspectedProperties";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import authenticationAPI from "./utils/authenticationAPI";
 
 function App() {
-  useEffect(() => {
-    authenticateUser();
-  }, []);
+  const [isAuthenticated, setAuthentication] = useState(false);
 
-  function authenticateUser() {
+  useEffect(() => {
     authenticationAPI.authenticated()
-      .then((res) => console.log(res))
-      .catch(err => console.log(err))
-  }
+      .then(res => {
+        setAuthentication(res.data.isAuthenticated);
+      })
+      .catch(err => console.log(err));
+  }, []);
   
   return (
     <Router>
       <div className="App">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
           <Route exact path="/reviews" component={Reviews} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/notes" component={Notes} />
-          <Route exact path="/monthly" component={MonthlySchedule} />
-          <Route exact path="/daily" component={DailySchedule} />
-          <Route exact path="/inspected" component={InspectedProperties} />
+          <Route
+            exact path="/login" 
+            render={() => isAuthenticated ? 
+              <Profile /> : 
+              <Login />
+            }
+          />
+          <Route
+            exact path="/signup" 
+            render={() => isAuthenticated ? 
+              <Profile /> : 
+              <Signup />
+            }
+          />
+          <Route
+            exact path="/profile" 
+            render={() => isAuthenticated ? 
+              <Profile /> : 
+              <Redirect to="/login" />
+            }
+          />
+          <Route
+            exact path="/notes" 
+            render={() => isAuthenticated ? 
+              <Notes /> : 
+              <Redirect to="/login" />
+            }
+          />
+          <Route
+            exact path="/monthly" 
+            render={() => isAuthenticated ? 
+              <MonthlySchedule /> : 
+              <Redirect to="/login" />
+            }
+          />
+          <Route
+            exact path="/daily" 
+            render={() => isAuthenticated ? 
+              <DailySchedule /> : 
+              <Redirect to="/login" />
+            }
+          />
+          <Route
+            exact path="/inspected"
+            render={() => isAuthenticated ? 
+              <InspectedProperties /> :
+              <Redirect to="/login" />
+            }
+          />
         </Switch>
       </div>
     </Router>

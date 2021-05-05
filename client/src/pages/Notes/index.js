@@ -210,7 +210,7 @@ export default function Notes(props) {
                       </th>
                     </tr>
                     <tr>
-                      <td colspan="2">
+                      <td colSpan="2">
                         <textarea></textarea>
                       </td>
                     </tr>
