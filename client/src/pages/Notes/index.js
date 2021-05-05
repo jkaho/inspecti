@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
@@ -39,11 +39,27 @@ const useStyles = makeStyles({
 
 export default function Notes(props) {
   const classes = useStyles();
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   let userId;
+
+  const titleRef = useRef();
+  const textRef = useRef();
 
   useEffect(() => {
     userId = props.id;
   }, []);
+
+  const handleTitleInputChange = () => {
+    const titleValue = titleRef.current.value.trim();
+    setTitle(titleValue);
+  };
+
+  const handleTextInputChange = () => {
+    const textValue = textRef.current.value.trim();
+    setText(textValue);
+  };
+
 
   return (
     <div>
@@ -105,7 +121,11 @@ export default function Notes(props) {
                 </IconButton>
               </div>
               <div className="note-title-input-div">
-                <input type="text" placeholder="Title"/>
+                <input 
+                  ref={titleRef} 
+                  type="text" 
+                  placeholder="Title" 
+                  onChange={handleTitleInputChange}/>
               </div>
               <div className="note-address note-seg">
                 <div className="note-address-btn">
@@ -216,7 +236,10 @@ export default function Notes(props) {
                     </tr>
                     <tr>
                       <td colSpan="2">
-                        <textarea></textarea>
+                        <textarea 
+                          ref={textRef}
+                          onChange={handleTextInputChange}
+                        ></textarea>
                       </td>
                     </tr>
                   </thead>
