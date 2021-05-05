@@ -14,10 +14,10 @@ router.post("/login", passport.authenticate("local", { session: true }), (req, r
   return res.json(req.user);
 });
 
-router.get("/login", passport.authenticate("local", { session: true }), (req, res) => {
-  console.log(req.user)
-  return res.json(req.user);
-});
+// router.get("/login", passport.authenticate("local", { session: true }), (req, res) => {
+//   console.log(req.user)
+//    res.json(req.user);
+// });
 
 router.get("/logout", (req, res) => {
   req.logout();

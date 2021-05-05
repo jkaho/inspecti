@@ -89,11 +89,11 @@ export default function LogIn() {
     };
 
     API.logInUser(userData)
-      .then((res) => {
-        console.log("User successfully logged in!");
-        console.log(res)
-      })
-      // .then(() => window.location.replace("/profile"))
+      // .then((res) => {
+      //   console.log("User successfully logged in!");
+      //   console.log(res)
+      // })
+      .then(() => window.location.replace("/profile"))
       .catch(err => {
         console.log(err);
         setOpen(true);

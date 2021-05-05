@@ -200,8 +200,8 @@ export default function SideMenu(props) {
 
   const logOut = () => {
     API.logOutUser()
-      .then(() => console.log("User successfully logged out"))
-      // .then(() => window.location.replace("/login"))
+      // .then(() => console.log("User successfully logged out"))
+      .then(() => window.location.replace("/login"))
       .catch(err => console.log(err))
   };
 

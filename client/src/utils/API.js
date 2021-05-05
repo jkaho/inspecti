@@ -9,7 +9,7 @@ const API = {
     return axios.post(url + "/api/user/login", userData, {withCredentials: true});
   },
   logOutUser: function() {
-    return axios.get(url + "/api/user/logout");
+    return axios.get(url + "/api/user/logout", {withCredentials: true});
   },
   getLocationSuggestions: function(query) {
     return axios.get(
