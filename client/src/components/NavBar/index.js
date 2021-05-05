@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 // import IconButton from '@material-ui/core/IconButton';
 import "./style.css";
+import authenticationAPI from "../../utils/authenticationAPI";
+import API from "../../utils/API";
+import MyPagesMenu from "../MyPagesMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +49,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const [isAuthenticated, setAuthentication] = useState(false);
+
+  useEffect(() => {
+    authenticationAPI.authenticated()
+      .then(res => {
+        if (res.data.isAuthenticated === true) {
+          setAuthentication(true);
+        } else {
+          setAuthentication(false);
+        }
+      });
+  }, []);
+
+  const logOut = () => {
+    API.logOutUser()
+      // .then(() => console.log("User successfully logged out"))
+      .then(() => window.location.replace("/login"))
+      .catch(err => console.log(err))
+  };
 
   return (
     <div className={classes.root}>
@@ -103,24 +125,45 @@ export default function ButtonAppBar() {
           >
             &nbsp;&nbsp;|&nbsp;&nbsp;
           </Typography>
-          <Button
-            className={
-              window.location.href === "http://localhost:3000/" ?
-              classes.colorWhite :
-              classes.colorBlack
-            }          
-          >
-            <Link to="/login">Log in</Link>
-          </Button>
-          <Button
-            className={
-              window.location.href === "http://localhost:3000/" ?
-              classes.joinBtnHome :
-              classes.joinBtn
-            }          
-          >
-            <Link to="/signup">Sign up</Link>
-          </Button>
+          {isAuthenticated === false ? 
+            <>
+              <Button
+                className={
+                  window.location.href === "http://localhost:3000/" ?
+                  classes.colorWhite :
+                  classes.colorBlack
+                }          
+              >
+                <Link to="/login">Log in</Link>
+              </Button>
+              <Button
+                className={
+                  window.location.href === "http://localhost:3000/" ?
+                  classes.joinBtnHome :
+                  classes.joinBtn
+                }          
+              >
+                <Link to="/signup">Sign up</Link>
+              </Button>
+            </> : 
+            <>
+              <MyPagesMenu
+                colorProp={
+                  window.location.href === "http://localhost:3000/" ?
+                  "white" :
+                  "black"
+                } 
+              />
+              <Button
+                className={
+                  window.location.href === "http://localhost:3000/" ?
+                  classes.joinBtnHome :
+                  classes.joinBtn
+                } 
+                onClick={logOut}
+              >Log Out</Button>
+            </>
+          }
         </Toolbar>
       </AppBar>
     </div>

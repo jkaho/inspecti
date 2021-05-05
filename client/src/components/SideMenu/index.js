@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import MyPagesMenu from "../MyPagesMenu";
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,14 +18,7 @@ import EventIcon from '@material-ui/icons/Event';
 import TableChartOutlinedIcon from '@material-ui/icons/TableChartOutlined';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import Hidden from "@material-ui/core/Hidden";
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
 import "./style.css";
 import API from "../../utils/API";
 
@@ -128,76 +122,6 @@ export default function SideMenu(props) {
 
   const container = window1 !== undefined ? () => window().document.body : undefined;
 
-  function MyPages() {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef(null);
-  
-    const handleToggle = () => {
-      setOpen((prevOpen) => !prevOpen);
-    };
-  
-    const handleClose = (event) => {
-      if (anchorRef.current && anchorRef.current.contains(event.target)) {
-        return;
-      }
-  
-      setOpen(false);
-    };
-  
-    function handleListKeyDown(event) {
-      if (event.key === 'Tab') {
-        event.preventDefault();
-        setOpen(false);
-      }
-    }
-  
-    // return focus to the button when we transitioned from !open -> open
-    const prevOpen = React.useRef(open);
-    React.useEffect(() => {
-      if (prevOpen.current === true && open === false) {
-        anchorRef.current.focus();
-      }
-  
-      prevOpen.current = open;
-    }, [open]);
-  
-    return (
-      <div className={classes.root}>
-        <div>
-          <Button
-            ref={anchorRef}
-            aria-controls={open ? 'menu-list-grow' : undefined}
-            aria-haspopup="true"
-            onClick={handleToggle}
-            endIcon={<KeyboardArrowDownIcon />}
-          >
-            My Pages
-          </Button>
-          <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-              >
-                <Paper>
-                  <ClickAwayListener onClickAway={handleClose}>
-                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                      <MenuItem onClick={handleClose}>Profile & Stats</MenuItem>
-                      <MenuItem onClick={handleClose}>Notes & Reviews</MenuItem>
-                      <MenuItem onClick={handleClose}>Inspection Schedule</MenuItem>
-                      <MenuItem onClick={handleClose}>Inspected Properties</MenuItem>
-                    </MenuList>
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper>
-        </div>
-      </div>
-    );
-  }
-
   const logOut = () => {
     API.logOutUser()
       // .then(() => console.log("User successfully logged out"))
@@ -234,7 +158,7 @@ export default function SideMenu(props) {
           {/* <Button className={classes.colorBlack}>
             My Pages
           </Button> */}
-          <MyPages />
+          <MyPagesMenu />
           <Button className={classes.joinBtn} onClick={logOut}>Log Out</Button>
         </Toolbar>
       </AppBar>
