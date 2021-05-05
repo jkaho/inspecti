@@ -36,20 +36,29 @@ export default function Home() {
   const searchRef = useRef();
   // const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [suggestionOpen, setSuggestionOpen] = useState(false);
 
   const handleInputChange = () => {
     const query = searchRef.current.value;
-    API.getPropertyListings(query)
-    .then(res => {
-      console.log(res.data);
-      setSuggestions(res.data);
-    })
-    .catch(err => console.log(err));
+    setSuggestions([]);
+    if (query !== "") {
+      API.getPropertyListings(query)
+      .then(res => {
+        setSuggestions(res.data);
+        if (res.data.length > 0) {
+          setSuggestionOpen(true);
+        } else {
+          setSuggestionOpen(false);
+        }
+      })
+      .catch(err => console.log(err));
+    }
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log("submitted!")
+    setSuggestionOpen(false);
+    setSuggestions([]);
   };
 
   return (
@@ -66,6 +75,7 @@ export default function Home() {
           />
           <SuggestionMenu
             suggestions={suggestions}
+            open={suggestionOpen}
           />
           <FilterDiv />
         </div>

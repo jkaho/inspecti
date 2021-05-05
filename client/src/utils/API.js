@@ -13,7 +13,7 @@ const API = {
   },
   getPropertyListings: function(query) {
     return axios.get(
-      "https://api.domain.com.au/v1/listings/locations?terms=" + query,
+      "https://api.domain.com.au/v1/listings/locations?terms=" + query + "&pageNumber=1&pageSize=10",
       { 
         headers: {
           "X-Api-Key": "key_dc635e3e95b67de404f3b44abbcc09e2"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,18 +14,40 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     backgroundColor: theme.palette.background.paper,
   },
+  closedSuggestion: {
+    display: "none",
+  },
+  openSuggestion: {
+    display: "block",
+  },
 }));
+
+function formatLocationSuggestion(obj) {
+  let location = `${obj.name}, ${obj.state.toUpperCase()}`;
+  if (obj.type === "suburb") {
+    location += ` ${obj.postcode}`;
+  } 
+
+  return location;
+};
 
 export default function SuggestionMenu(props) {
   const classes = useStyles();
-
+  
   return (
-    <div id="suggestion-box" className={classes.root}>
+    <div id="suggestion-box"
+      className={`${classes.root}
+        ${props.open === true ? classes.openSuggestion : classes.closedSuggestion}
+      `}
+    >
       <List component="nav" aria-label="address suggestions">
         {props.suggestions.length > 0 ? 
           props.suggestions.map(suggestion => (
-          <ListItem button>
-            <ListItemText primary={suggestion.name} />
+          <ListItem button
+            key={formatLocationSuggestion(suggestion)}
+            value={formatLocationSuggestion(suggestion)}
+          >
+            <ListItemText primary={formatLocationSuggestion(suggestion)} />
           </ListItem>
           )) : ""
         }
