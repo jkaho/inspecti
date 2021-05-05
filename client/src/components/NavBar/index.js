@@ -157,8 +157,8 @@ export default function ButtonAppBar() {
               <Button
                 className={
                   window.location.href === "http://localhost:3000/" ?
-                  classes.joinBtnHome :
-                  classes.joinBtn
+                  classes.colorWhite :
+                  classes.colorBlack
                 } 
                 onClick={logOut}
               >Log Out</Button>
