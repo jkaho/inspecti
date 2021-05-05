@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
@@ -39,6 +39,11 @@ const useStyles = makeStyles({
 
 export default function Notes(props) {
   const classes = useStyles();
+  let userId;
+
+  useEffect(() => {
+    userId = props.id;
+  }, []);
 
   return (
     <div>

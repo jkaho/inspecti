@@ -13,11 +13,13 @@ import authenticationAPI from "./utils/authenticationAPI";
 
 function App() {
   const [isAuthenticated, setAuthentication] = useState(false);
+  const [userId, setUserId] = useState();
 
   useEffect(() => {
     authenticationAPI.authenticated()
       .then(res => {
         setAuthentication(res.data.isAuthenticated);
+        setUserId(res.data.id);
       })
       .catch(err => console.log(err));
   }, []);
@@ -45,35 +47,45 @@ function App() {
           <Route
             exact path="/profile" 
             render={() => isAuthenticated ? 
-              <Profile /> : 
+              <Profile
+                id={userId}
+              /> : 
               <Redirect to="/login" />
             }
           />
           <Route
             exact path="/notes" 
             render={() => isAuthenticated ? 
-              <Notes /> : 
+              <Notes 
+                id={userId}
+              /> : 
               <Redirect to="/login" />
             }
           />
           <Route
             exact path="/monthly" 
             render={() => isAuthenticated ? 
-              <MonthlySchedule /> : 
+              <MonthlySchedule
+                id={userId}
+              /> : 
               <Redirect to="/login" />
             }
           />
           <Route
             exact path="/daily" 
             render={() => isAuthenticated ? 
-              <DailySchedule /> : 
+              <DailySchedule
+                id={userId}
+              /> : 
               <Redirect to="/login" />
             }
           />
           <Route
             exact path="/inspected"
             render={() => isAuthenticated ? 
-              <InspectedProperties /> :
+              <InspectedProperties 
+                id={userId}
+              /> :
               <Redirect to="/login" />
             }
           />

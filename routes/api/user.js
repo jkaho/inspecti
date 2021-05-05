@@ -28,7 +28,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/authenticated", (req, res) => {
   if (req.user) {
-    return res.json({ isAuthenticated: true });
+    return res.json({ isAuthenticated: true, id: req.user.id });
   } 
   return res.json({ isAuthenticated: false });
 });
