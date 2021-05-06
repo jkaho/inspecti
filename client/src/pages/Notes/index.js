@@ -42,20 +42,50 @@ export default function Notes(props) {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  let userId;
+  let currentNoteId;
 
   const titleRef = useRef();
   const textRef = useRef();
 
   useEffect(() => {
-    userId = props.id;
-    const user = {
-      userId: userId
-    }
-    notesAPI.getAllNotes(user)
-      .then(res => console.log(res))
+    // Check user's saved notes 
+    notesAPI.getAllNotes(props.id)
+      .then(res => {
+        console.log(res);
+        // If there are no existing notes, create a new blank note
+        if (res.data.length < 1) {
+          titleRef.current.value = "";
+          textRef.current.value = "";
+          setTitle("");
+          setText("");
+
+          const newNote = {
+            starred: false,
+            title: title,
+            text: text,
+            propertyAddress: null,
+            userId: props.id
+          }
+
+          notesAPI.createNote(newNote)
+            .then(res => {
+              console.log(res.data);
+              currentNoteId = res.data.id;
+            })
+            .catch(err => console.log(err))
+        // Else render the latest note 
+        } else {
+          // Render latest note
+          console.log("notes");
+        }
+      })
       .catch(err => console.log(err))
   }, []);
+
+  // Check for all notes that belong to the user
+  // - if no notes, show a blank note and save when the user enters a title 
+  //    > update note upon input 
+  // - if notes, render all on sidebar and show the latest note 
 
   const handleTitleInputChange = () => {
     const titleValue = titleRef.current.value.trim();

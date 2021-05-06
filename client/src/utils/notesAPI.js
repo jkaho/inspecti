@@ -3,7 +3,7 @@ const url = "http://localhost:3001";
 
 const notesAPI = {
   getAllNotes: function(userId) {
-    return axios.get(url + "/api/user/notes", userId, { withCredentials: true })
+    return axios.get(url + "/api/user/notes/" + userId, { withCredentials: true })
   },
   createNote: function(noteData) {
     return axios.post(url + "/api/user/note", noteData, { withCredentials: true });

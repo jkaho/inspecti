@@ -31,7 +31,7 @@ router.get("/logout", (req, res) => {
 });
 
 // Note routes 
-router.get("/notes", notesController.getNotes);
+router.get("/notes/:id", notesController.getNotes);
 
 router.route("/note")
   .post(notesController.createNote, (req, res) => {
