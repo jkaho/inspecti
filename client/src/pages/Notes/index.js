@@ -224,6 +224,11 @@ export default function Notes(props) {
     setModalState(false);
     setAddressInfoState(false);
     setAddressInputState(false);
+    notesAPI.updateNote(currentNoteId, {
+      propertyAddress: null
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   };
 
   const unlinkModalNoClick = () => {
