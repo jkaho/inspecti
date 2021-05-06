@@ -42,7 +42,7 @@ export default function Notes(props) {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  let currentNoteId;
+  const [currentNoteId, setCurrentNoteId] = useState();
 
   const titleRef = useRef();
   const textRef = useRef();
@@ -66,17 +66,18 @@ export default function Notes(props) {
             propertyAddress: null,
             userId: props.id
           }
-
+          console.log("NEW NOTE")
           notesAPI.createNote(newNote)
             .then(res => {
               console.log(res.data);
-              currentNoteId = res.data.id;
+              setCurrentNoteId(res.data.id);
             })
             .catch(err => console.log(err))
         // Else render the latest note 
         } else {
           // Render latest note
-          console.log("notes");
+          setCurrentNoteId(res.data[0].id);
+          console.log("ALREADY NOTE")
         }
       })
       .catch(err => console.log(err))
@@ -90,11 +91,25 @@ export default function Notes(props) {
   const handleTitleInputChange = () => {
     const titleValue = titleRef.current.value.trim();
     setTitle(titleValue);
+
+    const titleData = {
+      title: titleValue
+    }
+    notesAPI.updateNote(currentNoteId, titleData)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   };
 
   const handleTextInputChange = () => {
     const textValue = textRef.current.value.trim();
     setText(textValue);
+
+    const textData = {
+      text: textValue
+    }
+    notesAPI.updateNote(currentNoteId, textData)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   };
 
 

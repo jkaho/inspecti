@@ -8,8 +8,8 @@ const notesAPI = {
   createNote: function(noteData) {
     return axios.post(url + "/api/user/note", noteData, { withCredentials: true });
   },
-  updateNote: function(updatedData) {
-    return axios.put(url + "/api/user/note", updatedData, { withCredentials: true });
+  updateNote: function(noteId, updatedData) {
+    return axios.put(url + "/api/user/note/" + noteId, updatedData, { withCredentials: true });
   },
   deleteNote: function(noteId) {
     return axios.delete(url + "/api/user/note/" + noteId, { withCredentials: true });

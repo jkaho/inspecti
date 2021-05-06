@@ -37,8 +37,9 @@ router.route("/note")
   .post(notesController.createNote, (req, res) => {
     res.status(200).send("Note successfully created!")
   })
-  // .put()
 
+router.route("/note/:id")
+  .put(notesController.updateNote)
 // router.delete("/note/id");
 
 module.exports = router;
