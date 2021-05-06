@@ -279,6 +279,12 @@ export default function Notes(props) {
       })
       .catch(err => console.log(err))
 
+    notesAPI.updateNote(currentNoteId, {
+      propertyAddress: address
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+
     setAddressInfoState(true);
     setAddressInputState(false);
     setRatingButtonState(true);
