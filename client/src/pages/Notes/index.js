@@ -43,6 +43,7 @@ export default function Notes(props) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [currentNoteId, setCurrentNoteId] = useState();
+  const [allNotes, setAllNotes] = useState([]);
 
   const titleRef = useRef();
   const textRef = useRef();
@@ -52,6 +53,7 @@ export default function Notes(props) {
     notesAPI.getAllNotes(props.id)
       .then(res => {
         console.log(res);
+        setAllNotes(res.data.reverse());
         // If there are no existing notes, create a new blank note
         if (res.data.length < 1) {
           titleRef.current.value = "";
@@ -76,7 +78,8 @@ export default function Notes(props) {
         // Else render the latest note 
         } else {
           // Render latest note
-          const lastNote = res.data[res.data.length - 1];
+          const lastNote = res.data[0];
+          console.log(lastNote)
           setCurrentNoteId(lastNote.id);
           console.log("ALREADY NOTE")
           setTitle(lastNote.title);
@@ -99,7 +102,7 @@ export default function Notes(props) {
 
     const noteData = {
       starred: false,
-      title: "",
+      title: "No title",
       text: "",
       propertyAddress: null,
       userId: props.id
@@ -115,14 +118,21 @@ export default function Notes(props) {
 
   const handleTitleInputChange = () => {
     const titleValue = titleRef.current.value;
-    setTitle(titleValue);
+    let nonEmptyTitleValue = titleValue;
+
+    if (titleValue === "") {
+      nonEmptyTitleValue = "No title"
+    }
+
+    setTitle(nonEmptyTitleValue);
 
     const titleData = {
-      title: titleValue
+      title: nonEmptyTitleValue
     }
     notesAPI.updateNote(currentNoteId, titleData)
       .then(res => console.log(res))
       .catch(err => console.log(err))
+      console.log(title)
   };
 
   const handleTextInputChange = () => {
@@ -137,6 +147,33 @@ export default function Notes(props) {
       .catch(err => console.log(err))
   };
 
+  const handleNoteButtonClick = (event) => {
+    let clickedNoteId;
+    if (event.target.id) {
+      clickedNoteId = parseInt(event.target.id.split("-")[1]);
+    } else {
+      clickedNoteId = parseInt(event.target.parentElement.id.split("-")[1]);
+    }
+
+    setCurrentNoteId(clickedNoteId);
+    notesAPI.getAllNotes(props.id)
+      .then(res => {
+        setAllNotes(res.data.reverse());
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].id === clickedNoteId) {
+            setTitle(res.data[i].title);
+            setText(res.data[i].text);
+          }
+        }
+      })
+    // for (let i = 0; i < allNotes.length; i++) {
+    //   if (allNotes[i].id === clickedNoteId) {
+    //     setTitle(allNotes[i].title);
+    //     setText(allNotes[i].text);
+    //   }
+    // }
+    console.log(title)
+  };
 
   return (
     <div>
@@ -167,25 +204,17 @@ export default function Notes(props) {
                   <ListItem className={classes.noteSection}>
                     <ListItemText disableTypography primary="Notes"/>
                   </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="Note 3" />
-                  </ListItem>
-                  <Divider light/>
-                  <ListItem button>
-                    <ListItemText primary="Note 4" />
-                  </ListItem>
-                  <Divider light/>
-                  <ListItem button>
-                    <ListItemText primary="Note 5" />
-                  </ListItem>
-                  <Divider light/>
-                  <ListItem button>
-                    <ListItemText primary="Note 6" />
-                  </ListItem>
-                  <Divider light/>
-                  <ListItem button>
-                    <ListItemText primary="Note 7" />
-                  </ListItem>
+                  {allNotes.map(note => (
+                    <div key={`note-${note.id}`}>
+                      <ListItem id={`note-${note.id}`} button onClick={handleNoteButtonClick}>
+                        <ListItemText id={`notetitle-${note.id}`}
+                          primary={currentNoteId === note.id && title !== "" ? title
+                            : note.title
+                          } />
+                      </ListItem>
+                      <Divider light/>
+                    </div>
+                  ))}
                 </List>
               </div>
             </div>
