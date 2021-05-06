@@ -76,12 +76,23 @@ export default function Notes(props) {
     carSpaces: 1,
     landSize: 100
   });
+  const [propertyReview, setPropertyReview] = useState({});
 
   let sideTitle = "";
 
   const titleRef = useRef();
   const textRef = useRef();
   const addressRef = useRef();
+  const conditionRef = useRef();
+  const potentialRef = useRef();
+  const surroundingsRef = useRef();
+  const neighboursRef = useRef();
+  const accessibilityRef = useRef();
+  const privacyRef = useRef();
+  const floorplanRef = useRef();
+  const outdoorSpaceRef = useRef();
+  const indoorOutdoorRef = useRef();
+  const lightingRef = useRef();
 
   useEffect(() => {
     // Check user's saved notes 
@@ -496,7 +507,7 @@ export default function Notes(props) {
                       <td>Property condition</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={conditionRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td> 
@@ -505,7 +516,7 @@ export default function Notes(props) {
                       <td>Potential to capitalise</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={potentialRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -514,7 +525,7 @@ export default function Notes(props) {
                       <td>Surroundings</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={surroundingsRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -523,7 +534,7 @@ export default function Notes(props) {
                       <td>Consistency with neighbours</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={neighboursRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -532,7 +543,7 @@ export default function Notes(props) {
                       <td>Accessibility</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={accessibilityRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -541,7 +552,7 @@ export default function Notes(props) {
                       <td>Privacy</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={privacyRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -550,7 +561,7 @@ export default function Notes(props) {
                       <td>Floorplan</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={floorplanRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -559,7 +570,7 @@ export default function Notes(props) {
                       <td>Outdoor space</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={outdoorSpaceRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -568,7 +579,7 @@ export default function Notes(props) {
                       <td>Indoor-to-outdoow flow</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={indoorOutdoorRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -577,7 +588,7 @@ export default function Notes(props) {
                       <td>Natural light</td>
                       <td>
                         <span className="review-rating">
-                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input ref={lightingRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
