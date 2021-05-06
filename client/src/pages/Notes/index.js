@@ -11,6 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Button from "@material-ui/core/Button";
+import PlaceIcon from "@material-ui/icons/Place";
+import RateReviewIcon from "@material-ui/icons/RateReview";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
 // import { Icon } from "@material-ui/core";
@@ -35,8 +38,19 @@ const useStyles = makeStyles({
   note: {
     overflow: "auto",
     height: "100%",
-  }
-})
+  },
+  attachButton: {
+    fontSize: 12,
+    borderRadius: "25px",
+    marginBottom: 0
+  },
+  hide: {
+    display: "none",
+  }, 
+  show: {
+    display: "block",
+  },
+});
 
 export default function Notes(props) {
   const classes = useStyles();
@@ -44,6 +58,10 @@ export default function Notes(props) {
   const [text, setText] = useState("");
   const [currentNoteId, setCurrentNoteId] = useState();
   const [allNotes, setAllNotes] = useState([]);
+  const [addressInputIsOpen, setAddressInputState] = useState(false);
+  const [ratingButtonIsOpen, setRatingButtonState] = useState(false);
+  const [ratingSectionIsOpen, setRatingSectionState] = useState(false);
+
   let sideTitle = "";
 
   const titleRef = useRef();
@@ -173,6 +191,14 @@ export default function Notes(props) {
     console.log(title)
   };
 
+  const handleLinkAddressButtonClick = () => {
+    if (addressInputIsOpen) {
+      setAddressInputState(false);
+    } else {
+      setAddressInputState(true);
+    }
+  };
+
   return (
     <div>
       <SideMenu />
@@ -231,6 +257,7 @@ export default function Notes(props) {
               <div className="new-note-btn">
                 <IconButton
                   onClick={handleNewNoteButtonClick}
+                  id="new-note-btn"
                 >
                   <AddCircleOutlineIcon />
                 </IconButton>
@@ -246,16 +273,46 @@ export default function Notes(props) {
               </div>
               <div className="note-address note-seg">
                 <div className="note-address-btn">
-                  <button>Link an address</button>
+                  <Button
+                    className={classes.attachButton}
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<PlaceIcon />}
+                    onClick={handleLinkAddressButtonClick}
+                  >
+                    Link an address
+                  </Button>
                 </div>
-                <div className="note-address-input">
+                <div 
+                  className={
+                    `note-address-input 
+                    ${addressInputIsOpen ? classes.show : classes.hide}`}
+                >
                   <input type="text" placeholder="Search an address" />
                 </div>
                 <div className="note-address-text"></div>
                 <div className="note-address-specs"></div>
               </div>
-              <div className="note-review-section note-seg">
-                <button>Create a review</button>
+              <div 
+                className={
+                  `note-review-attach-button
+                  ${ratingButtonIsOpen ? classes.show : classes.hide}`
+                }
+              >
+                <Button
+                  className={classes.attachButton}
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<RateReviewIcon />}
+                >
+                  Rate the property
+                </Button>
+              </div>
+              <div 
+                className=
+                {`note-review-section note-seg
+                ${ratingSectionIsOpen ? classes.show : classes.hide}`}
+              >
                 <table>
                   <thead>
                     <tr>

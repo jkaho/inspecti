@@ -16,6 +16,10 @@
   border-radius: 2px;
 }
 
+#new-note-btn {
+  padding-bottom: 0;
+}
+
 #note-area {
   width: calc(100% - 237px);
 }
@@ -27,9 +31,9 @@
 .note-title-input-div input {
   width: 100%;
   height: 50px;
-  font-size: 25px;
+  font-size: 30px;
   border: none;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 .note-title-input-div input:focus {
@@ -40,16 +44,25 @@
   padding: 10px;
 }
 
+.note-address {
+  padding-bottom: 0; /* override .note-seg padding */
+}
+
 .note-address-input {
-  display: none;
+  padding: 10px 0;
+}
+
+.note-address-input input {
+  height: 30px;
+  width: 100%;
+}
+
+.new-note-btn {
+  text-align: right;
 }
 
 .note-review-section table, .note-text-section table {
   width: 100%;
-}
-
-.note-review-section table {
-  display: none;
 }
 
 .note-section-heading {
