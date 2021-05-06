@@ -496,7 +496,7 @@ export default function Notes(props) {
                       <td>Property condition</td>
                       <td>
                         <span className="review-rating">
-                          <input type="number" min="1" max="5" placeholder="5"/>
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td> 
@@ -505,7 +505,7 @@ export default function Notes(props) {
                       <td>Potential to capitalise</td>
                       <td>
                         <span className="review-rating">
-                          <input type="number" min="1" max="5" placeholder="5"/>
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -513,56 +513,72 @@ export default function Notes(props) {
                     <tr className="review-criteria-row">
                       <td>Surroundings</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Consistency with neighbours</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Accessibility</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Privacy</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Floorplan</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Outdoor space</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Indoor-to-outdoow flow</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Natural light</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>

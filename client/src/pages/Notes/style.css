@@ -108,6 +108,10 @@
   text-align: right;
 }
 
+.rating-input {
+  width: 30px;
+}
+
 /* ------- MEDIA QUERIES ------- */
 
 @media (max-width: 850px) {
