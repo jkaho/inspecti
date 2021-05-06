@@ -91,8 +91,30 @@ export default function Notes(props) {
   //    > update note upon input 
   // - if notes, render all on sidebar and show the latest note 
 
+  const handleNewNoteButtonClick = () => {
+    // titleRef.current.value = "";
+    // textRef.current.value = "";
+    setTitle("");
+    setText("");
+
+    const noteData = {
+      starred: false,
+      title: "",
+      text: "",
+      propertyAddress: null,
+      userId: props.id
+    }
+
+    notesAPI.createNote(noteData)
+      .then(res => {
+        console.log(res);
+        setCurrentNoteId(res.data.id);
+      })
+      .catch(err => console.log(err))
+  };
+
   const handleTitleInputChange = () => {
-    const titleValue = titleRef.current.value.trim();
+    const titleValue = titleRef.current.value;
     setTitle(titleValue);
 
     const titleData = {
@@ -104,7 +126,7 @@ export default function Notes(props) {
   };
 
   const handleTextInputChange = () => {
-    const textValue = textRef.current.value.trim();
+    const textValue = textRef.current.value;
     setText(textValue);
 
     const textData = {
@@ -171,7 +193,9 @@ export default function Notes(props) {
           <Grid item id="note-area" className={classes.note}>
             <div className="current-note-div box-seg">
               <div className="new-note-btn">
-                <IconButton>
+                <IconButton
+                  onClick={handleNewNoteButtonClick}
+                >
                   <AddCircleOutlineIcon />
                 </IconButton>
               </div>
