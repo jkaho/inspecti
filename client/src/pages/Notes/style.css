@@ -69,8 +69,12 @@
   font-size: 16px;
 }
 
-.under-suggestion-box {
+/* .under-suggestion-box {
   position: absolute;
+} */
+
+.note-review-attach-button {
+  padding: 10px;
 }
 
 .address-suggestion-box li {
@@ -85,6 +89,11 @@
 
 .new-note-btn {
   text-align: right;
+}
+
+.note-address-text {
+  padding: 5px 0;
+  color: rgb(85, 85, 85);
 }
 
 .note-review-section table, .note-text-section table {

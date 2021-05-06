@@ -51,6 +51,9 @@ const useStyles = makeStyles({
   show: {
     display: "block",
   },
+  iconButton: {
+    padding: 2,
+  }
 });
 
 export default function Notes(props) {
@@ -66,6 +69,12 @@ export default function Notes(props) {
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressInfoIsOpen, setAddressInfoState] = useState(false);
+  const [propertySpecs, setPropertySpecs] = useState({
+    beds: 1,
+    baths: 1,
+    carSpaces: 1,
+    land: 100
+  });
 
   let sideTitle = "";
 
@@ -228,12 +237,31 @@ export default function Notes(props) {
 
   const handleAddressSuggestionClick = (event) => {
     const address = event.target.textContent;
-    console.log(event.target)
-    console.log(address);
     setAddress(address);
+
+    notesAPI.getPropertyInfo(event.target.id)
+      .then(res => {
+        console.log(res);
+        const propertyInfo = {
+          beds: res.data.bedrooms,
+          baths: res.data.bathrooms,
+          carSpaces: res.data.carSpaces,
+          land: res.data.areaSize
+        }
+
+        setPropertySpecs(propertyInfo);
+      })
+      .catch(err => console.log(err))
+
     setAddressInfoState(true);
     setAddressInputState(false);
-  }
+    setRatingButtonState(true);
+  };
+
+  const handleRatingButtonClick = () => {
+    setRatingSectionState(true);
+    setRatingButtonState(false);
+  };
 
   return (
     <div>
@@ -336,6 +364,7 @@ export default function Notes(props) {
                       {addressSuggestions.splice(0, 10).map(suggestion => (
                         <li 
                           key={suggestion.address} 
+                          id={suggestion.id}
                           value={suggestion.address}
                           onClick={handleAddressSuggestionClick}
                         >{suggestion.address}</li>
@@ -358,7 +387,16 @@ export default function Notes(props) {
                   <div className="note-address-text">
                     {address}
                   </div>
-                  <div className="note-address-specs"></div>
+                  <div className="note-address-specs">
+                    <i className="fas fa-bed"></i>&nbsp;
+                    <span className="num-beds">{propertySpecs.beds}</span>&nbsp;&nbsp;
+                    <i className="fas fa-shower"></i>&nbsp;
+                    <span className="num-baths">{propertySpecs.baths}</span>&nbsp;&nbsp;
+                    <i className="fas fa-car"></i>&nbsp;
+                    <span className="num-cars">{propertySpecs.carSpaces}</span>&nbsp;&nbsp;
+                    <i className="fas fa-ruler-combined"></i>&nbsp;
+                    <span className="num-land">{propertySpecs.land}m²</span>&nbsp;&nbsp;
+                  </div>
                 </div>
               </div>
               <div className="under-suggestion-box">
@@ -374,6 +412,7 @@ export default function Notes(props) {
                   variant="contained"
                   color="secondary"
                   startIcon={<RateReviewIcon />}
+                  onClick={handleRatingButtonClick}
                 >
                   Rate the property
                 </Button>
@@ -388,13 +427,13 @@ export default function Notes(props) {
                     <tr>
                       <th className="note-section-heading">PROPERTY REVIEW</th>
                       <th className="note-action-btns">
-                        <IconButton aria-label="share">
+                        <IconButton className={classes.iconButton} aria-label="share">
                           <PresentToAllIcon />
                         </IconButton>
-                        <IconButton aria-label="edit">
+                        <IconButton className={classes.iconButton} aria-label="edit">
                           <EditIcon />
                         </IconButton>
-                        <IconButton aria-label="delete">
+                        <IconButton className={classes.iconButton}  aria-label="delete">
                           <DeleteIcon />
                         </IconButton>
                       </th>
