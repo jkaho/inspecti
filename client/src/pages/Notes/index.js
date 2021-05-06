@@ -61,11 +61,13 @@ export default function Notes(props) {
   const [addressInputIsOpen, setAddressInputState] = useState(false);
   const [ratingButtonIsOpen, setRatingButtonState] = useState(false);
   const [ratingSectionIsOpen, setRatingSectionState] = useState(false);
+  const [addressSearch, setAddressSearch] = useState("");
 
   let sideTitle = "";
 
   const titleRef = useRef();
   const textRef = useRef();
+  const addressRef = useRef();
 
   useEffect(() => {
     // Check user's saved notes 
@@ -199,6 +201,15 @@ export default function Notes(props) {
     }
   };
 
+  const handleAddressInputChange = () => {
+    const address = addressRef.current.value;
+    setAddressSearch(address);
+
+    notesAPI.getAddressSuggestions(address)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
+
   return (
     <div>
       <SideMenu />
@@ -288,7 +299,12 @@ export default function Notes(props) {
                     `note-address-input 
                     ${addressInputIsOpen ? classes.show : classes.hide}`}
                 >
-                  <input type="text" placeholder="Search an address" />
+                  <input 
+                    ref={addressRef}
+                    type="text" 
+                    placeholder="Search an address" 
+                    onChange={handleAddressInputChange}
+                  />
                 </div>
                 <div className="note-address-text"></div>
                 <div className="note-address-specs"></div>
