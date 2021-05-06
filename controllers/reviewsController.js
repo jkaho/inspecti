@@ -12,6 +12,9 @@ const reviewsController = {
       .catch(err => console.log(err))
   },
   createReview: function(req, res) {
+    console.log(req.body)
+    console.log(req.params)
+    console.log(req.user.id)
     db.review
       .create({
         shared: req.body.shared,
@@ -24,7 +27,7 @@ const reviewsController = {
         floorplanRating: req.body.floorplanRating,
         outdoorSpaceRating: req.body.outdoorSpaceRating,
         indoorOutdoorFlowRating: req.body.indoorOutdoorFlowRating,
-        naturalLightingRating: req.body.naturalLightingRating,
+        naturalLightRating: req.body.naturalLightingRating,
         userId: req.user.id,
         noteId: req.params.id
       })

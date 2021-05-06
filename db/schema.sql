@@ -111,3 +111,4 @@ CREATE TABLE scheduledEvents (
 );
 
 SELECT * FROM notes;
+SELECT * FROM reviews;

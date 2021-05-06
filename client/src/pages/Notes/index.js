@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
+import SimpleModal from "../../components/Modal";
 import Grid from "@material-ui/core/Grid";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import PlaceIcon from "@material-ui/icons/Place";
 import RateReviewIcon from "@material-ui/icons/RateReview";
@@ -18,7 +20,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
 // import { Icon } from "@material-ui/core";
 import notesAPI from "../../utils/notesAPI";
-import SimpleModal from "../../components/Modal";
+import reviewsAPI from "../../utils/reviewsAPI";
 
 const useStyles = makeStyles({
   noteSection: {
@@ -76,7 +78,19 @@ export default function Notes(props) {
     carSpaces: 1,
     landSize: 100
   });
-  const [propertyReview, setPropertyReview] = useState({});
+  const [propertyReview, setPropertyReview] = useState({
+    shared: false,
+    propertyConditionRating: 5,
+    potentialRating: 5,
+    surroundingsRating: 5,
+    neighbourComparisonRating: 5,
+    accessibilityRating: 5,
+    privacyRating: 5,
+    floorplanRating: 5,
+    outdoorSpaceRating: 5,
+    indoorOutdoorFlowRating: 5,
+    naturalLightRating: 5,
+  });
 
   let sideTitle = "";
 
@@ -324,6 +338,67 @@ export default function Notes(props) {
   const handleRatingButtonClick = () => {
     setRatingSectionState(true);
     setRatingButtonState(false);
+    reviewsAPI.createReview(currentNoteId, propertyReview)
+      .then(res => console.log(res))
+      .catch(err => console.log)
+  };
+
+  const handleRatingInputChange = (event) => {
+    const target = event.target.id.split("-")[0];
+    const review = propertyReview;
+    switch(target) {
+      case "condition":
+        review.propertyConditionRating = conditionRef.current.value;
+        break;
+      case "potential":
+        review.potentialRating = potentialRef.current.value;
+        break;
+      case "surroundings":
+        review.surroundingsRating = surroundingsRef.current.value;
+        break;
+      case "neighbours":
+        review.neighbourComparisonRating = neighboursRef.current.value;
+        break;
+      case "accessibility":
+        review.accessibilityRating = accessibilityRef.current.value;
+        break;
+      case "privacy":
+        review.privacyRating = privacyRef.current.value;
+        break;
+      case "floorplan":
+        review.floorplanRating = floorplanRef.current.value;
+        break;
+      case "outdoorSpace":
+        review.outdoorSpaceRating = outdoorSpaceRef.current.value;
+        break;
+      case "indoorOutdoor":
+        review.indoorOutdoorFlowRating = indoorOutdoorRef.current.value;
+        break;
+      case "lighting":
+        review.naturalLightRating = lightingRef.current.value;
+        break;
+      default: 
+        break;
+    }
+
+    setPropertyReview(review);
+  };
+
+  const handleReviewSaveButtonClick = () => {
+    const ratingValues = {
+      propertyConditionRating: conditionRef.current.value,
+      potentialRating: potentialRef.current.value,
+      surroundingsRating: surroundingsRef.current.value,
+      neighbourComparisonRating: neighboursRef.current.value,
+      accessibilityRating: accessibilityRef.current.value,
+      privacyRating: privacyRef.current.value,
+      floorplanRating: floorplanRef.current.value,
+      outdoorSpaceRating: outdoorSpaceRef.current.value,
+      indoorOutdoorFlowRating: indoorOutdoorRef.current.value,
+      naturalLightRating: lightingRef.current.value,
+    };
+      
+    setPropertyReview(ratingValues);
   };
 
   return (
@@ -490,11 +565,14 @@ export default function Notes(props) {
                     <tr>
                       <th className="note-section-heading">PROPERTY REVIEW</th>
                       <th className="note-action-btns">
-                        <IconButton className={classes.iconButton} aria-label="share">
-                          <PresentToAllIcon />
-                        </IconButton>
                         <IconButton className={classes.iconButton} aria-label="edit">
                           <EditIcon />
+                        </IconButton>
+                        <IconButton onClick={handleReviewSaveButtonClick} className={classes.iconButton} aria-label="save">
+                          <SaveIcon/>
+                        </IconButton>
+                        <IconButton className={classes.iconButton} aria-label="share">
+                          <PresentToAllIcon />
                         </IconButton>
                         <IconButton className={classes.iconButton}  aria-label="delete">
                           <DeleteIcon />
@@ -507,7 +585,16 @@ export default function Notes(props) {
                       <td>Property condition</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={conditionRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="condition-input" 
+                            ref={conditionRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.propertyConditionRating}
+                            placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td> 
@@ -516,7 +603,16 @@ export default function Notes(props) {
                       <td>Potential to capitalise</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={potentialRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="potential-input" 
+                            ref={potentialRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.potentialRating}
+                            placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -525,7 +621,16 @@ export default function Notes(props) {
                       <td>Surroundings</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={surroundingsRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="surroundings-input" 
+                            ref={surroundingsRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.surroundingsRating}
+                            placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -534,7 +639,16 @@ export default function Notes(props) {
                       <td>Consistency with neighbours</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={neighboursRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="neighbours-input" 
+                            ref={neighboursRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.neighbourComparisonRating}
+                            placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -543,7 +657,16 @@ export default function Notes(props) {
                       <td>Accessibility</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={accessibilityRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="accessibility-input" 
+                            ref={accessibilityRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.accessibilityRating}
+                            placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -552,7 +675,17 @@ export default function Notes(props) {
                       <td>Privacy</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={privacyRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="privacy-input" 
+                            ref={privacyRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.privacyRating} 
+                            placeholder="5"
+                          />
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -561,7 +694,17 @@ export default function Notes(props) {
                       <td>Floorplan</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={floorplanRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="floorplan-input" 
+                            ref={floorplanRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.floorplanRating}
+                            placeholder="5"
+                          />
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -570,7 +713,16 @@ export default function Notes(props) {
                       <td>Outdoor space</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={outdoorSpaceRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="outdoorSpace-input" 
+                            ref={outdoorSpaceRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.outdoorSpaceRating}
+                            placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -579,7 +731,16 @@ export default function Notes(props) {
                       <td>Indoor-to-outdoow flow</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={indoorOutdoorRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="indoorOutdoor-input" 
+                            ref={indoorOutdoorRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.indoorOutdoorFlowRating}
+                            placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -588,7 +749,16 @@ export default function Notes(props) {
                       <td>Natural light</td>
                       <td>
                         <span className="review-rating">
-                          <input ref={lightingRef} className="rating-input" type="number" min="1" max="5" placeholder="5"/>
+                          <input 
+                            id="lighting-input" 
+                            ref={lightingRef} 
+                            onChange={handleRatingInputChange} 
+                            className="rating-input" 
+                            type="number" 
+                            min="1" 
+                            max="5" 
+                            value={propertyReview.naturalLightRating}
+                            placeholder="5"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
