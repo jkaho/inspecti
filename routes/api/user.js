@@ -2,6 +2,7 @@ const router = require("express").Router();
 const passport = require("../../config/passport");
 const usersController = require("../../controllers/usersController");
 const notesController = require("../../controllers/notesController");
+const reviewsController = require("../../controllers/reviewsController");
 
 // Authentication route 
 router.get("/authenticated", (req, res) => {
@@ -41,5 +42,10 @@ router.route("/note")
 router.route("/note/:id")
   .put(notesController.updateNote)
 // router.delete("/note/id");
+
+router.route("/review/:id")
+  .post(reviewsController.createReview)
+  .put(reviewsController.updateReview)
+  .get(reviewsController.getReview)
 
 module.exports = router;
