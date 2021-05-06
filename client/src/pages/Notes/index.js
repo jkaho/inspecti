@@ -76,8 +76,11 @@ export default function Notes(props) {
         // Else render the latest note 
         } else {
           // Render latest note
-          setCurrentNoteId(res.data[0].id);
+          const lastNote = res.data[res.data.length - 1];
+          setCurrentNoteId(lastNote.id);
           console.log("ALREADY NOTE")
+          setTitle(lastNote.title);
+          setText(lastNote.text);
         }
       })
       .catch(err => console.log(err))
@@ -177,7 +180,9 @@ export default function Notes(props) {
                   ref={titleRef} 
                   type="text" 
                   placeholder="Title" 
-                  onChange={handleTitleInputChange}/>
+                  onChange={handleTitleInputChange}
+                  value={title}
+                />
               </div>
               <div className="note-address note-seg">
                 <div className="note-address-btn">
@@ -291,6 +296,7 @@ export default function Notes(props) {
                         <textarea 
                           ref={textRef}
                           onChange={handleTextInputChange}
+                          value={text}
                         ></textarea>
                       </td>
                     </tr>
