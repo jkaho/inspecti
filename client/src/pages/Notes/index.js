@@ -44,6 +44,7 @@ export default function Notes(props) {
   const [text, setText] = useState("");
   const [currentNoteId, setCurrentNoteId] = useState();
   const [allNotes, setAllNotes] = useState([]);
+  let sideTitle = "";
 
   const titleRef = useRef();
   const textRef = useRef();
@@ -156,12 +157,14 @@ export default function Notes(props) {
     }
 
     setCurrentNoteId(clickedNoteId);
+    console.log(clickedNoteId)
     notesAPI.getAllNotes(props.id)
       .then(res => {
         setAllNotes(res.data.reverse());
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].id === clickedNoteId) {
             setTitle(res.data[i].title);
+            sideTitle = res.data[i].title;
             setText(res.data[i].text);
           }
         }
@@ -208,7 +211,7 @@ export default function Notes(props) {
                     <div key={`note-${note.id}`}>
                       <ListItem id={`note-${note.id}`} button onClick={handleNoteButtonClick}>
                         <ListItemText id={`notetitle-${note.id}`}
-                          primary={currentNoteId === note.id && title !== "" ? title
+                          primary={currentNoteId === note.id && sideTitle !== "" ? sideTitle
                             : note.title
                           } />
                       </ListItem>
