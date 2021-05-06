@@ -90,11 +90,6 @@ export default function Notes(props) {
       .catch(err => console.log(err))
   }, []);
 
-  // Check for all notes that belong to the user
-  // - if no notes, show a blank note and save when the user enters a title 
-  //    > update note upon input 
-  // - if notes, render all on sidebar and show the latest note 
-
   const handleNewNoteButtonClick = () => {
     // titleRef.current.value = "";
     // textRef.current.value = "";
@@ -207,17 +202,26 @@ export default function Notes(props) {
                   <ListItem className={classes.noteSection}>
                     <ListItemText disableTypography primary="Notes"/>
                   </ListItem>
-                  {allNotes.map(note => (
-                    <div key={`note-${note.id}`}>
-                      <ListItem id={`note-${note.id}`} button onClick={handleNoteButtonClick}>
-                        <ListItemText id={`notetitle-${note.id}`}
-                          primary={currentNoteId === note.id && sideTitle !== "" ? sideTitle
-                            : note.title
-                          } />
+                  {allNotes.length > 0 ? 
+                    allNotes.map(note => (
+                      <div key={`note-${note.id}`}>
+                        <ListItem id={`note-${note.id}`} button onClick={handleNoteButtonClick}>
+                          <ListItemText id={`notetitle-${note.id}`}
+                            primary={currentNoteId === note.id && sideTitle !== "" ? sideTitle
+                              : note.title
+                            } />
+                        </ListItem>
+                        <Divider light/>
+                      </div>
+                    )) : 
+                    <div>
+                      <ListItem>
+                        <ListItemText
+                          primary="No existing notes"
+                        />
                       </ListItem>
-                      <Divider light/>
-                    </div>
-                  ))}
+                    </div> 
+                  }
                 </List>
               </div>
             </div>
