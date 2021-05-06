@@ -18,6 +18,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
 // import { Icon } from "@material-ui/core";
 import notesAPI from "../../utils/notesAPI";
+import SuggestionSearch from "../../components/SuggestionSearch";
 
 const useStyles = makeStyles({
   noteSection: {
@@ -62,6 +63,9 @@ export default function Notes(props) {
   const [ratingButtonIsOpen, setRatingButtonState] = useState(false);
   const [ratingSectionIsOpen, setRatingSectionState] = useState(false);
   const [addressSearch, setAddressSearch] = useState("");
+  const [addressSuggestions, setAddressSuggestions] = useState([]);
+  const [address, setAddress] = useState("");
+  const [addressInfoIsOpen, setAddressInfoState] = useState(false);
 
   let sideTitle = "";
 
@@ -201,13 +205,34 @@ export default function Notes(props) {
     }
   };
 
-  const handleAddressInputChange = () => {
-    const address = addressRef.current.value;
-    setAddressSearch(address);
+  const handleUnlinkAddressButtonClick = () => {
+    setAddress("");
+    setAddressInfoState(false);
+    setAddressInputState(false);
+  };
 
-    notesAPI.getAddressSuggestions(address)
-      .then(res => console.log(res))
+  const handleAddressInputChange = () => {
+    const address = addressRef.current.value.trim();
+    setAddressSearch(address);
+    if (address !== "") {
+      notesAPI.getAddressSuggestions(address)
+      .then(res => {
+        setAddressSuggestions(res.data);
+      })
       .catch(err => console.log(err))
+    } else {
+      setAddressSuggestions([]);
+    }
+    console.log(addressSuggestions)
+  };
+
+  const handleAddressSuggestionClick = (event) => {
+    const address = event.target.textContent;
+    console.log(event.target)
+    console.log(address);
+    setAddress(address);
+    setAddressInfoState(true);
+    setAddressInputState(false);
   }
 
   return (
@@ -289,9 +314,10 @@ export default function Notes(props) {
                     variant="contained"
                     color="secondary"
                     startIcon={<PlaceIcon />}
-                    onClick={handleLinkAddressButtonClick}
+                    onClick={!addressInfoIsOpen ? handleLinkAddressButtonClick
+                    : handleUnlinkAddressButtonClick}
                   >
-                    Link an address
+                    {addressInfoIsOpen ? "Unlink address" : "Link an address"}
                   </Button>
                 </div>
                 <div 
@@ -299,16 +325,44 @@ export default function Notes(props) {
                     `note-address-input 
                     ${addressInputIsOpen ? classes.show : classes.hide}`}
                 >
-                  <input 
-                    ref={addressRef}
-                    type="text" 
-                    placeholder="Search an address" 
+                  <div className="address-search-input">
+                    <input 
+                      ref={addressRef}
+                      type="text" 
+                      placeholder="Search an address" 
+                      onChange={handleAddressInputChange}
+                    />
+                    <div className="address-suggestion-box">
+                      {addressSuggestions.splice(0, 10).map(suggestion => (
+                        <li 
+                          key={suggestion.address} 
+                          value={suggestion.address}
+                          onClick={handleAddressSuggestionClick}
+                        >{suggestion.address}</li>
+                      ))}
+                    </div>
+                  </div>
+
+                  
+                  {/* <SuggestionSearch
+                    suggestions={addressSuggestions}
                     onChange={handleAddressInputChange}
-                  />
+                    addressRef={addressRef}
+                  /> */}
                 </div>
-                <div className="note-address-text"></div>
-                <div className="note-address-specs"></div>
+                <div 
+                  className={
+                    `note-address-text 
+                    ${addressInfoIsOpen ? classes.show : classes.hide}`
+                  }>
+                  <div className="note-address-text">
+                    {address}
+                  </div>
+                  <div className="note-address-specs"></div>
+                </div>
               </div>
+              <div className="under-suggestion-box">
+  
               <div 
                 className={
                   `note-review-attach-button
@@ -435,6 +489,7 @@ export default function Notes(props) {
                     </tr>
                   </thead>
                 </table>
+              </div>
               </div>
             </div>
           </Grid>
