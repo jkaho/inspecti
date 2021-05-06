@@ -19,6 +19,10 @@ CREATE TABLE notes (
   title VARCHAR(40) NOT NULL,
   text VARCHAR(255), 
   propertyAddress VARCHAR(255),
+  bedrooms INT,
+  bathrooms INT,
+  carSpaces INT,
+  landSize INT,
   starred BOOLEAN NOT NULL DEFAULT FALSE,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -106,3 +110,4 @@ CREATE TABLE scheduledEvents (
   FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
 );
 
+SELECT * FROM notes;

@@ -31,6 +31,10 @@ const notesController = {
           title: req.body.title,
           text: req.body.text,
           propertyAddress: req.body.propertyAddress,
+          bedrooms: req.body.bedrooms,
+          bathrooms: req.body.bathrooms,
+          carSpaces: req.body.carSpaces,
+          landSize: req.body.landSize,
         }, 
         {
           where: {

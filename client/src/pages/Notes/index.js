@@ -71,10 +71,10 @@ export default function Notes(props) {
   const [addressInfoIsOpen, setAddressInfoState] = useState(false);
   const [modalIsOpen, setModalState] = useState(false);
   const [propertySpecs, setPropertySpecs] = useState({
-    beds: 1,
-    baths: 1,
+    bedrooms: 1,
+    bathrooms: 1,
     carSpaces: 1,
-    land: 100
+    landSize: 100
   });
 
   let sideTitle = "";
@@ -95,7 +95,7 @@ export default function Notes(props) {
           textRef.current.value = "";
           setTitle("");
           setText("");
-
+          
           const newNote = {
             starred: false,
             title: title,
@@ -114,11 +114,25 @@ export default function Notes(props) {
         } else {
           // Render latest note
           const lastNote = res.data[0];
-          console.log(lastNote)
           setCurrentNoteId(lastNote.id);
-          console.log("ALREADY NOTE")
           setTitle(lastNote.title);
           setText(lastNote.text);
+          setAddress(lastNote.propertyAddress);
+          setPropertySpecs({
+            bedrooms: lastNote.bedrooms,
+            bathrooms: lastNote.bathrooms,
+            carSpaces: lastNote.carSpaces,
+            land: lastNote.landSize,
+          });
+          console.log(propertySpecs)
+          setAddressInfoState(true);
+
+          if (lastNote.reviewId) {
+            setRatingSectionState(true);
+          } else {
+            setRatingButtonState(true);
+          }
+
         }
       })
       .catch(err => console.log(err))
@@ -129,10 +143,14 @@ export default function Notes(props) {
     // textRef.current.value = "";
     setTitle("");
     setText("");
+    setAddress("");
+    setAddressInputState(false);
+    setAddressInfoState(false);
+    setRatingButtonState(false);
 
     const noteData = {
       starred: false,
-      title: "No title",
+      title: "",
       text: "",
       propertyAddress: null,
       userId: props.id
@@ -148,16 +166,10 @@ export default function Notes(props) {
 
   const handleTitleInputChange = () => {
     const titleValue = titleRef.current.value;
-    let nonEmptyTitleValue = titleValue;
-
-    if (titleValue === "") {
-      nonEmptyTitleValue = "No title"
-    }
-
-    setTitle(nonEmptyTitleValue);
+    setTitle(titleValue);
 
     const titleData = {
-      title: nonEmptyTitleValue
+      title: titleValue
     }
     notesAPI.updateNote(currentNoteId, titleData)
       .then(res => console.log(res))
@@ -195,6 +207,14 @@ export default function Notes(props) {
             setTitle(res.data[i].title);
             sideTitle = res.data[i].title;
             setText(res.data[i].text);
+            setAddress(res.data[i].propertyAddress);
+            setPropertySpecs({
+              bedrooms: res.data[i].bedrooms,
+              bathrooms: res.data[i].bathrooms,
+              carSpaces: res.data[i].carSpaces,
+              landSize: res.data[i].landSize,
+            });
+            console.log(res.data[i].bedrooms)
           }
         }
       })
@@ -204,7 +224,6 @@ export default function Notes(props) {
     //     setText(allNotes[i].text);
     //   }
     // }
-    console.log(title)
   };
 
   const handleLinkAddressButtonClick = () => {
@@ -224,6 +243,7 @@ export default function Notes(props) {
     setModalState(false);
     setAddressInfoState(false);
     setAddressInputState(false);
+    setRatingButtonState(false);
     notesAPI.updateNote(currentNoteId, {
       propertyAddress: null
     })
@@ -258,41 +278,36 @@ export default function Notes(props) {
       .then(res => {
         console.log(res);
         const propertyInfo = {
-          beds: res.data.bedrooms,
-          baths: res.data.bathrooms,
+          bedrooms: res.data.bedrooms,
+          bathrooms: res.data.bathrooms,
           carSpaces: res.data.carSpaces,
-          land: res.data.areaSize
-        }
-
-        if (!res.data.bedrooms) {
-          propertyInfo.beds = "-";
-        }
-
-        if (!res.data.bathrooms) {
-          propertyInfo.baths = "-";
-        }
-
-        if (!res.data.carSpaces) {
-          propertyInfo.carSpaces = "-";
-        }
-
-        if (!res.data.areaSize) {
-          propertyInfo.land = "-";
+          landSize: res.data.areaSize
         }
 
         setPropertySpecs(propertyInfo);
+
+        propertyInfo.propertyAddress = address;
+        console.log(propertyInfo)
+        notesAPI.updateNote(currentNoteId, propertyInfo)
+          .then(res => {
+            console.log(res);
+            setAddressInfoState(true);
+            setAddressInputState(false);
+            setRatingButtonState(true);
+          })
+          .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
 
-    notesAPI.updateNote(currentNoteId, {
-      propertyAddress: address
-    })
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-
-    setAddressInfoState(true);
-    setAddressInputState(false);
-    setRatingButtonState(true);
+    // notesAPI.updateNote(currentNoteId, {
+    //   propertyAddress: address,
+    //   beds: propertySpecs.beds,
+    //   baths: propertySpecs.baths,
+    //   carSpaces: propertySpecs.carSpaces,
+    //   landSize: propertySpecs.land
+    // })
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err))
   };
 
   const handleRatingButtonClick = () => {
@@ -426,13 +441,13 @@ export default function Notes(props) {
                   </div>
                   <div className="note-address-specs">
                     <i className="fas fa-bed"></i>&nbsp;
-                    <span className="num-beds">{propertySpecs.beds}</span>&nbsp;&nbsp;
+                    <span className="num-beds">{propertySpecs.bedrooms ? propertySpecs.bedrooms : "- "}</span>&nbsp;&nbsp;
                     <i className="fas fa-shower"></i>&nbsp;
-                    <span className="num-baths">{propertySpecs.baths}</span>&nbsp;&nbsp;
+                    <span className="num-baths">{propertySpecs.bathrooms ? propertySpecs.bathrooms : "- "}</span>&nbsp;&nbsp;
                     <i className="fas fa-car"></i>&nbsp;
-                    <span className="num-cars">{propertySpecs.carSpaces}</span>&nbsp;&nbsp;
+                    <span className="num-cars">{propertySpecs.carSpaces ? propertySpecs.carSpaces : "- "}</span>&nbsp;&nbsp;
                     <i className="fas fa-ruler-combined"></i>&nbsp;
-                    <span className="num-land">{propertySpecs.land}m²</span>&nbsp;&nbsp;
+                    <span className="num-land">{propertySpecs.landSize ? propertySpecs.landSize : "- "}m²</span>&nbsp;&nbsp;
                   </div>
                 </div>
               </div>
@@ -480,14 +495,18 @@ export default function Notes(props) {
                     <tr className="review-criteria-row">
                       <td>Property condition</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
-                      </td>
+                      </td> 
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Potential to capitalise</td>
                       <td>
-                        <span className="review-rating">5</span>
+                        <span className="review-rating">
+                          <input type="number" min="1" max="5" placeholder="5"/>
+                        </span>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>

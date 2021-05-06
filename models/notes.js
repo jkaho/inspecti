@@ -20,6 +20,22 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    bedrooms: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    bathrooms: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    carSpaces: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    landSize: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    }
   });
 
   Note.associate = models => {
