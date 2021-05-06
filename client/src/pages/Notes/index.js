@@ -18,7 +18,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
 // import { Icon } from "@material-ui/core";
 import notesAPI from "../../utils/notesAPI";
-import SuggestionSearch from "../../components/SuggestionSearch";
+import SimpleModal from "../../components/Modal";
 
 const useStyles = makeStyles({
   noteSection: {
@@ -69,6 +69,7 @@ export default function Notes(props) {
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressInfoIsOpen, setAddressInfoState] = useState(false);
+  const [modalIsOpen, setModalState] = useState(false);
   const [propertySpecs, setPropertySpecs] = useState({
     beds: 1,
     baths: 1,
@@ -215,9 +216,18 @@ export default function Notes(props) {
   };
 
   const handleUnlinkAddressButtonClick = () => {
+    setModalState(true);
+  };
+
+  const unlinkModalYesClick = () => {
     setAddress("");
+    setModalState(false);
     setAddressInfoState(false);
     setAddressInputState(false);
+  };
+
+  const unlinkModalNoClick = () => {
+    setModalState(false);
   };
 
   const handleAddressInputChange = () => {
@@ -247,6 +257,22 @@ export default function Notes(props) {
           baths: res.data.bathrooms,
           carSpaces: res.data.carSpaces,
           land: res.data.areaSize
+        }
+
+        if (!res.data.bedrooms) {
+          propertyInfo.beds = "-";
+        }
+
+        if (!res.data.bathrooms) {
+          propertyInfo.baths = "-";
+        }
+
+        if (!res.data.carSpaces) {
+          propertyInfo.carSpaces = "-";
+        }
+
+        if (!res.data.areaSize) {
+          propertyInfo.land = "-";
         }
 
         setPropertySpecs(propertyInfo);
@@ -503,6 +529,13 @@ export default function Notes(props) {
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
+                    <tr className="review-criteria-row">
+                      <td>Natural light</td>
+                      <td>
+                        <span className="review-rating">5</span>
+                        <span className="out-of-five">/5</span>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -531,6 +564,13 @@ export default function Notes(props) {
               </div>
               </div>
             </div>
+            <SimpleModal
+              title="Confirmation"
+              text="Are you sure you want to unlink this address?"
+              yesClick={unlinkModalYesClick}
+              noClick={unlinkModalNoClick}
+              modalState={modalIsOpen}
+            />
           </Grid>
         </Grid>
       </BoxContainer>
