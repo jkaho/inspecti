@@ -14,6 +14,9 @@ const reviewsAPI = {
   updateReview: function(noteId, reviewBody) {
     return axios.put(url + "/api/user/review/" + noteId, reviewBody, { withCredentials: true });
   },
+  deleteReview: function(noteId) {
+    return axios.delete(url + "/api/user/review/" + noteId, { withCredentials: true });
+  },
 };
 
 export default reviewsAPI;

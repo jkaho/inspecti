@@ -49,6 +49,7 @@ router.route("/review/:id")
   .post(reviewsController.createReview)
   .put(reviewsController.updateReview)
   .get(reviewsController.getReview)
+  .delete(reviewsController.deleteReview)
 
 router.get("/reviews", reviewsController.getAllReviews);
 

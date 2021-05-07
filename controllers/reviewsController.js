@@ -37,7 +37,7 @@ const reviewsController = {
         userId: req.user.id,
         noteId: req.params.id
       })
-      .then(model => res.json(model))
+      .then(newNote => res.json(newNote))
       .catch(err => res.status(422).json(err))
   },
   updateReview: function(req, res) {
@@ -63,7 +63,19 @@ const reviewsController = {
           }
         }
       )
-      .then(updatedNote => res.json(updatedNote))
+      .then(updatedReview => res.json(updatedReview))
+      .catch(err => res.status(422).json(err))
+  },
+  deleteReview: function(req, res) {
+    db.review
+      .destroy( 
+        {
+          where: {
+            noteId: parseInt(req.params.id)
+          }
+        }
+      )
+      .then(deletedReview => res.json(deletedReview))
       .catch(err => res.status(422).json(err))
   }
 };
