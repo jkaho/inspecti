@@ -142,22 +142,26 @@ export default function Notes(props) {
           setCurrentNoteId(lastNote.id);
           setTitle(lastNote.title);
           setText(lastNote.text);
-          setAddress(lastNote.propertyAddress);
-          setPropertySpecs({
-            bedrooms: lastNote.bedrooms,
-            bathrooms: lastNote.bathrooms,
-            carSpaces: lastNote.carSpaces,
-            land: lastNote.landSize,
-          });
-          console.log(propertySpecs)
-          setAddressInfoState(true);
-
-          if (lastNote.reviewId) {
-            setRatingSectionState(true);
+          if (lastNote.propertyAddress) {
+            setAddress(lastNote.propertyAddress);
+            setPropertySpecs({
+              bedrooms: lastNote.bedrooms,
+              bathrooms: lastNote.bathrooms,
+              carSpaces: lastNote.carSpaces,
+              land: lastNote.landSize,
+            });
+            setAddressInfoState(true);
+            // Determine whether or not note has review
+            if (lastNote.reviewId) {
+              setRatingSectionState(true);
+            } else {
+              setRatingButtonState(true);
+            }
           } else {
-            setRatingButtonState(true);
+            setAddressInfoState(false);
+            setRatingSectionState(false);
+            setRatingButtonState(false);
           }
-
         }
       })
       .catch(err => console.log(err))
@@ -223,9 +227,9 @@ export default function Notes(props) {
     }
 
     setCurrentNoteId(clickedNoteId);
-    console.log(clickedNoteId)
     notesAPI.getAllNotes(props.id)
       .then(res => {
+        console.log(res.data)
         setAllNotes(res.data.reverse());
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].id === clickedNoteId) {
@@ -239,7 +243,21 @@ export default function Notes(props) {
               carSpaces: res.data[i].carSpaces,
               landSize: res.data[i].landSize,
             });
-            console.log(res.data[i].bedrooms)
+            if (res.data[i].propertyAddress) {
+              setAddressInfoState(true);
+              console.log(res.data[i])
+              if (res.data[i].reviewId) {
+                setRatingSectionState(true);
+                setRatingButtonState(false);
+              } else {
+                setRatingSectionState(false);
+                setRatingButtonState(true);
+              }
+            } else {
+              setAddressInfoState(false);
+              setRatingButtonState(false);
+              setRatingSectionState(false);
+            }
           }
         }
       })

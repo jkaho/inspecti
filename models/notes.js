@@ -47,7 +47,8 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "CASCADE"
     });
 
-    Note.belongsTo(models.user)
+    Note.belongsTo(models.user);
+    Note.belongsTo(models.review);
   };
 
   return Note;

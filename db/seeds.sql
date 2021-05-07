@@ -1,9 +1,9 @@
 -- USERS -- 
-INSERT INTO users (id, firstName, lastName, email, password)
-VALUES (1, "Sally", "Jackson", "sally@email.com", "password");
+INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
+VALUES (1, "Bob", "Dylan", "bobby@email.com", "$2a$10$jEObUXD8pZmIith9StjiFOkJMBPpIfk4Y22jXwTrPgJooQZGwQEjK", "2021-05-07 04:04:11", "2021-05-07 04:04:11");
 
-INSERT INTO users (id, firstName, lastName, email, password)
-VALUES (2, "Bob", "Dylan", "bobby@email.com", "password");
+INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
+VALUES (2, "Sally", "Jackson", "sally@email.com", "$2a$10$XWTDualRScH7dbEZd4rN7.xIVDrURLkxScR5Mj5CKrSz/KjQ4/tWe", "2021-05-07 04:04:27", "2021-05-07 04:04:27");
 
 -- NOTES --
 INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, userId)
@@ -19,10 +19,10 @@ INSERT INTO notes (id, title, text, propertyAddress, starred, userId)
 VALUES (4, "Mosman semi auction", "", "32 Milson Dr Mosman, NSW 2088", FALSE, 1);
 
 INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, userId)
-VALUES (5, "Potts Pt apartment", "", "72/15 Limey Rd Potts Pt, NSW 2011", 3, 2, 2, 121, FALSE, 1);
+VALUES (5, "Potts Pt apartment", "", "72/15 Limey Rd Potts Pt, NSW 2011", 3, 2, 2, 121, TRUE, 1);
 
 INSERT INTO notes (id, title, text, propertyAddress, starred, userId)
-VALUES (6, "George from Bay Wright Real Estate", "", null, TRUE, 1);
+VALUES (6, "George from Bay Wright Real Estate", "", null, FALSE, 1);
 
 -- REVIEWS -- 
 INSERT INTO reviews (
@@ -82,11 +82,11 @@ INSERT INTO reviews (
   naturalLightRating,
   userId,
   noteId
-) VALUES (3, FALSE, 2, 1, 4, 2, 2, 5, 3, 4, 5, 4, 1, 6);
+) VALUES (3, FALSE, 2, 1, 4, 2, 2, 5, 3, 4, 5, 4, 1, 5);
 
 UPDATE notes 
 SET reviewId = 3
-WHERE id = 6;
+WHERE id = 5;
 
 -- INSPECTED PROPERTIES --
 INSERT INTO inspectedProperties (
