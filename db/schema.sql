@@ -29,8 +29,8 @@ CREATE TABLE notes (
   userId INT NOT NULL,
   reviewId INT,
   PRIMARY KEY(id),
-  FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY(reviewId) REFERENCES reviews(id) ON DELETE SET NULL
+  FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
+--   FOREIGN KEY(reviewId) REFERENCES reviews(id) ON DELETE SET NULL
 );
 
 CREATE TABLE reviews (
@@ -110,5 +110,10 @@ CREATE TABLE scheduledEvents (
   FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
 );
 
+ALTER TABLE notes
+ADD FOREIGN KEY (reviewId) REFERENCES reviews(id);
+
+SELECT * FROM users;
 SELECT * FROM notes;
 SELECT * FROM reviews;
+
