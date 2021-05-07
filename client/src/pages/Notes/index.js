@@ -226,6 +226,7 @@ export default function Notes(props) {
   };
 
   const handleNoteButtonClick = (event) => {
+    console.log("clicked")
     let clickedNoteId;
     if (event.target.id) {
       clickedNoteId = parseInt(event.target.id.split("-")[1]);
@@ -381,7 +382,7 @@ export default function Notes(props) {
       outdoorSpaceRating: null,
       indoorOutdoorFlowRating: null,
       naturalLightRating: null,
-    }
+    };
     reviewsAPI.createReview(currentNoteId, review)
       .then(res => {
         console.log(res);
@@ -444,6 +445,8 @@ export default function Notes(props) {
   };
 
   const handleDeleteNoteButtonClick = (event) => {
+    event.stopPropagation();
+    console.log(event.target)
     const noteId = event.target.id.split("-")[1];
     setModalState({ isOpen: true, type: "noteDelete", title: "Confirmation", text: "Are you sure you want to delete this note?" });
     setNoteReviewToDelete(noteId);
@@ -456,7 +459,43 @@ export default function Notes(props) {
         handleModalNoClick();
         notesAPI.getAllNotes(props.id)
           .then(res => {
-            setAllNotes(res.data);
+            setAllNotes(res.data.reverse());
+            if (currentNoteId === noteReviewToDelete) {
+              if (res.data.length > 0) {
+                setCurrentNoteId(res.data[0].id);
+                setTitle(res.data[0].title);
+                setText(res.data[0].text);
+                if (res.data[0].propertyAddress) {
+                  setAddress(res.data[0].propertyAddress);
+                  setPropertySpecs({
+                    bedrooms: res.data[0].bedrooms,
+                    bathrooms: res.data[0].bathrooms,
+                    carSpaces: res.data[0].carSpaces,
+                    landSize: res.data[0].landSize
+                  });
+                  setAddressInfoState(true);
+                  if (res.data[0].hasReview) {
+                    setRatingButtonState(false);
+                    setRatingSectionState(true);
+                    setRatingEditState(false);
+                  } else {
+                    setRatingButtonState(true);
+                  }
+                } else {
+                  setAddressInfoState(false);
+                  setRatingButtonState(false);
+                  setRatingSectionState(false);
+                }
+              } else {
+                setTitle("");
+                setText("");
+                setAddressInfoState(false);
+                setAddress("");
+                setRatingButtonState(false);
+                setRatingSectionState(false);
+                setPropertySpecs({});
+              }
+            }
           })
           .catch(err => console.log(err))
       })
