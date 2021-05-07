@@ -78,19 +78,7 @@ export default function Notes(props) {
     carSpaces: 1,
     landSize: 100
   });
-  const [propertyReview, setPropertyReview] = useState({
-    // shared: false,
-    // propertyConditionRating: 5,
-    // potentialRating: 5,
-    // surroundingsRating: 5,
-    // neighbourComparisonRating: 5,
-    // accessibilityRating: 5,
-    // privacyRating: 5,
-    // floorplanRating: 5,
-    // outdoorSpaceRating: 5,
-    // indoorOutdoorFlowRating: 5,
-    // naturalLightRating: 5,
-  });
+  const [propertyReview, setPropertyReview] = useState({});
 
   let sideTitle = "";
 
@@ -152,7 +140,7 @@ export default function Notes(props) {
             });
             setAddressInfoState(true);
             // Determine whether or not note has review
-            if (lastNote.reviewId) {
+            if (lastNote.review) {
               setRatingSectionState(true);
             } else {
               setRatingButtonState(true);
@@ -246,7 +234,7 @@ export default function Notes(props) {
             if (res.data[i].propertyAddress) {
               setAddressInfoState(true);
               console.log(res.data[i])
-              if (res.data[i].reviewId) {
+              if (res.data[i].review) {
                 setRatingSectionState(true);
                 setRatingButtonState(false);
               } else {
@@ -371,7 +359,7 @@ export default function Notes(props) {
       .then(res => {
         console.log(res);
         notesAPI.updateNote(currentNoteId, {
-          reviewId: res.data.id
+          hasReview: true
         })
           .then(res => console.log(res))
           .catch(err => console.log(err))

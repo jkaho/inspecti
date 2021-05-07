@@ -2,6 +2,9 @@ import axios from "axios";
 const url = "http://localhost:3001";
 
 const reviewsAPI = {
+  getAllReviews: function() {
+    return axios.get(url + "/api/user/reviews", { withCredentials: true });
+  },
   getReview: function(noteId) {
     return axios.post(url + "/api/user/review/" + noteId, { withCredentials: true });
   },

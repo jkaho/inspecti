@@ -1,6 +1,12 @@
 const db = require("../models");
 
 const reviewsController = {
+  getAllReviews: function(req, res) {
+    db.review
+      .findAll()
+      .then(reviews => res.json(review))
+      .catch(err => console.log(err))
+  },
   getReview: function(req, res) {
     db.review
       .find({
@@ -8,7 +14,7 @@ const reviewsController = {
           noteId: parseInt(req.params.id)
         }
       })
-      .then(notes => res.json(notes))
+      .then(review => res.json(review))
       .catch(err => console.log(err))
   },
   createReview: function(req, res) {

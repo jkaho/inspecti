@@ -44,9 +44,12 @@ router.route("/note/:id")
   .delete(notesController.deleteNote)
 // router.delete("/note/id");
 
+// Review routes 
 router.route("/review/:id")
   .post(reviewsController.createReview)
   .put(reviewsController.updateReview)
   .get(reviewsController.getReview)
+
+router.get("/reviews", reviewsController.getAllReviews);
 
 module.exports = router;

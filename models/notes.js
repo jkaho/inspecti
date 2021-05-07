@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     starred: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
     title: {
       type: DataTypes.STRING,
@@ -35,6 +36,11 @@ module.exports = function(sequelize, DataTypes) {
     landSize: {
       type: DataTypes.INTEGER,
       allowNull: true,
+    },
+    hasReview: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     }
   });
 
