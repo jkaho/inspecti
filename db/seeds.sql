@@ -1,6 +1,9 @@
 -- USERS -- 
 INSERT INTO users ("id", "firstName", "lastName", "email", "password")
-VALUES (1, "Sally", "Jackson", "sally-j@email.com", "password");
+VALUES (1, "Sally", "Jackson", "sally@email.com", "password");
+
+INSERT INTO users ("id", "firstName", "lastName", "email", "password")
+VALUES (2, "Bob", "Dylan", "bobby@email.com", "password");
 
 -- NOTES --
 INSERT INTO notes ("id", "title", "text", "propertyAddress", "starred", "userId", "reviewId")
@@ -19,7 +22,7 @@ INSERT INTO notes ("id", "title", "text", "propertyAddress", "starred", "userId"
 VALUES (5, "Potts Pt apartment", "", "72/15 Limey Rd Potts Pt, NSW 2011", FALSE, 1, null);
 
 INSERT INTO notes ("id", "title", "text", "propertyAddress", "starred", "userId", "reviewId")
-VALUES (6, "George from Bay Wright Real Estate", "", null, FALSE, 1, null);
+VALUES (6, "George from Bay Wright Real Estate", "", null, TRUE, 1, null);
 
 -- REVIEWS -- 
 INSERT INTO (
@@ -55,6 +58,23 @@ INSERT INTO (
   "userId",
   "noteId"
 ) VALUES (2, TRUE, 3, 4, 2, 2, 1, 5, 3, 2, 2, 1, 1, 4);
+
+INSERT INTO (
+  "id", 
+  "shared",
+  "propertyConditionRating",
+  "potentialRating",
+  "surroundingsRating",
+  "neighbourComparisonRating",
+  "accessibilityRating",
+  "privacyRating",
+  "floorplanRating",
+  "outdoorSpaceRating",
+  "indoorOutdoorFlowRating",
+  "naturalLightRating",
+  "userId",
+  "noteId"
+) VALUES (3, FALSE, 2, 1, 4, 2, 2, 5, 3, 4, 5, 4, 1, 6);
 
 -- INSPECTED PROPERTIES --
 INSERT INTO (
