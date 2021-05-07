@@ -11,6 +11,17 @@ const notesController = {
       .then(notes => res.json(notes))
       .catch(err => console.log(err))
   },
+  getStarredNotes: function(req, res) {
+    db.note
+      .findAll({
+        where: {
+          userId: parseInt(req.params.id),
+          starred: true
+        }
+      })
+      .then(notes => res.json(notes))
+      .catch(err => console.log(err))
+  },
   createNote: function(req, res) {
     db.note
       .create({

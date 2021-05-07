@@ -34,6 +34,8 @@ router.get("/logout", (req, res) => {
 // Note routes 
 router.get("/notes/:id", notesController.getNotes);
 
+router.get("/notes/starred/:id", notesController.getStarredNotes);
+
 router.route("/note")
   .post(notesController.createNote, (req, res) => {
     res.status(200).send("Note successfully created!")
@@ -42,7 +44,6 @@ router.route("/note")
 router.route("/note/:id")
   .put(notesController.updateNote)
   .delete(notesController.deleteNote)
-// router.delete("/note/id");
 
 // Review routes 
 router.route("/review/:id")
