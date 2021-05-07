@@ -48,7 +48,6 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Note.belongsTo(models.user);
-    Note.belongsTo(models.review);
   };
 
   return Note;

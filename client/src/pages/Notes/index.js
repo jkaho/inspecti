@@ -422,21 +422,22 @@ export default function Notes(props) {
   };
 
   const handleReviewSaveButtonClick = () => {
-    // const ratingValues = {
-    //   propertyConditionRating: conditionRef.current.value,
-    //   potentialRating: potentialRef.current.value,
-    //   surroundingsRating: surroundingsRef.current.value,
-    //   neighbourComparisonRating: neighboursRef.current.value,
-    //   accessibilityRating: accessibilityRef.current.value,
-    //   privacyRating: privacyRef.current.value,
-    //   floorplanRating: floorplanRef.current.value,
-    //   outdoorSpaceRating: outdoorSpaceRef.current.value,
-    //   indoorOutdoorFlowRating: indoorOutdoorRef.current.value,
-    //   naturalLightRating: lightingRef.current.value,
-    // };
-      
     reviewsAPI.updateReview(currentNoteId, propertyReview)
       .then(res => console.log(res))
+      .catch(err => console.log(err))
+  };
+
+  const handleDeleteNoteButtonClick = (event) => {
+    const noteId = event.target.id.split("-")[1];
+    notesAPI.deleteNote(noteId)
+      .then(res => {
+        console.log(res);
+        notesAPI.getAllNotes(props.id)
+          .then(res => {
+            setAllNotes(res.data);
+          })
+          .catch(err => console.log(err))
+      })
       .catch(err => console.log(err))
   };
 
@@ -477,6 +478,9 @@ export default function Notes(props) {
                             primary={currentNoteId === note.id && sideTitle !== "" ? sideTitle
                               : note.title
                             } />
+                          <button id={`deletebtn-${note.id}`} onClick={handleDeleteNoteButtonClick}>
+                            <i id={`deleteicon-${note.id}`} className="far fa-trash-alt" />
+                          </button>
                         </ListItem>
                         <Divider light/>
                       </div>

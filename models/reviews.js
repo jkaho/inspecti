@@ -48,14 +48,6 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Review.associate = models => {
-    Review.hasOne(models.note, {
-      foreignKey: {
-        name: "reviewId",
-        allowNull: true
-      },
-      onDelete: "SET NULL"
-    });
-
     Review.belongsTo(models.note)
   }
 
