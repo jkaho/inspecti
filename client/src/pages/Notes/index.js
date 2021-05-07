@@ -74,7 +74,12 @@ export default function Notes(props) {
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressInfoIsOpen, setAddressInfoState] = useState(false);
-  const [modalIsOpen, setModalState] = useState(false);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    type: "",
+    title: "",
+    text: ""
+  });
   const [propertySpecs, setPropertySpecs] = useState({
     bedrooms: 1,
     bathrooms: 1,
@@ -83,7 +88,7 @@ export default function Notes(props) {
   });
   const [propertyReview, setPropertyReview] = useState({});
   const [ratingEditIsOpen, setRatingEditState] = useState(false);
-
+  const [noteReviewToDelete, setNoteReviewToDelete] = useState();
   let sideTitle = "";
 
   const titleRef = useRef();
@@ -288,12 +293,12 @@ export default function Notes(props) {
   };
 
   const handleUnlinkAddressButtonClick = () => {
-    setModalState(true);
+    setModalState({ isOpen: true, type: "addressUnlink", title: "Confirmation", text: "Are you sure you want to unlink this address?" });
   };
 
   const unlinkModalYesClick = () => {
     setAddress("");
-    setModalState(false);
+    setModalState({ isOpen: false, type: "", title: "", text: "" });
     setAddressInfoState(false);
     setAddressInputState(false);
     setRatingButtonState(false);
@@ -304,8 +309,8 @@ export default function Notes(props) {
       .catch(err => console.log(err))
   };
 
-  const unlinkModalNoClick = () => {
-    setModalState(false);
+  const handleModalNoClick = () => {
+    setModalState({ isOpen: false, type: "", title: "", text: "" });
   };
 
   const handleAddressInputChange = () => {
@@ -440,13 +445,41 @@ export default function Notes(props) {
 
   const handleDeleteNoteButtonClick = (event) => {
     const noteId = event.target.id.split("-")[1];
-    notesAPI.deleteNote(noteId)
+    setModalState({ isOpen: true, type: "noteDelete", title: "Confirmation", text: "Are you sure you want to delete this note?" });
+    setNoteReviewToDelete(noteId);
+  };
+
+  const handleConfirmDeleteNoteYesClick = () => {
+    notesAPI.deleteNote(noteReviewToDelete)
       .then(res => {
         console.log(res);
+        handleModalNoClick();
         notesAPI.getAllNotes(props.id)
           .then(res => {
             setAllNotes(res.data);
           })
+          .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
+  };
+
+  const handleDeleteReviewButtonClick = () => {
+    setModalState({ isOpen: true, type: "reviewDelete", title: "Confirmation", text: "Are you sure you want to delete this review?" })
+  };
+
+  const handleConfirmDeleteReviewYesClick = () => {
+    reviewsAPI.deleteReview(currentNoteId)
+      .then(res => {
+        console.log(res);
+        setPropertyReview({});
+        setRatingSectionState(false);
+        setRatingButtonState(true);
+        setModalState({ isOpen: false, type: "", title: "", text: "" });
+
+        notesAPI.updateNote(currentNoteId, {
+          hasReview: false,
+        })
+          .then(res => console.log(res))
           .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
@@ -628,7 +661,7 @@ export default function Notes(props) {
                         <IconButton className={classes.iconButton} aria-label="share">
                           <PresentToAllIcon />
                         </IconButton>
-                        <IconButton className={classes.iconButton}  aria-label="delete">
+                        <IconButton className={classes.iconButton}  aria-label="delete" onClick={handleDeleteReviewButtonClick}>
                           <DeleteIcon />
                         </IconButton>
                       </th>
@@ -894,11 +927,16 @@ export default function Notes(props) {
               </div>
             </div>
             <SimpleModal
-              title="Confirmation"
-              text="Are you sure you want to unlink this address?"
-              yesClick={unlinkModalYesClick}
-              noClick={unlinkModalNoClick}
-              modalState={modalIsOpen}
+              title={modalState.title}
+              text={modalState.text}
+              yesClick={
+                modalState.type === "addressUnlink" ? unlinkModalYesClick : 
+                modalState.type === "reviewDelete" ? handleConfirmDeleteReviewYesClick : 
+                handleConfirmDeleteNoteYesClick
+              }
+              noClick={handleModalNoClick}
+              modalState={modalState.isOpen}
+              id={modalState.noteId ? modalState.noteId : ""}
             />
           </Grid>
         </Grid>

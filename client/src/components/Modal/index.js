@@ -69,6 +69,7 @@ export default function SimpleModal(props) {
           color="secondary"
           startIcon={<DoneIcon />}
           onClick={props.yesClick}
+          id={props.noteId ? props.noteId : ""}
         >Yes</Button>
       </div>
     </div>
