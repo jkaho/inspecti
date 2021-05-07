@@ -79,17 +79,17 @@ export default function Notes(props) {
     landSize: 100
   });
   const [propertyReview, setPropertyReview] = useState({
-    shared: false,
-    propertyConditionRating: 5,
-    potentialRating: 5,
-    surroundingsRating: 5,
-    neighbourComparisonRating: 5,
-    accessibilityRating: 5,
-    privacyRating: 5,
-    floorplanRating: 5,
-    outdoorSpaceRating: 5,
-    indoorOutdoorFlowRating: 5,
-    naturalLightRating: 5,
+    // shared: false,
+    // propertyConditionRating: 5,
+    // potentialRating: 5,
+    // surroundingsRating: 5,
+    // neighbourComparisonRating: 5,
+    // accessibilityRating: 5,
+    // privacyRating: 5,
+    // floorplanRating: 5,
+    // outdoorSpaceRating: 5,
+    // indoorOutdoorFlowRating: 5,
+    // naturalLightRating: 5,
   });
 
   let sideTitle = "";
@@ -301,18 +301,16 @@ export default function Notes(props) {
 
     notesAPI.getPropertyInfo(event.target.id)
       .then(res => {
-        console.log(res);
         const propertyInfo = {
           bedrooms: res.data.bedrooms,
           bathrooms: res.data.bathrooms,
           carSpaces: res.data.carSpaces,
           landSize: res.data.areaSize
-        }
+        };
 
         setPropertySpecs(propertyInfo);
 
         propertyInfo.propertyAddress = address;
-        console.log(propertyInfo)
         notesAPI.updateNote(currentNoteId, propertyInfo)
           .then(res => {
             console.log(res);
@@ -338,44 +336,65 @@ export default function Notes(props) {
   const handleRatingButtonClick = () => {
     setRatingSectionState(true);
     setRatingButtonState(false);
-    reviewsAPI.createReview(currentNoteId, propertyReview)
-      .then(res => console.log(res))
-      .catch(err => console.log)
+    const review = {
+      shared: false,
+      propertyConditionRating: null,
+      potentialRating: null,
+      surroundingsRating: null,
+      neighbourComparisonRating: null,
+      accessibilityRating: null,
+      privacyRating: null,
+      floorplanRating: null,
+      outdoorSpaceRating: null,
+      indoorOutdoorFlowRating: null,
+      naturalLightRating: null,
+    }
+    reviewsAPI.createReview(currentNoteId, review)
+      .then(res => {
+        console.log(res);
+        notesAPI.updateNote(currentNoteId, {
+          reviewId: res.data.id
+        })
+          .then(res => console.log(res))
+          .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
   };
 
   const handleRatingInputChange = (event) => {
     const target = event.target.id.split("-")[0];
+    console.log(target)
     const review = propertyReview;
     switch(target) {
       case "condition":
-        review.propertyConditionRating = conditionRef.current.value;
+        review.propertyConditionRating = parseInt(conditionRef.current.value);
         break;
       case "potential":
-        review.potentialRating = potentialRef.current.value;
+        review.potentialRating = parseInt(potentialRef.current.value);
         break;
       case "surroundings":
-        review.surroundingsRating = surroundingsRef.current.value;
+        review.surroundingsRating = parseInt(surroundingsRef.current.value);
         break;
       case "neighbours":
-        review.neighbourComparisonRating = neighboursRef.current.value;
+        review.neighbourComparisonRating = parseInt(neighboursRef.current.value);
         break;
       case "accessibility":
-        review.accessibilityRating = accessibilityRef.current.value;
+        review.accessibilityRating = parseInt(accessibilityRef.current.value);
         break;
       case "privacy":
-        review.privacyRating = privacyRef.current.value;
+        review.privacyRating = parseInt(privacyRef.current.value);
         break;
       case "floorplan":
-        review.floorplanRating = floorplanRef.current.value;
+        review.floorplanRating = parseInt(floorplanRef.current.value);
         break;
       case "outdoorSpace":
-        review.outdoorSpaceRating = outdoorSpaceRef.current.value;
+        review.outdoorSpaceRating = parseInt(outdoorSpaceRef.current.value);
         break;
       case "indoorOutdoor":
-        review.indoorOutdoorFlowRating = indoorOutdoorRef.current.value;
+        review.indoorOutdoorFlowRating = parseInt(indoorOutdoorRef.current.value);
         break;
       case "lighting":
-        review.naturalLightRating = lightingRef.current.value;
+        review.naturalLightRating = parseInt(lightingRef.current.value);
         break;
       default: 
         break;
@@ -385,20 +404,22 @@ export default function Notes(props) {
   };
 
   const handleReviewSaveButtonClick = () => {
-    const ratingValues = {
-      propertyConditionRating: conditionRef.current.value,
-      potentialRating: potentialRef.current.value,
-      surroundingsRating: surroundingsRef.current.value,
-      neighbourComparisonRating: neighboursRef.current.value,
-      accessibilityRating: accessibilityRef.current.value,
-      privacyRating: privacyRef.current.value,
-      floorplanRating: floorplanRef.current.value,
-      outdoorSpaceRating: outdoorSpaceRef.current.value,
-      indoorOutdoorFlowRating: indoorOutdoorRef.current.value,
-      naturalLightRating: lightingRef.current.value,
-    };
+    // const ratingValues = {
+    //   propertyConditionRating: conditionRef.current.value,
+    //   potentialRating: potentialRef.current.value,
+    //   surroundingsRating: surroundingsRef.current.value,
+    //   neighbourComparisonRating: neighboursRef.current.value,
+    //   accessibilityRating: accessibilityRef.current.value,
+    //   privacyRating: privacyRef.current.value,
+    //   floorplanRating: floorplanRef.current.value,
+    //   outdoorSpaceRating: outdoorSpaceRef.current.value,
+    //   indoorOutdoorFlowRating: indoorOutdoorRef.current.value,
+    //   naturalLightRating: lightingRef.current.value,
+    // };
       
-    setPropertyReview(ratingValues);
+    reviewsAPI.updateReview(currentNoteId, propertyReview)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   };
 
   return (

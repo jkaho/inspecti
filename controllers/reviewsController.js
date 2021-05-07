@@ -54,7 +54,7 @@ const reviewsController = {
         }, 
         {
           where: {
-            id: parseInt(req.params.id)
+            noteId: parseInt(req.params.id)
           }
         }
       )

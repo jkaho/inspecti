@@ -18,7 +18,8 @@ const notesController = {
         title: req.body.title,
         text: req.body.text,
         propertyAddress: req.body.propertyAddress,
-        userId: req.body.userId
+        userId: req.body.userId,
+        reviewId: null,
       })
       .then(model => res.json(model))
       .catch(err => res.status(422).json(err))
@@ -35,6 +36,7 @@ const notesController = {
           bathrooms: req.body.bathrooms,
           carSpaces: req.body.carSpaces,
           landSize: req.body.landSize,
+          reviewId: req.body.reviewId
         }, 
         {
           where: {
