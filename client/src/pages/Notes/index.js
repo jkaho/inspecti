@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
 import SimpleModal from "../../components/Modal";
+import RichTextEditor from "../../components/RichTextEditor";
 import Grid from "@material-ui/core/Grid";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -124,8 +125,8 @@ export default function Notes(props) {
             text: text,
             propertyAddress: null,
             userId: props.id
-          }
-          console.log("NEW NOTE")
+          };
+
           notesAPI.createNote(newNote)
             .then(res => {
               console.log(res.data);
@@ -171,7 +172,7 @@ export default function Notes(props) {
         }
       })
       .catch(err => console.log(err))
-  }, []);
+  });
 
   const handleNewNoteButtonClick = () => {
     // titleRef.current.value = "";
@@ -190,7 +191,7 @@ export default function Notes(props) {
       text: "",
       propertyAddress: null,
       userId: props.id
-    }
+    };
 
     notesAPI.createNote(noteData)
       .then(res => {
@@ -958,6 +959,7 @@ export default function Notes(props) {
                           onChange={handleTextInputChange}
                           value={text}
                         ></textarea>
+                        <RichTextEditor />
                       </td>
                     </tr>
                   </thead>

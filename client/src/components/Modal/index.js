@@ -78,7 +78,7 @@ export default function SimpleModal(props) {
   return (
     <div>
       <Modal
-        open={props.modalState}
+        open={open ? open : props.modalState}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

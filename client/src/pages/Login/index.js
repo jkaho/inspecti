@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import PopupMessage from "../../components/PopupMessage";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -37,21 +37,8 @@ const useStyles = makeStyles((theme) => ({
 export default function LogIn() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [authorisationStatus, setAuthorisationStatus] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
-
-  // useEffect(() => {
-  //   authenticateUser();
-  // }, []);
-
-  // function authenticateUser() {
-  //   authenticationAPI.authenticated()
-  //     .then((res) => {
-  //       console.log(res)
-  //     })
-  //     .catch(err => console.log(err))
-  // }
 
   const handleLogInFormSubmit = (event) => {
     event.preventDefault();
