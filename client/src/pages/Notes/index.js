@@ -53,6 +53,9 @@ const useStyles = makeStyles({
   show: {
     display: "block",
   },
+  showSpan: {
+    display: "inline-block",
+  },
   iconButton: {
     padding: 2,
   }
@@ -79,6 +82,7 @@ export default function Notes(props) {
     landSize: 100
   });
   const [propertyReview, setPropertyReview] = useState({});
+  const [ratingEditIsOpen, setRatingEditState] = useState(false);
 
   let sideTitle = "";
 
@@ -141,6 +145,15 @@ export default function Notes(props) {
             setAddressInfoState(true);
             // Determine whether or not note has review
             if (lastNote.hasReview) {
+              reviewsAPI.getAllReviews()
+                .then(res => {
+                  for (let i = 0; i < res.data.length; i++) {
+                    if (res.data[i].noteId === lastNote.id) {
+                      setPropertyReview(res.data[i]);
+                    }
+                  }
+                })
+                .catch(err => console.log(err))
               setRatingSectionState(true);
             } else {
               setRatingButtonState(true);
@@ -164,6 +177,7 @@ export default function Notes(props) {
     setAddressInputState(false);
     setAddressInfoState(false);
     setRatingButtonState(false);
+    setRatingEditState(false);
 
     const noteData = {
       starred: false,
@@ -217,7 +231,6 @@ export default function Notes(props) {
     setCurrentNoteId(clickedNoteId);
     notesAPI.getAllNotes(props.id)
       .then(res => {
-        console.log(res.data)
         setAllNotes(res.data.reverse());
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].id === clickedNoteId) {
@@ -233,10 +246,19 @@ export default function Notes(props) {
             });
             if (res.data[i].propertyAddress) {
               setAddressInfoState(true);
-              console.log(res.data[i])
               if (res.data[i].hasReview) {
+                reviewsAPI.getAllReviews()
+                .then(res => {
+                  for (let i = 0; i < res.data.length; i++) {
+                    if (res.data[i].noteId === clickedNoteId) {
+                      setPropertyReview(res.data[i]);
+                    }
+                  }
+                })
+                .catch(err => console.log(err))
                 setRatingSectionState(true);
                 setRatingButtonState(false);
+                setRatingEditState(false);
               } else {
                 setRatingSectionState(false);
                 setRatingButtonState(true);
@@ -410,6 +432,7 @@ export default function Notes(props) {
   };
 
   const handleReviewSaveButtonClick = () => {
+    setRatingEditState(false);
     reviewsAPI.updateReview(currentNoteId, propertyReview)
       .then(res => console.log(res))
       .catch(err => console.log(err))
@@ -596,7 +619,7 @@ export default function Notes(props) {
                     <tr>
                       <th className="note-section-heading">PROPERTY REVIEW</th>
                       <th className="note-action-btns">
-                        <IconButton className={classes.iconButton} aria-label="edit">
+                        <IconButton className={classes.iconButton} aria-label="edit" onClick={() => setRatingEditState(true)}>
                           <EditIcon />
                         </IconButton>
                         <IconButton onClick={handleReviewSaveButtonClick} className={classes.iconButton} aria-label="save">
@@ -615,182 +638,230 @@ export default function Notes(props) {
                     <tr className="review-criteria-row">
                       <td>Property condition</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.propertyConditionRating ? propertyReview.propertyConditionRating : "-"}
+                        </span>
+                        <input 
                             id="condition-input" 
                             ref={conditionRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.propertyConditionRating}
-                            placeholder="-"/>
-                        </span>
+                            placeholder={propertyReview.propertyConditionRating ? propertyReview.propertyConditionRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td> 
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Potential to capitalise</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.potentialRating ? propertyReview.potentialRating : "-"}
+                        </span>
+                        <input 
                             id="potential-input" 
                             ref={potentialRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.potentialRating}
-                            placeholder="-"/>
-                        </span>
+                            placeholder={propertyReview.potentialRating ? propertyReview.potentialRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Surroundings</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.surroundingsRating ? propertyReview.surroundingsRating : "-"}
+                        </span>
+                        <input 
                             id="surroundings-input" 
                             ref={surroundingsRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.surroundingsRating}
-                            placeholder="-"/>
-                        </span>
+                            placeholder={propertyReview.surroundingsRating ? propertyReview.surroundingsRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Consistency with neighbours</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.neighbourComparisonRating ? propertyReview.neighbourComparisonRating : "-"}
+                        </span>
+                        <input 
                             id="neighbours-input" 
                             ref={neighboursRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.neighbourComparisonRating}
-                            placeholder="-"/>
-                        </span>
+                            placeholder={propertyReview.neighbourComparisonRating ? propertyReview.neighbourComparisonRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Accessibility</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.accessibilityRating ? propertyReview.accessibilityRating : "-"}
+                        </span>
+                        <input 
                             id="accessibility-input" 
                             ref={accessibilityRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.accessibilityRating}
-                            placeholder="-"/>
-                        </span>
+                            placeholder={propertyReview.accessibilityRating ? propertyReview.accessibilityRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Privacy</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.privacyRating ? propertyReview.privacyRating : "-"}
+                        </span>
+                        <input 
                             id="privacy-input" 
                             ref={privacyRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.privacyRating} 
-                            placeholder="-"
-                          />
-                        </span>
+                            placeholder={propertyReview.privacyRating ? propertyReview.privacyRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Floorplan</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.floorplanRating ? propertyReview.floorplanRating : "-"}
+                        </span>
+                        <input 
                             id="floorplan-input" 
                             ref={floorplanRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.floorplanRating}
-                            placeholder="-"
-                          />
-                        </span>
+                            placeholder={propertyReview.floorplanRating ? propertyReview.floorplanRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Outdoor space</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.outdoorSpaceRating ? propertyReview.outdoorSpaceRating : "-"}
+                        </span>
+                        <input 
                             id="outdoorSpace-input" 
                             ref={outdoorSpaceRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.outdoorSpaceRating}
-                            placeholder="-"/>
-                        </span>
+                            placeholder={propertyReview.outdoorSpaceRating ? propertyReview.outdoorSpaceRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Indoor-to-outdoow flow</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.indoorOutdoorFlowRating ? propertyReview.indoorOutdoorFlowRating : "-"}
+                        </span>
+                        <input 
                             id="indoorOutdoor-input" 
                             ref={indoorOutdoorRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.indoorOutdoorFlowRating}
-                            placeholder="-"/>
-                        </span>
+                            placeholder={propertyReview.indoorOutdoorFlowRating ? propertyReview.indoorOutdoorFlowRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
                       <td>Natural light</td>
                       <td>
-                        <span className="review-rating">
-                          <input 
+                        <span 
+                          className={
+                            `review-rating
+                            ${ratingEditIsOpen ? classes.hide : classes.showSpan}`
+                          }
+                        >
+                          {propertyReview.naturalLightRating ? propertyReview.naturalLightRating : "-"}
+                        </span>
+                        <input 
                             id="lighting-input" 
                             ref={lightingRef} 
                             onChange={handleRatingInputChange} 
-                            className="rating-input" 
+                            className={`rating-input ${ratingEditIsOpen ? classes.showSpan : classes.hide}`} 
                             type="number" 
                             min="1" 
                             max="5" 
-                            value={propertyReview.naturalLightRating}
-                            placeholder="-"/>
-                        </span>
+                            placeholder={propertyReview.naturalLightRating ? propertyReview.naturalLightRating : "-"}/>
                         <span className="out-of-five">/5</span>
                       </td>
                     </tr>

@@ -4,7 +4,7 @@ const reviewsController = {
   getAllReviews: function(req, res) {
     db.review
       .findAll()
-      .then(reviews => res.json(review))
+      .then(reviews => res.json(reviews))
       .catch(err => console.log(err))
   },
   getReview: function(req, res) {
@@ -55,8 +55,7 @@ const reviewsController = {
           outdoorSpaceRating: req.body.outdoorSpaceRating,
           indoorOutdoorFlowRating: req.body.indoorOutdoorFlowRating,
           naturalLightingRating: req.body.naturalLightingRating,
-          userId: req.user.id,
-          noteId: req.params.id
+          userId: req.user.id
         }, 
         {
           where: {

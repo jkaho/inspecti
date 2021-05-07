@@ -16,7 +16,7 @@ INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpa
 VALUES (3, "Harbour views", "", "76 Craigson St Greenwich, NSW 2065", 4, 2, 2, 427, TRUE, FALSE, 1);
 
 INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (4, "Mosman semi auction", "", "32 Milson Dr Mosman, NSW 2088", FALSE, TRUE 1);
+VALUES (4, "Mosman semi auction", "", "32 Milson Dr Mosman, NSW 2088", FALSE, TRUE, 1);
 
 INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
 VALUES (5, "Potts Pt apartment", "", "72/15 Limey Rd Potts Pt, NSW 2011", 3, 2, 2, 121, TRUE, TRUE, 1);
