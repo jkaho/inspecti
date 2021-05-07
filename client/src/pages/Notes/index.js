@@ -615,7 +615,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.propertyConditionRating}
-                            placeholder="5"/>
+                            placeholder="-"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td> 
@@ -633,7 +633,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.potentialRating}
-                            placeholder="5"/>
+                            placeholder="-"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -651,7 +651,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.surroundingsRating}
-                            placeholder="5"/>
+                            placeholder="-"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -669,7 +669,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.neighbourComparisonRating}
-                            placeholder="5"/>
+                            placeholder="-"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -687,7 +687,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.accessibilityRating}
-                            placeholder="5"/>
+                            placeholder="-"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -705,7 +705,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.privacyRating} 
-                            placeholder="5"
+                            placeholder="-"
                           />
                         </span>
                         <span className="out-of-five">/5</span>
@@ -724,7 +724,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.floorplanRating}
-                            placeholder="5"
+                            placeholder="-"
                           />
                         </span>
                         <span className="out-of-five">/5</span>
@@ -743,7 +743,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.outdoorSpaceRating}
-                            placeholder="5"/>
+                            placeholder="-"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -761,7 +761,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.indoorOutdoorFlowRating}
-                            placeholder="5"/>
+                            placeholder="-"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
@@ -779,7 +779,7 @@ export default function Notes(props) {
                             min="1" 
                             max="5" 
                             value={propertyReview.naturalLightRating}
-                            placeholder="5"/>
+                            placeholder="-"/>
                         </span>
                         <span className="out-of-five">/5</span>
                       </td>
