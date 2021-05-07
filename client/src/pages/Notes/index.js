@@ -140,7 +140,7 @@ export default function Notes(props) {
             });
             setAddressInfoState(true);
             // Determine whether or not note has review
-            if (lastNote.review) {
+            if (lastNote.hasReview) {
               setRatingSectionState(true);
             } else {
               setRatingButtonState(true);
@@ -234,7 +234,7 @@ export default function Notes(props) {
             if (res.data[i].propertyAddress) {
               setAddressInfoState(true);
               console.log(res.data[i])
-              if (res.data[i].review) {
+              if (res.data[i].hasReview) {
                 setRatingSectionState(true);
                 setRatingButtonState(false);
               } else {
