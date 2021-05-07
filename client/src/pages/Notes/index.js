@@ -69,6 +69,7 @@ export default function Notes(props) {
   const [text, setText] = useState("");
   const [currentNoteId, setCurrentNoteId] = useState();
   const [allNotes, setAllNotes] = useState([]);
+  const [starredNotes, setStarredNotes] = useState([]);
   const [addressInputIsOpen, setAddressInputState] = useState(false);
   const [ratingButtonIsOpen, setRatingButtonState] = useState(false);
   const [ratingSectionIsOpen, setRatingSectionState] = useState(false);
@@ -526,6 +527,18 @@ export default function Notes(props) {
       .catch(err => console.log(err))
   };
 
+  const handleStarButtonClick = (event, isStarred) => {
+    const noteId = event.target.id.split("-")[1];
+    let starred = !isStarred;
+    notesAPI.updateNote(noteId, {
+      starred: starred,
+    })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err))
+  };
+
   return (
     <div>
       <SideMenu />
@@ -563,10 +576,15 @@ export default function Notes(props) {
                             primary={currentNoteId === note.id && sideTitle !== "" ? sideTitle
                               : note.title
                             } />
+                        </ListItem>
+                        <div className="list-item-actions">
                           <button id={`deletebtn-${note.id}`} onClick={handleDeleteNoteButtonClick}>
                             <i id={`deleteicon-${note.id}`} className="far fa-trash-alt" />
                           </button>
-                        </ListItem>
+                          <button id={`starbtn-${note.id}`} onClick={handleStarButtonClick(event, note.starred)}>
+                            <i id={`staricon-${note.id}`} className={note.starred ? "fas fa-star" : "far- fa-star"} />
+                          </button>
+                        </div>
                         <Divider light/>
                       </div>
                     )) : 
