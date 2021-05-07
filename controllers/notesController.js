@@ -46,6 +46,18 @@ const notesController = {
       )
       .then(updatedNote => res.json(updatedNote))
       .catch(err => res.status(422).json(err))
+  },
+  deleteNote: function(req, res) {
+    db.note
+      .destroy(
+        {
+          where: {
+            id: parseInt(req.params.id)
+          }
+        }
+      )
+      .then(deletedNote => res.json(deletedNote))
+      .catch(err => res.status(422).json(err))
   }
 };
 

@@ -41,6 +41,7 @@ router.route("/note")
 
 router.route("/note/:id")
   .put(notesController.updateNote)
+  .delete(notesController.deleteNote)
 // router.delete("/note/id");
 
 router.route("/review/:id")
