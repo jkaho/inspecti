@@ -93,6 +93,7 @@ export default function Notes(props) {
   });
   const [propertyReview, setPropertyReview] = useState({});
   const [ratingEditIsOpen, setRatingEditState] = useState(false);
+  const [textEditorModeOn, setTextEditorMode] = useState(false);
   const [noteReviewToDelete, setNoteReviewToDelete] = useState();
   let sideTitle = "";
 
@@ -579,6 +580,10 @@ export default function Notes(props) {
       .catch(err => console.log(err))
   };
 
+  const handleEditTextButtonClick = () => {
+    setTextEditorMode(!textEditorModeOn);
+  };
+
   return (
     <div>
       <SideMenu />
@@ -1015,7 +1020,9 @@ export default function Notes(props) {
                     <tr>
                       <th className="note-section-heading">PROPERTY NOTES</th>
                       <th className="note-action-btns">
-                        <IconButton>
+                        <IconButton
+                          onClick={handleEditTextButtonClick}
+                        >
                           <EditIcon />
                         </IconButton>
                       </th>
@@ -1032,7 +1039,11 @@ export default function Notes(props) {
                           onChange={handleTextInputChange}
                           textValue={text}
                         /> */}
-                        <TextEditor />
+                        <TextEditor
+                          currentNoteId={currentNoteId}
+                          editorModeOn={textEditorModeOn}
+                          text={text}
+                        />
                       </td>
                     </tr>
                   </thead>

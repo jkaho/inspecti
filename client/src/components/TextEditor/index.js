@@ -1,16 +1,31 @@
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './style.css';
+import notesAPI from "../../utils/notesAPI";
 
-function TextEditor() {
+const useStyles = makeStyles({
+  hide: {
+    display: "none",
+  },
+  show: {
+    display: "block",
+  },
+});
+
+function TextEditor(props) {
+  const classes = useStyles();
+
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty(),
   );
   const  [convertedContent, setConvertedContent] = useState(null);
+  const [text, setText] = useState();
+  const [editorModeOn, setEditorMode] = useState(false);
 
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -26,13 +41,37 @@ function TextEditor() {
     return  {
       __html: DOMPurify.sanitize(html)
     }
-  }
+  };
+
+  // const saveTextToDB = () => {
+  //   console.log(createMarkup(convertedContent));
+  // };
+
+  const handleTextInputChange = () => {
+    const textValue = createMarkup(convertedContent).__html;
+    setText(textValue);
+
+    const textData = {
+      text: textValue
+    };
+
+    notesAPI.updateNote(props.currentNoteId, textData)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  };
 
   return (
-    <div className="wysiwyg-text-editor">
+    <div>
+    <div className=
+      {
+        `wysiwyg-text-editor
+        ${props.editorModeOn ? classes.show : classes.hide}`
+      }
+    >
       <Editor 
         editorState={editorState}
         onEditorStateChange={handleEditorChange}
+        onChange={handleTextInputChange}
         wrapperClassName="wrapper-class"
         editorClassName="editor-class"
         toolbarClassName="toolbar-class"
@@ -106,7 +145,16 @@ function TextEditor() {
           },
         }}
       />
-      <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)}></div>
+    </div>
+    <div 
+    className=
+    {
+      `preview 
+      ${props.editorModeOn ? classes.hide : classes.show}`
+    }
+   dangerouslySetInnerHTML={{ __html: props.text }}
+  >
+  </div>
     </div>
   )
 }
