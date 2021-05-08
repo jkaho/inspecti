@@ -1029,16 +1029,12 @@ export default function Notes(props) {
                     </tr>
                     <tr>
                       <td colSpan="2">
-                        <textarea 
+                        {/* Standard textarea for notes */}
+                        {/* <textarea 
                           ref={textRef}
                           onChange={handleTextInputChange}
                           value={text}
-                        ></textarea>
-                        {/* <RichTextEditor
-                          textRef={textRef}
-                          onChange={handleTextInputChange}
-                          textValue={text}
-                        /> */}
+                        ></textarea> */}
                         <TextEditor
                           currentNoteId={currentNoteId}
                           editorModeOn={textEditorModeOn}
