@@ -24,6 +24,7 @@ export default function NoteListItem(props) {
         </button>
         <button id={`starbtn-${props.noteId}`} onClick={(event) => {
             props.starOnClick(event, props.noteIsStarred);
+            setStarredState(!isStarred);
           }}>
           <i id={`staricon-${props.noteId}`} className={isStarred ? "fas fa-star" : "far fa-star"} />
         </button>

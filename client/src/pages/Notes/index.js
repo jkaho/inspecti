@@ -554,7 +554,7 @@ export default function Notes(props) {
     })
       .then(res => {
         console.log(res);
-        notesAPI.getAllNotes()
+        notesAPI.getAllNotes(props.id)
           .then(res => {
             // Update starred and non-starred notes
             let starredNotes = [];
