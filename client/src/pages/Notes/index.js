@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
 import SimpleModal from "../../components/Modal";
+import NoteListItem from "../../components/NoteListItem";
 // import RichTextEditor from "../../components/RichTextEditor";
 import TextEditor from "../../components/TextEditor";
 import Grid from "@material-ui/core/Grid";
@@ -70,6 +71,7 @@ export default function Notes(props) {
   const [currentNoteId, setCurrentNoteId] = useState();
   const [allNotes, setAllNotes] = useState([]);
   const [starredNotes, setStarredNotes] = useState([]);
+  const [nonStarredNotes, setNonStarredNotes] = useState([]);
   const [addressInputIsOpen, setAddressInputState] = useState(false);
   const [ratingButtonIsOpen, setRatingButtonState] = useState(false);
   const [ratingSectionIsOpen, setRatingSectionState] = useState(false);
@@ -113,7 +115,6 @@ export default function Notes(props) {
     notesAPI.getAllNotes(props.id)
       .then(res => {
         console.log(res);
-        setAllNotes(res.data.reverse());
         // If there are no existing notes, create a new blank note
         if (res.data.length < 1) {
           titleRef.current.value = "";
@@ -137,6 +138,24 @@ export default function Notes(props) {
             .catch(err => console.log(err))
         // Else render the latest note 
         } else {
+          // Separate starred and non-starred notes 
+          let starredNotes = [];
+          let nonStarredNotes = [];
+          res.data.forEach(note => {
+            if (note.starred) {
+              starredNotes.push(note);
+            } else {
+              nonStarredNotes.push(note);
+            };
+          });
+
+          // Reverse order of notes to display newest first 
+          res.data.reverse(); // to display latest note
+          starredNotes.reverse(); // to display starred notes list
+          nonStarredNotes.reverse(); // to display all notes list 
+          setStarredNotes(starredNotes);
+          setNonStarredNotes(nonStarredNotes);
+
           // Render latest note
           const lastNote = res.data[0];
           setCurrentNoteId(lastNote.id);
@@ -534,7 +553,28 @@ export default function Notes(props) {
       starred: starred,
     })
       .then(res => {
-        console.log(res.data);
+        console.log(res);
+        notesAPI.getAllNotes()
+          .then(res => {
+            // Update starred and non-starred notes
+            let starredNotes = [];
+            let nonStarredNotes = [];
+            res.data.forEach(note => {
+              if (note.starred) {
+                starredNotes.push(note);
+              } else {
+                nonStarredNotes.push(note);
+              };
+            });
+
+            // Reverse order of notes to display newest first 
+            res.data.reverse(); // to display latest note
+            starredNotes.reverse(); // to display starred notes list
+            nonStarredNotes.reverse(); // to display all notes list 
+            setStarredNotes(starredNotes);
+            setNonStarredNotes(nonStarredNotes);
+          })
+          .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
   };
@@ -554,13 +594,28 @@ export default function Notes(props) {
                   <ListItem className={classes.noteSection}>
                     <ListItemText disableTypography primary="Starred"/>
                   </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="Note 1" />
-                  </ListItem>
-                  <Divider light/>
-                  <ListItem button>
-                    <ListItemText primary="Note 2" />
-                  </ListItem>
+                  {starredNotes.length > 0 ? 
+                    starredNotes.map(note => (
+                      <NoteListItem
+                        key={`note-${note.id}`}
+                        noteId={note.id}
+                        listItemOnClick={handleNoteButtonClick}
+                        currentNoteId={currentNoteId}
+                        sideTitle={sideTitle}
+                        noteTitle={note.title}
+                        deleteOnClick={handleDeleteNoteButtonClick}
+                        starOnClick={handleStarButtonClick}
+                        noteIsStarred={note.starred}
+                      />
+                    )) : 
+                    <div>
+                      <ListItem>
+                        <ListItemText
+                          primary="No starred notes"
+                        />
+                      </ListItem>
+                    </div> 
+                  }
                 </List>
               </div>
               <div className="all-notes-div">
@@ -568,25 +623,19 @@ export default function Notes(props) {
                   <ListItem className={classes.noteSection}>
                     <ListItemText disableTypography primary="Notes"/>
                   </ListItem>
-                  {allNotes.length > 0 ? 
-                    allNotes.map(note => (
-                      <div key={`note-${note.id}`}>
-                        <ListItem id={`note-${note.id}`} button onClick={handleNoteButtonClick}>
-                          <ListItemText id={`notetitle-${note.id}`}
-                            primary={currentNoteId === note.id && sideTitle !== "" ? sideTitle
-                              : note.title
-                            } />
-                        </ListItem>
-                        <div className="list-item-actions">
-                          <button id={`deletebtn-${note.id}`} onClick={handleDeleteNoteButtonClick}>
-                            <i id={`deleteicon-${note.id}`} className="far fa-trash-alt" />
-                          </button>
-                          <button id={`starbtn-${note.id}`} onClick={handleStarButtonClick(event, note.starred)}>
-                            <i id={`staricon-${note.id}`} className={note.starred ? "fas fa-star" : "far- fa-star"} />
-                          </button>
-                        </div>
-                        <Divider light/>
-                      </div>
+                  {nonStarredNotes.length > 0 ? 
+                    nonStarredNotes.map(note => (
+                      <NoteListItem
+                        key={`note-${note.id}`}
+                        noteId={note.id}
+                        listItemOnClick={handleNoteButtonClick}
+                        currentNoteId={currentNoteId}
+                        sideTitle={sideTitle}
+                        noteTitle={note.title}
+                        deleteOnClick={handleDeleteNoteButtonClick}
+                        starOnClick={handleStarButtonClick}
+                        noteIsStarred={note.starred}
+                      />
                     )) : 
                     <div>
                       <ListItem>
