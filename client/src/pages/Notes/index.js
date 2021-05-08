@@ -249,7 +249,6 @@ export default function Notes(props) {
   };
 
   const handleNoteButtonClick = (event) => {
-    console.log("clicked")
     let clickedNoteId;
     if (event.target.id) {
       clickedNoteId = parseInt(event.target.id.split("-")[1]);

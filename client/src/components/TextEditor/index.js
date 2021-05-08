@@ -25,7 +25,6 @@ function TextEditor(props) {
   );
   const  [convertedContent, setConvertedContent] = useState(null);
   const [text, setText] = useState();
-  const [editorModeOn, setEditorMode] = useState(false);
 
   const handleEditorChange = (state) => {
     setEditorState(state);
