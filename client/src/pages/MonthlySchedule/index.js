@@ -6,6 +6,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "./style.css";
 // import MonthlyCalendar from "../../components/MonthlyCalendar";
+import FormModal from "../../components/FormModal";
 
 export default function MonthlySchedule() {
   const handleDateClick = () => {
@@ -23,7 +24,7 @@ export default function MonthlySchedule() {
             dateClick={handleDateClick}
             customButtons={{
               eventButton: {
-                text: "ADD EVENT",
+                text: "ADD EVENT +",
                 click: () => console.log("Add event!")
               }
             }}
@@ -33,8 +34,11 @@ export default function MonthlySchedule() {
               right: 'prev,next',
             }}
           />
+                  <FormModal />
+
         </div>
         {/* <MonthlyCalendar /> */}
+
       </div>
     </div>
   );

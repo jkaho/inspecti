@@ -1,0 +1,21 @@
+.event-div {
+  margin: 10px 0;
+}
+
+.event-create-div {
+  margin: 30px 0 20px 0;
+  text-align: center;
+}
+
+#event-time {
+  height: 40px;
+  font-size: 16px;
+  border: 1px solid rgb(201, 201, 201);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.event-time-div label {
+  color: rgb(88, 88, 88);
+  font-weight: 300;
+}
