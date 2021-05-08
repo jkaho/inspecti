@@ -19,12 +19,8 @@
   background: white!important;
 }
 
-.fc-today-button {
-  display: none!important;
-}
-
 .fc-button-group {
-  width: 150px;
+  width: 120px;
 }
 
 .fc-prev-button, .fc-next-button {
@@ -56,6 +52,42 @@
 .fc-daygrid-day:hover {
   background: rgb(255, 235, 255);
 }
+
+.fc-eventButton-button {
+  border: 1px solid rgb(152, 11, 165)!important; 
+  background: rgb(152, 11, 165)!important;
+  color: white!important;
+  font-weight: 300!important;
+  border-radius: 25px!important;
+}
+
+.fc-eventButton-button:hover {
+  border: 1px solid rgb(152, 11, 165, 0.8)!important; 
+  background: rgb(152, 11, 165, 0.8)!important;
+}
+
+.fc-dayGridMonth-button {
+  background: none!important;
+  color: #2C3E50!important;
+  border: 2px solid #2C3E50!important;
+  border-top-left-radius: 25px!important;
+  border-bottom-left-radius: 25px!important;
+}
+
+.fc-timeGridDay-button {
+  background: none!important;
+  color: #2C3E50!important;
+  border: 2px solid #2C3E50!important;
+  border-left: none!important;
+  border-top-right-radius: 25px!important;
+  border-bottom-right-radius: 25px!important;
+}
+
+.fc-button-active {
+  background-color: #2C3E50!important;
+  color: white!important;
+}
+
 
 @media (max-width: 600px) {
   .calendar-container {
