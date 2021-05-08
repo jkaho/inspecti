@@ -10,6 +10,7 @@ import PlaceIcon from "@material-ui/icons/Place";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./style.css";
+import moment from "moment";
 
 function getModalStyle() {
   const top = 50;
@@ -42,12 +43,19 @@ const useStyles = makeStyles((theme) => ({
     width: "42ch",
   },
   createButton: {
+    color: "rgb(255, 235, 255)",
+    background: "purple",
+    "&:hover": {
+      background: "rgb(99, 0, 99)",
+    }
+  },
+  cancelButton: {
     color: "purple",
     background: "rgb(255, 235, 255)",
     "&:hover": {
-      background: "purple",
-      color: "rgb(255, 235, 255)",
-    }
+      background: "rgb(255, 225, 255)",
+    },
+    marginLeft: 20,
   },
 }));
 
@@ -98,7 +106,7 @@ export default function FormModal() {
         </div>
         <div className="event-address-div event-div">
           <FormControl className={clsx(classes.margin, classes.addressTextField)} variant="outlined">
-            <InputLabel for="outlined-adornment-address">Search for an address</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-address">Search for an address</InputLabel>
             <OutlinedInput
               labelWidth={160}
               type="text"
@@ -114,11 +122,12 @@ export default function FormModal() {
         <div className="event-time-div event-div">
           <label htmlFor="event-time">Event time</label><br/>
           <input type="datetime-local" id="event-time"
-            name="event-time" value={new Date()} min={new Date()}
+            name="event-time" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
           />
         </div>
         <div className="event-create-div event-div">
           <Button className={classes.createButton} variant="contained">CREATE EVENT</Button>
+          <Button className={classes.cancelButton} variant="contained" onClick={handleClose}>CANCEL</Button>
         </div>
       </form>
     </div>
