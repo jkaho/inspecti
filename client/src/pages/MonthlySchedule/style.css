@@ -1,0 +1,70 @@
+.calendar-container {
+  position: fixed;
+  top: 65px;
+  left: 240px;
+  height: 100%;
+  width: calc(100vw - 240px);
+  padding: 20px 0;
+  overflow: auto;
+}
+
+.calendar-wrapper {
+  border-radius: 2px;
+  width: 85%;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+.fc-daygrid {
+  background: white!important;
+}
+
+.fc-today-button {
+  display: none!important;
+}
+
+.fc-button-group {
+  width: 150px;
+}
+
+.fc-prev-button, .fc-next-button {
+  background: none!important;
+  border: 2px solid rgb(152, 11, 165)!important;
+  color: rgb(152, 11, 165)!important;
+}
+
+.fc-prev-button:hover, .fc-next-button:hover {
+  background: rgb(152, 11, 165)!important;
+  color: white!important;
+}
+
+.fc-prev-button {
+  margin-right: 10px!important;
+  border-top-left-radius: 20px!important;
+  border-bottom-left-radius: 20px!important;
+}
+
+.fc-next-button {
+  border-top-right-radius: 20px!important;
+  border-bottom-right-radius: 20px!important;
+}
+
+.fc-daygrid-day {
+  cursor: pointer;
+}
+
+.fc-daygrid-day:hover {
+  background: rgb(255, 235, 255);
+}
+
+@media (max-width: 600px) {
+  .calendar-container {
+    left: 0;
+    width: 100%;
+  }
+
+  /* .box-container {
+    margin: 20px auto;
+    width: 90%;
+  } */
+}
