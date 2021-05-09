@@ -116,4 +116,5 @@ CREATE TABLE scheduledEvents (
 SELECT * FROM users;
 SELECT * FROM notes;
 SELECT * FROM reviews;
+SELECT * FROM scheduledEvents;
 

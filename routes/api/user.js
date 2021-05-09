@@ -3,6 +3,7 @@ const passport = require("../../config/passport");
 const usersController = require("../../controllers/usersController");
 const notesController = require("../../controllers/notesController");
 const reviewsController = require("../../controllers/reviewsController");
+const eventsController = require("../../controllers/eventsController");
 
 // Authentication route 
 router.get("/authenticated", (req, res) => {
@@ -55,5 +56,9 @@ router.route("/review/:id")
   .delete(reviewsController.deleteReview)
 
 router.get("/reviews", reviewsController.getAllReviews);
+
+// Event routes 
+router.route("/event")
+  .post(eventsController.createEvent)
 
 module.exports = router;

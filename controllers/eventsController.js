@@ -7,7 +7,7 @@ const eventsController = {
         eventType: req.body.eventType,
         date: req.body.date,
         propertyAddress: req.body.propertyAddress,
-        propertyType: req.body.propretyType,
+        propertyType: req.body.propertyType,
         bedrooms: req.body.bedrooms,
         bathrooms: req.body.bathrooms,
         carSpaces: req.body.carSpaces,

@@ -3,15 +3,17 @@ import clsx from "clsx";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import PlaceIcon from "@material-ui/icons/Place";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import InputAdornment from "@material-ui/core/InputAdornment";
+// import OutlinedInput from "@material-ui/core/OutlinedInput";
+// import PlaceIcon from "@material-ui/icons/Place";
+import SearchAutocomplete from "../../components/SearchAutocomplete";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./style.css";
 import moment from "moment";
 import eventsAPI from '../../utils/eventsAPI';
+import domainAPI from "../../utils/domainAPI";
 
 function getModalStyle() {
   const top = 50;
@@ -73,6 +75,8 @@ export default function FormModal() {
   const [open, setOpen] = React.useState(false);
   const [eventType, setEventType] = React.useState("Inspection");
   const [hasAuction, setAuctionState] = React.useState(false);
+  const [propertySpecs, setPropertySpecs] = React.useState({});
+  const [address, setAddress] = React.useState();
 
   const typeRef = useRef();
   const addressRef = useRef();
@@ -91,31 +95,64 @@ export default function FormModal() {
     setEventType(event.target.value);
   };
 
-  const handleFormSubmit = () => {
-    
-    const eventTypeVal = typeRef.current.children[1].children[0].value;
-    const eventAddressVal = addressRef.current.children[1].children[0].value;
-    const eventTimeVal = timeRef.current.value;
-
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log(timeRef.current.value,)
     const newEvent = {
-      eventType: eventTypeVal,
-      propertyAddress: eventAddressVal,
-      date: eventTimeVal,
+      eventType: typeRef.current.children[1].children[0].value,
+      date: timeRef.current.value,
+      propertyAddress: address,
+      propertyType: propertySpecs.propertyType,
+      bedrooms: propertySpecs.bedrooms,
+      bathrooms: propertySpecs.bathrooms,
+      carSpaces: propertySpecs.carSpaces,
+      landSize: propertySpecs.landSize,
       hasAuction: hasAuction,
     };
+    console.log(newEvent)
 
     eventsAPI.createEvent(newEvent)
       .then(res => {
         console.log(res);
-
       })
+      .catch(err => console.log(err))
+  };
 
+  // const handleAddressInputChange = () => {
+  //   const search = addressRef.current.children[1].children[0].value;
+  //   console.log(addressRef.current)
+  //   setAddressSuggestions(search);
+  //   domainAPI.getAddressSuggestions(search)
+  //     .then(res => {
+  //       console.log(res);
+  //     })
+  //     .catch(err => console.log(err))
+  // };
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item);
+    setAddress(item.address);
+    domainAPI.getPropertyInfo(item.id)
+      .then(res => {
+        console.log(res);
+        let propertyInfo = {
+          bedrooms: res.data.bedrooms,
+          bathrooms: res.data.bathrooms,
+          carSpaces: res.data.carSpaces,
+          landSize: res.data.areaSize,
+          propertyType: res.data.propertyCategory
+        };
+
+        setPropertySpecs(propertyInfo);
+      })
+      .catch(err => console.log(err));
   };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">New property event</h2>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <div className="event-type-div event-div">
           <FormControl className={clsx(classes.margin, classes.typeTextField)} variant="outlined">
             <TextField
@@ -140,25 +177,29 @@ export default function FormModal() {
           </FormControl>
         </div>
         <div className="event-address-div event-div">
-          <FormControl className={clsx(classes.margin, classes.addressTextField)} variant="outlined">
+          {/* <FormControl className={clsx(classes.margin, classes.addressTextField)} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-address">Search for an address</InputLabel>
             <OutlinedInput
               ref={addressRef}
               labelWidth={160}
               type="text"
               id="outlined-adornment-address"
+              onChange={handleAddressInputChange}
               endAdornment={
                 <InputAdornment position="end">
                   <PlaceIcon />
                 </InputAdornment>
               }
             />
-          </FormControl>
+          </FormControl> */}
+          <SearchAutocomplete
+            handleOnSelect={handleOnSelect}
+          />
         </div>
         <div className="event-time-div event-div">
           <label htmlFor="event-time">Event time</label><br/>
           <input type="datetime-local" id="event-time"
-            ref={timeRef}
+            ref={timeRef} noValidate
             name="event-time" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
           />
         </div>
@@ -176,10 +217,11 @@ export default function FormModal() {
                 ${hasAuction ? classes.show : classes.hide}`
               }
             >
-              <label htmlFor="event-time">Event time</label><br/>
-              <input type="datetime-local" id="event-time"
+              <label htmlFor="auction-time">Auction time</label><br/>
+              <input type="datetime-local" id="auction-time"
+                className={`${hasAuction ? classes.show : classes.hide}`}
                 ref={auctionTimeRef}
-                name="event-time" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
+                name="auction-time" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
               />
             </div>
           </div>
@@ -187,7 +229,7 @@ export default function FormModal() {
           ""
         }
         <div className="event-create-div event-div">
-          <Button className={classes.createButton} variant="contained" type="submit" onSubmit={handleFormSubmit}>CREATE EVENT</Button>
+          <Button className={classes.createButton} variant="contained" type="submit">CREATE EVENT</Button>
           <Button className={classes.cancelButton} variant="contained" onClick={handleClose}>CANCEL</Button>
         </div>
       </form>

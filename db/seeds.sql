@@ -130,7 +130,7 @@ INSERT INTO scheduledEvents (
   bathrooms,
   carSpaces,
   landSize,
-  priceGuide,
+--   priceGuide,
   hasAuction,
   userId
-) VALUES (1, "Inspection", "2021-05-15 13:45:00", "93 Michael St North Sydney, NSW 2060", "House", 4, 2, 2, 457, 3000000, TRUE, 1);
+) VALUES (1000, "Inspection", "2021-05-15 13:45:00", "93 Michael St North Sydney, NSW 2060", "House", 4, 2, 2, 457, TRUE, 1);
