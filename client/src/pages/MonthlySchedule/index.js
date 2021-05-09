@@ -8,6 +8,7 @@ import "./style.css";
 // import MonthlyCalendar from "../../components/MonthlyCalendar";
 import FormModal from "../../components/FormModal";
 import eventsAPI from "../../utils/eventsAPI";
+import moment from "moment";
 
 export default function MonthlySchedule() {
   const [addEventModalIsOpen, setAddEventModalState] = useState(false);
@@ -19,7 +20,46 @@ export default function MonthlySchedule() {
 
   const getAllEvents = () => {
     eventsAPI.getAllEvents()
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        let eventGroups = [];
+        res.data.forEach(eventObj => {
+          const eventObjDate = moment(eventObj.date).format("YYYY-MM-DD");
+          const eventObjType = eventObj.eventType;
+          eventGroups.push(eventObjDate + " " + eventObjType);
+        });
+
+        let existingEvents = [];
+        for (let i = 0; i < eventGroups.length; i++) {
+          if (!existingEvents.includes(eventGroups[i])) {
+            existingEvents.push(eventGroups[i]);
+            existingEvents.push(1);
+          } else {
+            const indexOfCounter = existingEvents.indexOf(eventGroups[i]) + 1;
+            existingEvents[indexOfCounter]++;
+          }
+        }
+        
+        let events = [];
+        for (let i = 0; i < existingEvents.length - 1; i += 2) {
+          const eventType = existingEvents[i].split(" ")[1];
+          const eventDate = existingEvents[i].split(" ")[0];
+          let color = "rgb(105, 175, 224)";
+          if (eventType === "Auction") {
+            color = "rgb(240, 77, 93)";
+          }
+
+          let eventWithCounter = {
+            title: `${eventType}s - ${existingEvents[i + 1]}`,
+            date: eventDate,
+            color: color
+          };
+
+          events.push(eventWithCounter);
+        }
+        
+        setEvents(events);
+      })
       .catch(err => console.log(err))
   };
 
@@ -51,13 +91,7 @@ export default function MonthlySchedule() {
               left: 'title',
               right: 'prev,next',
             }}
-            // events={[
-            //   {
-            //     title: 'my event',
-            //     date: '2021-05-15',
-            //     color: 'blue'
-            //   }
-            // ]}
+            events={events}
           />
           <FormModal
             open={addEventModalIsOpen}

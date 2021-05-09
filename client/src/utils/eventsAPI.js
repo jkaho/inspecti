@@ -6,7 +6,7 @@ const eventsAPI = {
     return axios.post(url + "/api/user/event", eventData, { withCredentials: true });
   },
   getAllEvents: function() {
-    return axios.get(url + "/events", { withCredentials: true });
+    return axios.get(url + "/api/user/events", { withCredentials: true });
   }
 };
 

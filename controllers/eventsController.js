@@ -5,7 +5,7 @@ const eventsController = {
     db.scheduledEvents
       .findAll({
         where: {
-          userId: parseInt(req.params.id)
+          userId: parseInt(req.user.id)
         }
       })
       .then(events => res.json(events))
