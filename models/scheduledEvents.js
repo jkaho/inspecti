@@ -1,6 +1,6 @@
 // Creates User model
 module.exports = function(sequelize, DataTypes) {
-  const ScheduledEvents = sequelize.define("scheduledEvents", {
+  const ScheduledEvents = sequelize.define("scheduledEvent", {
     eventType: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -46,6 +46,7 @@ module.exports = function(sequelize, DataTypes) {
     hasAuction: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
   }, { freezeTableName: true });
 
