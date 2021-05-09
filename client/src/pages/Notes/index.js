@@ -115,89 +115,93 @@ export default function Notes(props) {
   const lightingRef = useRef();
 
   useEffect(() => {
+    renderAllNotes();
+  }, []);
+
+  const renderAllNotes = () => {
     // Check user's saved notes 
     notesAPI.getAllNotes(props.id)
-      .then(res => {
-        console.log(res);
-        // If there are no existing notes, create a new blank note
-        if (res.data.length < 1) {
-          titleRef.current.value = "";
-          textRef.current.value = "";
-          setTitle("");
-          setText("");
-          
-          const newNote = {
-            starred: false,
-            title: title,
-            text: text,
-            propertyAddress: null,
-            userId: props.id
-          };
+    .then(res => {
+      console.log(res);
+      // If there are no existing notes, create a new blank note
+      if (res.data.length < 1) {
+        titleRef.current.value = "";
+        textRef.current.value = "";
+        setTitle("");
+        setText("");
+        
+        const newNote = {
+          starred: false,
+          title: title,
+          text: text,
+          propertyAddress: null,
+          userId: props.id
+        };
 
-          notesAPI.createNote(newNote)
-            .then(res => {
-              console.log(res.data);
-              setCurrentNoteId(res.data.id);
-            })
-            .catch(err => console.log(err))
-        // Else render the latest note 
-        } else {
-          // Separate starred and non-starred notes 
-          let starredNotes = [];
-          let nonStarredNotes = [];
-          res.data.forEach(note => {
-            if (note.starred) {
-              starredNotes.push(note);
-            } else {
-              nonStarredNotes.push(note);
-            };
-          });
-
-          // Reverse order of notes to display newest first 
-          res.data.reverse(); // to display latest note
-          starredNotes.reverse(); // to display starred notes list
-          nonStarredNotes.reverse(); // to display all notes list 
-          setStarredNotes(starredNotes);
-          setNonStarredNotes(nonStarredNotes);
-
-          // Render latest note
-          const lastNote = res.data[0];
-          setCurrentNoteId(lastNote.id);
-          setTitle(lastNote.title);
-          setText(lastNote.text);
-          if (lastNote.propertyAddress) {
-            setAddress(lastNote.propertyAddress);
-            setPropertySpecs({
-              bedrooms: lastNote.bedrooms,
-              bathrooms: lastNote.bathrooms,
-              carSpaces: lastNote.carSpaces,
-              land: lastNote.landSize,
-            });
-            setAddressInfoState(true);
-            // Determine whether or not note has review
-            if (lastNote.hasReview) {
-              reviewsAPI.getAllReviews()
-                .then(res => {
-                  for (let i = 0; i < res.data.length; i++) {
-                    if (res.data[i].noteId === lastNote.id) {
-                      setPropertyReview(res.data[i]);
-                    }
-                  }
-                })
-                .catch(err => console.log(err))
-              setRatingSectionState(true);
-            } else {
-              setRatingButtonState(true);
-            }
+        notesAPI.createNote(newNote)
+          .then(res => {
+            console.log(res.data);
+            setCurrentNoteId(res.data.id);
+          })
+          .catch(err => console.log(err))
+      // Else render the latest note 
+      } else {
+        // Separate starred and non-starred notes 
+        let starredNotes = [];
+        let nonStarredNotes = [];
+        res.data.forEach(note => {
+          if (note.starred) {
+            starredNotes.push(note);
           } else {
-            setAddressInfoState(false);
-            setRatingSectionState(false);
-            setRatingButtonState(false);
+            nonStarredNotes.push(note);
+          };
+        });
+
+        // Reverse order of notes to display newest first 
+        res.data.reverse(); // to display latest note
+        starredNotes.reverse(); // to display starred notes list
+        nonStarredNotes.reverse(); // to display all notes list 
+        setStarredNotes(starredNotes);
+        setNonStarredNotes(nonStarredNotes);
+
+        // Render latest note
+        const lastNote = res.data[0];
+        setCurrentNoteId(lastNote.id);
+        setTitle(lastNote.title);
+        setText(lastNote.text);
+        if (lastNote.propertyAddress) {
+          setAddress(lastNote.propertyAddress);
+          setPropertySpecs({
+            bedrooms: lastNote.bedrooms,
+            bathrooms: lastNote.bathrooms,
+            carSpaces: lastNote.carSpaces,
+            land: lastNote.landSize,
+          });
+          setAddressInfoState(true);
+          // Determine whether or not note has review
+          if (lastNote.hasReview) {
+            reviewsAPI.getAllReviews()
+              .then(res => {
+                for (let i = 0; i < res.data.length; i++) {
+                  if (res.data[i].noteId === lastNote.id) {
+                    setPropertyReview(res.data[i]);
+                  }
+                }
+              })
+              .catch(err => console.log(err))
+            setRatingSectionState(true);
+          } else {
+            setRatingButtonState(true);
           }
+        } else {
+          setAddressInfoState(false);
+          setRatingSectionState(false);
+          setRatingButtonState(false);
         }
-      })
-      .catch(err => console.log(err))
-  }, []);
+      }
+    })
+    .catch(err => console.log(err))
+  }
 
   const handleNewNoteButtonClick = () => {
     // titleRef.current.value = "";
@@ -589,15 +593,66 @@ export default function Notes(props) {
   const handleNoteSearchInputChange = () => {
     const query = searchRef.current.value;
     setSearchword(query);
-    // const noteQuery = {
-    //   query: query
-    // };
 
-    notesAPI.searchNotes(props.id, query)
+    if (query !== "") {
+      notesAPI.searchNotes(props.id, query)
       .then(res => {
         console.log(res);
+        if (res.data.length > 0) {
+          res.data.reverse();
+          let starredNotes = [];
+          let nonStarredNotes = [];
+          for (let i = 0; i < res.data.length; i++) {
+            if (res.data[i].starred) {
+              starredNotes.push(res.data[i]);
+            } else {
+              nonStarredNotes.push(res.data[i]);
+            }
+            setStarredNotes(starredNotes);
+            setNonStarredNotes(nonStarredNotes);
+
+            let topSearchResult = starredNotes[0];
+            setTitle(topSearchResult.title);
+            setText(topSearchResult.text);
+            if (topSearchResult.propertyAddress) {
+              setAddress(topSearchResult.propertyAddress);
+              setPropertySpecs({
+                bedrooms: topSearchResult.bedrooms,
+                bathrooms: topSearchResult.bathrooms,
+                carSpaces: topSearchResult.carSpaces,
+                land: topSearchResult.landSize,
+              });
+              setAddressInfoState(true);
+              // Determine whether or not note has review
+              if (topSearchResult.hasReview) {
+                reviewsAPI.getAllReviews()
+                  .then(res => {
+                    for (let i = 0; i < res.data.length; i++) {
+                      if (res.data[i].noteId === topSearchResult.id) {
+                        setPropertyReview(res.data[i]);
+                      }
+                    }
+                  })
+                  .catch(err => console.log(err))
+                setRatingSectionState(true);
+              } else {
+                setRatingButtonState(true);
+              }
+            } else {
+              setAddressInfoState(false);
+              setRatingSectionState(false);
+              setRatingButtonState(false);
+            }
+          }
+        } else {
+          setStarredNotes([]);
+          setNonStarredNotes([]);
+        }
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
+    } else {
+      renderAllNotes();
+    }
   };
 
   return (

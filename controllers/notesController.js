@@ -24,7 +24,6 @@ const notesController = {
       .catch(err => console.log(err))
   },
   searchNotes: function(req, res) {
-    console.log(req.body)
     db.note
       .findAll({
         where: {
