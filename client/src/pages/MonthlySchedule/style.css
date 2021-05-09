@@ -15,6 +15,11 @@
   margin-bottom: 100px;
 }
 
+.monthly-heading {
+  font-weight: 300;
+  margin-top: 10px;
+}
+
 .fc-daygrid {
   background: white!important;
 }

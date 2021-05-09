@@ -76,6 +76,9 @@ export default function MonthlySchedule() {
       <SideMenu />
       <div className="calendar-container">
         <div className="calendar-wrapper">
+          <div className="monthly-page-heading">
+            <h1 className="monthly-heading">MONTHLY SCHEDULE</h1>
+          </div>
           <FullCalendar
             plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
             initialView="dayGridMonth"
