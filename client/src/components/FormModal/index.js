@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormModal() {
+export default function FormModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -89,9 +89,9 @@ export default function FormModal() {
     setOpen(true);
   };
 
-  const handleModalClose = () => {
-    setOpen(false);
-  };
+  // const handleModalClose = () => {
+  //   setOpen(false);
+  // };
 
   const handleClose = () => {
     setAddEventPopupState(false);
@@ -119,7 +119,7 @@ export default function FormModal() {
     eventsAPI.createEvent(newEvent)
       .then(res => {
         console.log(res);
-        handleModalClose();
+        props.handleModalClose();
         setAddEventPopupState(true);
       })
       .catch(err => console.log(err))
@@ -226,7 +226,7 @@ export default function FormModal() {
         } */}
         <div className="event-create-div event-div">
           <Button className={classes.createButton} variant="contained" type="submit">CREATE EVENT</Button>
-          <Button className={classes.cancelButton} variant="contained" onClick={handleModalClose}>CANCEL</Button>
+          <Button className={classes.cancelButton} variant="contained" onClick={props.close}>CANCEL</Button>
         </div>
       </form>
     </div>
@@ -234,12 +234,12 @@ export default function FormModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleModalOpen}>
+      {/* <button type="button" onClick={handleModalOpen}>
         Open Modal
-      </button>
+      </button> */}
       <Modal
-        open={open}
-        onClose={handleModalClose}
+        open={props.open}
+        onClose={props.close}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SideMenu from "../../components/SideMenu";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -9,8 +9,14 @@ import "./style.css";
 import FormModal from "../../components/FormModal";
 
 export default function MonthlySchedule() {
+  const [addEventModalIsOpen, setAddEventModalState] = useState(false);
+
   const handleDateClick = () => {
     console.log("Go to daily view page!");
+  };
+
+  const handleModalClose = () => {
+    setAddEventModalState(false);
   };
 
   return (
@@ -25,7 +31,7 @@ export default function MonthlySchedule() {
             customButtons={{
               eventButton: {
                 text: "ADD EVENT +",
-                click: () => console.log("Add event!")
+                click: () => setAddEventModalState(true)
               }
             }}
             headerToolbar={{
@@ -34,7 +40,10 @@ export default function MonthlySchedule() {
               right: 'prev,next',
             }}
           />
-                  <FormModal />
+          <FormModal
+            open={addEventModalIsOpen}
+            close={handleModalClose}
+          />
 
         </div>
         {/* <MonthlyCalendar /> */}
