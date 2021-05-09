@@ -6,7 +6,10 @@ const notesAPI = {
     return axios.get(url + "/api/user/notes/" + userId, { withCredentials: true });
   },
   getStarredNotes: function(userId) {
-    return axios.get(url + "api/user/notes/starred/" + userId, { withCredentials: true });
+    return axios.get(url + "/api/user/notes/starred/" + userId, { withCredentials: true });
+  },
+  searchNotes: function(userId, query) {
+    return axios.get(url + "/api/user/notes/search/" + userId + "/q=" + query, { withCredentials: true });
   },
   createNote: function(noteData) {
     return axios.post(url + "/api/user/note", noteData, { withCredentials: true });

@@ -36,6 +36,8 @@ router.get("/notes/:id", notesController.getNotes);
 
 router.get("/notes/starred/:id", notesController.getStarredNotes);
 
+router.get("/notes/search/:id/q=:query", notesController.searchNotes);
+
 router.route("/note")
   .post(notesController.createNote, (req, res) => {
     res.status(200).send("Note successfully created!")

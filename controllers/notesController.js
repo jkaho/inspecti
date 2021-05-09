@@ -1,4 +1,5 @@
 const db = require("../models");
+const { Op } = require("sequelize");
 
 const notesController = {
   getNotes: function(req, res) {
@@ -17,6 +18,34 @@ const notesController = {
         where: {
           userId: parseInt(req.params.id),
           starred: true
+        }
+      })
+      .then(notes => res.json(notes))
+      .catch(err => console.log(err))
+  },
+  searchNotes: function(req, res) {
+    console.log(req.body)
+    db.note
+      .findAll({
+        where: {
+          userId: parseInt(req.params.id),
+          [Op.or]: [
+            {
+              title: {
+                [Op.like]: "%" + req.params.query + "%"
+              }
+            },
+            {
+              text: {
+                [Op.like]: "%" + req.params.query + "%"
+              }
+            },
+            {
+              propertyAddress: {
+                [Op.like]: "%" + req.params.query + "%"
+              }
+            }
+          ]
         }
       })
       .then(notes => res.json(notes))

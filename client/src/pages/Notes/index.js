@@ -24,6 +24,7 @@ import "./style.css";
 // import { Icon } from "@material-ui/core";
 import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
+import API from "../../utils/userAPI";
 
 const useStyles = makeStyles({
   noteSection: {
@@ -95,8 +96,10 @@ export default function Notes(props) {
   const [ratingEditIsOpen, setRatingEditState] = useState(false);
   const [textEditorModeOn, setTextEditorMode] = useState(false);
   const [noteReviewToDelete, setNoteReviewToDelete] = useState();
+  const [searchword, setSearchword] = useState();
   let sideTitle = "";
 
+  const searchRef = useRef();
   const titleRef = useRef();
   const textRef = useRef();
   const addressRef = useRef();
@@ -583,6 +586,20 @@ export default function Notes(props) {
     setTextEditorMode(!textEditorModeOn);
   };
 
+  const handleNoteSearchInputChange = () => {
+    const query = searchRef.current.value;
+    setSearchword(query);
+    // const noteQuery = {
+    //   query: query
+    // };
+
+    notesAPI.searchNotes(props.id, query)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err))
+  };
+
   return (
     <div>
       <SideMenu />
@@ -591,7 +608,13 @@ export default function Notes(props) {
           <Grid id="note-bar" item className={classes.overflow}>
             <div className="note-list-div box-seg">
               <div className="note-search-div">
-                <input id="note-search-input" type="text" placeholder="Search your notes"/>
+                <input 
+                  ref={searchRef}
+                  id="note-search-input" 
+                  type="text" 
+                  placeholder="Search your notes"
+                  onChange={handleNoteSearchInputChange}
+                />
               </div>
               <div className="starred-notes-div">
                 <List component="nav" aria-label="" className={classes.noteList}>

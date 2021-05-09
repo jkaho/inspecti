@@ -14,6 +14,7 @@
   height: 30px;
   border: 1px solid rgb(161, 161, 161);
   border-radius: 2px;
+  width: 100%;
 }
 
 #new-note-btn {
