@@ -22,6 +22,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
 import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
+import domainAPI from "../../utils/domainAPI";
 
 const useStyles = makeStyles({
   noteSection: {
@@ -344,7 +345,7 @@ export default function Notes(props) {
     const address = addressRef.current.value.trim();
     setAddressSearch(address);
     if (address !== "") {
-      notesAPI.getAddressSuggestions(address)
+      domainAPI.getAddressSuggestions(address)
       .then(res => {
         setAddressSuggestions(res.data);
       })
@@ -359,7 +360,7 @@ export default function Notes(props) {
     const address = event.target.textContent;
     setAddress(address);
 
-    notesAPI.getPropertyInfo(event.target.id)
+    domainAPI.getPropertyInfo(event.target.id)
       .then(res => {
         const propertyInfo = {
           bedrooms: res.data.bedrooms,

@@ -20,24 +20,6 @@ const notesAPI = {
   deleteNote: function(noteId) {
     return axios.delete(url + "/api/user/note/" + noteId, { withCredentials: true });
   },
-  getAddressSuggestions: function(query) {
-    return axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + query + "&channel=Residential",
-      { 
-        headers: {
-          "X-Api-Key": "key_dc635e3e95b67de404f3b44abbcc09e2"
-        }
-      }
-    );
-  },
-  getPropertyInfo: function(propertyId) {
-    return axios.get("https://api.domain.com.au/v1/properties/" + propertyId,
-      { 
-        headers: {
-          "X-Api-Key": "key_dc635e3e95b67de404f3b44abbcc09e2"
-        }
-      }
-    );
-  }
 };
 
 export default notesAPI;

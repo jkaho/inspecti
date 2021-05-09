@@ -11,6 +11,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./style.css";
 import moment from "moment";
+import eventsAPI from '../../utils/eventsAPI';
 
 function getModalStyle() {
   const top = 50;
@@ -21,7 +22,7 @@ function getModalStyle() {
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
   };
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -91,6 +92,7 @@ export default function FormModal() {
   };
 
   const handleFormSubmit = () => {
+    
     const eventTypeVal = typeRef.current.children[1].children[0].value;
     const eventAddressVal = addressRef.current.children[1].children[0].value;
     const eventTimeVal = timeRef.current.value;
@@ -102,7 +104,12 @@ export default function FormModal() {
       hasAuction: hasAuction,
     };
 
-    
+    eventsAPI.createEvent(newEvent)
+      .then(res => {
+        console.log(res);
+
+      })
+
   };
 
   const body = (
