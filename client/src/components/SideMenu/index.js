@@ -107,6 +107,14 @@ export default function SideMenu(props) {
             <ListItemText primary="Inspection Schedule" />
           </ListItem>
         </Link>
+        <Link to="/daily">
+          <ListItem button>
+            <ListItemIcon>
+              <EventIcon />
+            </ListItemIcon>
+            <ListItemText primary="Daily Schedule" />
+          </ListItem>
+        </Link>
         <Link to="/inspected">
           <ListItem button>
             <ListItemIcon>

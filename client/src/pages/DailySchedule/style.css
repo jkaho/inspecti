@@ -1,0 +1,88 @@
+.daily-container {
+  position: fixed;
+  top: 65px;
+  left: 240px;
+  height: 100%;
+  width: calc(100vw - 240px);
+  padding: 20px 50px;
+}
+
+.daily-heading {
+  font-weight: 300;
+  margin-top: 10px;
+}
+
+.date-carousel {
+  height: 100px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px rgb(196, 196, 196, 0.5);
+  padding: 10px;
+}
+
+.date-carousel table {
+  width: 100%;
+}
+
+.date-box {
+  text-align: center;
+  padding: 10px;
+}
+
+.day-of-week {
+  font-size: 18px;
+  color: rgb(172, 172, 172);
+  margin-bottom: -10px;
+}
+
+.day-of-month {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.today {
+  color: rgb(175, 23, 175);
+  font-weight: 800;
+}
+
+.next-day {
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .daily-container {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .daily-container {
+    padding: 20px;
+  }
+
+  .date-carousel {
+    padding: 0 5px;
+    height: 80px
+  }
+
+  .date-box {
+    padding: 10px 5px;
+    height: 80px
+  }
+
+  .day-of-week {
+    font-size: 14px;
+    color: rgb(172, 172, 172);
+    margin-bottom: -10px;
+  }
+  
+  .day-of-month {
+    font-size: 27px;
+    font-weight: 500;
+  }
+
+  .today {
+    font-weight: 800;
+  }
+}
