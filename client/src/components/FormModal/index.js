@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import clsx from "clsx";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -57,6 +57,12 @@ const useStyles = makeStyles((theme) => ({
     },
     marginLeft: 20,
   },
+  hide: {
+    display: "none",
+  },
+  show: {
+    display: "block",
+  },
 }));
 
 export default function FormModal() {
@@ -65,6 +71,12 @@ export default function FormModal() {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [eventType, setEventType] = React.useState("Inspection");
+  const [hasAuction, setAuctionState] = React.useState(false);
+
+  const typeRef = useRef();
+  const addressRef = useRef();
+  const timeRef = useRef();
+  const auctionTimeRef = useRef();
 
   const handleOpen = () => {
     setOpen(true);
@@ -74,8 +86,23 @@ export default function FormModal() {
     setOpen(false);
   };
 
-  const handleChange = (event) => {
+  const handleEventTypeChange = (event) => {
     setEventType(event.target.value);
+  };
+
+  const handleFormSubmit = () => {
+    const eventTypeVal = typeRef.current.children[1].children[0].value;
+    const eventAddressVal = addressRef.current.children[1].children[0].value;
+    const eventTimeVal = timeRef.current.value;
+
+    const newEvent = {
+      eventType: eventTypeVal,
+      propertyAddress: eventAddressVal,
+      date: eventTimeVal,
+      hasAuction: hasAuction,
+    };
+
+    
   };
 
   const body = (
@@ -85,11 +112,12 @@ export default function FormModal() {
         <div className="event-type-div event-div">
           <FormControl className={clsx(classes.margin, classes.typeTextField)} variant="outlined">
             <TextField
+              ref={typeRef}
               id="outlined-select-event-type"
               select
               label="Event type"
               value={eventType}
-              onChange={handleChange}
+              onChange={handleEventTypeChange}
               SelectProps={{
                 native: true,
               }}
@@ -108,6 +136,7 @@ export default function FormModal() {
           <FormControl className={clsx(classes.margin, classes.addressTextField)} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-address">Search for an address</InputLabel>
             <OutlinedInput
+              ref={addressRef}
               labelWidth={160}
               type="text"
               id="outlined-adornment-address"
@@ -122,11 +151,36 @@ export default function FormModal() {
         <div className="event-time-div event-div">
           <label htmlFor="event-time">Event time</label><br/>
           <input type="datetime-local" id="event-time"
+            ref={timeRef}
             name="event-time" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
           />
         </div>
+        {eventType === "Inspection" ?
+          <div className="event-hasAuction-div event-div">
+            <Button
+              variant="contained" 
+              onClick={() => {
+                hasAuction ? setAuctionState(false) : setAuctionState(true)
+              }}
+            >{hasAuction ? "REMOVE AUCTION" : "ADD AUCTION"}</Button>
+            <div className=
+              {
+                `event-hasAuction-input 
+                ${hasAuction ? classes.show : classes.hide}`
+              }
+            >
+              <label htmlFor="event-time">Event time</label><br/>
+              <input type="datetime-local" id="event-time"
+                ref={auctionTimeRef}
+                name="event-time" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
+              />
+            </div>
+          </div>
+          : 
+          ""
+        }
         <div className="event-create-div event-div">
-          <Button className={classes.createButton} variant="contained">CREATE EVENT</Button>
+          <Button className={classes.createButton} variant="contained" type="submit" onSubmit={handleFormSubmit}>CREATE EVENT</Button>
           <Button className={classes.cancelButton} variant="contained" onClick={handleClose}>CANCEL</Button>
         </div>
       </form>

@@ -4,13 +4,12 @@ import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
 import SimpleModal from "../../components/Modal";
 import NoteListItem from "../../components/NoteListItem";
-// import RichTextEditor from "../../components/RichTextEditor";
 import TextEditor from "../../components/TextEditor";
 import Grid from "@material-ui/core/Grid";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import IconButton from "@material-ui/core/IconButton";
 import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import EditIcon from "@material-ui/icons/Edit";
@@ -21,10 +20,8 @@ import PlaceIcon from "@material-ui/icons/Place";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
-// import { Icon } from "@material-ui/core";
 import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
-import API from "../../utils/userAPI";
 
 const useStyles = makeStyles({
   noteSection: {

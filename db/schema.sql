@@ -101,7 +101,7 @@ CREATE TABLE scheduledEvents (
   bathrooms INT,
   carSpaces INT,
   landSize INT,
-  priceGuide INT,
+--   priceGuide INT,
   hasAuction BOOLEAN NOT NULL,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,

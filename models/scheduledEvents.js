@@ -39,10 +39,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    priceGuide: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
+    // priceGuide: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: true,
+    // },
     hasAuction: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
