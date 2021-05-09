@@ -158,3 +158,7 @@ function TextEditor(props) {
   )
 }
 export default TextEditor;
+
+/*
+  Referenced: https://blog.logrocket.com/building-rich-text-editors-in-react-using-draft-js-and-react-draft-wysiwyg/
+*/

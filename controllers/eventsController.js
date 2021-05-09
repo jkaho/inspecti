@@ -2,7 +2,7 @@ const db = require("../models");
 
 const eventsController = {
   createEvent: function(req, res) {
-    db.scheduledEvent
+    db.scheduledEvents
       .create({
         eventType: req.body.eventType,
         date: req.body.date,

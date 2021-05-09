@@ -14,6 +14,7 @@ import "./style.css";
 import moment from "moment";
 import eventsAPI from '../../utils/eventsAPI';
 import domainAPI from "../../utils/domainAPI";
+import PopupMessage from '../PopupMessage';
 
 function getModalStyle() {
   const top = 50;
@@ -77,18 +78,23 @@ export default function FormModal() {
   const [hasAuction, setAuctionState] = React.useState(false);
   const [propertySpecs, setPropertySpecs] = React.useState({});
   const [address, setAddress] = React.useState();
+  const [addEventPopupIsOpen, setAddEventPopupState] = React.useState(false);
 
   const typeRef = useRef();
   const addressRef = useRef();
   const timeRef = useRef();
   const auctionTimeRef = useRef();
 
-  const handleOpen = () => {
+  const handleModalOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleModalClose = () => {
     setOpen(false);
+  };
+
+  const handleClose = () => {
+    setAddEventPopupState(false);
   };
 
   const handleEventTypeChange = (event) => {
@@ -109,25 +115,15 @@ export default function FormModal() {
       landSize: propertySpecs.landSize,
       hasAuction: hasAuction,
     };
-    console.log(newEvent)
 
     eventsAPI.createEvent(newEvent)
       .then(res => {
         console.log(res);
+        handleModalClose();
+        setAddEventPopupState(true);
       })
       .catch(err => console.log(err))
   };
-
-  // const handleAddressInputChange = () => {
-  //   const search = addressRef.current.children[1].children[0].value;
-  //   console.log(addressRef.current)
-  //   setAddressSuggestions(search);
-  //   domainAPI.getAddressSuggestions(search)
-  //     .then(res => {
-  //       console.log(res);
-  //     })
-  //     .catch(err => console.log(err))
-  // };
 
   const handleOnSelect = (item) => {
     // the item selected
@@ -203,7 +199,7 @@ export default function FormModal() {
             name="event-time" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
           />
         </div>
-        {eventType === "Inspection" ?
+        {/* {eventType === "Inspection" ?
           <div className="event-hasAuction-div event-div">
             <Button
               variant="contained" 
@@ -227,10 +223,10 @@ export default function FormModal() {
           </div>
           : 
           ""
-        }
+        } */}
         <div className="event-create-div event-div">
           <Button className={classes.createButton} variant="contained" type="submit">CREATE EVENT</Button>
-          <Button className={classes.cancelButton} variant="contained" onClick={handleClose}>CANCEL</Button>
+          <Button className={classes.cancelButton} variant="contained" onClick={handleModalClose}>CANCEL</Button>
         </div>
       </form>
     </div>
@@ -238,17 +234,23 @@ export default function FormModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      <button type="button" onClick={handleModalOpen}>
         Open Modal
       </button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleModalClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
         {body}
       </Modal>
+      <PopupMessage
+        open={addEventPopupIsOpen}
+        handleClose={handleClose}
+        severity="success"
+        message="Event successully created!"
+      />
     </div>
   );
 }

@@ -61,7 +61,7 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "CASCADE"
     });
 
-    User.hasMany(models.scheduledEvent, {
+    User.hasMany(models.scheduledEvents, {
       foreignKey: {
         name: "userId",
         allowNull: true

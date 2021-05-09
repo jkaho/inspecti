@@ -1,6 +1,6 @@
 // Creates User model
 module.exports = function(sequelize, DataTypes) {
-  const ScheduledEvents = sequelize.define("scheduledEvent", {
+  const ScheduledEvents = sequelize.define("scheduledEvents", {
     eventType: {
       type: DataTypes.STRING,
       allowNull: false,
