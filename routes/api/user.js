@@ -58,6 +58,8 @@ router.route("/review/:id")
 router.get("/reviews", reviewsController.getAllReviews);
 
 // Event routes 
+router.get("/events", eventsController.getEvents);
+
 router.route("/event")
   .post(eventsController.createEvent)
 

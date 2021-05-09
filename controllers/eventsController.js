@@ -1,6 +1,16 @@
 const db = require("../models");
 
 const eventsController = {
+  getEvents: function(req, res) {
+    db.scheduledEvents
+      .findAll({
+        where: {
+          userId: parseInt(req.params.id)
+        }
+      })
+      .then(events => res.json(events))
+      .catch(err => console.log(err))
+  },
   createEvent: function(req, res) {
     db.scheduledEvents
       .create({
