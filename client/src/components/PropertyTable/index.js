@@ -27,13 +27,11 @@ const useStylesPagination = makeStyles((theme) => ({
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
-    width: 1000,
+    width: 900,
     borderWidth: 1,
     borderColor: "#E0E0E0",
     borderStyle: "solid",
-    margin: 50,
-    marginLeft: "auto",
-    marginRight: "auto"
+    margin: "50px auto"
   },
   cell: {
     textAlign: "center"
@@ -134,44 +132,8 @@ export default function PropertyTable() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  }
+  };
 
-  // return (
-  //   <TableContainer component={Paper} className={classes.table}>
-  //     <Table>
-  //       <TableHead>
-  //         <TableRow>
-  //           <TableCell>Date</TableCell>
-  //           <TableCell>Address</TableCell>
-  //           <TableCell>Type</TableCell>
-  //           <TableCell>Bed</TableCell>
-  //           <TableCell>Bath</TableCell>
-  //           <TableCell>Car</TableCell>
-  //           <TableCell>Land</TableCell>
-  //           <TableCell>Auction</TableCell>
-  //           <TableCell>Notes</TableCell>
-  //         </TableRow>
-  //       </TableHead>
-  //       <TableBody>
-  //         {rows.map((row) => (
-  //           <TableRow key={row.address}>
-  //             <TableCell component="th" scope="row">
-  //               {row.date}
-  //             </TableCell>
-  //             <TableCell>{row.address}</TableCell>
-  //             <TableCell>{row.type}</TableCell>
-  //             <TableCell>{row.bed}</TableCell>
-  //             <TableCell>{row.bath}</TableCell>
-  //             <TableCell>{row.car}</TableCell>
-  //             <TableCell>{row.land}</TableCell>
-  //             <TableCell>{row.auction}</TableCell>
-  //             <TableCell>{row.notes}</TableCell>
-  //           </TableRow>
-  //         ))}
-  //       </TableBody>
-  //     </Table>
-  //   </TableContainer>
-  // )
   return (
     <TableContainer component={Paper} className={classes.table}>
       <Table>
@@ -240,7 +202,7 @@ export default function PropertyTable() {
             : rows
           ).map((row) => (
             <TableRow key={row.address}>
-              <TableCell>{row.date}</TableCell>
+              <TableCell className="date-cell">{row.date}</TableCell>
               <TableCell>{row.address}</TableCell>
               <TableCell>{row.type}</TableCell>
               <TableCell>{row.bed}</TableCell>
@@ -251,7 +213,7 @@ export default function PropertyTable() {
               <TableCell className={classes.cell}>{row.auction}</TableCell>
               <TableCell className={classes.cell}>{row.notes}</TableCell>
               <TableCell style={{ paddingLeft: "30px" }}>
-                <i className="fas fa-edit" style={{ color: "rgb(248, 179, 52)"}}></i><br/>
+                <i className="fas fa-edit" style={{ color: "rgb(248, 179, 52)"}}></i>&nbsp;
                 <i className="fas fa-trash" style={{ color: "rgb(221, 77, 77)"}}></i>
               </TableCell>
             </TableRow>

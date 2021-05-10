@@ -1,0 +1,15 @@
+.property-container {
+  position: relative;
+  top: 65px;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+.MuiTableCell-root {
+  padding: 5px!important;
+}
+
+.date-cell {
+  padding-left: 10px!important;
+}
