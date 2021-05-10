@@ -60,6 +60,8 @@ router.get("/reviews", reviewsController.getAllReviews);
 // Event routes 
 router.get("/events", eventsController.getEvents);
 
+router.get("/events/daily/:date", eventsController.getDailyEvents);
+
 router.route("/event")
   .post(eventsController.createEvent)
 

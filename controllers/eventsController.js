@@ -1,4 +1,5 @@
 const db = require("../models");
+const { Op } = require("sequelize");
 
 const eventsController = {
   getEvents: function(req, res) {
@@ -9,6 +10,18 @@ const eventsController = {
         }
       })
       .then(events => res.json(events))
+      .catch(err => console.log(err))
+  },
+  getDailyEvents: function(req, res) {
+    db.scheduledEvents
+      .findAll({
+        where: {
+          date: {
+            [Op.like]: "%" + req.params.date + "%"
+          }
+        }
+      })
+      .then(dailyEvents => res.json(dailyEvents))
       .catch(err => console.log(err))
   },
   createEvent: function(req, res) {

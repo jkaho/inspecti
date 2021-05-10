@@ -7,6 +7,9 @@ const eventsAPI = {
   },
   getAllEvents: function() {
     return axios.get(url + "/api/user/events", { withCredentials: true });
+  },
+  getDailySchedule: function(date) {
+    return axios.get(url + "/api/user/events/daily/" + date, { withCredentials: true });
   }
 };
 
