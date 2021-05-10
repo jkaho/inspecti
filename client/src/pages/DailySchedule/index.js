@@ -19,6 +19,21 @@ const useStyles = makeStyles({
 export default function DailySchedule(props) {
   const classes = useStyles();
   let { state } = useLocation();
+  const [date, setDate] = useState();
+
+  useEffect(() => {
+    setDate(state);
+  }, []);
+
+  const handleForwardButtonClick = () => {
+    state = moment(date).add(1, "d");
+    setDate(state);
+  };
+
+  const handleBackButtonClick = () => {
+    state = moment(date).add(-1, "d");
+    setDate(state);
+  };
 
   return (
     <div>
@@ -39,42 +54,42 @@ export default function DailySchedule(props) {
             <tbody>
               <tr>
                 <td>
-                  <IconButton aria-label="arrow back">
+                  <IconButton aria-label="arrow back" onClick={handleBackButtonClick}>
                     <ArrowBackIosIcon/>
                   </IconButton>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment(state).add(-1, "d").format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month">{moment(state).add(-1, "d").format("DD")}</div>
+                    <div className="day-of-week">{moment(date).add(-1, "d").format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month">{moment(date).add(-1, "d").format("DD")}</div>
                   </div>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment(state).format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month today">{moment(state).format("DD")}</div>
+                    <div className="day-of-week">{moment(date).format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month today">{moment(date).format("DD")}</div>
                   </div>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment(state).add(1, "d").format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month">{moment(state).add(1, "d").format("DD")}</div>
+                    <div className="day-of-week">{moment(date).add(1, "d").format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month">{moment(date).add(1, "d").format("DD")}</div>
                   </div>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment(state).add(2, "d").format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month">{moment(state).add(2, "d").format("DD")}</div>
+                    <div className="day-of-week">{moment(date).add(2, "d").format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month">{moment(date).add(2, "d").format("DD")}</div>
                   </div>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment(state).add(3, "d").format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month">{moment(state).add(3, "d").format("DD")}</div>
+                    <div className="day-of-week">{moment(date).add(3, "d").format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month">{moment(date).add(3, "d").format("DD")}</div>
                   </div>
                 </td>
                 <td className="next-day">
-                  <IconButton aria-label="arrow forward">
+                  <IconButton aria-label="arrow forward" onClick={handleForwardButtonClick}>
                     <ArrowForwardIosIcon/>
                   </IconButton>
                 </td>
