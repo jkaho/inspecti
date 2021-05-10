@@ -81,8 +81,8 @@ export default function FormModal(props) {
   const [addEventPopupIsOpen, setAddEventPopupState] = React.useState(false);
 
   const typeRef = useRef();
-  const addressRef = useRef();
-  const timeRef = useRef();
+  const startTimeRef = useRef();
+  const endTimeRef = useRef();
   const auctionTimeRef = useRef();
 
   const handleModalOpen = () => {
@@ -106,7 +106,8 @@ export default function FormModal(props) {
     console.log(timeRef.current.value,)
     const newEvent = {
       eventType: typeRef.current.children[1].children[0].value,
-      date: timeRef.current.value,
+      startTime: startTimeRef.current.value,
+      endTime: endTimeRef.current.value,
       propertyAddress: address,
       propertyType: propertySpecs.propertyType,
       bedrooms: propertySpecs.bedrooms,
@@ -193,10 +194,17 @@ export default function FormModal(props) {
           />
         </div>
         <div className="event-time-div event-div">
-          <label htmlFor="event-time">Event time</label><br/>
-          <input type="datetime-local" id="event-time"
-            ref={timeRef} noValidate
-            name="event-time" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
+          <label htmlFor="event-startTime">Start time</label><br/>
+          <input type="datetime-local" id="event-startTime"
+            ref={startTimeRef} noValidate
+            name="event-startTime" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
+          />
+        </div>
+        <div className="event-time-div-2 event-div">
+          <label htmlFor="event-endTime">End time</label><br/>
+          <input type="datetime-local" id="event-endTime"
+            ref={endTimeRef} noValidate
+            name="event-endTime" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
           />
         </div>
         {/* {eventType === "Inspection" ?

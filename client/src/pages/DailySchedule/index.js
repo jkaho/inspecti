@@ -36,20 +36,6 @@ export default function DailySchedule(props) {
       .then(res => {
         console.log(res);
         setEvents(res.data);
-        // let allEvents = [];
-        // res.data.forEach(item => {
-        //   let eventInfo = {
-        //     startTime: moment(item.startTime).format("h:mmA"),
-        //     endTime: moment(item.endTime).format("h:mmA"),
-        //     eventType: item.eventType,
-        //     propertyAddress: item.propertyAddress,
-        //     bedrooms: item.bedrooms,
-        //     bathrooms: item.bathrooms,
-        //     carSpaces: item.carSpaces,
-        //   };
-
-        //   allEvents.push(eventInfo);
-        // })
       })
       .catch(err => console.log(err))
   };
