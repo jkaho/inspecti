@@ -44,6 +44,7 @@ const eventsController = {
       .catch(err => res.status(422).json(err))
   },
   updateEvent: function(req, res) {
+    console.log(req.body)
     db.scheduledEvents
       .update({
         eventType: req.body.eventType,

@@ -103,7 +103,6 @@ export default function FormModal(props) {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(timeRef.current.value,)
     const newEvent = {
       eventType: typeRef.current.children[1].children[0].value,
       startTime: startTimeRef.current.value,

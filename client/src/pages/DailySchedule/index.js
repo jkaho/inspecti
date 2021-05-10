@@ -52,10 +52,6 @@ export default function DailySchedule(props) {
     getDailyEvents(state);
   };
 
-  const handleEditEventButtonClick = (event) => {
-    const cardId = event.target.id.split("-")[1];
-  };
-
   return (
     <div>
       <SideMenu />
