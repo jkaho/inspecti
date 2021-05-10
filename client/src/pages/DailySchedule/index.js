@@ -82,7 +82,9 @@ export default function DailySchedule(props) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [eventType, setEventType] = React.useState("Inspection");
-  const [addEventPopupIsOpen, setAddEventPopupState] = React.useState(false);
+  const [editEventPopupIsOpen, setEditEventPopupState] = React.useState(false);
+  const [deleteEventPopupIsOpen, setDeleteEventPopupState] = React.useState(false);
+  const [deleteEventModalIsOpen, setDeleteEventModalState] = React.useState(false);
   const [eventToModify, setEventToModify] = React.useState();
 
   useEffect(() => {
@@ -125,8 +127,16 @@ export default function DailySchedule(props) {
     setOpen(false);
   };
 
-  const handleClose = () => {
-    setAddEventPopupState(false);
+  const handleDeleteModalClose = () => {
+    setDeleteEventModalState(false);
+  };
+
+  const handleEditPopupClose = () => {
+    setEditEventPopupState(false);
+  };
+
+  const handleDeletePopupClose = () => {
+    setDeleteEventPopupState(false);
   };
 
   const handleEventTypeChange = (event) => {
@@ -154,7 +164,7 @@ export default function DailySchedule(props) {
       .then(res => {
         console.log(res);
         handleModalClose();
-        setAddEventPopupState(true);
+        setEditEventPopupState(true);
         getDailyEvents(date);
       })
       .catch(err => console.log(err))
@@ -162,17 +172,23 @@ export default function DailySchedule(props) {
 
   const handleDeleteButtonClick = (event) => {
     const buttonId = event.target.id.split("-")[1];
-    eventsAPI.deleteEvent(buttonId)
+    setEventToModify(buttonId)
+    setDeleteEventModalState(true);
+  };
+
+  const handleDeleteFormSubmit = () => {
+    eventsAPI.deleteEvent(eventToModify)
       .then(res => {
         console.log(res);
+        setDeleteEventPopupState(true);
         getDailyEvents(date);
       })
       .catch(err => console.log(err))
   };
 
-  const body = (
+  const editBody = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">New property event</h2>
+      <h2 id="simple-modal-title">Update property event</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="event-type-div event-div">
           <FormControl className={clsx(classes.margin, classes.typeTextField)} variant="outlined">
@@ -216,10 +232,21 @@ export default function DailySchedule(props) {
           <Button className={classes.cancelButton} variant="contained" onClick={handleModalClose}>CANCEL</Button>
         </div>
       </form>
-
     </div>
   );
 
+  const deleteBody = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title-delete">Delete property event</h2>
+      <p>Are you sure you want to delete this event?</p>
+      <form onSubmit={handleDeleteFormSubmit}>
+        <div className="event-create-div event-div">
+          <Button className={classes.createButton} variant="contained" type="submit">DELETE EVENT</Button>
+          <Button className={classes.cancelButton} variant="contained" onClick={handleDeleteModalClose}>CANCEL</Button>
+        </div>
+      </form>
+    </div>
+  );
 
   return (
     <div>
@@ -316,13 +343,27 @@ export default function DailySchedule(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        {body}
+        {editBody}
+      </Modal>
+      <Modal
+        open={deleteEventModalIsOpen}
+        onClose={handleDeleteModalClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {deleteBody}
       </Modal>
       <PopupMessage
-        open={addEventPopupIsOpen}
-        handleClose={handleClose}
+        open={editEventPopupIsOpen}
+        handleClose={handleEditPopupClose}
         severity="success"
         message="Event successully updated!"
+      />
+      <PopupMessage
+        open={deleteEventPopupIsOpen}
+        handleClose={handleDeletePopupClose}
+        severity="success"
+        message="Event successully deleted"
       />
     </div>
     </div>
