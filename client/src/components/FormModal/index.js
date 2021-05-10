@@ -7,7 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 // import InputAdornment from "@material-ui/core/InputAdornment";
 // import OutlinedInput from "@material-ui/core/OutlinedInput";
 // import PlaceIcon from "@material-ui/icons/Place";
-// import SearchAutocomplete from "../../components/SearchAutocomplete";
+import SearchAutocomplete from "../../components/SearchAutocomplete";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./style.css";
@@ -79,19 +79,22 @@ export default function FormModal(props) {
   const [propertySpecs, setPropertySpecs] = React.useState({});
   const [address, setAddress] = React.useState();
   const [addEventPopupIsOpen, setAddEventPopupState] = React.useState(false);
+  const [addressQuery, setAddressQuery] = React.useState("");
+  const [addressSuggestions, setAddressSuggestions] = React.useState([]);
 
   const typeRef = useRef();
   const startTimeRef = useRef();
   const endTimeRef = useRef();
-  const auctionTimeRef = useRef();
+  // const auctionTimeRef = useRef();
+  const addressRef = useRef();
 
   const handleModalOpen = () => {
     setOpen(true);
   };
 
-  // const handleModalClose = () => {
-  //   setOpen(false);
-  // };
+  const handleModalClose = () => {
+    setOpen(false);
+  };
 
   const handleClose = () => {
     setAddEventPopupState(false);
@@ -119,30 +122,51 @@ export default function FormModal(props) {
     eventsAPI.createEvent(newEvent)
       .then(res => {
         console.log(res);
-        props.handleModalClose();
+        props.close();
         setAddEventPopupState(true);
       })
       .catch(err => console.log(err))
   };
 
-  const handleOnSelect = (item) => {
-    // the item selected
-    console.log(item);
-    setAddress(item.address);
-    domainAPI.getPropertyInfo(item.id)
+  // const handleOnSelect = (item) => {
+  //   // the item selected
+  //   console.log(item);
+  //   setAddress(item.address);
+  //   domainAPI.getPropertyInfo(item.id)
+  //     .then(res => {
+  //       console.log(res);
+  //       let propertyInfo = {
+  //         bedrooms: res.data.bedrooms,
+  //         bathrooms: res.data.bathrooms,
+  //         carSpaces: res.data.carSpaces,
+  //         landSize: res.data.areaSize,
+  //         propertyType: res.data.propertyCategory
+  //       };
+
+  //       setPropertySpecs(propertyInfo);
+  //     })
+  //     .catch(err => console.log(err));
+  // };
+
+  const handleAddressInputChange = () => {
+    const newValue = addressRef.current.children[0].children[1].children[0].value;
+    setAddressQuery(newValue);
+
+    if (newValue === "") {
+      setAddressSuggestions([]);
+    } else {
+      domainAPI.getAddressSuggestions(newValue)
       .then(res => {
         console.log(res);
-        let propertyInfo = {
-          bedrooms: res.data.bedrooms,
-          bathrooms: res.data.bathrooms,
-          carSpaces: res.data.carSpaces,
-          landSize: res.data.areaSize,
-          propertyType: res.data.propertyCategory
-        };
-
-        setPropertySpecs(propertyInfo);
+        setAddressSuggestions(res.data.splice(0, 10));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+    }
+  };
+
+  const handleSuggestionClick = (value) => {
+    const newValue = value.address;
+    setAddress(newValue);
   };
 
   const body = (
@@ -191,6 +215,12 @@ export default function FormModal(props) {
           {/* <SearchAutocomplete
             handleOnSelect={handleOnSelect}
           /> */}
+          <SearchAutocomplete
+            addressRef={addressRef}
+            onInputChange={handleAddressInputChange}
+            suggestions={addressSuggestions}
+            onChange={handleSuggestionClick}
+          />
         </div>
         <div className="event-time-div event-div">
           <label htmlFor="event-startTime">Start time</label><br/>
