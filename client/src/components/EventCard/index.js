@@ -18,6 +18,14 @@ export default function EventCard(props) {
           <i className="fas fa-glasses"></i>&nbsp;
           {props.type.toUpperCase()}
         </div>
+        <div className="eventcard-actions">
+          <button>
+            <i className="fas fa-edit"></i>
+          </button>
+          <button>
+            <i className="fas fa-trash"></i>
+          </button>
+        </div>
       </div>
       <div className="eventcard-content eventcard-block">
         <div className="eventcard-address">
