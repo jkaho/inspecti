@@ -65,4 +65,8 @@ router.get("/events/:startTime/:endTime", eventsController.getDailyEvents);
 router.route("/event")
   .post(eventsController.createEvent)
 
+router.route("/event/:id")
+  .put(eventsController.updateEvent)
+  .delete(eventsController.deleteEvent)
+  
 module.exports = router;

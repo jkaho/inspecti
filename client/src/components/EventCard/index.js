@@ -19,10 +19,10 @@ export default function EventCard(props) {
           {props.type.toUpperCase()}
         </div>
         <div className="eventcard-actions">
-          <button>
+          <button id={`editbtn-${props.id}`}>
             <i className="fas fa-edit"></i>
           </button>
-          <button>
+          <button id={`deletebtn-${props.id}`}>
             <i className="fas fa-trash"></i>
           </button>
         </div>

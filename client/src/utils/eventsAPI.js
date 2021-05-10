@@ -10,6 +10,12 @@ const eventsAPI = {
   },
   getDailySchedule: function(startTime, endTime) {
     return axios.get(url + "/api/user/events/" + startTime + "/" + endTime, { withCredentials: true });
+  },
+  updateEvent: function(eventId) {
+    return axios.put(url + "/api/user/event/" + eventId, { withCredentials: true });
+  },
+  deleteEvent: function(eventId) {
+    return axios.delete(url + "/api/user/event/" + eventId, { withCredentials: true });
   }
 };
 

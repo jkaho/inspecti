@@ -66,6 +66,10 @@ export default function DailySchedule(props) {
     getDailyEvents(state);
   };
 
+  const handleEditEventButtonClick = (event) => {
+    const cardId = event.target.id.split("-")[1];
+  };
+
   return (
     <div>
       <SideMenu />
@@ -132,6 +136,7 @@ export default function DailySchedule(props) {
           {events.length > 0 ? events.map(item => (
             <EventCard
               key={item.id}
+              id={item.id}
               startTime={moment(item.startTime).format("h:mmA")}
               endTime={moment(item.endTime).format("h:mmA")}
               type={item.eventType}

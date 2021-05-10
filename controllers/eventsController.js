@@ -43,6 +43,32 @@ const eventsController = {
       .then(model => res.json(model))
       .catch(err => res.status(422).json(err))
   },
+  updateEvent: function(req, res) {
+    db.scheduledEvents
+      .update({
+        eventType: req.body.eventType,
+        startTime: req.body.startTime,
+        endTime: req.body.endTime,
+      }, {
+        where: {
+          id: parseInt(req.params.id)
+        }
+      })
+      .then(updatedEvent => res.json(updatedEvent))
+      .catch(err => console.log(err))
+  },
+  deleteEvent: function(req, res) {
+    db.scheduledEvents
+      .destroy(
+        {
+          where: {
+            id: parseInt(req.params.id)
+          }
+        }
+      )
+      .then(deletedEvent => res.json(deletedEvent))
+      .catch(err => res.status(422).json(err))
+  }
 };
 
 module.exports = eventsController;
