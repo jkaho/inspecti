@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import SideMenu from "../../components/SideMenu";
 import "./style.css";
@@ -16,11 +16,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DailySchedule() {
+export default function DailySchedule(props) {
   const classes = useStyles();
-
-  const [dayOfWeek, setDayOfWeek] = useState(moment().format("ddd").toUpperCase());
-  const [dayOfMonth, setDayOfMonth] = useState(moment().format("DD"));
+  let { state } = useLocation();
 
   return (
     <div>
@@ -47,32 +45,32 @@ export default function DailySchedule() {
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment().add(-1, "d").format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month">{moment().add(-1, "d").format("DD")}</div>
+                    <div className="day-of-week">{moment(state).add(-1, "d").format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month">{moment(state).add(-1, "d").format("DD")}</div>
                   </div>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{dayOfWeek}</div>
-                    <div className="day-of-month today">{dayOfMonth}</div>
+                    <div className="day-of-week">{moment(state).format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month today">{moment(state).format("DD")}</div>
                   </div>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment().add(1, "d").format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month">{moment().add(1, "d").format("DD")}</div>
+                    <div className="day-of-week">{moment(state).add(1, "d").format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month">{moment(state).add(1, "d").format("DD")}</div>
                   </div>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment().add(2, "d").format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month">{moment().add(2, "d").format("DD")}</div>
+                    <div className="day-of-week">{moment(state).add(2, "d").format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month">{moment(state).add(2, "d").format("DD")}</div>
                   </div>
                 </td>
                 <td>
                   <div className="date-box">
-                    <div className="day-of-week">{moment().add(3, "d").format("ddd").toUpperCase()}</div>
-                    <div className="day-of-month">{moment().add(3, "d").format("DD")}</div>
+                    <div className="day-of-week">{moment(state).add(3, "d").format("ddd").toUpperCase()}</div>
+                    <div className="day-of-month">{moment(state).add(3, "d").format("DD")}</div>
                   </div>
                 </td>
                 <td className="next-day">

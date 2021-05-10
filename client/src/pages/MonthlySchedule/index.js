@@ -9,10 +9,12 @@ import "./style.css";
 import FormModal from "../../components/FormModal";
 import eventsAPI from "../../utils/eventsAPI";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 export default function MonthlySchedule() {
   const [addEventModalIsOpen, setAddEventModalState] = useState(false);
   const [events, setEvents] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     getAllEvents();
@@ -63,8 +65,13 @@ export default function MonthlySchedule() {
       .catch(err => console.log(err))
   };
 
-  const handleDateClick = () => {
-    console.log("Go to daily view page!");
+  const handleDateClick = (info) => {
+    console.log(info.dateStr);
+    const dateStr = info.dateStr;
+    history.push({
+      pathname: "/daily",
+      state: dateStr
+    })
   };
 
   const handleModalClose = () => {
