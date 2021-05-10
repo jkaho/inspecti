@@ -8,7 +8,11 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 20]
       }
     },
-    date: {
+    startTime: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    endTime: {
       type: DataTypes.DATE,
       allowNull: false,
     },

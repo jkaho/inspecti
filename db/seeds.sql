@@ -123,7 +123,8 @@ INSERT INTO attendedAuctions (
 INSERT INTO scheduledEvents (
   id, 
   eventType,
-  date, 
+  startTime, 
+  endTime, 
   propertyAddress, 
   propertyType,
   bedrooms,
@@ -133,4 +134,4 @@ INSERT INTO scheduledEvents (
 --   priceGuide,
   hasAuction,
   userId
-) VALUES (1000, "Inspection", "2021-05-15 13:45:00", "93 Michael St North Sydney, NSW 2060", "House", 4, 2, 2, 457, TRUE, 1);
+) VALUES (1000, "Inspection", "2021-05-15 13:45:00", "2021-05-15 14:15:00", "93 Michael St North Sydney, NSW 2060", "House", 4, 2, 2, 457, TRUE, 1);

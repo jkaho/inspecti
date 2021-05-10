@@ -26,7 +26,7 @@ export default function MonthlySchedule() {
         console.log(res);
         let eventGroups = [];
         res.data.forEach(eventObj => {
-          const eventObjDate = moment(eventObj.date).format("YYYY-MM-DD");
+          const eventObjDate = moment(eventObj.startTime).format("YYYY-MM-DD");
           const eventObjType = eventObj.eventType;
           eventGroups.push(eventObjDate + " " + eventObjType);
         });
