@@ -23,6 +23,7 @@ import "./style.css";
 import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
 import domainAPI from "../../utils/domainAPI";
+import PopupMessage from "../../components/PopupMessage";
 
 const useStyles = makeStyles({
   noteSection: {
@@ -95,6 +96,7 @@ export default function Notes(props) {
   const [textEditorModeOn, setTextEditorMode] = useState(false);
   const [noteReviewToDelete, setNoteReviewToDelete] = useState();
   const [searchword, setSearchword] = useState();
+  const [shareSuccessIsOpen, setShareSuccessState] = useState(false);
   let sideTitle = "";
 
   const searchRef = useRef();
@@ -653,6 +655,21 @@ export default function Notes(props) {
     }
   };
 
+  const handleShareButtonClick = () => {
+    reviewsAPI.updateReview(currentNoteId, {
+      shared: true
+    })
+    .then(res => {
+      console.log(res);
+      setShareSuccessState(true);
+    })
+    .catch(err => console.log(err))
+  };
+
+  const shareSuccessPopupClose = () => {
+    setShareSuccessState(false);
+  };
+
   return (
     <div>
       <SideMenu />
@@ -846,7 +863,7 @@ export default function Notes(props) {
                         <IconButton onClick={handleReviewSaveButtonClick} className={classes.iconButton} aria-label="save">
                           <SaveIcon/>
                         </IconButton>
-                        <IconButton className={classes.iconButton} aria-label="share">
+                        <IconButton onClick={handleShareButtonClick} className={classes.iconButton} aria-label="share">
                           <PresentToAllIcon />
                         </IconButton>
                         <IconButton className={classes.iconButton}  aria-label="delete" onClick={handleDeleteReviewButtonClick}>
@@ -1137,6 +1154,12 @@ export default function Notes(props) {
           </Grid>
         </Grid>
       </BoxContainer>
+      <PopupMessage 
+        open={shareSuccessIsOpen}
+        handleClose={shareSuccessPopupClose}
+        severity="success"
+        message="Review successfully shared!"
+      />
     </div>
   )
 }
