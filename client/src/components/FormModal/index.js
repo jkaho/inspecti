@@ -7,7 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 // import InputAdornment from "@material-ui/core/InputAdornment";
 // import OutlinedInput from "@material-ui/core/OutlinedInput";
 // import PlaceIcon from "@material-ui/icons/Place";
-import SearchAutocomplete from "../../components/SearchAutocomplete";
+// import SearchAutocomplete from "../../components/SearchAutocomplete";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./style.css";
@@ -188,9 +188,9 @@ export default function FormModal(props) {
               }
             />
           </FormControl> */}
-          <SearchAutocomplete
+          {/* <SearchAutocomplete
             handleOnSelect={handleOnSelect}
-          />
+          /> */}
         </div>
         <div className="event-time-div event-div">
           <label htmlFor="event-startTime">Start time</label><br/>
