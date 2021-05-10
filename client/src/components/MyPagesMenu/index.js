@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import MenuList from '@material-ui/core/MenuList';
@@ -79,10 +80,18 @@ export default function MyPagesMenu(props) {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={handleClose}>Profile & Stats</MenuItem>
-                    <MenuItem onClick={handleClose}>Notes & Reviews</MenuItem>
-                    <MenuItem onClick={handleClose}>Inspection Schedule</MenuItem>
-                    <MenuItem onClick={handleClose}>Inspected Properties</MenuItem>
+                    <Link to="/profile">
+                      <MenuItem onClick={handleClose}>Profile & Stats</MenuItem>
+                    </Link>
+                    <Link to="/notes">
+                      <MenuItem onClick={handleClose}>Notes & Reviews</MenuItem>
+                    </Link>
+                    <Link to="/monthly">
+                      <MenuItem onClick={handleClose}>Inspection Schedule</MenuItem>
+                    </Link>
+                    <Link to="/inspected">
+                      <MenuItem onClick={handleClose}>Inspected Properties</MenuItem>
+                    </Link>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
