@@ -36,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
     color: "black",
+  },
+  menuButtonToggle: {
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
@@ -147,7 +149,11 @@ export default function SideMenu(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            className={classes.menuButton}
+            className={
+              `${classes.menuButton} 
+              ${window.location.href !== "http://localhost:3000/inspected" ? 
+              classes.menuButtonToggle : ""}`
+            }
           >
             <MenuIcon />
           </IconButton>
@@ -170,36 +176,60 @@ export default function SideMenu(props) {
           <Button className={classes.joinBtn} onClick={logOut}>Log Out</Button>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="">
-      <Hidden smUp implementation="css">
-      <Drawer
-        // className={classes.drawer}
-        container={container}
-        variant="temporary"
-        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
+      <nav 
+        className={window.location.href !== "http://localhost:3000/inspected" ? classes.drawer : ""}
+        aria-label=""
       >
-        {drawer}
-      </Drawer>
-      </Hidden>
-      <Hidden xsDown implementation="css">
+      {window.location.href !== "http://localhost:3000/inspected" ? 
+        <Hidden smUp implementation="css">
           <Drawer
+            // className={classes.drawer}
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
             classes={{
               paper: classes.drawerPaper,
             }}
-            variant="permanent"
-            open
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
           >
             {drawer}
           </Drawer>
-        </Hidden>
+        </Hidden> :  
+        <Drawer
+          // className={classes.drawer}
+          container={container}
+          variant="temporary"
+          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          {drawer}
+        </Drawer>
+      }
+      {window.location.href !== "http://localhost:3000/inspected" ? 
+        <Hidden xsDown implementation="css">
+            <Drawer
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              variant="permanent"
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Hidden> : 
+          ""
+      }
       </nav>
       {/* <main className={classes.content}>
         <Toolbar />
