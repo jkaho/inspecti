@@ -7,8 +7,10 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import Button from "@material-ui/core/Button";
-import { IconButton } from "@material-ui/core";
+import { IconButton, ListItemSecondaryAction } from "@material-ui/core";
 import moment from "moment";
+import eventsAPI from "../../utils/eventsAPI";
+import EventCard from "../../components/EventCard";
 
 const useStyles = makeStyles({
   arrowButton: {
@@ -20,19 +22,48 @@ export default function DailySchedule(props) {
   const classes = useStyles();
   let { state } = useLocation();
   const [date, setDate] = useState();
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     setDate(state);
+    getDailyEvents(state);
   }, []);
+
+  const getDailyEvents = (dateQuery) => {
+    let startTime = moment(dateQuery).format("YYYY-MM-DD HH:mm:ss");
+    let endTime = moment(dateQuery).add(1, "d").format("YYYY-MM-DD HH:mm:ss");
+    eventsAPI.getDailySchedule(startTime, endTime)
+      .then(res => {
+        console.log(res);
+        setEvents(res.data);
+        // let allEvents = [];
+        // res.data.forEach(item => {
+        //   let eventInfo = {
+        //     startTime: moment(item.startTime).format("h:mmA"),
+        //     endTime: moment(item.endTime).format("h:mmA"),
+        //     eventType: item.eventType,
+        //     propertyAddress: item.propertyAddress,
+        //     bedrooms: item.bedrooms,
+        //     bathrooms: item.bathrooms,
+        //     carSpaces: item.carSpaces,
+        //   };
+
+        //   allEvents.push(eventInfo);
+        // })
+      })
+      .catch(err => console.log(err))
+  };
 
   const handleForwardButtonClick = () => {
     state = moment(date).add(1, "d");
     setDate(state);
+    getDailyEvents(state);
   };
 
   const handleBackButtonClick = () => {
     state = moment(date).add(-1, "d");
     setDate(state);
+    getDailyEvents(state);
   };
 
   return (
@@ -97,7 +128,25 @@ export default function DailySchedule(props) {
             </tbody>
           </table>
         </div>
-        <div className="daily-box-container"></div>
+        <div className="daily-box-container">
+          {events.length > 0 ? events.map(item => (
+            <EventCard
+              key={item.id}
+              startTime={moment(item.startTime).format("h:mmA")}
+              endTime={moment(item.endTime).format("h:mmA")}
+              type={item.eventType}
+              address={item.propertyAddress}
+              bedrooms={item.bedrooms}
+              bathrooms={item.bathrooms}
+              carSpaces={item.carSpaces}
+              landSize={item.landSize}
+            />
+          )) : 
+          <div className="no-events">
+            <h2>No scheduled events</h2>
+          </div> 
+          } 
+        </div>
       </div>
     </div>
   );

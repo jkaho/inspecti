@@ -13,11 +13,12 @@ const eventsController = {
       .catch(err => console.log(err))
   },
   getDailyEvents: function(req, res) {
+    console.log(req.params)
     db.scheduledEvents
       .findAll({
         where: {
-          date: {
-            [Op.like]: "%" + req.params.date + "%"
+          startTime: {
+            [Op.between]: [req.params.startTime, req.params.endTime]
           }
         }
       })
@@ -28,7 +29,8 @@ const eventsController = {
     db.scheduledEvents
       .create({
         eventType: req.body.eventType,
-        date: req.body.date,
+        startTime: req.body.startTime,
+        endTime: req.body.endTime,
         propertyAddress: req.body.propertyAddress,
         propertyType: req.body.propertyType,
         bedrooms: req.body.bedrooms,
