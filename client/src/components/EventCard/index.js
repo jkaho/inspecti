@@ -178,18 +178,20 @@ export default function EventCard(props) {
     <div>
     <div className="eventcard-container">
       <div className="eventcard-heading eventcard-block">
-        <div className="eventcard-time">
-          <i className="fas fa-clock"></i>&nbsp;
-          {props.startTime} - {props.endTime}
-        </div>
-        <div 
-          className={
-            `eventcard-type 
-            ${props.type === "Inspection" ? "inspection-event" : "auction-event"}`
-          }
-        >
-          <i className="fas fa-glasses"></i>&nbsp;
-          {props.type.toUpperCase()}
+        <div className="eventcard-timetype">
+          <div className="eventcard-time">
+            <i className="fas fa-clock"></i>&nbsp;
+            {props.startTime} - {props.endTime}
+          </div>
+          <div 
+            className={
+              `eventcard-type 
+              ${props.type === "Inspection" ? "inspection-event" : "auction-event"}`
+            }
+          >
+            <i className="fas fa-glasses"></i>&nbsp;
+            {props.type.toUpperCase()}
+          </div>
         </div>
         <div className="eventcard-actions">
           <button id={`editbtn-${props.id}`} onClick={props.editClick}>

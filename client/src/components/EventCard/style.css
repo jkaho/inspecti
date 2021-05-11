@@ -9,7 +9,7 @@
 }
 
 .eventcard-heading {
-  padding: 5px;
+  padding: 0 5px;
   border-bottom: 1px solid rgb(228, 228, 228);
 }
 
@@ -32,3 +32,29 @@
 .no-events {
   text-align: center;
 }
+
+.eventcard-timetype {
+  display: inline-block;
+  width: 60%;
+}
+
+.eventcard-actions {
+  display: inline-block;
+  width: 40%;
+  text-align: right;
+}
+
+.eventcard-actions button {
+  background: none;
+  border: none;
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.eventcard-actions button:hover {
+  background: rgb(0, 0, 0, 0.04);
+}
+
