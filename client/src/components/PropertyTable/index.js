@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -124,16 +124,24 @@ export default function PropertyTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
-  
+  const firstUpdate = useRef(true);
+
   useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+
     getAndSetProperties();
-  }, []);
+  }, [props.properties]);
 
   const getAndSetProperties = () => {
     let rowsToRender = [];
+    console.log(props.properties)
     props.properties.forEach(property => {
+      console.log(property.hasNote)
       rowsToRender.push(createData(
-        moment(property.dateInspected).format("YYYY/MM/DD"),
+        moment(property.dateInspected).format("DD/MM/YY"),
         property.propertyAddress,
         property.propertyType,
         property.bedrooms,
@@ -146,6 +154,8 @@ export default function PropertyTable(props) {
         property.hasNote,
       ))
     });
+    
+    console.log(rowsToRender)
     setRows(rowsToRender);
   };
 
@@ -166,8 +176,6 @@ export default function PropertyTable(props) {
   //     )
   //   })
   // ];
-
-  console.log(rows);
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 

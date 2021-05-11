@@ -50,6 +50,20 @@ const notesController = {
       .then(notes => res.json(notes))
       .catch(err => console.log(err))
   },
+  searchNoteAddress: function(req, res) {
+    console.log(req.body)
+    db.note
+      .findAll({
+        where: {
+          userId: parseInt(req.user.id),
+          propertyAddress: {
+            [Op.like]: "%" + req.params.query + "%"
+          }
+        }
+      })
+      .then(notes => res.json(notes))
+      .catch(err => console.log(err));
+  },
   createNote: function(req, res) {
     db.note
       .create({

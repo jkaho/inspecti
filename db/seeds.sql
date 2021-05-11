@@ -24,6 +24,18 @@ VALUES (5, "Potts Pt apartment", "", "72/15 Limey Rd Potts Pt, NSW 2011", 3, 2, 
 INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
 VALUES (6, "George from Bay Wright Real Estate", "", null, FALSE, FALSE, 1);
 
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
+VALUES (7, "Brand new townhouse", "", "4/3 Barr Pl Waverley", FALSE, FALSE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
+VALUES (8, "Garden apartment", "", "3/35 Star Rd Starville", FALSE, FALSE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
+VALUES (9, "Ask for contract", "", "131 Euroka St Boxley", FALSE, FALSE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
+VALUES (10, "Ocean views", "", "9 Samson Rd Bondi", FALSE, FALSE, 1);
+
 -- REVIEWS -- 
 INSERT INTO reviews (
   id, 
@@ -102,7 +114,7 @@ INSERT INTO inspectedProperties (
   soldPrice,
   hadAuction,
   userId
-) VALUES (1, "2021-04-17", "35 Luxe Ave Bellavue Hill, NSW 2023", "House", 5, 3, 2, 655, 3200000, 3235000, null, 1);
+) VALUES (1, "2021-04-17", "35 Luxe Ave Bellavue Hill, NSW 2023", "House", 5, 3, 2, 655, 3200000, 3235000, FALSE, 1);
 
 INSERT INTO inspectedProperties (
   id, 
@@ -117,7 +129,7 @@ INSERT INTO inspectedProperties (
   soldPrice,
   hadAuction,
   userId
-) VALUES (2, "2021-04-21", "4/3 Barr Pl Waverley", "Townhouse", 3, 2, 2, 220, 2500000, 2600000, null, 1);
+) VALUES (2, "2021-04-21", "4/3 Barr Pl Waverley", "Townhouse", 3, 2, 2, 220, 2500000, 2600000, FALSE, 1);
 
 INSERT INTO inspectedProperties (
   id, 
@@ -132,7 +144,7 @@ INSERT INTO inspectedProperties (
   soldPrice,
   hadAuction,
   userId
-) VALUES (3, "2021-04-17", "53 Bore St Greenwood", "House", 5, 3, 2, 450, 3200000, 3330000, TRUE 1);
+) VALUES (3, "2021-04-17", "53 Bore St Greenwood", "House", 5, 3, 2, 450, 3200000, 3330000, TRUE, 1);
 
 INSERT INTO inspectedProperties (
   id, 

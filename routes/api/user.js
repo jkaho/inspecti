@@ -40,6 +40,8 @@ router.get("/notes/starred/:id", notesController.getStarredNotes);
 
 router.get("/notes/search/q=:query", notesController.searchNotes);
 
+router.get("/notes/address/q=:query", notesController.searchNoteAddress);
+
 router.route("/note")
   .post(notesController.createNote, (req, res) => {
     res.status(200).send("Note successfully created!")

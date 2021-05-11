@@ -11,6 +11,9 @@ const notesAPI = {
   searchNotes: function(query) {
     return axios.get(url + "/api/user/notes/search/q=" + query, { withCredentials: true });
   },
+  searchNoteAddress: function(address) {
+    return axios.get(url + "/api/user/notes/address/q=" + address, { withCredentials: true });
+  },
   createNote: function(noteData) {
     return axios.post(url + "/api/user/note", noteData, { withCredentials: true });
   },

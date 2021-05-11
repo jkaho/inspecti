@@ -32,22 +32,26 @@ export default function InspectedProperties() {
       .then(res => {
         console.log(res);
         let propertiesToRender = res.data;
-        propertiesToRender.forEach(item => {
-          item.hadAuction === true ? 
-          item.hadAuction = "true" : 
-          item.hadAuction = "false"
-          item.hasNote = "false";
-          // Note: this searches for title and content too, not just address
-          notesAPI.searchNotes(item.propertyAddress)
+        for (let i = 0; i < propertiesToRender.length; i++) {
+          propertiesToRender[i].hadAuction === true ? 
+          propertiesToRender[i].hadAuction = "true" : 
+          propertiesToRender[i].hadAuction = "false"
+          propertiesToRender[i].hasNote = "false";
+          let propertyQuery = propertiesToRender[i].propertyAddress.replace("/", "%2F");
+          notesAPI.searchNoteAddress(propertyQuery)
             .then(res => {
               console.log(res);
               if (res.data.length > 0) {
-                item.hasNote = "true";
+                propertiesToRender[i].hasNote = "true";
+                console.log(i, res.data[0])
+              }
+              if (i === res.data.length - 1) {
+                setProperties(propertiesToRender);
+                console.log(propertiesToRender)
               }
             })
             .catch(err => console.log(err));
-        });
-        setProperties(propertiesToRender);
+        };
       })
       .catch(err => console.log(err));
   };
