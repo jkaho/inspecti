@@ -37,6 +37,9 @@ const useStyles = makeStyles({
   },
   cell: {
     textAlign: "center"
+  },
+  cellHeight: {
+    maxHeight: 80,
   }
 });
 
@@ -278,7 +281,7 @@ export default function PropertyTable(props) {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.address}>
+            <TableRow className={classes.cellHeight} key={row.address}>
               <TableCell className="date-cell">{row.date}</TableCell>
               <TableCell>{row.address}</TableCell>
               <TableCell>{row.type}</TableCell>
