@@ -17,6 +17,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import TableFooter from "@material-ui/core/TableFooter";
 import moment from "moment";
+import "./style.css";
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -150,8 +151,8 @@ export default function PropertyTable(props) {
         property.landSize,
         property.priceGuide,
         property.soldPrice,
-        property.hadAuction,
-        property.hasNote,
+        property.hadAuction ? "true" : "false",
+        property.notes,
       ))
     });
     
@@ -290,7 +291,15 @@ export default function PropertyTable(props) {
               <TableCell>{row.priceGuide}</TableCell>
               <TableCell>{row.soldPrice}</TableCell>
               <TableCell className={classes.cell}>{row.auction}</TableCell>
-              <TableCell className={classes.cell}>{row.notes}</TableCell>
+              <TableCell className={`${classes.cell} note-cell`}>
+                <ul>
+                  {row.notes.length > 0 ? 
+                    row.notes.map(note => (
+                      <li key={note.id} className="property-note-title">"{note.title}"</li>
+                    )) : <li className="no-property-notes">No notes</li>
+                  }
+                </ul>
+              </TableCell>
               <TableCell style={{ paddingLeft: "30px" }}>
                 <i className="fas fa-edit" style={{ color: "rgb(248, 179, 52)"}}></i>&nbsp;
                 <i className="fas fa-trash" style={{ color: "rgb(221, 77, 77)"}}></i>

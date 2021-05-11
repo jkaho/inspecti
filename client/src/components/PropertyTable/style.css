@@ -1,0 +1,16 @@
+.note-cell {
+  overflow: auto;
+  text-align: left;
+}
+
+.note-cell ul {
+  list-style: none;
+}
+
+.no-property-notes {
+  color: rgb(204, 204, 204);
+}
+
+.property-note-title {
+  text-decoration: underline;
+}

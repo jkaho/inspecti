@@ -33,6 +33,7 @@ export default function InspectedProperties() {
     propertiesAPI.getPropertyNotes(propertyQuery)
       .then(res => {
         console.log(res);
+        setProperties(res.data);
       })
       .catch(err => console.log(err))
     // propertiesAPI.getAllProperties()
@@ -40,9 +41,9 @@ export default function InspectedProperties() {
     //     console.log(res);
     //     let propertiesToRender = res.data;
     //     for (let i = 0; i < propertiesToRender.length; i++) {
-    //       propertiesToRender[i].hadAuction === true ? 
-    //       propertiesToRender[i].hadAuction = "true" : 
-    //       propertiesToRender[i].hadAuction = "false"
+          // propertiesToRender[i].hadAuction === true ? 
+          // propertiesToRender[i].hadAuction = "true" : 
+          // propertiesToRender[i].hadAuction = "false"
           // propertiesToRender[i].hasNote = "false";
           // notesAPI.searchNoteAddress(propertyQuery)
           //   .then(res => {
