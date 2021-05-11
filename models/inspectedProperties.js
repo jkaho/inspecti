@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   const InspectedProperties = sequelize.define("inspectedProperties", {
     dateInspected: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true,
     },
     propertyAddress: {

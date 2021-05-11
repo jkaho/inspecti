@@ -56,7 +56,7 @@ CREATE TABLE reviews (
 
 CREATE TABLE inspectedProperties (
   id INT AUTO_INCREMENT NOT NULL,
-  dateInspected DATETIME,
+  dateInspected DATE,
   propertyAddress VARCHAR(255) NOT NULL,
   propertyType VARCHAR(20) NOT NULL,
   bedrooms INT,
