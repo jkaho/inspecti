@@ -1,4 +1,5 @@
 const db = require("../models");
+const { Op } = require("sequelize");
 
 const propertiesController = {
   getProperties: function(req, res) {
@@ -9,7 +10,20 @@ const propertiesController = {
         }
       })
       .then(properties => res.json(properties))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
+  },
+  getPropertyNotes: function(req, res) {
+    db.inspectedProperties
+      .findAll({
+        include: [db.note],
+        // where: {
+        //   propertyAddress: {
+        //     [Op.like]: "%" + req.params.query + "%"
+        //   }
+        // }
+      })
+      .then(results => res.json(results))
+      .catch(err => console.log(err));
   },
   createPropertyEntry: function(req, res) {
     db.inspectedProperties
@@ -27,7 +41,7 @@ const propertiesController = {
         userId: req.body.userId,
       })
       .then(propertyEntry => res.json(propertyEntry))
-      .catch(err => res.status(422).json(err))
+      .catch(err => res.status(422).json(err));
   },
 };
 

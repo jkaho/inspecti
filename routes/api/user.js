@@ -75,6 +75,8 @@ router.route("/event/:id")
 // Inspected Properties routes
 router.get("/properties", propertiesController.getProperties);
 
+router.get("/property/notes/q=:query", propertiesController.getPropertyNotes);
+
 router.post("/property", propertiesController.createPropertyEntry);
   
 module.exports = router;

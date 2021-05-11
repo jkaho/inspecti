@@ -11,7 +11,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 // import Divider from '@material-ui/core/Divider';
 import IconButton from "@material-ui/core/IconButton";
-import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SaveIcon from "@material-ui/icons/Save";
@@ -22,6 +21,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./style.css";
 import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
+import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
 import PopupMessage from "../../components/PopupMessage";
 
@@ -365,30 +365,43 @@ export default function Notes(props) {
 
   const handleAddressSuggestionClick = (event) => {
     const address = event.target.textContent;
+    let propertyId;
     setAddress(address);
 
-    domainAPI.getPropertyInfo(event.target.id)
+    propertiesAPI.getAllProperties()
       .then(res => {
-        const propertyInfo = {
-          bedrooms: res.data.bedrooms,
-          bathrooms: res.data.bathrooms,
-          carSpaces: res.data.carSpaces,
-          landSize: res.data.areaSize
-        };
+        console.log(res.data);
+        res.data.forEach(item => {
+          if (address === item.propertyAddress) {
+            propertyId = item.id;
+          }
+        });
 
-        setPropertySpecs(propertyInfo);
-
-        propertyInfo.propertyAddress = address;
-        notesAPI.updateNote(currentNoteId, propertyInfo)
-          .then(res => {
-            console.log(res);
-            setAddressInfoState(true);
-            setAddressInputState(false);
-            setRatingButtonState(true);
-          })
-          .catch(err => console.log(err))
+        domainAPI.getPropertyInfo(event.target.id)
+        .then(res => {
+          const propertyInfo = {
+            bedrooms: res.data.bedrooms,
+            bathrooms: res.data.bathrooms,
+            carSpaces: res.data.carSpaces,
+            landSize: res.data.areaSize,
+            propertyId: propertyId
+          };
+  
+          setPropertySpecs(propertyInfo);
+  
+          propertyInfo.propertyAddress = address;
+          notesAPI.updateNote(currentNoteId, propertyInfo)
+            .then(res => {
+              console.log(res);
+              setAddressInfoState(true);
+              setAddressInputState(false);
+              setRatingButtonState(true);
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
 
     // notesAPI.updateNote(currentNoteId, {
     //   propertyAddress: address,

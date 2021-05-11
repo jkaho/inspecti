@@ -14,6 +14,25 @@ CREATE TABLE users (
   PRIMARY KEY(id)
 );
 
+CREATE TABLE inspectedProperties (
+  id INT AUTO_INCREMENT NOT NULL,
+  dateInspected DATE,
+  propertyAddress VARCHAR(255) UNIQUE NOT NULL,
+  propertyType VARCHAR(20) NOT NULL,
+  bedrooms INT,
+  bathrooms INT,
+  carSpaces INT,
+  landSize INT,
+  priceGuide INT,
+  soldPrice INT,
+  hadAuction BOOLEAN NOT NULL,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  userId INT NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE 
+);
+
 CREATE TABLE notes (
   id INT AUTO_INCREMENT NOT NULL,
   title VARCHAR(40) NOT NULL,
@@ -27,9 +46,11 @@ CREATE TABLE notes (
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   userId INT NOT NULL,
+  propertyId INT,
   hasReview BOOLEAN DEFAULT FALSE,
   PRIMARY KEY(id),
-  FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
+  FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY(propertyId) REFERENCES inspectedProperties(id) ON DELETE CASCADE
 --   FOREIGN KEY(reviewId) REFERENCES reviews(id) ON DELETE SET NULL
 );
 
@@ -52,25 +73,6 @@ CREATE TABLE reviews (
   noteId INT NOT NULL,
   PRIMARY KEY(id),
   FOREIGN KEY(noteId) REFERENCES notes(id) ON DELETE CASCADE
-);
-
-CREATE TABLE inspectedProperties (
-  id INT AUTO_INCREMENT NOT NULL,
-  dateInspected DATE,
-  propertyAddress VARCHAR(255) NOT NULL,
-  propertyType VARCHAR(20) NOT NULL,
-  bedrooms INT,
-  bathrooms INT,
-  carSpaces INT,
-  landSize INT,
-  priceGuide INT,
-  soldPrice INT,
-  hadAuction BOOLEAN NOT NULL,
-  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-  userId INT NOT NULL,
-  PRIMARY KEY(id),
-  FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE 
 );
 
 CREATE TABLE attendedAuctions (

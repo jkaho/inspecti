@@ -5,101 +5,6 @@ VALUES (1, "Bob", "Dylan", "bobby@email.com", "$2a$10$jEObUXD8pZmIith9StjiFOkJMB
 INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
 VALUES (2, "Sally", "Jackson", "sally@email.com", "$2a$10$XWTDualRScH7dbEZd4rN7.xIVDrURLkxScR5Mj5CKrSz/KjQ4/tWe", "2021-05-07 04:04:27", "2021-05-07 04:04:27");
 
--- NOTES --
-INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
-VALUES (1, "Renovation inspo", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, TRUE, TRUE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
-VALUES (2, "City living", "", "135/23 Lore St Sydney, NSW 2000", 2, 2, 0, 90, FALSE, FALSE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
-VALUES (3, "Harbour views", "", "76 Craigson St Greenwich, NSW 2065", 4, 2, 2, 427, TRUE, FALSE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (4, "Mosman semi auction", "", "32 Milson Dr Mosman, NSW 2088", FALSE, TRUE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
-VALUES (5, "Potts Pt apartment", "", "72/15 Limey Rd Potts Pt, NSW 2011", 3, 2, 2, 121, TRUE, TRUE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (6, "George from Bay Wright Real Estate", "", null, FALSE, FALSE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (7, "Brand new townhouse", "", "4/3 Barr Pl Waverley", FALSE, FALSE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (8, "Garden apartment", "", "3/35 Star Rd Starville", FALSE, FALSE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (9, "Ask for contract", "", "131 Euroka St Boxley", FALSE, FALSE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (10, "Ocean views", "", "9 Samson Rd Bondi", FALSE, FALSE, 1);
-
--- REVIEWS -- 
-INSERT INTO reviews (
-  id, 
-  shared,
-  propertyConditionRating,
-  potentialRating,
-  surroundingsRating,
-  neighbourComparisonRating,
-  accessibilityRating,
-  privacyRating,
-  floorplanRating,
-  outdoorSpaceRating,
-  indoorOutdoorFlowRating,
-  naturalLightRating,
-  userId,
-  noteId
-) VALUES (1, TRUE, 1, 2, 4, 3, 4, 3, 5, 4, 5, 5, 1, 1);
-
--- UPDATE notes 
--- SET reviewId = 1
--- WHERE id = 1;
-
-INSERT INTO reviews (
-  id, 
-  shared,
-  propertyConditionRating,
-  potentialRating,
-  surroundingsRating,
-  neighbourComparisonRating,
-  accessibilityRating,
-  privacyRating,
-  floorplanRating,
-  outdoorSpaceRating,
-  indoorOutdoorFlowRating,
-  naturalLightRating,
-  userId,
-  noteId
-) VALUES (2, TRUE, 3, 4, 2, 2, 1, 5, 3, 2, 2, 1, 1, 4);
-
--- UPDATE notes 
--- SET reviewId = 2
--- WHERE id = 4;
-
-INSERT INTO reviews (
-  id, 
-  shared,
-  propertyConditionRating,
-  potentialRating,
-  surroundingsRating,
-  neighbourComparisonRating,
-  accessibilityRating,
-  privacyRating,
-  floorplanRating,
-  outdoorSpaceRating,
-  indoorOutdoorFlowRating,
-  naturalLightRating,
-  userId,
-  noteId
-) VALUES (3, FALSE, 2, 1, 4, 2, 2, 5, 3, 4, 5, 4, 1, 5);
-
--- UPDATE notes 
--- SET reviewId = 3
--- WHERE id = 5;
-
 -- INSPECTED PROPERTIES --
 INSERT INTO inspectedProperties (
   id, 
@@ -265,6 +170,101 @@ INSERT INTO inspectedProperties (
   hadAuction,
   userId
 ) VALUES (11, "2021-04-03", "42 Billy Ave Cronolla", "House", 3, 2, 1, 390, 2800000, 2600000, TRUE, 1);
+
+-- NOTES --
+INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
+VALUES (1, "Renovation inspo", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, TRUE, TRUE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
+VALUES (2, "City living", "", "135/23 Lore St Sydney, NSW 2000", 2, 2, 0, 90, FALSE, FALSE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
+VALUES (3, "Harbour views", "", "76 Craigson St Greenwich, NSW 2065", 4, 2, 2, 427, TRUE, FALSE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
+VALUES (4, "Mosman semi auction", "", "32 Milson Dr Mosman, NSW 2088", FALSE, TRUE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
+VALUES (5, "Potts Pt apartment", "", "72/15 Limey Rd Potts Pt, NSW 2011", 3, 2, 2, 121, TRUE, TRUE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
+VALUES (6, "George from Bay Wright Real Estate", "", null, FALSE, FALSE, 1);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId, propertyId)
+VALUES (7, "Brand new townhouse", "", "4/3 Barr Pl Waverley", FALSE, FALSE, 1, 2);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId, propertyId)
+VALUES (8, "Garden apartment", "", "3/35 Star Rd Starville", FALSE, FALSE, 1, 4);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId, propertyId)
+VALUES (9, "Ask for contract", "", "131 Euroka St Boxley", FALSE, FALSE, 1, 6);
+
+INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId, propertyId)
+VALUES (10, "Ocean views", "", "9 Samson Rd Bondi", FALSE, FALSE, 1, 9);
+
+-- REVIEWS -- 
+INSERT INTO reviews (
+  id, 
+  shared,
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (1, TRUE, 1, 2, 4, 3, 4, 3, 5, 4, 5, 5, 1, 1);
+
+-- UPDATE notes 
+-- SET reviewId = 1
+-- WHERE id = 1;
+
+INSERT INTO reviews (
+  id, 
+  shared,
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (2, TRUE, 3, 4, 2, 2, 1, 5, 3, 2, 2, 1, 1, 4);
+
+-- UPDATE notes 
+-- SET reviewId = 2
+-- WHERE id = 4;
+
+INSERT INTO reviews (
+  id, 
+  shared,
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (3, FALSE, 2, 1, 4, 2, 2, 5, 3, 4, 5, 4, 1, 5);
+
+-- UPDATE notes 
+-- SET reviewId = 3
+-- WHERE id = 5;
 
 -- ATTENDED AUCTIONS -- 
 INSERT INTO attendedAuctions (

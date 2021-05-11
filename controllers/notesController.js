@@ -72,6 +72,7 @@ const notesController = {
         text: req.body.text,
         propertyAddress: req.body.propertyAddress,
         userId: req.body.userId,
+        propertyId: req.body.propertyAddress,
         hasReview: false,
       })
       .then(model => res.json(model))
@@ -89,7 +90,8 @@ const notesController = {
           bathrooms: req.body.bathrooms,
           carSpaces: req.body.carSpaces,
           landSize: req.body.landSize,
-          hasReview: req.body.hasReview
+          hasReview: req.body.hasReview,
+          propertyId: req.body.propertyId
         }, 
         {
           where: {

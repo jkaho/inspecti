@@ -47,6 +47,14 @@ module.exports = function(sequelize, DataTypes) {
   }, { freezeTableName: true });
 
   InspectedProperties.associate = models => {
+    InspectedProperties.hasMany(models.note, {
+      foreignKey: {
+        name: "propertyId",
+        allowNull: true
+      },
+      onDelete: "CASCADE"
+    });
+    
     InspectedProperties.belongsTo(models.user);
   };
   

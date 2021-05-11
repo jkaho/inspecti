@@ -28,32 +28,38 @@ export default function InspectedProperties() {
 
   // Helpers 
   const getAllProperties = () => {
-    propertiesAPI.getAllProperties()
+    // let propertyQuery = propertiesToRender[i].propertyAddress.replace("/", "%2F");
+    let propertyQuery="placeholder";
+    propertiesAPI.getPropertyNotes(propertyQuery)
       .then(res => {
         console.log(res);
-        let propertiesToRender = res.data;
-        for (let i = 0; i < propertiesToRender.length; i++) {
-          propertiesToRender[i].hadAuction === true ? 
-          propertiesToRender[i].hadAuction = "true" : 
-          propertiesToRender[i].hadAuction = "false"
-          propertiesToRender[i].hasNote = "false";
-          let propertyQuery = propertiesToRender[i].propertyAddress.replace("/", "%2F");
-          notesAPI.searchNoteAddress(propertyQuery)
-            .then(res => {
-              console.log(res);
-              if (res.data.length > 0) {
-                propertiesToRender[i].hasNote = "true";
-                console.log(i, res.data[0])
-              }
-              if (i === res.data.length - 1) {
-                setProperties(propertiesToRender);
-                console.log(propertiesToRender)
-              }
-            })
-            .catch(err => console.log(err));
-        };
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+    // propertiesAPI.getAllProperties()
+    //   .then(res => {
+    //     console.log(res);
+    //     let propertiesToRender = res.data;
+    //     for (let i = 0; i < propertiesToRender.length; i++) {
+    //       propertiesToRender[i].hadAuction === true ? 
+    //       propertiesToRender[i].hadAuction = "true" : 
+    //       propertiesToRender[i].hadAuction = "false"
+          // propertiesToRender[i].hasNote = "false";
+          // notesAPI.searchNoteAddress(propertyQuery)
+          //   .then(res => {
+          //     console.log(res);
+          //     if (res.data.length > 0) {
+          //       propertiesToRender[i].hasNote = "true";
+          //       console.log(i, res.data[0])
+          //     }
+          //     if (i === res.data.length - 1) {
+          //       setProperties(propertiesToRender);
+          //       console.log(propertiesToRender)
+          //     }
+          //   })
+          //   .catch(err => console.log(err));
+      //   };
+      // })
+      // .catch(err => console.log(err));
   };
 
   return (
