@@ -5,7 +5,7 @@ const propertiesController = {
     db.inspectedProperties
       .findAll({
         where: {
-          userId: parseInt(req.params.id)
+          userId: parseInt(req.user.id)
         }
       })
       .then(properties => res.json(properties))

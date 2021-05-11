@@ -27,7 +27,7 @@ const notesController = {
     db.note
       .findAll({
         where: {
-          userId: parseInt(req.params.id),
+          userId: parseInt(req.user.id),
           [Op.or]: [
             {
               title: {

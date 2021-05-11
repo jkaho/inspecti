@@ -3,6 +3,7 @@ import SideMenu from "../../components/SideMenu";
 import PropertyTable from "../../components/PropertyTable";
 import "./style.css";
 import propertiesAPI from "../../utils/propertiesAPI";
+import notesAPI from "../../utils/notesAPI";
 
 export default function InspectedProperties() {
   // States
@@ -30,7 +31,23 @@ export default function InspectedProperties() {
     propertiesAPI.getAllProperties()
       .then(res => {
         console.log(res);
-        setProperties(res.data);
+        let propertiesToRender = res.data;
+        propertiesToRender.forEach(item => {
+          item.hadAuction === true ? 
+          item.hadAuction = "true" : 
+          item.hadAuction = "false"
+          item.hasNote = "false";
+          // Note: this searches for title and content too, not just address
+          notesAPI.searchNotes(item.propertyAddress)
+            .then(res => {
+              console.log(res);
+              if (res.data.length > 0) {
+                item.hasNote = "true";
+              }
+            })
+            .catch(err => console.log(err));
+        });
+        setProperties(propertiesToRender);
       })
       .catch(err => console.log(err));
   };
@@ -50,6 +67,7 @@ export default function InspectedProperties() {
           guideRef={guideRef}
           soldRef={soldRef}
           auctionRef={auctionRef}
+          properties={properties}
         />
       </div>
     </div>
