@@ -1,0 +1,35 @@
+.list-item {
+  padding-bottom: 0!important;
+}
+
+.list-item-actions {
+  width: 100%;
+  padding-left: 10px;
+}
+
+.list-item-actions button {
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+  background: none;
+  border: none;
+  border-radius: 100%;
+}
+
+.list-item-actions button:hover {
+  background: rgb(247, 247, 247);
+}
+
+.onHover, .list-item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  transition: 0.3s;
+}
+
+.noHover {
+  background-color: white;
+  transition: 0.3s;
+}
+
+.list-item-star {
+  color: rgb(151, 81, 184);
+}
