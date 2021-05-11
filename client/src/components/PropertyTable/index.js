@@ -138,9 +138,7 @@ export default function PropertyTable(props) {
 
   const getAndSetProperties = () => {
     let rowsToRender = [];
-    console.log(props.properties)
     props.properties.forEach(property => {
-      console.log(property.hasNote)
       rowsToRender.push(createData(
         moment(property.dateInspected).format("DD/MM/YY"),
         property.propertyAddress,

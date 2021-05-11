@@ -16,6 +16,7 @@ const propertiesController = {
     db.inspectedProperties
       .findAll({
         include: [db.note],
+        order: [["dateInspected", "DESC"]]
         // where: {
         //   propertyAddress: {
         //     [Op.like]: "%" + req.params.query + "%"

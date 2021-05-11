@@ -29,8 +29,7 @@ export default function InspectedProperties() {
   // Helpers 
   const getAllProperties = () => {
     // let propertyQuery = propertiesToRender[i].propertyAddress.replace("/", "%2F");
-    let propertyQuery="placeholder";
-    propertiesAPI.getPropertyNotes(propertyQuery)
+    propertiesAPI.getPropertyNotes()
       .then(res => {
         console.log(res);
         setProperties(res.data);
