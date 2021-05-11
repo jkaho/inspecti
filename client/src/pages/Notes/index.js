@@ -97,6 +97,7 @@ export default function Notes(props) {
   const [noteReviewToDelete, setNoteReviewToDelete] = useState();
   const [searchword, setSearchword] = useState();
   const [shareSuccessIsOpen, setShareSuccessState] = useState(false);
+  const [isShared, setSharedState] = useState(false);
   let sideTitle = "";
 
   const searchRef = useRef();
@@ -185,6 +186,8 @@ export default function Notes(props) {
                 for (let i = 0; i < res.data.length; i++) {
                   if (res.data[i].noteId === lastNote.id) {
                     setPropertyReview(res.data[i]);
+                    setSharedState(res.data[i].shared);
+                    console.log(res.data[i].shared)
                   }
                 }
               })
@@ -236,24 +239,25 @@ export default function Notes(props) {
 
     const titleData = {
       title: titleValue
-    }
+    };
+
     notesAPI.updateNote(currentNoteId, titleData)
       .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
       console.log(title)
   };
 
-  const handleTextInputChange = () => {
-    const textValue = textRef.current.value;
-    setText(textValue);
+  // const handleTextInputChange = () => {
+  //   const textValue = textRef.current.value;
+  //   setText(textValue);
 
-    const textData = {
-      text: textValue
-    }
-    notesAPI.updateNote(currentNoteId, textData)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-  };
+  //   const textData = {
+  //     text: textValue
+  //   }
+  //   notesAPI.updateNote(currentNoteId, textData)
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err))
+  // };
 
   const handleNoteButtonClick = (event) => {
     let clickedNoteId;
@@ -287,6 +291,7 @@ export default function Notes(props) {
                   for (let i = 0; i < res.data.length; i++) {
                     if (res.data[i].noteId === clickedNoteId) {
                       setPropertyReview(res.data[i]);
+                      setSharedState(res.data[i].shared);
                     }
                   }
                 })
@@ -657,13 +662,14 @@ export default function Notes(props) {
 
   const handleShareButtonClick = () => {
     reviewsAPI.updateReview(currentNoteId, {
-      shared: true
+      shared: !isShared
     })
     .then(res => {
       console.log(res);
       setShareSuccessState(true);
+      setSharedState(!isShared);
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
   };
 
   const shareSuccessPopupClose = () => {
@@ -857,14 +863,14 @@ export default function Notes(props) {
                     <tr>
                       <th className="note-section-heading">PROPERTY REVIEW</th>
                       <th className="note-action-btns">
+                        <Button onClick={handleShareButtonClick} variant="contained" aria-label="share">
+                          {isShared ? "UNSHARE" : "SHARE"}  
+                        </Button>
                         <IconButton className={classes.iconButton} aria-label="edit" onClick={() => setRatingEditState(true)}>
                           <EditIcon />
                         </IconButton>
                         <IconButton onClick={handleReviewSaveButtonClick} className={classes.iconButton} aria-label="save">
                           <SaveIcon/>
-                        </IconButton>
-                        <IconButton onClick={handleShareButtonClick} className={classes.iconButton} aria-label="share">
-                          <PresentToAllIcon />
                         </IconButton>
                         <IconButton className={classes.iconButton}  aria-label="delete" onClick={handleDeleteReviewButtonClick}>
                           <DeleteIcon />
@@ -1158,7 +1164,10 @@ export default function Notes(props) {
         open={shareSuccessIsOpen}
         handleClose={shareSuccessPopupClose}
         severity="success"
-        message="Review successfully shared!"
+        message={
+          isShared ? "Review successfully shared!" : 
+          "Review successfully unshared"
+        }
       />
     </div>
   )
