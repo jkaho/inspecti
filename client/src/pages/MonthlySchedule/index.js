@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SideMenu from "../../components/SideMenu";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -10,11 +10,25 @@ import FormModal from "../../components/FormModal";
 import eventsAPI from "../../utils/eventsAPI";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
+import domainAPI from "../../utils/domainAPI";
 
 export default function MonthlySchedule() {
   const [addEventModalIsOpen, setAddEventModalState] = useState(false);
   const [events, setEvents] = useState([]);
+  const [eventType, setEventType] = React.useState("Inspection");
+  const [hasAuction, setAuctionState] = React.useState(false);
+  const [propertySpecs, setPropertySpecs] = React.useState({});
+  const [address, setAddress] = React.useState();
+  const [addressQuery, setAddressQuery] = React.useState("");
+  const [addressSuggestions, setAddressSuggestions] = React.useState([]);
+  const [addEventPopupIsOpen, setAddEventPopupState] = React.useState(false);
+
   const history = useHistory();
+
+  const typeRef = useRef();
+  const startTimeRef = useRef();
+  const endTimeRef = useRef();
+  const addressRef = useRef();
 
   useEffect(() => {
     getAllEvents();
@@ -78,6 +92,60 @@ export default function MonthlySchedule() {
     setAddEventModalState(false);
   };
 
+  const handleEventTypeChange = (event) => {
+    setEventType(event.target.value);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const newEvent = {
+      eventType: typeRef.current.children[1].children[0].value,
+      startTime: startTimeRef.current.value,
+      endTime: endTimeRef.current.value,
+      propertyAddress: address,
+      propertyType: propertySpecs.propertyType,
+      bedrooms: propertySpecs.bedrooms,
+      bathrooms: propertySpecs.bathrooms,
+      carSpaces: propertySpecs.carSpaces,
+      landSize: propertySpecs.landSize,
+      hasAuction: hasAuction,
+    };
+
+    eventsAPI.createEvent(newEvent)
+      .then(res => {
+        console.log(res);
+        handleModalClose();
+        setAddEventPopupState(true);
+        getAllEvents();
+      })
+      .catch(err => console.log(err))
+  };
+
+  const handlePopupClose = () => {
+    setAddEventPopupState(false);
+  };
+
+  const handleAddressInputChange = () => {
+    const newValue = addressRef.current.children[0].children[1].children[0].value;
+    setAddressQuery(newValue);
+
+    if (newValue === "") {
+      setAddressSuggestions([]);
+    } else {
+      domainAPI.getAddressSuggestions(newValue)
+      .then(res => {
+        console.log(res);
+        setAddressSuggestions(res.data.splice(0, 10));
+      })
+      .catch(err => console.log(err))
+    }
+  };
+
+  const handleSuggestionClick = (value) => {
+    const newValue = value.address;
+    setAddress(newValue);
+  };
+  
   return (
     <div>
       <SideMenu />
@@ -106,6 +174,18 @@ export default function MonthlySchedule() {
           <FormModal
             open={addEventModalIsOpen}
             close={handleModalClose}
+            handleSuggestionClick={handleSuggestionClick}
+            handleFormSubmit={handleFormSubmit}
+            handleEventTypeChange={handleEventTypeChange}
+            handleAddressInputChange={handleAddressInputChange}
+            addressRef={addressRef}
+            typeRef={typeRef}
+            startTimeRef={startTimeRef}
+            endTimeRef={endTimeRef}
+            eventType={eventType}
+            addressSuggestions={addressSuggestions}
+            addEventPopupIsOpen={addEventPopupIsOpen}
+            handlePopupClose={handlePopupClose}
           />
 
         </div>
