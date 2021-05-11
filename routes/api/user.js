@@ -4,6 +4,7 @@ const usersController = require("../../controllers/usersController");
 const notesController = require("../../controllers/notesController");
 const reviewsController = require("../../controllers/reviewsController");
 const eventsController = require("../../controllers/eventsController");
+const propertiesController = require("../../controllers/propertiesController");
 
 // Authentication route 
 router.get("/authenticated", (req, res) => {
@@ -68,5 +69,10 @@ router.route("/event")
 router.route("/event/:id")
   .put(eventsController.updateEvent)
   .delete(eventsController.deleteEvent)
+
+// Inspected Properties routes
+router.get("/properties", propertiesController.getProperties);
+
+router.post("/property", propertiesController.createPropertyEntry);
   
 module.exports = router;

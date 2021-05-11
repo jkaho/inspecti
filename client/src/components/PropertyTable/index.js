@@ -118,7 +118,7 @@ const rows = [
 
 ];
 
-export default function PropertyTable() {
+export default function PropertyTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
