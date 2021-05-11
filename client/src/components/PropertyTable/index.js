@@ -100,21 +100,21 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired
 }; 
 
-function createData(date, address, type, bed, bath, car, land, price, auction, notes) {
-  return { date, address, type, bed, bath, car, land, price, auction, notes };
+function createData(date, address, type, bed, bath, car, land, guide, sold, auction, notes) {
+  return { date, address, type, bed, bath, car, land, guide, sold, auction, notes };
 };
 
 const rows = [
-  createData("21/04/21", "4/3 Barr Pl Waverley", "Townhouse", 3, 2, 2, 220, "$2.5m", "-", "21/04/21"),
-  createData("17/04/21", "53 Bore St Greenwood", "House", 5, 3, 2, 450, "$3.2m", "24/04/21", "18/04/21"),
-  createData("17/04/21", "3/35 Star Rd Starville", "Apartment", 2, 2, 1, 97, "$2.2m", "24/04/21", "-"),
-  createData("17/04/21", "54 Michael St Beverley", "House", 4, 3, 1, 650, "$2.2m", "-", "18/04/21"),
-  createData("10/04/21", "131 Euroka St Boxley", "House", 3, 2, 1, 180, "$2.2m", "-", "-"),
-  createData("10/04/21", "29 Euroka St Boxley", "House", 5, 2, 3, 980, "$4.2m", "-", "10/04/21"),
-  createData("10/04/21", "7/63 Bomson Ave Boxley", "Apartment", 4, 2, 2, 203, "$3.65m", "-", "-"),
-  createData("3/04/21", "9 Samson Rd Bondi", "House", 4, 3, 3, 267, "$2.9m", "-", "-"),
-  createData("3/04/21", "2/85 Samson Dr Bondi", "Townhouse", 3, 2, 1, 216, "$1.8m", "-", "6/04/21"),
-  createData("3/04/21", "42 Billy Ave Cronolla", "House", 3, 2, 1, 390, "$2.8m", "-", "-"),
+  createData("21/04/21", "4/3 Barr Pl Waverley", "Townhouse", 3, 2, 2, 220, "$2.5m", "$2.6m", "-", "21/04/21"),
+  createData("17/04/21", "53 Bore St Greenwood", "House", 5, 3, 2, 450, "$3.2m", "$3.3m", "24/04/21", "18/04/21"),
+  createData("17/04/21", "3/35 Star Rd Starville", "Apartment", 2, 2, 1, 97, "$2.2m", "$2.76m", "24/04/21", "-"),
+  createData("17/04/21", "54 Michael St Beverley", "House", 4, 3, 1, 650, "$2.2m", "$2.29m", "-", "18/04/21"),
+  createData("10/04/21", "131 Euroka St Boxley", "House", 3, 2, 1, 180, "$2.2m", "$2.32m", "-", "-"),
+  createData("10/04/21", "29 Euroka St Boxley", "House", 5, 2, 3, 980, "$4.2m","$4.175m", "-", "10/04/21"),
+  createData("10/04/21", "7/63 Bomson Ave Boxley", "Apartment", 4, 2, 2, 203, "$3.65m","4.0m", "-", "-"),
+  createData("3/04/21", "9 Samson Rd Bondi", "House", 4, 3, 3, 267, "$2.9m", "$3.21m", "-", "-"),
+  createData("3/04/21", "2/85 Samson Dr Bondi", "Townhouse", 3, 2, 1, 216, "$1.8m", "$1.891m", "-", "6/04/21"),
+  createData("3/04/21", "42 Billy Ave Cronolla", "House", 3, 2, 1, 390, "$2.8m", "$2.6m", "-", "-"),
 
 ];
 
@@ -146,7 +146,8 @@ export default function PropertyTable(props) {
             <TableCell>Bath</TableCell>
             <TableCell>Car</TableCell>
             <TableCell>Land</TableCell>
-            <TableCell>Price</TableCell>
+            <TableCell>Guide</TableCell>
+            <TableCell>Sold</TableCell>
             <TableCell>Auction</TableCell>
             <TableCell>Notes</TableCell>
             <TableCell>Action</TableCell>
@@ -155,31 +156,54 @@ export default function PropertyTable(props) {
         <TableBody>
           <TableRow>
             <TableCell>
-              <input type="text" style={{ width: "60px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.dateRef}
+                style={{ width: "60px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
-              <input type="text" style={{ width: "140px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.addressRef}
+                style={{ width: "140px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
-              <input type="text" style={{ width: "80px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.typeRef}
+                style={{ width: "80px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
-              <input type="text" style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.bedRef}
+                style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
-              <input type="text" style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.bathRef}
+                style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
-              <input type="text" style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.carRef}
+                style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
-              <input type="text" style={{ width: "30px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.landRef}
+                style={{ width: "30px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
-              <input type="text" style={{ width: "30px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.guideRef}
+                style={{ width: "30px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
-              <input type="text" style={{ width: "60px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}/>
+              <input type="text" ref={props.soldRef}
+                style={{ width: "30px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
+            </TableCell>
+            <TableCell>
+              <input type="text" ref={props.auctionRef}
+                style={{ width: "60px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              />
             </TableCell>
             <TableCell>
               <button
