@@ -12,8 +12,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./style.css";
 import moment from "moment";
-import eventsAPI from '../../utils/eventsAPI';
-import domainAPI from "../../utils/domainAPI";
 import PopupMessage from '../PopupMessage';
 
 function getModalStyle() {

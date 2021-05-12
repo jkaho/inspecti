@@ -1,6 +1,5 @@
 // import React, { useState } from "react";
 // import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import domainAPI from "../../utils/domainAPI";
 
 // export default function SearchAutocomplete(props) {
 //   const [suggestions, setSuggestions] = useState([]);
@@ -62,23 +61,34 @@ import domainAPI from "../../utils/domainAPI";
 // };
 
 /* eslint-disable no-use-before-define */
-import React, { useState } from 'react';
+import React from 'react';
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import "./style.css";
+
+const useStyles = makeStyles({
+  smallInput: {
+    width: "200px!important",
+    fontSize: 14,
+  },
+});
 
 export default function SearchAutocomplete(props) {
   // const [value, setValue] = useState("");
+  const classes = useStyles();
 
   return (
     <Autocomplete
       id="search-autocomplete"
+      className={props.smallInput ? `${classes.smallInput} smallInput` : ""}
       freeSolo
       ref={props.addressRef}
       onInputChange={props.onInputChange}
       onChange={(event, value) => props.onChange(value)}
       options={props.suggestions}
       getOptionLabel={(option) => option.address}
-      style={{ width: 300 }}
+      style={{ width: 300, padding: 0 }}
       renderInput={(params) => <TextField {...params} label="Search for an address" variant="outlined"
       />}
     />

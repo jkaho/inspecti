@@ -39,7 +39,7 @@ const propertiesController = {
         priceGuide: req.body.priceGuide,
         soldPrice: req.body.soldPrice,
         hadAuction: req.body.hadAuction,
-        userId: req.body.userId,
+        userId: req.user.id,
       })
       .then(propertyEntry => res.json(propertyEntry))
       .catch(err => res.status(422).json(err));

@@ -18,6 +18,8 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import TableFooter from "@material-ui/core/TableFooter";
 import moment from "moment";
 import "./style.css";
+import SearchAutocomplete from "../../components/SearchAutocomplete";
+import abbreviate from "number-abbreviate";
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -29,7 +31,7 @@ const useStylesPagination = makeStyles((theme) => ({
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
-    width: 900,
+    width: 950,
     borderWidth: 1,
     borderColor: "#E0E0E0",
     borderStyle: "solid",
@@ -40,6 +42,9 @@ const useStyles = makeStyles({
   },
   cellHeight: {
     maxHeight: 80,
+  },
+  addressInput: {
+    height: 40,
   }
 });
 
@@ -191,6 +196,7 @@ export default function PropertyTable(props) {
   };
 
   return (
+    <>
     <TableContainer component={Paper} className={classes.table}>
       <Table>
         <TableHead>
@@ -212,54 +218,68 @@ export default function PropertyTable(props) {
         <TableBody>
           <TableRow>
             <TableCell>
-              <input type="text" ref={props.dateRef}
-                style={{ width: "60px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              <input type="date" ref={props.dateRef} defaultValue={moment().format("DD/MM/YY")}
+                style={{ width: "90px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.addressRef}
-                style={{ width: "140px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              <SearchAutocomplete
+                id="search-autocomplete-inspected"
+                className="inspected-search-address"
+                style={{ position: "fixed" }}
+                addressRef={props.addressRef}
+                onInputChange={props.handleAddressInputChange}
+                suggestions={props.addressSuggestions}
+                onChange={props.handleSuggestionClick}
+                smallInput={true}
               />
+              {/* <input type="text" ref={props.addressRef} placeholder="Required"
+                style={{ width: "140px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              /> */}
             </TableCell>
             <TableCell>
               <input type="text" ref={props.typeRef}
-                style={{ width: "80px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "80px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
               <input type="text" ref={props.bedRef}
-                style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "30px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
               <input type="text" ref={props.bathRef}
-                style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "30px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
               <input type="text" ref={props.carRef}
-                style={{ width: "20px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "30px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
               <input type="text" ref={props.landRef}
-                style={{ width: "30px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "30px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.guideRef}
-                style={{ width: "30px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              <input type="text" ref={props.guideRef} placeholder="1500000"
+                style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.soldRef}
-                style={{ width: "30px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              <input type="text" ref={props.soldRef} placeholder="1750000"
+                style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.auctionRef}
+              <select ref={props.auctionRef} style={{ height: "30px" }}>
+                <option value={false}>No</option>
+                <option value={true}>Yes</option>
+              </select>
+              {/* <input type="text" ref={props.auctionRef} placeholder="Required"
                 style={{ width: "60px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
-              />
+              /> */}
             </TableCell>
             <TableCell>
               <button
@@ -274,7 +294,9 @@ export default function PropertyTable(props) {
               >Create</button>
             </TableCell>
             <TableCell>
-              <i className="fas fa-plus-circle" style={{ color: "rgb(102, 185, 106)", fontSize: "20px", paddingLeft: "10px"}}></i>
+              <button type="submit" onClick={props.handleNewEntryButtonClick}>
+                <i className="fas fa-plus-circle" style={{ color: "rgb(102, 185, 106)", fontSize: "20px", paddingLeft: "10px"}}></i>
+              </button>
             </TableCell>
           </TableRow>
           {(rowsPerPage > 0 
@@ -289,8 +311,8 @@ export default function PropertyTable(props) {
               <TableCell>{row.bath}</TableCell>
               <TableCell>{row.car}</TableCell>
               <TableCell>{row.land}</TableCell>
-              <TableCell>{row.priceGuide}</TableCell>
-              <TableCell>{row.soldPrice}</TableCell>
+              <TableCell>{`$${abbreviate(row.guide, 3)}`}</TableCell>
+              <TableCell>{`$${abbreviate(row.sold, 3)}`}</TableCell>
               <TableCell className={classes.cell}>{row.auction}</TableCell>
               <TableCell className={`${classes.cell} note-cell`}>
                 <ul>
@@ -334,6 +356,7 @@ export default function PropertyTable(props) {
         </TableFooter>
       </Table>
     </TableContainer>
+    </>
   )
 }
 

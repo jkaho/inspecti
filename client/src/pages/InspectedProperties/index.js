@@ -1,13 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import SideMenu from "../../components/SideMenu";
 import PropertyTable from "../../components/PropertyTable";
+import PopupMessage from "../../components/PopupMessage";
 import "./style.css";
 import propertiesAPI from "../../utils/propertiesAPI";
-import notesAPI from "../../utils/notesAPI";
+import domainAPI from "../../utils/domainAPI";
 
 export default function InspectedProperties() {
   // States
   const [properties, setProperties] = useState([]);
+  const [fillInputsPopupIsOpen, setFillInputsPopupState] = useState(false);
+  const [createSuccessPopupIsOpen, setCreateSuccessPopupState] = useState(false);
+  const [addressSuggestions, setAddressSuggestions] = React.useState([]);
+  // const [addressQuery, setAddressQuery] = React.useState("");
+  const [address, setAddress] = React.useState();
 
   // Initial render
   useEffect(() => {
@@ -35,31 +41,82 @@ export default function InspectedProperties() {
         setProperties(res.data);
       })
       .catch(err => console.log(err))
-    // propertiesAPI.getAllProperties()
-    //   .then(res => {
-    //     console.log(res);
-    //     let propertiesToRender = res.data;
-    //     for (let i = 0; i < propertiesToRender.length; i++) {
-          // propertiesToRender[i].hadAuction === true ? 
-          // propertiesToRender[i].hadAuction = "true" : 
-          // propertiesToRender[i].hadAuction = "false"
-          // propertiesToRender[i].hasNote = "false";
-          // notesAPI.searchNoteAddress(propertyQuery)
-          //   .then(res => {
-          //     console.log(res);
-          //     if (res.data.length > 0) {
-          //       propertiesToRender[i].hasNote = "true";
-          //       console.log(i, res.data[0])
-          //     }
-          //     if (i === res.data.length - 1) {
-          //       setProperties(propertiesToRender);
-          //       console.log(propertiesToRender)
-          //     }
-          //   })
-          //   .catch(err => console.log(err));
-      //   };
-      // })
-      // .catch(err => console.log(err));
+  };
+
+  const handleAddressInputChange = () => {
+    const newValue = addressRef.current.children[0].children[1].children[0].value;
+    // setAddressQuery(newValue);
+    console.log(addressRef.current)
+    if (newValue === "") {
+      setAddressSuggestions([]);
+    } else {
+      domainAPI.getAddressSuggestions(newValue)
+      .then(res => {
+        console.log(res);
+        setAddressSuggestions(res.data.splice(0, 10));
+      })
+      .catch(err => console.log(err))
+    }
+  };
+
+  const handleSuggestionClick = (value) => {
+    setAddress(value);
+    console.log(value);
+  };
+
+  const handleNewEntryButtonClick = () => {
+    domainAPI.getPropertyInfo(address.id)
+      .then(res => {
+        console.log(res);
+        // const propertyInfo = {
+        //   bedrooms: res.data.bedrooms,
+        //   bathrooms: res.data.bathrooms,
+        //   carSpaces: res.data.carSpaces,
+        //   landSize: res.data.areaSize,
+        //   propertyType: res.data.propertyCategory
+        // };
+
+        const propertyEntry = {
+          dateInspected: dateRef.current.value,
+          propertyAddress: address.address,
+          bedrooms: res.data.bedrooms,
+          bathrooms: res.data.bathrooms,
+          carSpaces: res.data.carSpaces,
+          landSize: res.data.areaSize,
+          propertyType: res.data.propertyCategory,
+          priceGuide: guideRef.current.value,
+          soldPrice: soldRef.current.value,
+          hadAuction: auctionRef.current.value === "true" ? true : false,
+        };
+
+        console.log(propertyEntry)
+    
+        if (
+          !propertyEntry.dateInspected || 
+          !propertyEntry.propertyAddress 
+        ) {
+          setFillInputsPopupState(true);
+          return;
+        }
+
+        propertiesAPI.createProperty(propertyEntry)
+          .then(res => {
+            console.log(res);
+            setCreateSuccessPopupState(true);
+            getAllProperties();
+          })
+          .catch(err => console.log(err));
+
+      })
+      .catch(err => console.log(err))
+  };
+
+  const handleFillInputsPopupClose = () => {
+    setFillInputsPopupState(false);
+  };
+
+  const handleCreateSuccessPopupClose = () => {
+    setCreateSuccessPopupState(false);
   };
 
   return (
@@ -78,8 +135,24 @@ export default function InspectedProperties() {
           soldRef={soldRef}
           auctionRef={auctionRef}
           properties={properties}
+          handleAddressInputChange={handleAddressInputChange}
+          handleSuggestionClick={handleSuggestionClick}
+          addressSuggestions={addressSuggestions}
+          handleNewEntryButtonClick={handleNewEntryButtonClick}
         />
       </div>
+      <PopupMessage 
+        open={fillInputsPopupIsOpen}
+        onClose={handleFillInputsPopupClose}
+        severity="warning"
+        message="Required fields: DATE, ADDRESS, and AUCTION"
+      />
+      <PopupMessage 
+        open={createSuccessPopupIsOpen}
+        onClose={handleCreateSuccessPopupClose}
+        severity="success"
+        message="Property entry successfully created!"
+      />
     </div>
   );
 };
