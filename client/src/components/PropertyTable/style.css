@@ -26,3 +26,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgb(223, 223, 223);
   text-align: center;
 }
+
+.property-action-btn {
+  background: none;
+  border: none;
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.property-action-btn:hover {
+  background: rgb(0 ,0 ,0, 0.04);
+}

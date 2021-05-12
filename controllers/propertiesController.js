@@ -44,6 +44,34 @@ const propertiesController = {
       .then(propertyEntry => res.json(propertyEntry))
       .catch(err => res.status(422).json(err));
   },
+  updatePropertyEntry: function(req, res) {
+    db.inspectedProperties
+      .update(
+        {
+          dateInspected: req.body.dateInspected,
+          priceGuide: req.body.priceGuide,
+          soldPrice: req.body.soldPrice,
+          hadAuction: req.body.hadAuction
+        },
+        {
+          where: {
+            id: req.params.id
+          }
+        }
+      )
+      .then(updatedPropertyEntry => res.json(updatedPropertyEntry))
+      .catch(err => console.log(err));
+  },
+  deletePropertyEntry: function(req, res) {
+    db.inspectedProperties
+      .destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(deletedPropertyEntry => res.json(deletedPropertyEntry))
+      .catch(err => console.log(err));
+  }
 };
 
 module.exports = propertiesController;

@@ -159,30 +159,13 @@ export default function PropertyTable(props) {
         property.soldPrice,
         property.hadAuction ? "true" : "false",
         property.notes,
+        property.id
       ))
     });
     
     console.log(rowsToRender)
     setRows(rowsToRender);
   };
-
-  // const rows = [
-  //   props.properties.forEach(property => {
-  //     return createData(
-  //       property.dateInspected,
-  //       property.propertyAddress,
-  //       property.propertyType,
-  //       property.bedrooms,
-  //       property.bathrooms,
-  //       property.carSpaces,
-  //       property.landSize,
-  //       property.priceGuide,
-  //       property.soldPrice,
-  //       property.hadAuction,
-  //       property.hasNote,
-  //     )
-  //   })
-  // ];
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -296,7 +279,7 @@ export default function PropertyTable(props) {
               >Create</button>
             </TableCell>
             <TableCell>
-              <button type="submit" onClick={props.handleNewEntryButtonClick}>
+              <button className="property-action-btn" type="submit" onClick={props.handleNewEntryButtonClick}>
                 <i className="fas fa-plus-circle" style={{ color: "rgb(102, 185, 106)", fontSize: "20px", paddingLeft: "10px"}}></i>
               </button>
             </TableCell>
@@ -326,8 +309,12 @@ export default function PropertyTable(props) {
                 </ul>
               </TableCell>
               <TableCell style={{ paddingLeft: "30px" }}>
-                <i className="fas fa-edit" style={{ color: "rgb(248, 179, 52)"}}></i>&nbsp;
-                <i className="fas fa-trash" style={{ color: "rgb(221, 77, 77)"}}></i>
+                <button className="property-action-btn">
+                  <i id={`editProperty-${row.id}`} className="fas fa-edit" style={{ color: "rgb(248, 179, 52)"}}></i>&nbsp;
+                </button>
+                <button className="property-action-btn">
+                  <i id={`deleteProperty-${row.id}`} className="fas fa-trash" style={{ color: "rgb(221, 77, 77)"}}></i>
+                </button>
               </TableCell>
             </TableRow>
           ))}

@@ -65,14 +65,6 @@ export default function InspectedProperties() {
     domainAPI.getPropertyInfo(address.id)
       .then(res => {
         console.log(res);
-        // const propertyInfo = {
-        //   bedrooms: res.data.bedrooms,
-        //   bathrooms: res.data.bathrooms,
-        //   carSpaces: res.data.carSpaces,
-        //   landSize: res.data.areaSize,
-        //   propertyType: res.data.propertyCategory
-        // };
-
         const propertyEntry = {
           dateInspected: dateRef.current.value,
           propertyAddress: address.address,
@@ -85,8 +77,6 @@ export default function InspectedProperties() {
           soldPrice: soldRef.current.value,
           hadAuction: auctionRef.current.value === "true" ? true : false,
         };
-
-        console.log(propertyEntry)
     
         if (
           !propertyEntry.dateInspected || 

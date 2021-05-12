@@ -5,6 +5,7 @@ const notesController = require("../../controllers/notesController");
 const reviewsController = require("../../controllers/reviewsController");
 const eventsController = require("../../controllers/eventsController");
 const propertiesController = require("../../controllers/propertiesController");
+const { default: propertiesAPI } = require("../../client/src/utils/propertiesAPI");
 
 // Authentication route 
 router.get("/authenticated", (req, res) => {
@@ -77,6 +78,8 @@ router.get("/properties", propertiesController.getProperties);
 
 router.get("/property/notes", propertiesController.getPropertyNotes);
 
-router.post("/property", propertiesController.createPropertyEntry);
+router.route("/property/note/:id")
+  .put(propertiesController.updatePropertyEntry)
+  .delete(propertiesController.deletePropertyEntry);
   
 module.exports = router;
