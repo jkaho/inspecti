@@ -14,6 +14,8 @@ export default function InspectedProperties() {
   const [addressSuggestions, setAddressSuggestions] = React.useState([]);
   // const [addressQuery, setAddressQuery] = React.useState("");
   const [address, setAddress] = React.useState();
+  const [editModeIsOn, setEditMode] = React.useState(false);
+  const [propertyToEditId, setPropertyToEditId] = React.useState();
 
   // Initial render
   useEffect(() => {
@@ -31,6 +33,11 @@ export default function InspectedProperties() {
   const guideRef   = useRef();
   const soldRef    = useRef();
   const auctionRef = useRef();
+
+  const editDateRef    = useRef();
+  const editGuideRef   = useRef();
+  const editSoldRef    = useRef();
+  const editAuctionRef = useRef ();
 
   // Helpers 
   const getAllProperties = () => {
@@ -106,12 +113,52 @@ export default function InspectedProperties() {
     setCreateSuccessPopupState(false);
   };
 
+  const handleEditButtonClick = (event) => {
+    const propertyId = event.target.id.split("-")[1];
+    setPropertyToEditId(parseInt(propertyId));
+    console.log(event.target)
+    setEditMode(true);
+    console.log(editModeIsOn)
+  };
+
+  const handleSaveButtonClick = (event) => {
+    setEditMode(false);
+    const propertyId = event.target.id.split("-")[1];
+    const updatedPropertyData = {
+      dateInspected: editDateRef.current.value,
+      priceGuide: parseInt(editGuideRef.current.value.trim()),
+      soldPrice: parseInt(editSoldRef.current.value.trim()),
+      hadAuction: editAuctionRef.current.value === "true" ? true : false
+    };
+
+    propertiesAPI.updateProperty(propertyId, updatedPropertyData)
+      .then(res => {
+        console.log(res);
+        getAllProperties();
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleDeleteButtonClick = (event) => {
+    const propertyId = event.target.id.split("-")[1];
+    propertiesAPI.deleteProperty(propertyId)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleInputClickAway = () => {
+    setEditMode(false);
+    console.log(editModeIsOn)
+  };
+
   return (
     <div>
       <SideMenu />
       <div className="property-container">
         <PropertyTable
-          dateRef={dateRef}
+          dateRef={dateRef}        
           addressRef={addressRef}
           // typeRef={typeRef}
           // bedRef={bedRef}
@@ -121,11 +168,21 @@ export default function InspectedProperties() {
           guideRef={guideRef}
           soldRef={soldRef}
           auctionRef={auctionRef}
+          editDateRef={editDateRef}
+          editGuideRef={editGuideRef}
+          editSoldRef={editSoldRef}
+          editAuctionRef={editAuctionRef}
           properties={properties}
           handleAddressInputChange={handleAddressInputChange}
           handleSuggestionClick={handleSuggestionClick}
           addressSuggestions={addressSuggestions}
           handleNewEntryButtonClick={handleNewEntryButtonClick}
+          editMode={editModeIsOn}
+          handleEditButtonClick={handleEditButtonClick}
+          handleSaveButtonClick={handleSaveButtonClick}
+          handleDeleteButtonClick={handleDeleteButtonClick}
+          propertyToEditId={propertyToEditId}
+          handleInputClickAway={handleInputClickAway}
         />
       </div>
       <PopupMessage 

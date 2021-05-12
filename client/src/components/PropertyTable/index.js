@@ -20,6 +20,7 @@ import moment from "moment";
 import "./style.css";
 import SearchAutocomplete from "../../components/SearchAutocomplete";
 import abbreviate from "number-abbreviate";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -45,6 +46,12 @@ const useStyles = makeStyles({
   },
   addressInput: {
     height: 40,
+  },
+  hide: {
+    display: "none",
+  },
+  show: {
+    display: "block",
   }
 });
 
@@ -110,8 +117,8 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired
 }; 
 
-function createData(date, address, type, bed, bath, car, land, guide, sold, auction, notes) {
-  return { date, address, type, bed, bath, car, land, guide, sold, auction, notes };
+function createData(date, address, type, bed, bath, car, land, guide, sold, auction, notes, id) {
+  return { date, address, type, bed, bath, car, land, guide, sold, auction, notes, id };
 };
 
 // const rows = [
@@ -148,7 +155,7 @@ export default function PropertyTable(props) {
     let rowsToRender = [];
     props.properties.forEach(property => {
       rowsToRender.push(createData(
-        moment(property.dateInspected).format("DD/MM/YY"),
+        moment(property.dateInspected).format("YYYY-MM-DD"),
         property.propertyAddress,
         property.propertyType,
         property.bedrooms,
@@ -161,9 +168,7 @@ export default function PropertyTable(props) {
         property.notes,
         property.id
       ))
-    });
-    
-    console.log(rowsToRender)
+    });    
     setRows(rowsToRender);
   };
 
@@ -176,6 +181,86 @@ export default function PropertyTable(props) {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const tableData = (row) => {
+    return (
+      <TableRow className={classes.cellHeight} key={row.address}>
+        <TableCell className="date-cell">
+          {
+            props.editMode && props.propertyToEditId === row.id ? 
+              <input type="date" ref={props.editDateRef} defaultValue={moment(row.date).format("YYYY-MM-DD")}
+                style={{ width: "90px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              /> 
+            : row.date 
+          }
+        </TableCell>
+        <TableCell>{row.address}</TableCell>
+        <TableCell>{row.type}</TableCell>
+        <TableCell>{row.bed}</TableCell>
+        <TableCell>{row.bath}</TableCell>
+        <TableCell>{row.car}</TableCell>
+        <TableCell>{row.land}</TableCell>
+        <TableCell>
+          {
+            props.editMode && props.propertyToEditId === row.id ? 
+              <input type="number" ref={props.editGuideRef} defaultValue={row.guide}
+                style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              /> 
+            : `$${abbreviate(row.guide, 3)}` 
+          }
+        </TableCell>
+        <TableCell>
+          {
+            props.editMode && props.propertyToEditId === row.id ?
+              <input type="number" ref={props.editSoldRef} defaultValue={row.sold}
+                style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+              /> 
+            : `$${abbreviate(row.sold, 3)}`
+          }              
+        </TableCell>
+        <TableCell className={classes.cell}>
+          {
+            props.editMode && props.propertyToEditId === row.id ?
+              <select ref={props.editAuctionRef} style={{ height: "30px" }}>
+                {row.auction === "true" ? 
+                  <>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                  </> : 
+                  <>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
+                  </>
+                }
+              </select>
+              : row.auction 
+          }
+        </TableCell>
+        <TableCell className={`${classes.cell} note-cell`}>
+          <ul>
+            {row.notes.length > 0 ? 
+              row.notes.map(note => (
+                <li key={note.id} className="property-note-title">"{note.title}"</li>
+              )) : <li className="no-property-notes">No notes</li>
+            }
+          </ul>
+        </TableCell>
+        <TableCell style={{ paddingLeft: "30px" }}>
+          {props.editMode && props.propertyToEditId === row.id ? 
+            <button id={`savePropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleSaveButtonClick}>
+              <i id={`saveProperty-${row.id}`} className="fas fa-save" style={{ color: "black"}}></i>&nbsp;
+            </button> :
+            <button id={`editPropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleEditButtonClick}>
+              <i id={`editProperty-${row.id}`} className="fas fa-edit" style={{ color: "rgb(248, 179, 52)"}}></i>&nbsp;
+            </button> 
+          }
+          <button id={`deletePropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleDeleteButtonClick}>
+            <i id={`deleteProperty-${row.id}`} className="fas fa-trash" style={{ color: "rgb(221, 77, 77)"}}></i>
+          </button>
+        </TableCell>
+      </TableRow>
+    );
   };
 
   return (
@@ -248,12 +333,12 @@ export default function PropertyTable(props) {
               <div className="no-input-cell">-</div>
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.guideRef} placeholder="1500000"
+              <input type="number" ref={props.guideRef} placeholder="1500000"
                 style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.soldRef} placeholder="1750000"
+              <input type="number" ref={props.soldRef} placeholder="1750000"
                 style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
               />
             </TableCell>
@@ -288,35 +373,11 @@ export default function PropertyTable(props) {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow className={classes.cellHeight} key={row.address}>
-              <TableCell className="date-cell">{row.date}</TableCell>
-              <TableCell>{row.address}</TableCell>
-              <TableCell>{row.type}</TableCell>
-              <TableCell>{row.bed}</TableCell>
-              <TableCell>{row.bath}</TableCell>
-              <TableCell>{row.car}</TableCell>
-              <TableCell>{row.land}</TableCell>
-              <TableCell>{`$${abbreviate(row.guide, 3)}`}</TableCell>
-              <TableCell>{`$${abbreviate(row.sold, 3)}`}</TableCell>
-              <TableCell className={classes.cell}>{row.auction}</TableCell>
-              <TableCell className={`${classes.cell} note-cell`}>
-                <ul>
-                  {row.notes.length > 0 ? 
-                    row.notes.map(note => (
-                      <li key={note.id} className="property-note-title">"{note.title}"</li>
-                    )) : <li className="no-property-notes">No notes</li>
-                  }
-                </ul>
-              </TableCell>
-              <TableCell style={{ paddingLeft: "30px" }}>
-                <button className="property-action-btn">
-                  <i id={`editProperty-${row.id}`} className="fas fa-edit" style={{ color: "rgb(248, 179, 52)"}}></i>&nbsp;
-                </button>
-                <button className="property-action-btn">
-                  <i id={`deleteProperty-${row.id}`} className="fas fa-trash" style={{ color: "rgb(221, 77, 77)"}}></i>
-                </button>
-              </TableCell>
-            </TableRow>
+            props.propertyToEditId === row.id ? 
+              <ClickAwayListener onClickAway={props.handleInputClickAway} key={row.address}>
+                {tableData(row)}
+              </ClickAwayListener> : 
+              tableData(row)
           ))}
 
           {emptyRows > 0 && (

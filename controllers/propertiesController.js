@@ -1,5 +1,5 @@
 const db = require("../models");
-const { Op } = require("sequelize");
+// const { Op } = require("sequelize");
 
 const propertiesController = {
   getProperties: function(req, res) {
@@ -55,7 +55,7 @@ const propertiesController = {
         },
         {
           where: {
-            id: req.params.id
+            id: parseInt(req.params.id)
           }
         }
       )
@@ -66,7 +66,7 @@ const propertiesController = {
     db.inspectedProperties
       .destroy({
         where: {
-          id: req.params.id
+          id: parseInt(req.params.id)
         }
       })
       .then(deletedPropertyEntry => res.json(deletedPropertyEntry))
