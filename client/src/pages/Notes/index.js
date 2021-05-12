@@ -1,30 +1,35 @@
+// React 
 import React, { useEffect, useState, useRef } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// Children components 
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
-import SimpleModal from "../../components/Modal";
 import NoteListItem from "../../components/NoteListItem";
 import TextEditor from "../../components/TextEditor";
+import SimpleModal from "../../components/Modal";
+import PopupMessage from "../../components/PopupMessage";
+// Material Design
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-// import Divider from '@material-ui/core/Divider';
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import PlaceIcon from "@material-ui/icons/Place";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SaveIcon from "@material-ui/icons/Save";
-import Button from "@material-ui/core/Button";
-import PlaceIcon from "@material-ui/icons/Place";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+// CSS
 import "./style.css";
+// API 
 import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
 import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
-import PopupMessage from "../../components/PopupMessage";
 
+// Class styles 
 const useStyles = makeStyles({
   noteSection: {
     background: "rgb(233, 233, 233)",
@@ -65,6 +70,7 @@ const useStyles = makeStyles({
 });
 
 export default function Notes(props) {
+  // States
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -100,6 +106,7 @@ export default function Notes(props) {
   const [isShared, setSharedState] = useState(false);
   let sideTitle = "";
 
+  // Refs
   const searchRef = useRef();
   const titleRef = useRef();
   const textRef = useRef();
@@ -115,10 +122,12 @@ export default function Notes(props) {
   const indoorOutdoorRef = useRef();
   const lightingRef = useRef();
 
+  // Initial render
   useEffect(() => {
     renderAllNotes();
   }, []);
 
+  // Helper functions
   const renderAllNotes = () => {
     // Check user's saved notes 
     notesAPI.getAllNotes(props.id)
@@ -203,8 +212,8 @@ export default function Notes(props) {
         }
       }
     })
-    .catch(err => console.log(err))
-  }
+    .catch(err => console.log(err));
+  };
 
   const handleNewNoteButtonClick = () => {
     // titleRef.current.value = "";
@@ -230,7 +239,7 @@ export default function Notes(props) {
         console.log(res);
         setCurrentNoteId(res.data.id);
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   };
 
   const handleTitleInputChange = () => {
@@ -244,7 +253,6 @@ export default function Notes(props) {
     notesAPI.updateNote(currentNoteId, titleData)
       .then(res => console.log(res))
       .catch(err => console.log(err));
-      console.log(title)
   };
 
   // const handleTextInputChange = () => {
@@ -488,7 +496,7 @@ export default function Notes(props) {
     setRatingEditState(false);
     reviewsAPI.updateReview(currentNoteId, propertyReview)
       .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   };
 
   const handleDeleteNoteButtonClick = (event) => {
@@ -546,11 +554,11 @@ export default function Notes(props) {
           })
           .catch(err => console.log(err))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   };
 
   const handleDeleteReviewButtonClick = () => {
-    setModalState({ isOpen: true, type: "reviewDelete", title: "Confirmation", text: "Are you sure you want to delete this review?" })
+    setModalState({ isOpen: true, type: "reviewDelete", title: "Confirmation", text: "Are you sure you want to delete this review?" });
   };
 
   const handleConfirmDeleteReviewYesClick = () => {
@@ -568,7 +576,7 @@ export default function Notes(props) {
           .then(res => console.log(res))
           .catch(err => console.log(err))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   };
 
   const handleStarButtonClick = (event, isStarred) => {
@@ -601,7 +609,7 @@ export default function Notes(props) {
           })
           .catch(err => console.log(err))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   };
 
   const handleEditTextButtonClick = () => {
