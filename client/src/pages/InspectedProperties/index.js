@@ -50,15 +50,16 @@ export default function InspectedProperties() {
   const classes = useStyles();
   // States
   const [properties, setProperties] = useState([]);
-  const [fillInputsPopupIsOpen, setFillInputsPopupState] = useState(false);
-  const [createSuccessPopupIsOpen, setCreateSuccessPopupState] = useState(false);
-  const [addressSuggestions, setAddressSuggestions] = React.useState([]);
+  // const [fillInputsPopupIsOpen, setFillInputsPopupState] = useState(false);
+  // const [createSuccessPopupIsOpen, setCreateSuccessPopupState] = useState(false);
+  const [popup, setPopup] = useState({ open: false, type: "", severity:"", message:"" });
+  const [addressSuggestions, setAddressSuggestions] = useState([]);
   // const [addressQuery, setAddressQuery] = React.useState("");
-  const [address, setAddress] = React.useState();
-  const [editModeIsOn, setEditMode] = React.useState(false);
-  const [propertyToEditId, setPropertyToEditId] = React.useState();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [deletePropertyModalIsOpen, setDeletePropertyModalState] = React.useState(false);
+  const [address, setAddress] = useState();
+  const [editModeIsOn, setEditMode] = useState(false);
+  const [propertyToEditId, setPropertyToEditId] = useState();
+  const [modalStyle] = useState(getModalStyle);
+  const [deletePropertyModalIsOpen, setDeletePropertyModalState] = useState(false);
 
   // Initial render
   useEffect(() => {
@@ -112,7 +113,8 @@ export default function InspectedProperties() {
   };
 
   const handleNewEntryButtonClick = () => {
-    domainAPI.getPropertyInfo(address.id)
+    if (address) {
+      domainAPI.getPropertyInfo(address.id)
       .then(res => {
         console.log(res);
         const propertyEntry = {
@@ -132,28 +134,45 @@ export default function InspectedProperties() {
           !propertyEntry.dateInspected || 
           !propertyEntry.propertyAddress 
         ) {
-          setFillInputsPopupState(true);
+          setPopup(
+            { 
+              open: true, 
+              type: "inputsRequired", 
+              severity: "warning",
+              message: "Required fields: DATE, ADDRESS, AUCTION"
+            }
+          );
           return;
         }
 
         propertiesAPI.createProperty(propertyEntry)
           .then(res => {
             console.log(res);
-            setCreateSuccessPopupState(true);
             getAllProperties();
+            setPopup(
+              { 
+                open: true, 
+                type: "createSuccess", 
+                severity: "success",
+                message: "Property successfully added to table!"
+              }
+            );
           })
           .catch(err => console.log(err));
 
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
+    } else {
+      return;
+    }
   };
 
-  const handleFillInputsPopupClose = () => {
-    setFillInputsPopupState(false);
-  };
+  const handlePopupClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
 
-  const handleCreateSuccessPopupClose = () => {
-    setCreateSuccessPopupState(false);
+    setPopup({ open: false, type: "", severity: "", message: ""});
   };
 
   const handleEditButtonClick = (event) => {
@@ -178,6 +197,14 @@ export default function InspectedProperties() {
       .then(res => {
         console.log(res);
         getAllProperties();
+        setPopup(
+          { 
+            open: true, 
+            type: "editSuccess", 
+            severity: "success",
+            message: "Property successfully updated!"
+          }
+        );
       })
       .catch(err => console.log(err));
   };
@@ -194,6 +221,14 @@ export default function InspectedProperties() {
         console.log(res);
         setDeletePropertyModalState(false);
         getAllProperties();
+        setPopup(
+          { 
+            open: true, 
+            type: "deleteSuccess", 
+            severity: "success",
+            message: "Property successfully deleted from table"
+          }
+        );
       })
       .catch(err => console.log(err));
   };
@@ -261,17 +296,29 @@ export default function InspectedProperties() {
         {deleteBody}
       </Modal>
       <PopupMessage 
-        open={fillInputsPopupIsOpen}
-        onClose={handleFillInputsPopupClose}
-        severity="warning"
-        message="Required fields: DATE, ADDRESS, and AUCTION"
+        open={popup.open}
+        handleClose={handlePopupClose}
+        severity={popup.severity}
+        message={popup.message}
+      />
+      {/* <PopupMessage 
+        open={createSuccessPopupIsOpen}
+        onClose={handleCreateSuccessPopupClose}
+        severity="success"
+        message="Property entry successfully created!"
+      />
+      <PopupMessage 
+        open={editSuccessPopupIsOpen}
+        onClose={handleCreateSuccessPopupClose}
+        severity="success"
+        message="Property entry successfully created!"
       />
       <PopupMessage 
         open={createSuccessPopupIsOpen}
         onClose={handleCreateSuccessPopupClose}
         severity="success"
         message="Property entry successfully created!"
-      />
+      /> */}
     </div>
   );
 };

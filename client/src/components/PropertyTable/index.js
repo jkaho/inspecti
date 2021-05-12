@@ -365,7 +365,7 @@ export default function PropertyTable(props) {
             </TableCell>
             <TableCell>
               <button className="property-action-btn" type="submit" onClick={props.handleNewEntryButtonClick}>
-                <i className="fas fa-plus-circle" style={{ color: "rgb(102, 185, 106)", fontSize: "20px", paddingLeft: "10px"}}></i>
+                <i className="fas fa-plus-circle" style={{ color: "rgb(102, 185, 106)", fontSize: "20px" }}></i>
               </button>
             </TableCell>
           </TableRow>
