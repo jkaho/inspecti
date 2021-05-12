@@ -12,20 +12,20 @@ export default function ReviewCard(props) {
         <table className="review-address-table">
           <tbody>
             <tr>
-              <td>25 Great Pl Sydney, NSW 2000</td>
+              <td>{props.address}</td>
               <td style={{ textAlign: "right" }}>
                 {/* <KingBedIcon />&nbsp;4
                 <BathtubIcon />&nbsp;2
                 <DirectionsCarIcon />&nbsp;2
                 <SquareFootIcon />&nbsp;761m² */}
                 <i className="fas fa-bed"></i>&nbsp;
-                <span className="num-beds">4</span>&nbsp;&nbsp;
+                <span className="num-beds">{props.beds ? props.beds : "-"}</span>&nbsp;&nbsp;
                 <i className="fas fa-shower"></i>&nbsp;
-                <span className="num-baths">2</span>&nbsp;&nbsp;
+                <span className="num-baths">{props.baths ? props.baths : "-"}</span>&nbsp;&nbsp;
                 <i className="fas fa-car"></i>&nbsp;
-                <span className="num-cars">2</span>&nbsp;&nbsp;
+                <span className="num-cars">{props.cars ? props.cars : "-"}</span>&nbsp;&nbsp;
                 <i className="fas fa-ruler-combined"></i>&nbsp;
-                <span className="num-land">761m²</span>&nbsp;&nbsp;
+                <span className="num-land">{props.land ? props.land : "- "}m²</span>&nbsp;&nbsp;
               </td>
             </tr>
           </tbody>
@@ -36,21 +36,22 @@ export default function ReviewCard(props) {
               <td
                 className="review-content-td"
                 style={{
-                  width: "300px",
+                  width: "60%",
                   paddingRight: "20px",
                   borderRight: "1px solid rgb(241, 241, 241)"
                   }}>
                 <div className="review-content-title">
-                  <h3>Amazing home!</h3>
+                  <h3>{props.title}</h3>
                 </div>
                 <div className="review-creator">
-                  <span className="review-author">James Lee</span>&nbsp;
-                  <span className="review-added">14/04/21</span>
+                  <span className="review-author">{props.author}</span>&nbsp;
+                  <span className="review-added">{props.date}</span>
                 </div>
-                <div className="review-text">
-                  One of the best homes I've ever been to. They did a great job with the  
+                <div className="review-text" dangerouslySetInnerHTML={{ __html: props.text }}>
+                  {/* One of the best homes I've ever been to. They did a great job with the  
                   interior design. Garden is fantastically landscaped.<br/><br/>
-                  Also, the agents, Vanessa and Charlie from Northen Real Estate, are really friendly!
+                  Also, the agents, Vanessa and Charlie from Northen Real Estate, are really friendly! */}
+                  {/* {props.text} */}
                 </div>
                 <div className="inspected-on">
                   PROPERTY INSPECTED ON <span className="inspected-date">12/04/21</span>
@@ -62,70 +63,70 @@ export default function ReviewCard(props) {
                     <tr>
                       <td className="review-criteria">Property condition</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.propertyConditionRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Potential to capitalise</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.potentialRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Surroundings</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.surroundingsRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Consistency with neighbours</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.neighbourComparisonRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Accessibility</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.accessibilityRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Privacy</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.privacyRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Floorplan</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.floorplanRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Outdoor space</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.outdoorSpaceRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Indoor-to-outdoor flow</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.indoorOutdoorFlowRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Natural light</td>
                       <td className="review-score">
-                        <span className="score">5</span>
+                        <span className="score">{props.naturalLightRating}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>

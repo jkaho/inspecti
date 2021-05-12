@@ -12,6 +12,17 @@ const usersController = {
       .then(model => res.json(model))
       .catch(err => res.status(422).json(err))
   },
+  getOneUser: function(req, res) {
+    console.log(req.params)
+    db.user
+      .findOne({
+        where: {
+          id: parseInt(req.params.id)
+        }
+      })
+      .then(user => res.json(user))
+      .catch(err => console.log(err))
+  },
 };
 
 module.exports = usersController;

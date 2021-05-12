@@ -162,14 +162,13 @@ function TextEditor(props) {
         }}
       />
     </div>
-    <div 
-    className=
-    {
-      `preview 
-      ${props.editorModeOn ? classes.hide : classes.show}`
-    }
-   dangerouslySetInnerHTML={{ __html: props.text }}
-  >
+    <div className=
+        {
+          `preview 
+          ${props.editorModeOn ? classes.hide : classes.show}`
+        }
+      dangerouslySetInnerHTML={{ __html: props.text }}
+    >
   </div>
     </div>
   )

@@ -5,6 +5,7 @@ import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
 import NoteListItem from "../../components/NoteListItem";
 import TextEditor from "../../components/TextEditor";
+import ReviewCard from "../../components/ReviewCard";
 import SimpleModal from "../../components/Modal";
 import PopupMessage from "../../components/PopupMessage";
 // Material Design
@@ -29,6 +30,10 @@ import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
 import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
+import userAPI from "../../utils/userAPI";
+
+// Moment.js
+import moment from "moment";
 
 // Modal style 
 function getModalStyle() {
@@ -82,11 +87,12 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     position: 'absolute',
-    width: 400,
+    width: 800,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    overflow: "auto"
   },
   createButton: {
     color: "rgb(255, 235, 255)",
@@ -103,6 +109,9 @@ const useStyles = makeStyles((theme) => ({
       background: "rgb(255, 225, 255)",
     },
   },
+  reviewModal: {
+    width: 400,
+  },
 }));
 
 export default function Notes(props) {
@@ -110,6 +119,7 @@ export default function Notes(props) {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [author, setAuthor] = useState({});
   const [currentNoteId, setCurrentNoteId] = useState();
   // const [allNotes, setAllNotes] = useState([]);
   const [starredNotes, setStarredNotes] = useState([]);
@@ -731,19 +741,26 @@ export default function Notes(props) {
   };
 
   const handleShareButtonClick = () => {
+    userAPI.getOneUser(props.id)
+      .then(res => {
+        console.log(res);
+        setAuthor({ firstName: res.data.firstName, lastName: res.data.lastName });
+        setReviewModalState(true);
+      })
+      .catch(err => console.log(err))
+  };
+
+  const confirmReviewShare = () => {
     reviewsAPI.updateReview(currentNoteId, {
       shared: !isShared
     })
     .then(res => {
       console.log(res);
+      setReviewModalState(false);
       setShareSuccessState(true);
       setSharedState(!isShared);
     })
     .catch(err => console.log(err));
-  };
-
-  const confirmReviewShare = () => {
-
   };
 
   const shareSuccessPopupClose = () => {
@@ -756,21 +773,117 @@ export default function Notes(props) {
 
   const reviewModalBody = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="review-modal-heading">Property review</h2>
-      <p>Tweak your note before sharing it as a review (your original note will not be modified).</p>
-      <form onSubmit={confirmReviewShare}>
+      <h2 id="review-modal-heading" style={{ textAlign: "center" }}>Preview</h2>
+      <ReviewCard
+        title={title}
+        text={text}
+        address={address}
+        date={moment().format("DD/MM/YY")}
+        author={`${author.firstName} ${author.lastName}`}
+        beds={propertySpecs.bedrooms}
+        baths={propertySpecs.bathrooms}
+        cars={propertySpecs.carSpaces}
+        land={propertySpecs.landSize}
+        propertyConditionRating={propertyReview.propertyConditionRating}
+        potentialRating={propertyReview.privacyRating}
+        surroundingsRating={propertyReview.surroundingsRating}
+        neighbourComparisonRating={propertyReview.neighbourComparisonRating}
+        accessibilityRating={propertyReview.accessibilityRating}
+        privacyRating={propertyReview.privacyRating}
+        floorplanRating={propertyReview.floorplanRating}
+        outdoorSpaceRating={propertyReview.outdoorSpaceRating}
+        indoorOutdoorFlowRating={propertyReview.indoorOutdoorFlowRating}
+        naturalLightRating={propertyReview.naturalLightRating}
+      />
+      <div className="review-modal-action" style={{ textAlign: "center", paddingTop: "10px" }}>
+        <Button className={classes.createButton} variant="contained" onClick={confirmReviewShare}>SHARE REVIEW</Button>
+        <Button className={classes.cancelButton} variant="contained" onClick={handleReviewModalClose}>CANCEL</Button>
+      </div>
+      {/* <p>Tweak your note before sharing it as a review for others to see (your original note will not be modified).</p> */}
+      {/* <form onSubmit={confirmReviewShare}>
         <div className="review-modal-div">
           <div className="review-modal-title">
-            <input type="text" />
+            <input type="text" defaultValue={title} />
           </div>
-          <div className="review-modal-ratings"></div>
-          <div className="review-modal-text"></div>
+          <div className="review-modal-ratings">
+            <table>
+              <tbody>
+                <tr>
+                  <td className="review-modal-rating-category">Property condition</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.propertyConditionRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Potential</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.potentialRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Surroundings</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.surroundingsRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Consistency with neighbours</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.neighbourComparisonRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Accessibility</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.accessibilityRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Privacy</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.privacyRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Floorplan</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.floorplanRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Outdoor space</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.outdoorSpaceRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Indoor-outdoor flow</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.indoorOutdoorFlowRating} />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="review-modal-rating-category">Natural lighting</td>
+                  <td className="review-modal-rating">
+                    <input type="number" defaultValue={propertyReview.naturalLightRating} />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="review-modal-text">
+            <TextEditor
+              currentNoteId={currentNoteId}
+              editorModeOn={textEditorModeOn}
+              text={text}
+            />
+          </div>
           <div className="review-modal-actions">
             <Button className={classes.createButton} variant="contained" type="submit">SHARE REVIEW</Button>
             <Button className={classes.cancelButton} variant="contained" onClick={handleReviewModalClose}>CANCEL</Button>
           </div>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 
@@ -1162,7 +1275,7 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Indoor-to-outdoow flow</td>
+                      <td>Indoor-to-outdoor flow</td>
                       <td>
                         <span 
                           className={
@@ -1256,6 +1369,7 @@ export default function Notes(props) {
               id={modalState.noteId ? modalState.noteId : ""}
             />
             <Modal
+              // className={classes.reviewModal}
               open={reviewModalIsOpen}
               onClose={handleReviewModalClose}
               aria-labelledby="review-modal-title"

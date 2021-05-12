@@ -3,14 +3,17 @@ const url = "http://localhost:3001";
 
 const API = {
   signUpUser: function(userData) {
-    return axios.post(url + "/api/user/signup", userData, {withCredentials: true});
+    return axios.post(url + "/api/user/signup", userData, { withCredentials: true });
   },
   logInUser: function(userData) {
-    return axios.post(url + "/api/user/login", userData, {withCredentials: true});
+    return axios.post(url + "/api/user/login", userData, { withCredentials: true });
   },
   logOutUser: function() {
-    return axios.get(url + "/api/user/logout", {withCredentials: true});
+    return axios.get(url + "/api/user/logout", { withCredentials: true });
   },
+  getOneUser: function(userId) {
+    return axios.get(url + "/api/user/find/" + userId, { withCredentials: true })
+  }
 };
 
 export default API;

@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../../components/NavBar";
-import ReviewCard from "../../components/ReviewCard";
+// import ReviewCard from "../../components/ReviewCard";
 import SearchBar from "../../components/SearchBar";
 import TextField from '@material-ui/core/TextField';
 import IconButton from "@material-ui/core/IconButton";
@@ -91,7 +91,7 @@ export default function Reviews() {
         </table>
       </div>
       <div className="review-container">
-        <ReviewCard />
+        {/* <ReviewCard /> */}
       </div>
     </div>
   );

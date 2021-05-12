@@ -6,7 +6,7 @@ const reviewsController = require("../../controllers/reviewsController");
 const eventsController = require("../../controllers/eventsController");
 const propertiesController = require("../../controllers/propertiesController");
 
-// Authentication route 
+// User routes
 router.get("/authenticated", (req, res) => {
   if (req.user) {
     return res.json({ isAuthenticated: true, id: req.user.id });
@@ -14,7 +14,6 @@ router.get("/authenticated", (req, res) => {
   return res.json({ isAuthenticated: false });
 });
 
-// Signup route 
 router.post("/signup", usersController.signUp, (req, res) => {
   req.login(user, function(err) {
     if (err) { return next(err); }
@@ -22,16 +21,16 @@ router.post("/signup", usersController.signUp, (req, res) => {
   });
 });
 
-// Logut route
 router.post("/login", passport.authenticate("local", { session: true }), (req, res) => {
   return res.json(req.user);
 });
 
-// Login route 
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/login");
 });
+
+router.get("/find/:id", usersController.getOneUser);
 
 // Note routes 
 router.get("/notes/:id", notesController.getNotes);
