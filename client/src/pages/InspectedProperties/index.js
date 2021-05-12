@@ -52,7 +52,7 @@ export default function InspectedProperties() {
   const [properties, setProperties] = useState([]);
   // const [fillInputsPopupIsOpen, setFillInputsPopupState] = useState(false);
   // const [createSuccessPopupIsOpen, setCreateSuccessPopupState] = useState(false);
-  const [popup, setPopup] = useState({ open: false, type: "", severity:"", message:"" });
+  const [popup, setPopup] = useState({ open: false, type: "", severity: "success", message: "" });
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   // const [addressQuery, setAddressQuery] = React.useState("");
   const [address, setAddress] = useState();
