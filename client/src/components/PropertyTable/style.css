@@ -22,3 +22,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     -webkit-appearance: none;
 }
 
+.no-input-cell {
+  color: rgb(223, 223, 223);
+  text-align: center;
+}

@@ -233,34 +233,36 @@ export default function PropertyTable(props) {
                 onChange={props.handleSuggestionClick}
                 smallInput={true}
               />
-              {/* <input type="text" ref={props.addressRef} placeholder="Required"
-                style={{ width: "140px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
-              /> */}
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.typeRef}
+              {/* <input type="text" ref={props.typeRef}
                 style={{ width: "80px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
-              />
+              /> */}
+              <div className="no-input-cell">-</div>
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.bedRef}
+              {/* <input type="text" ref={props.bedRef}
                 style={{ width: "30px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
-              />
+              /> */}
+              <div className="no-input-cell">-</div>
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.bathRef}
+              {/* <input type="text" ref={props.bathRef}
                 style={{ width: "30px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
-              />
+              /> */}
+              <div className="no-input-cell">-</div>
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.carRef}
+              {/* <input type="text" ref={props.carRef}
                 style={{ width: "30px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
-              />
+              /> */}
+              <div className="no-input-cell">-</div>
             </TableCell>
             <TableCell>
-              <input type="text" ref={props.landRef}
+              {/* <input type="text" ref={props.landRef}
                 style={{ width: "30px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
-              />
+              /> */}
+              <div className="no-input-cell">-</div>
             </TableCell>
             <TableCell>
               <input type="text" ref={props.guideRef} placeholder="1500000"

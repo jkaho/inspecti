@@ -69,7 +69,7 @@ import "./style.css";
 
 const useStyles = makeStyles({
   smallInput: {
-    width: "200px!important",
+    width: "100%!important",
     fontSize: 14,
   },
 });

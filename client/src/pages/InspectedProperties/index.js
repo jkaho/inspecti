@@ -23,11 +23,11 @@ export default function InspectedProperties() {
   // Refs
   const dateRef    = useRef();
   const addressRef = useRef();
-  const typeRef    = useRef();
-  const bedRef     = useRef();
-  const bathRef    = useRef();
-  const carRef     = useRef();
-  const landRef    = useRef();
+  // const typeRef    = useRef();
+  // const bedRef     = useRef();
+  // const bathRef    = useRef();
+  // const carRef     = useRef();
+  // const landRef    = useRef();
   const guideRef   = useRef();
   const soldRef    = useRef();
   const auctionRef = useRef();
@@ -45,14 +45,11 @@ export default function InspectedProperties() {
 
   const handleAddressInputChange = () => {
     const newValue = addressRef.current.children[0].children[1].children[0].value;
-    // setAddressQuery(newValue);
-    console.log(addressRef.current)
     if (newValue === "") {
       setAddressSuggestions([]);
     } else {
       domainAPI.getAddressSuggestions(newValue)
       .then(res => {
-        console.log(res);
         setAddressSuggestions(res.data.splice(0, 10));
       })
       .catch(err => console.log(err))
@@ -126,11 +123,11 @@ export default function InspectedProperties() {
         <PropertyTable
           dateRef={dateRef}
           addressRef={addressRef}
-          typeRef={typeRef}
-          bedRef={bedRef}
-          bathRef={bathRef}
-          carRef={carRef}
-          landRef={landRef}
+          // typeRef={typeRef}
+          // bedRef={bedRef}
+          // bathRef={bathRef}
+          // carRef={carRef}
+          // landRef={landRef}
           guideRef={guideRef}
           soldRef={soldRef}
           auctionRef={auctionRef}
