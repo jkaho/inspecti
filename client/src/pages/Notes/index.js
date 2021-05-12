@@ -15,6 +15,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
 import PlaceIcon from "@material-ui/icons/Place";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -28,6 +29,18 @@ import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
 import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
+
+// Modal style 
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+};
 
 // Class styles 
 const useStyles = makeStyles({
@@ -66,7 +79,30 @@ const useStyles = makeStyles({
   },
   iconButton: {
     padding: 2,
-  }
+  },
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  createButton: {
+    color: "rgb(255, 235, 255)",
+    background: "purple",
+    "&:hover": {
+      background: "rgb(99, 0, 99)",
+    },
+    marginRight: 10,
+  },
+  cancelButton: {
+    color: "purple",
+    background: "rgb(255, 235, 255)",
+    "&:hover": {
+      background: "rgb(255, 225, 255)",
+    },
+  },
 });
 
 export default function Notes(props) {
@@ -75,16 +111,17 @@ export default function Notes(props) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [currentNoteId, setCurrentNoteId] = useState();
-  const [allNotes, setAllNotes] = useState([]);
+  // const [allNotes, setAllNotes] = useState([]);
   const [starredNotes, setStarredNotes] = useState([]);
   const [nonStarredNotes, setNonStarredNotes] = useState([]);
   const [addressInputIsOpen, setAddressInputState] = useState(false);
   const [ratingButtonIsOpen, setRatingButtonState] = useState(false);
   const [ratingSectionIsOpen, setRatingSectionState] = useState(false);
-  const [addressSearch, setAddressSearch] = useState("");
+  // const [addressSearch, setAddressSearch] = useState("");
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressInfoIsOpen, setAddressInfoState] = useState(false);
+  const [modalStyle] = useState(getModalStyle);
   const [modalState, setModalState] = useState({
     isOpen: false,
     type: "",
@@ -101,9 +138,10 @@ export default function Notes(props) {
   const [ratingEditIsOpen, setRatingEditState] = useState(false);
   const [textEditorModeOn, setTextEditorMode] = useState(false);
   const [noteReviewToDelete, setNoteReviewToDelete] = useState();
-  const [searchword, setSearchword] = useState();
+  // const [searchword, setSearchword] = useState();
   const [shareSuccessIsOpen, setShareSuccessState] = useState(false);
   const [isShared, setSharedState] = useState(false);
+  const [reviewModalIsOpen, setReviewModalState] = useState(false);
   let sideTitle = "";
 
   // Refs
@@ -278,7 +316,7 @@ export default function Notes(props) {
     setCurrentNoteId(clickedNoteId);
     notesAPI.getAllNotes(props.id)
       .then(res => {
-        setAllNotes(res.data.reverse());
+        // setAllNotes(res.data.reverse());
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].id === clickedNoteId) {
             setTitle(res.data[i].title);
@@ -358,7 +396,7 @@ export default function Notes(props) {
 
   const handleAddressInputChange = () => {
     const address = addressRef.current.value.trim();
-    setAddressSearch(address);
+    // setAddressSearch(address);
     if (address !== "") {
       domainAPI.getAddressSuggestions(address)
       .then(res => {
@@ -514,7 +552,7 @@ export default function Notes(props) {
         handleModalNoClick();
         notesAPI.getAllNotes(props.id)
           .then(res => {
-            setAllNotes(res.data.reverse());
+            // setAllNotes(res.data.reverse());
             if (currentNoteId === noteReviewToDelete) {
               if (res.data.length > 0) {
                 setCurrentNoteId(res.data[0].id);
@@ -618,7 +656,7 @@ export default function Notes(props) {
 
   const handleNoteSearchInputChange = () => {
     const query = searchRef.current.value;
-    setSearchword(query);
+    // setSearchword(query);
 
     if (query !== "") {
       notesAPI.searchNotes(props.id, query)
@@ -693,9 +731,37 @@ export default function Notes(props) {
     .catch(err => console.log(err));
   };
 
+  const confirmReviewShare = () => {
+
+  };
+
   const shareSuccessPopupClose = () => {
     setShareSuccessState(false);
   };
+
+  const handleReviewModalClose = () => {
+    setReviewModalState(false);
+  };
+
+  const reviewModalBody = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="review-modal-heading">Property review</h2>
+      <p>Tweak your note before sharing it as a review (your original note will not be modified).</p>
+      <form onSubmit={confirmReviewShare}>
+        <div className="review-modal-div">
+          <div className="review-modal-title">
+            <input type="text" />
+          </div>
+          <div className="review-modal-ratings"></div>
+          <div className="review-modal-text"></div>
+          <div className="review-modal-actions">
+            <Button className={classes.createButton} variant="contained" type="submit">SHARE REVIEW</Button>
+            <Button className={classes.cancelButton} variant="contained" onClick={handleReviewModalClose}>CANCEL</Button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
 
   return (
     <div>
@@ -1178,6 +1244,14 @@ export default function Notes(props) {
               modalState={modalState.isOpen}
               id={modalState.noteId ? modalState.noteId : ""}
             />
+            <Modal
+              open={reviewModalIsOpen}
+              onClose={handleReviewModalClose}
+              aria-labelledby="review-modal-title"
+              aria-describedby="review-modal-description"
+            >
+              {reviewModalBody}
+            </Modal>
           </Grid>
         </Grid>
       </BoxContainer>
