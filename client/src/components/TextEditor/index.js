@@ -32,6 +32,7 @@ function TextEditor(props) {
     ),
   );
   
+  // Necessary to render note text properly
   useEffect(() => {
     setEditorState(() => EditorState.createWithContent(
       ContentState.createFromBlockArray(

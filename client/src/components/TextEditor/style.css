@@ -1,14 +1,14 @@
 .wrapper-class {
-  padding: 5px;
-  border: 1px solid #ccc;
+  /* padding: 5px; */
+  border: 1px solid rgb(226, 225, 225);
 }
 
 .editor-class {
   background-color: white;
   padding: 10px;
-  border: 1px solid #ccc;
+  border-top: 1px solid rgb(240, 237, 237);
 }
 
 .toolbar-class {
-  border: 1px solid #ccc;
+  border: none;
 }
