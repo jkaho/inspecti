@@ -1,12 +1,53 @@
 import React, { useState, useEffect, useRef } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import SideMenu from "../../components/SideMenu";
 import PropertyTable from "../../components/PropertyTable";
 import PopupMessage from "../../components/PopupMessage";
 import "./style.css";
 import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
+import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+};
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  createButton: {
+    color: "rgb(255, 235, 255)",
+    background: "purple",
+    "&:hover": {
+      background: "rgb(99, 0, 99)",
+    },
+    marginRight: 10,
+  },
+  cancelButton: {
+    color: "purple",
+    background: "rgb(255, 235, 255)",
+    "&:hover": {
+      background: "rgb(255, 225, 255)",
+    },
+  },
+}));
 
 export default function InspectedProperties() {
+  const classes = useStyles();
   // States
   const [properties, setProperties] = useState([]);
   const [fillInputsPopupIsOpen, setFillInputsPopupState] = useState(false);
@@ -16,6 +57,8 @@ export default function InspectedProperties() {
   const [address, setAddress] = React.useState();
   const [editModeIsOn, setEditMode] = React.useState(false);
   const [propertyToEditId, setPropertyToEditId] = React.useState();
+  const [modalStyle] = React.useState(getModalStyle);
+  const [deletePropertyModalIsOpen, setDeletePropertyModalState] = React.useState(false);
 
   // Initial render
   useEffect(() => {
@@ -141,9 +184,16 @@ export default function InspectedProperties() {
 
   const handleDeleteButtonClick = (event) => {
     const propertyId = event.target.id.split("-")[1];
-    propertiesAPI.deleteProperty(propertyId)
+    setPropertyToEditId(propertyId);
+    setDeletePropertyModalState(true);
+  };
+
+  const confirmDeleteClick = () => {
+    propertiesAPI.deleteProperty(propertyToEditId)
       .then(res => {
         console.log(res);
+        setDeletePropertyModalState(false);
+        getAllProperties();
       })
       .catch(err => console.log(err));
   };
@@ -152,6 +202,23 @@ export default function InspectedProperties() {
     setEditMode(false);
     console.log(editModeIsOn)
   };
+
+  const handleDeleteModalClose = () => {
+    setDeletePropertyModalState(false);
+  };
+
+  const deleteBody = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title-delete">Delete inspected property</h2>
+      <p>Are you sure you want to delete this property from the table?</p>
+      <form onSubmit={confirmDeleteClick}>
+        <div className="property-delete-div">
+          <Button className={classes.createButton} variant="contained" type="submit">DELETE PROPERTY</Button>
+          <Button className={classes.cancelButton} variant="contained" onClick={handleDeleteModalClose}>CANCEL</Button>
+        </div>
+      </form>
+    </div>
+  );
 
   return (
     <div>
@@ -185,6 +252,14 @@ export default function InspectedProperties() {
           handleInputClickAway={handleInputClickAway}
         />
       </div>
+      <Modal
+        open={deletePropertyModalIsOpen}
+        onClose={handleDeleteModalClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {deleteBody}
+      </Modal>
       <PopupMessage 
         open={fillInputsPopupIsOpen}
         onClose={handleFillInputsPopupClose}

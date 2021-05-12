@@ -77,6 +77,8 @@ router.get("/properties", propertiesController.getProperties);
 
 router.get("/property/notes", propertiesController.getPropertyNotes);
 
+router.post("/property", propertiesController.createPropertyEntry);
+
 router.route("/property/:id")
   .put(propertiesController.updatePropertyEntry)
   .delete(propertiesController.deletePropertyEntry);
