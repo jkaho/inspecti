@@ -120,4 +120,5 @@ SELECT * FROM users;
 SELECT * FROM notes;
 SELECT * FROM reviews;
 SELECT * FROM scheduledEvents;
+SELECT * FROM inspectedProperties;
 

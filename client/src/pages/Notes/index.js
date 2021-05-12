@@ -43,7 +43,7 @@ function getModalStyle() {
 };
 
 // Class styles 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   noteSection: {
     background: "rgb(233, 233, 233)",
     fontSize: 20,
@@ -103,7 +103,7 @@ const useStyles = makeStyles({
       background: "rgb(255, 225, 255)",
     },
   },
-});
+}));
 
 export default function Notes(props) {
   // States
@@ -306,6 +306,8 @@ export default function Notes(props) {
   // };
 
   const handleNoteButtonClick = (event) => {
+    setTextEditorMode(false);
+
     let clickedNoteId;
     if (event.target.id) {
       clickedNoteId = parseInt(event.target.id.split("-")[1]);
@@ -313,6 +315,7 @@ export default function Notes(props) {
       clickedNoteId = parseInt(event.target.parentElement.id.split("-")[1]);
     }
 
+    console.log(clickedNoteId)
     setCurrentNoteId(clickedNoteId);
     notesAPI.getAllNotes(props.id)
       .then(res => {
@@ -322,6 +325,7 @@ export default function Notes(props) {
             setTitle(res.data[i].title);
             sideTitle = res.data[i].title;
             setText(res.data[i].text);
+            console.log(res.data[i].text)
             setAddress(res.data[i].propertyAddress);
             setPropertySpecs({
               bedrooms: res.data[i].bedrooms,
@@ -651,7 +655,14 @@ export default function Notes(props) {
   };
 
   const handleEditTextButtonClick = () => {
-    setTextEditorMode(!textEditorModeOn);
+    notesAPI.getOneNote(currentNoteId)
+    .then(res => {
+      console.log(res);
+      setText(res.data.text);
+      console.log(res.data.text)
+      setTextEditorMode(!textEditorModeOn);
+    })
+    .catch(err => console.log(err));
   };
 
   const handleNoteSearchInputChange = () => {

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState, convertFromHTML } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
@@ -20,11 +20,27 @@ const useStyles = makeStyles({
 function TextEditor(props) {
   const classes = useStyles();
 
+  // const [editorState, setEditorState] = useState(
+  //   () => EditorState.createEmpty(),
+  // );
+  console.log(props.text)
   const [editorState, setEditorState] = useState(
-    () => EditorState.createEmpty(),
+    () => EditorState.createWithContent(
+      ContentState.createFromBlockArray(
+        convertFromHTML(`${props.text}`)
+      )
+    ),
   );
+  
+  useEffect(() => {
+    setEditorState(() => EditorState.createWithContent(
+      ContentState.createFromBlockArray(
+        convertFromHTML(`${props.text}`)
+    )));
+  }, [props.text]);
+
   const  [convertedContent, setConvertedContent] = useState(null);
-  const [text, setText] = useState();
+  // const [text, setText] = useState();
 
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -48,7 +64,7 @@ function TextEditor(props) {
 
   const handleTextInputChange = () => {
     const textValue = createMarkup(convertedContent).__html;
-    setText(textValue);
+    // setText(textValue);
 
     const textData = {
       text: textValue

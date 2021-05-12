@@ -48,6 +48,7 @@ router.route("/note")
   })
 
 router.route("/note/:id")
+  .get(notesController.getOneNote)
   .put(notesController.updateNote)
   .delete(notesController.deleteNote)
 

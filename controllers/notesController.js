@@ -12,6 +12,16 @@ const notesController = {
       .then(notes => res.json(notes))
       .catch(err => console.log(err))
   },
+  getOneNote: function(req, res) {
+    db.note
+      .findOne({
+        where: {
+          id: parseInt(req.params.id)
+        }
+      })
+      .then(note => res.json(note))
+      .catch(err => console.log(err));
+  },
   getStarredNotes: function(req, res) {
     db.note
       .findAll({
