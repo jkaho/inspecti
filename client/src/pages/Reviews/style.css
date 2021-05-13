@@ -6,7 +6,7 @@
   margin: 10px auto;
   width: fit-content;
   background: white;
-  border: 1px solid rgb(241, 241, 241);
+  border: 1px solid rgb(219, 219, 219);
   border-radius: 2px;
   padding: 10px;
 }
@@ -33,4 +33,5 @@
 .review-container {
   width: 620px;
   margin: 0 auto;
+  margin-bottom: 50px;
 }

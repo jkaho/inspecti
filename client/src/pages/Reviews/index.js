@@ -9,6 +9,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ClearIcon from "@material-ui/icons/Clear";
 import "./style.css";
 import notesAPI from "../../utils/notesAPI";
+import moment from "moment";
 
 const sortCriteria = [
   "Date added",
@@ -108,7 +109,7 @@ export default function Reviews() {
             title={review.title}
             text={review.text}
             address={review.propertyAddress}
-            date={review.dateShared}
+            date={moment(review.dateShared).format("DD/MM/YY")}
             author={`${review.user.firstName} ${review.user.lastName}`}
             beds={review.bedrooms}
             baths={review.bathrooms}
