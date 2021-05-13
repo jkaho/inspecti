@@ -23,6 +23,18 @@ const notesController = {
       .then(notes => res.json(notes))
       .catch(err => console.log(err));
   },
+  getSharedNotes: function(req, res) {
+    db.note
+      .findAll({
+        include: { all: true },
+        where: {
+          shared: true
+        },
+        order: [["dateShared", "DESC"]]
+      })
+      .then(sharedNotes => res.json(sharedNotes))
+      .catch(err => console.log(err));
+  },
   getOneNote: function(req, res) {
     db.note
       .findOne({

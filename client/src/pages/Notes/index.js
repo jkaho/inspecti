@@ -887,7 +887,8 @@ export default function Notes(props) {
 
   const handleConfirmUnshareYesClick = () => {
     notesAPI.updateNote(currentNoteId, {
-      shared: !isShared
+      shared: !isShared,
+      dateShared: null
     })
     .then(res => {
       console.log(res);

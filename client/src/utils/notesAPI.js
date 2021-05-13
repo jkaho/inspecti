@@ -8,6 +8,9 @@ const notesAPI = {
   getNotesWithReviews: function(userId) {
     return axios.get(url + "/api/user/notes/reviews/" + userId, { withCredentials: true });
   },
+  getSharedNotes: function() {
+    return axios.get(url + "/api/user/shared", { withCredentials: true });
+  },
   getOneNote: function(noteId) {
     return axios.get(url + "/api/user/note/" + noteId, { withCredentials: true });
   },

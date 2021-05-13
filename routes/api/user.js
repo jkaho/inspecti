@@ -37,6 +37,8 @@ router.get("/notes/:id", notesController.getNotes);
 
 router.get("/notes/reviews/:id", notesController.getNotesWithReviews);
 
+router.get("/shared", notesController.getSharedNotes);
+
 router.get("/notes/starred/:id", notesController.getStarredNotes);
 
 router.get("/notes/search/q=:query", notesController.searchNotes);
