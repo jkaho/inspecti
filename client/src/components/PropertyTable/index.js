@@ -242,7 +242,18 @@ export default function PropertyTable(props) {
             {row.notes.length > 0 ? 
               row.notes.map(note => (
                 <li key={note.id} className="property-note-title">"{note.title}"</li>
-              )) : <li className="no-property-notes">No notes</li>
+              )) : 
+              <li className="no-property-notes">
+                <button onClick={props.handleCreateNoteClick} id={`createnote-${row.id}`} 
+                  data-address={row.address}
+                  data-beds={row.bed}
+                  data-baths={row.bath}
+                  data-cars={row.car}
+                  data-land={row.land}
+                >
+                  Create
+                </button>
+              </li>
             }
           </ul>
         </TableCell>
@@ -352,7 +363,7 @@ export default function PropertyTable(props) {
               /> */}
             </TableCell>
             <TableCell>
-              <button
+              {/* <button
                 style={{
                   background: "rgb(258, 258, 258)",
                   padding: "5px",
@@ -361,7 +372,8 @@ export default function PropertyTable(props) {
                   width: "60px",
                   color: "grey"
                 }}
-              >Create</button>
+              >Create</button> */}
+              <div className="no-input-cell">-</div>
             </TableCell>
             <TableCell>
               <button className="property-action-btn" type="submit" onClick={props.handleNewEntryButtonClick}>

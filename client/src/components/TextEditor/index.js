@@ -168,7 +168,7 @@ function TextEditor(props) {
         }
       dangerouslySetInnerHTML={{ __html: props.text }}
     >
-  </div>
+    </div>
     </div>
   )
 }

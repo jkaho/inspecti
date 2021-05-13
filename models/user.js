@@ -40,7 +40,15 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.note, {
       foreignKey: {
         name: "userId",
-        allowNull: true
+        allowNull: false
+      },
+      onDelete: "CASCADE"
+    });
+
+    User.hasMany(models.review, {
+      foreignKey: {
+        name: "userId",
+        allowNull: false
       },
       onDelete: "CASCADE"
     });
@@ -48,7 +56,7 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.inspectedProperties, {
       foreignKey: {
         name: "userId",
-        allowNull: true
+        allowNull: false
       },
       onDelete: "CASCADE"
     });
@@ -56,7 +64,7 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.attendedAuctions, {
       foreignKey: {
         name: "userId",
-        allowNull: true
+        allowNull: false
       },
       onDelete: "CASCADE"
     });
@@ -64,7 +72,7 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.scheduledEvents, {
       foreignKey: {
         name: "userId",
-        allowNull: true
+        allowNull: false
       },
       onDelete: "CASCADE"
     });

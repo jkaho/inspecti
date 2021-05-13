@@ -8,8 +8,16 @@
   padding-left: 0;
 }
 
-.no-property-notes {
-  color: rgb(204, 204, 204);
+.no-property-notes button {
+  background: white;
+  border: 1px solid rgb(165, 11, 204);
+  color: rgb(165, 11, 204);
+  cursor: pointer;
+}
+
+.no-property-notes button:hover {
+  background: rgb(165, 11, 204);
+  color: white;
 }
 
 .property-note-title {

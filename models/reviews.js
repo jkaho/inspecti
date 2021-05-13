@@ -44,7 +44,9 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Review.associate = models => {
-    Review.belongsTo(models.note)
+    Review.belongsTo(models.note);
+
+    Review.belongsTo(models.user);
   }
 
   return Review;

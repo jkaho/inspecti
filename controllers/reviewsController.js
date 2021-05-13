@@ -18,6 +18,7 @@ const reviewsController = {
       .catch(err => console.log(err))
   },
   createReview: function(req, res) {
+    console.log(req.user.id)
     db.review
       .create({
         propertyConditionRating: req.body.propertyConditionRating,
@@ -29,12 +30,12 @@ const reviewsController = {
         floorplanRating: req.body.floorplanRating,
         outdoorSpaceRating: req.body.outdoorSpaceRating,
         indoorOutdoorFlowRating: req.body.indoorOutdoorFlowRating,
-        naturalLightRating: req.body.naturalLightingRating,
+        naturalLightRating: req.body.naturalLightRating,
         userId: req.user.id,
         noteId: req.params.id
       })
-      .then(newNote => res.json(newNote))
-      .catch(err => res.status(422).json(err))
+      .then(newReview => res.json(newReview))
+      .catch(err => console.log(err))
   },
   updateReview: function(req, res) {
     db.review

@@ -105,11 +105,15 @@ const notesController = {
         text: req.body.text,
         propertyAddress: req.body.propertyAddress,
         userId: req.body.userId,
-        propertyId: req.body.propertyAddress,
-        hasReview: false,
+        propertyId: req.body.propertyId,
+        hasReview: req.body.hasReview ? req.body.hasReview : false,
+        bedrooms: req.body.bedrooms,
+        bathrooms: req.body.bathrooms,
+        carSpaces: req.body.carSpaces,
+        landSize: req.body.landSize
       })
       .then(model => res.json(model))
-      .catch(err => res.status(422).json(err))
+      .catch(err => console.log(err))
   },
   updateNote: function(req, res) {
     db.note
