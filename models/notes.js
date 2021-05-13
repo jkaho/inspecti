@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false
     },
     dateShared: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true
     },
     title: {

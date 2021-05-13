@@ -18,12 +18,8 @@ const reviewsController = {
       .catch(err => console.log(err))
   },
   createReview: function(req, res) {
-    console.log(req.body)
-    console.log(req.params)
-    console.log(req.user.id)
     db.review
       .create({
-        shared: req.body.shared,
         propertyConditionRating: req.body.propertyConditionRating,
         potentialRating: req.body.potentialRating,
         surroundingsRating: req.body.surroundingsRating,
@@ -44,7 +40,6 @@ const reviewsController = {
     db.review
       .update(
         {
-          shared: req.body.shared,
           propertyConditionRating: req.body.propertyConditionRating,
           potentialRating: req.body.potentialRating,
           surroundingsRating: req.body.surroundingsRating,

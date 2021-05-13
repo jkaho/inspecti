@@ -149,7 +149,7 @@ export default function Notes(props) {
   const [textEditorModeOn, setTextEditorMode] = useState(false);
   const [noteReviewToDelete, setNoteReviewToDelete] = useState();
   // const [searchword, setSearchword] = useState();
-  const [shareSuccessIsOpen, setShareSuccessState] = useState(false);
+  const [popup, setPopupState] = useState({ open: false, type: "", severity: "success", message: "" });
   const [isShared, setSharedState] = useState(false);
   const [reviewModalIsOpen, setReviewModalState] = useState(false);
   let sideTitle = "";
@@ -880,21 +880,40 @@ export default function Notes(props) {
       .catch(err => console.log(err))
   };
 
-  const confirmReviewShare = () => {
-    reviewsAPI.updateReview(currentNoteId, {
+  const handleUnshareButtonClick = () => {
+    setModalState({ isOpen: true, type: "reviewUnshare", title: "Confirmation", 
+    text: "Unsharing this review will remove it from public view on the reviews page. Would you like to proceed?" });
+  };
+
+  const handleConfirmUnshareYesClick = () => {
+    notesAPI.updateNote(currentNoteId, {
       shared: !isShared
     })
     .then(res => {
       console.log(res);
-      setReviewModalState(false);
-      setShareSuccessState(true);
+      handleModalNoClick();
+      setPopupState({ open: true, type: "unshareSuccess", severity: "success", message: "Review successfully unshared"});
       setSharedState(!isShared);
     })
     .catch(err => console.log(err));
   };
 
-  const shareSuccessPopupClose = () => {
-    setShareSuccessState(false);
+  const confirmReviewShare = () => {
+    notesAPI.updateNote(currentNoteId, {
+      shared: !isShared,
+      dateShared: moment().format("YYYY-MM-DD")
+    })
+    .then(res => {
+      console.log(res);
+      setReviewModalState(false);
+      setPopupState({ open: true, type: "shareSuccess", severity: "success", message: "Review successfully shared!"});
+      setSharedState(!isShared);
+    })
+    .catch(err => console.log(err));
+  };
+
+  const handlePopupClose = () => {
+    setPopupState({ open: false, type: "", severity: "success", message: "" });
   };
 
   const handleReviewModalClose = () => {
@@ -1204,15 +1223,17 @@ export default function Notes(props) {
                     <tr>
                       <th className="note-section-heading">PROPERTY REVIEW</th>
                       <th className="note-action-btns">
-                        <Button onClick={handleShareButtonClick} variant="contained" aria-label="share">
+                        <Button onClick={isShared ? handleUnshareButtonClick : handleShareButtonClick} variant="contained" aria-label="share">
                           {isShared ? "UNSHARE" : "SHARE"}  
                         </Button>
-                        <IconButton className={classes.iconButton} aria-label="edit" onClick={() => setRatingEditState(true)}>
-                          <EditIcon />
-                        </IconButton>
-                        <IconButton onClick={handleReviewSaveButtonClick} className={classes.iconButton} aria-label="save">
-                          <SaveIcon/>
-                        </IconButton>
+                        {ratingEditIsOpen ? 
+                          <IconButton onClick={handleReviewSaveButtonClick} className={classes.iconButton} aria-label="save">
+                            <SaveIcon/>
+                          </IconButton> : 
+                          <IconButton className={classes.iconButton} aria-label="edit" onClick={() => setRatingEditState(true)}>
+                            <EditIcon />
+                          </IconButton>
+                        }
                         <IconButton className={classes.iconButton}  aria-label="delete" onClick={handleDeleteReviewButtonClick}>
                           <DeleteIcon />
                         </IconButton>
@@ -1492,7 +1513,8 @@ export default function Notes(props) {
               yesClick={
                 modalState.type === "addressUnlink" ? unlinkModalYesClick : 
                 modalState.type === "reviewDelete" ? handleConfirmDeleteReviewYesClick : 
-                handleConfirmDeleteNoteYesClick
+                modalState.type === "noteDelete" ? handleConfirmDeleteNoteYesClick :
+                handleConfirmUnshareYesClick
               }
               noClick={handleModalNoClick}
               modalState={modalState.isOpen}
@@ -1511,13 +1533,10 @@ export default function Notes(props) {
         </Grid>
       </BoxContainer>
       <PopupMessage 
-        open={shareSuccessIsOpen}
-        handleClose={shareSuccessPopupClose}
-        severity="success"
-        message={
-          isShared ? "Review successfully shared!" : 
-          "Review successfully unshared"
-        }
+        open={popup.open}
+        handleClose={handlePopupClose}
+        severity={popup.severity}
+        message={popup.message}
       />
     </div>
   )

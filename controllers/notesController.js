@@ -104,6 +104,8 @@ const notesController = {
       .update(
         {
           starred: req.body.starred,
+          shared: req.body.shared,
+          dateShared: req.body.dateShared,
           title: req.body.title,
           text: req.body.text,
           propertyAddress: req.body.propertyAddress,
