@@ -237,16 +237,11 @@ export default function Notes(props) {
           });
           setAddressInfoState(true);
           // Determine whether or not note has review
-          if (lastNote.reviews) {    
+          if (lastNote.review) {    
             setSharedState(lastNote.shared) 
             setRatingSectionState(true);
-                for (let i = 0; i < lastNote.reviews.length; i++) {
-                  if (res.data[i].noteId === lastNote.reviews[i].id) {
-                    setPropertyReview(lastNote.reviews[i]);
-                    console.log(lastNote.reviews[i])
-                  }
-                }
-        
+            setPropertyReview(lastNote.review);
+            console.log(lastNote.review)
           } else {
             setRatingButtonState(true);
           }
@@ -408,17 +403,16 @@ export default function Notes(props) {
       clickedNoteId = parseInt(event.target.parentElement.id.split("-")[1]);
     }
 
-    console.log(clickedNoteId)
     setCurrentNoteId(clickedNoteId);
-    notesAPI.getAllNotes(props.id)
+    notesAPI.getNotesWithReviews(props.id)
       .then(res => {
+        console.log(res)
         // setAllNotes(res.data.reverse());
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].id === clickedNoteId) {
             setTitle(res.data[i].title);
             sideTitle = res.data[i].title;
             setText(res.data[i].text);
-            console.log(res.data[i].text)
             setAddress(res.data[i].propertyAddress);
             setPropertySpecs({
               bedrooms: res.data[i].bedrooms,
@@ -428,17 +422,9 @@ export default function Notes(props) {
             });
             if (res.data[i].propertyAddress) {
               setAddressInfoState(true);
-              if (res.data[i].hasReview) {
-                reviewsAPI.getAllReviews()
-                .then(res => {
-                  for (let i = 0; i < res.data.length; i++) {
-                    if (res.data[i].noteId === clickedNoteId) {
-                      setPropertyReview(res.data[i]);
-                      setSharedState(res.data[i].shared);
-                    }
-                  }
-                })
-                .catch(err => console.log(err))
+              if (res.data[i].review) {
+                setPropertyReview(res.data[i].review);
+                setSharedState(res.data[i].shared);
                 setRatingSectionState(true);
                 setRatingButtonState(false);
                 setRatingEditState(false);
@@ -461,6 +447,68 @@ export default function Notes(props) {
     //   }
     // }
   };
+  // const handleNoteButtonClick = (event) => {
+  //   setTextEditorMode(false);
+
+  //   let clickedNoteId;
+  //   if (event.target.id) {
+  //     clickedNoteId = parseInt(event.target.id.split("-")[1]);
+  //   } else {
+  //     clickedNoteId = parseInt(event.target.parentElement.id.split("-")[1]);
+  //   }
+
+  //   setCurrentNoteId(clickedNoteId);
+  //   notesAPI.getAllNotes(props.id)
+  //     .then(res => {
+  //       // setAllNotes(res.data.reverse());
+  //       for (let i = 0; i < res.data.length; i++) {
+  //         if (res.data[i].id === clickedNoteId) {
+  //           setTitle(res.data[i].title);
+  //           sideTitle = res.data[i].title;
+  //           setText(res.data[i].text);
+  //           console.log(res.data[i].text)
+  //           setAddress(res.data[i].propertyAddress);
+  //           setPropertySpecs({
+  //             bedrooms: res.data[i].bedrooms,
+  //             bathrooms: res.data[i].bathrooms,
+  //             carSpaces: res.data[i].carSpaces,
+  //             landSize: res.data[i].landSize,
+  //           });
+  //           if (res.data[i].propertyAddress) {
+  //             setAddressInfoState(true);
+  //             if (res.data[i].hasReview) {
+  //               reviewsAPI.getAllReviews()
+  //               .then(res => {
+  //                 for (let i = 0; i < res.data.length; i++) {
+  //                   if (res.data[i].noteId === clickedNoteId) {
+  //                     setPropertyReview(res.data[i]);
+  //                     setSharedState(res.data[i].shared);
+  //                   }
+  //                 }
+  //               })
+  //               .catch(err => console.log(err))
+  //               setRatingSectionState(true);
+  //               setRatingButtonState(false);
+  //               setRatingEditState(false);
+  //             } else {
+  //               setRatingSectionState(false);
+  //               setRatingButtonState(true);
+  //             }
+  //           } else {
+  //             setAddressInfoState(false);
+  //             setRatingButtonState(false);
+  //             setRatingSectionState(false);
+  //           }
+  //         }
+  //       }
+  //     })
+  //   // for (let i = 0; i < allNotes.length; i++) {
+  //   //   if (allNotes[i].id === clickedNoteId) {
+  //   //     setTitle(allNotes[i].title);
+  //   //     setText(allNotes[i].text);
+  //   //   }
+  //   // }
+  // };
 
   const handleLinkAddressButtonClick = () => {
     if (addressInputIsOpen) {
@@ -561,7 +609,6 @@ export default function Notes(props) {
     setRatingSectionState(true);
     setRatingButtonState(false);
     const review = {
-      shared: false,
       propertyConditionRating: null,
       potentialRating: null,
       surroundingsRating: null,

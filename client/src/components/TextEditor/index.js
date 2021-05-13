@@ -23,7 +23,6 @@ function TextEditor(props) {
   // const [editorState, setEditorState] = useState(
   //   () => EditorState.createEmpty(),
   // );
-  console.log(props.text)
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(
       ContentState.createFromBlockArray(
