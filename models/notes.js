@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     },
+    dateShared: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,

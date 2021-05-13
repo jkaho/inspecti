@@ -36,6 +36,7 @@ CREATE TABLE inspectedProperties (
 CREATE TABLE notes (
   id INT AUTO_INCREMENT NOT NULL,
   shared BOOLEAN NOT NULL DEFAULT FALSE,
+  dateShared DATE,
   title VARCHAR(40) NOT NULL,
   text VARCHAR(255), 
   propertyAddress VARCHAR(255),
