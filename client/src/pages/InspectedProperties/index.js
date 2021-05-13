@@ -421,7 +421,6 @@ export default function InspectedProperties(props) {
       landSize: parseInt(propertyNoteInfo.landSize),
       text: createMarkup(convertedContent).__html
     };
-    console.log(newNote)
 
     notesAPI.createNote(newNote)
       .then(res => {
@@ -440,11 +439,11 @@ export default function InspectedProperties(props) {
           noteId: res.data.id
         };
 
-        console.log(newReview)
-
         reviewsAPI.createReview(res.data.id, newReview)
           .then(res => {
             console.log(res);
+            handleModalClose();
+            setPopup({ open: true, type: "createNote", severity: "success", message: "Note successfully created!" });
             getAllProperties();
           })
           .catch(err => console.log(err));
