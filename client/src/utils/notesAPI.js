@@ -5,6 +5,9 @@ const notesAPI = {
   getAllNotes: function(userId) {
     return axios.get(url + "/api/user/notes/" + userId, { withCredentials: true });
   },
+  getNotesWithReviews: function(userId) {
+    return axios.get(url + "/api/user/notes/reviews/" + userId, { withCredentials: true });
+  },
   getOneNote: function(noteId) {
     return axios.get(url + "/api/user/note/" + noteId, { withCredentials: true });
   },

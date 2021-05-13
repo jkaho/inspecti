@@ -35,6 +35,7 @@ CREATE TABLE inspectedProperties (
 
 CREATE TABLE notes (
   id INT AUTO_INCREMENT NOT NULL,
+  shared BOOLEAN NOT NULL DEFAULT FALSE,
   title VARCHAR(40) NOT NULL,
   text VARCHAR(255), 
   propertyAddress VARCHAR(255),
@@ -56,7 +57,6 @@ CREATE TABLE notes (
 
 CREATE TABLE reviews (
   id INT AUTO_INCREMENT NOT NULL,
-  shared BOOLEAN NOT NULL,
   propertyConditionRating INT,
   potentialRating INT,
   surroundingsRating INT,

@@ -1,10 +1,6 @@
 // Creates User model
 module.exports = function(sequelize, DataTypes) {
   const Review = sequelize.define("review", {
-    shared: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
     propertyConditionRating: {
       type: DataTypes.INTEGER,
       allowNull: true,

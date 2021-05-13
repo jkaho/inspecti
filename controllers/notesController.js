@@ -10,7 +10,18 @@ const notesController = {
         }
       })
       .then(notes => res.json(notes))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
+  },
+  getNotesWithReviews: function(req, res) {
+    db.note
+      .findAll({
+        include: [db.review],
+        where: {
+          userId: parseInt(req.params.id)
+        }
+      })
+      .then(notes => res.json(notes))
+      .catch(err => console.log(err));
   },
   getOneNote: function(req, res) {
     db.note

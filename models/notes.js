@@ -6,6 +6,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false,
     },
+    shared: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,

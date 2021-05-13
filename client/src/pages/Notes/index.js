@@ -178,7 +178,7 @@ export default function Notes(props) {
   // Helper functions
   const renderAllNotes = () => {
     // Check user's saved notes 
-    notesAPI.getAllNotes(props.id)
+    notesAPI.getNotesWithReviews(props.id)
     .then(res => {
       console.log(res);
       // If there are no existing notes, create a new blank note
@@ -237,19 +237,16 @@ export default function Notes(props) {
           });
           setAddressInfoState(true);
           // Determine whether or not note has review
-          if (lastNote.hasReview) {
-            reviewsAPI.getAllReviews()
-              .then(res => {
-                for (let i = 0; i < res.data.length; i++) {
-                  if (res.data[i].noteId === lastNote.id) {
-                    setPropertyReview(res.data[i]);
-                    setSharedState(res.data[i].shared);
-                    console.log(res.data[i].shared)
+          if (lastNote.reviews) {    
+            setSharedState(lastNote.shared) 
+            setRatingSectionState(true);
+                for (let i = 0; i < lastNote.reviews.length; i++) {
+                  if (res.data[i].noteId === lastNote.reviews[i].id) {
+                    setPropertyReview(lastNote.reviews[i]);
+                    console.log(lastNote.reviews[i])
                   }
                 }
-              })
-              .catch(err => console.log(err))
-            setRatingSectionState(true);
+        
           } else {
             setRatingButtonState(true);
           }
@@ -262,6 +259,92 @@ export default function Notes(props) {
     })
     .catch(err => console.log(err));
   };
+  // const renderAllNotes = () => {
+  //   // Check user's saved notes 
+  //   notesAPI.getAllNotes(props.id)
+  //   .then(res => {
+  //     console.log(res);
+  //     // If there are no existing notes, create a new blank note
+  //     if (res.data.length < 1) {
+  //       titleRef.current.value = "";
+  //       textRef.current.value = "";
+  //       setTitle("");
+  //       setText("");
+        
+  //       const newNote = {
+  //         starred: false,
+  //         title: title,
+  //         text: text,
+  //         propertyAddress: null,
+  //         userId: props.id
+  //       };
+
+  //       notesAPI.createNote(newNote)
+  //         .then(res => {
+  //           console.log(res.data);
+  //           setCurrentNoteId(res.data.id);
+  //         })
+  //         .catch(err => console.log(err))
+  //     // Else render the latest note 
+  //     } else {
+  //       // Separate starred and non-starred notes 
+  //       let starredNotes = [];
+  //       let nonStarredNotes = [];
+  //       res.data.forEach(note => {
+  //         if (note.starred) {
+  //           starredNotes.push(note);
+  //         } else {
+  //           nonStarredNotes.push(note);
+  //         };
+  //       });
+
+  //       // Reverse order of notes to display newest first 
+  //       res.data.reverse(); // to display latest note
+  //       starredNotes.reverse(); // to display starred notes list
+  //       nonStarredNotes.reverse(); // to display all notes list 
+  //       setStarredNotes(starredNotes);
+  //       setNonStarredNotes(nonStarredNotes);
+
+  //       // Render latest note
+  //       const lastNote = res.data[0];
+  //       setCurrentNoteId(lastNote.id);
+  //       setTitle(lastNote.title);
+  //       setText(lastNote.text);
+  //       if (lastNote.propertyAddress) {
+  //         setAddress(lastNote.propertyAddress);
+  //         setPropertySpecs({
+  //           bedrooms: lastNote.bedrooms,
+  //           bathrooms: lastNote.bathrooms,
+  //           carSpaces: lastNote.carSpaces,
+  //           land: lastNote.landSize,
+  //         });
+  //         setAddressInfoState(true);
+  //         // Determine whether or not note has review
+  //         if (lastNote.hasReview) {
+  //           reviewsAPI.getAllReviews()
+  //             .then(res => {
+  //               for (let i = 0; i < res.data.length; i++) {
+  //                 if (res.data[i].noteId === lastNote.id) {
+  //                   setPropertyReview(res.data[i]);
+  //                   setSharedState(res.data[i].shared);
+  //                   console.log(res.data[i].shared)
+  //                 }
+  //               }
+  //             })
+  //             .catch(err => console.log(err))
+  //           setRatingSectionState(true);
+  //         } else {
+  //           setRatingButtonState(true);
+  //         }
+  //       } else {
+  //         setAddressInfoState(false);
+  //         setRatingSectionState(false);
+  //         setRatingButtonState(false);
+  //       }
+  //     }
+  //   })
+  //   .catch(err => console.log(err));
+  // };
 
   const handleNewNoteButtonClick = () => {
     // titleRef.current.value = "";
