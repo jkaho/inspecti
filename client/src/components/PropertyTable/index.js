@@ -52,6 +52,13 @@ const useStyles = makeStyles({
   },
   show: {
     display: "block",
+  },
+  noteBtn: {
+    background: "none",
+    border: "none",
+    textDecoration: "underline",
+    cursor: "pointer",
+    fontSize: 12
   }
 });
 
@@ -190,7 +197,7 @@ export default function PropertyTable(props) {
           {
             props.editMode && props.propertyToEditId === row.id ? 
               <input type="date" ref={props.editDateRef} defaultValue={moment(row.date).format("YYYY-MM-DD")}
-                style={{ width: "90px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "90px", height: "30px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "2px" }}
               /> 
             : row.date 
           }
@@ -205,7 +212,7 @@ export default function PropertyTable(props) {
           {
             props.editMode && props.propertyToEditId === row.id ? 
               <input type="number" ref={props.editGuideRef} defaultValue={row.guide}
-                style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "65px", height: "30px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "2px" }}
               /> 
             : `$${abbreviate(row.guide, 3)}` 
           }
@@ -214,7 +221,7 @@ export default function PropertyTable(props) {
           {
             props.editMode && props.propertyToEditId === row.id ?
               <input type="number" ref={props.editSoldRef} defaultValue={row.sold}
-                style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "65px", height: "30px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "2px" }}
               /> 
             : `$${abbreviate(row.sold, 3)}`
           }              
@@ -241,10 +248,23 @@ export default function PropertyTable(props) {
           <ul>
             {row.notes.length > 0 ? 
               row.notes.map(note => (
-                <li key={note.id} className="property-note-title">"{note.title}"</li>
+                <li key={note.id} className="property-note-title">
+                  <button className={classes.noteBtn} onClick={props.handleViewNoteButtonClick} id={`viewnote-${note.id}`} 
+                    data-address={row.address}
+                    data-beds={row.bed}
+                    data-baths={row.bath}
+                    data-cars={row.car}
+                    data-land={row.land}
+                    data-text={note.text}
+                    data-title={note.title}
+                  >
+                    "{note.title}"
+                  </button>
+                </li>
               )) : 
               <li className="no-property-notes">
                 <button onClick={props.handleCreateNoteClick} id={`createnote-${row.id}`} 
+                  style={{ height: 30, width: 70, fontWeight: "bold" }}
                   data-address={row.address}
                   data-beds={row.bed}
                   data-baths={row.bath}
@@ -260,14 +280,14 @@ export default function PropertyTable(props) {
         <TableCell style={{ paddingLeft: "30px" }}>
           {props.editMode && props.propertyToEditId === row.id ? 
             <button id={`savePropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleSaveButtonClick}>
-              <i id={`saveProperty-${row.id}`} className="fas fa-save" style={{ color: "black"}}></i>&nbsp;
+              <i id={`saveProperty-${row.id}`} className="fas fa-save" style={{ color: "black"}}></i>
             </button> :
             <button id={`editPropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleEditButtonClick}>
-              <i id={`editProperty-${row.id}`} className="fas fa-edit" style={{ color: "rgb(248, 179, 52)"}}></i>&nbsp;
+              <i id={`editProperty-${row.id}`} className="fas fa-edit" style={{ color: "rgb(177, 90, 177)"}}></i>
             </button> 
           }
           <button id={`deletePropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleDeleteButtonClick}>
-            <i id={`deleteProperty-${row.id}`} className="fas fa-trash" style={{ color: "rgb(221, 77, 77)"}}></i>
+            <i id={`deleteProperty-${row.id}`} className="fas fa-trash" style={{ color: "rgb(177, 90, 177)"}}></i>
           </button>
         </TableCell>
       </TableRow>
@@ -298,14 +318,14 @@ export default function PropertyTable(props) {
           <TableRow>
             <TableCell>
               <input type="date" ref={props.dateRef} defaultValue={moment().format("DD/MM/YY")}
-                style={{ width: "90px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "90px", height: "56px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "4px" }}
               />
             </TableCell>
             <TableCell>
               <SearchAutocomplete
                 id="search-autocomplete-inspected"
                 className="inspected-search-address"
-                style={{ position: "fixed" }}
+                // style={{ position: "fixed" }}
                 addressRef={props.addressRef}
                 onInputChange={props.handleAddressInputChange}
                 suggestions={props.addressSuggestions}
@@ -345,21 +365,23 @@ export default function PropertyTable(props) {
             </TableCell>
             <TableCell>
               <input type="number" ref={props.guideRef} placeholder="1500000"
-                style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "75px", height: "56px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "4px" }}
               />
             </TableCell>
             <TableCell>
               <input type="number" ref={props.soldRef} placeholder="1750000"
-                style={{ width: "65px", height: "30px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "75px", height: "56px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "4px" }}
               />
             </TableCell>
             <TableCell>
-              <select ref={props.auctionRef} style={{ height: "30px" }}>
+              <select ref={props.auctionRef}
+                style={{ width: "45px", height: "56px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "4px" }}
+              >
                 <option value={false}>No</option>
                 <option value={true}>Yes</option>
               </select>
               {/* <input type="text" ref={props.auctionRef} placeholder="Required"
-                style={{ width: "60px", height: "20px", border: "1px solid rgb(228, 228, 228)", borderRadius: "2px" }}
+                style={{ width: "60px", height: "20px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "4px" }}
               /> */}
             </TableCell>
             <TableCell>

@@ -70,7 +70,7 @@ import "./style.css";
 const useStyles = makeStyles({
   smallInput: {
     width: "100%!important",
-    fontSize: 14,
+    // height: "30px!important"
   },
 });
 

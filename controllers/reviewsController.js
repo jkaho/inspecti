@@ -8,8 +8,9 @@ const reviewsController = {
       .catch(err => console.log(err))
   },
   getReview: function(req, res) {
+    console.log(req.params)
     db.review
-      .find({
+      .findOne({
         where: {
           noteId: parseInt(req.params.id)
         }

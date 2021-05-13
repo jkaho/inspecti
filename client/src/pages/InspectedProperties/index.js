@@ -452,10 +452,12 @@ export default function InspectedProperties(props) {
       .catch(err => console.log(err))
   };
 
-  const noteBody = (
+  const createNoteBody = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title-note">Create a property note</h2>
-      <p>{propertyNoteInfo.address}</p>
+      <h2 id="simple-modal-note-create">
+        Create a property note for <span color="purple">{propertyNoteInfo.address}</span>
+      </h2>
+      {/* <p>{propertyNoteInfo.address}</p> */}
       <form onSubmit={handleConfirmNewNoteButtonClick}>
         <div className="property-note-content">
           <input ref={titleRef} type="text" placeholder="Title" />
@@ -537,6 +539,158 @@ export default function InspectedProperties(props) {
     </div>
   );
 
+  const handleViewNoteButtonClick = (event) => {
+    const noteId = event.target.id.split("-")[1];
+    setModalState({ open: true, type: "viewNote" });
+    reviewsAPI.getReview(noteId)
+      .then(res => {
+        console.log(res);
+        if (res.data) {
+          setPropertyNoteInfo({
+            noteId: noteId,
+            address: event.target.dataset.address,
+            bedrooms: event.target.dataset.beds,
+            bathrooms: event.target.dataset.baths,
+            carSpaces: event.target.dataset.cars,
+            landSize: event.target.dataset.land,
+            title: event.target.dataset.title,
+            text: event.target.dataset.text,
+            propertyConditionRating: res.data.propertyConditionRating,
+            potentialRating: res.data.potentialRating,
+            surroundingsRating: res.data.surroundingsRating,
+            neighbourComparisonRating: res.data.neighbourComparisonRating,
+            accessibilityRating: res.data.accessibilityRating,
+            privacyRating: res.data.privacyRating,
+            floorplanRating: res.data.floorplanRating,
+            outdoorSpaceRating: res.data.outdoorSpaceRating,
+            indoorOutdoorFlowRating: res.data.indoorOutdoorFlowRating,
+            naturalLightRating: res.data.naturalLightRating
+          });
+        } else {
+          setPropertyNoteInfo({
+            noteId: noteId,
+            address: event.target.dataset.address,
+            bedrooms: event.target.dataset.beds,
+            bathrooms: event.target.dataset.baths,
+            carSpaces: event.target.dataset.cars,
+            landSize: event.target.dataset.land,
+            title: event.target.dataset.title,
+            text: event.target.dataset.text,
+          });
+        }
+      })
+  };
+
+  const viewNoteBody = (
+    <div id="view-note" style={modalStyle} className={classes.paper}>
+      <div id="view-note-body">
+        <h2 id="simple-modal-note-view">{propertyNoteInfo.title}</h2>
+        <div className="note-view-address">{propertyNoteInfo.address}</div>
+        <div className="note-view-specs">
+          <i className="fas fa-bed"></i>&nbsp;
+          <span className="num-beds">{propertyNoteInfo.bedrooms ? propertyNoteInfo.bedrooms : "-"}</span>&nbsp;&nbsp;
+          <i className="fas fa-shower"></i>&nbsp;
+          <span className="num-baths">{propertyNoteInfo.bathrooms ? propertyNoteInfo.bathrooms : "-"}</span>&nbsp;&nbsp;
+          <i className="fas fa-car"></i>&nbsp;
+          <span className="num-cars">{propertyNoteInfo.carSpaces ? propertyNoteInfo.carSpaces : "-"}</span>&nbsp;&nbsp;
+          <i className="fas fa-ruler-combined"></i>&nbsp;
+          <span className="num-land">{propertyNoteInfo.landSize ? propertyNoteInfo.landSize : "- "}m²</span>&nbsp;&nbsp;
+        </div>
+        <div className="property-note-content">
+          {
+            propertyNoteInfo.propertyConditionRating ? 
+            <table>
+              <tbody>
+                <tr>
+                  <td className="property-note-rating-category">Property condition</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.propertyConditionRating ? propertyNoteInfo.propertyConditionRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Potential</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.potentialRating ? propertyNoteInfo.potentialRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Surroundings</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.surroundingsRating ? propertyNoteInfo.surroundingsRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Consistency with neighbours</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.neighbourComparisonRating ? propertyNoteInfo.neighbourComparisonRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Accessibility</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.accessibilityRating ? propertyNoteInfo.accessibilityRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Privacy</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.privacyRating ? propertyNoteInfo.privacyRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Floorplan</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.floorplanRating ? propertyNoteInfo.floorplanRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Outdoor space</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.outdoorSpaceRating ? propertyNoteInfo.outdoorSpaceRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Indoor-to-outdoor flow</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.indoorOutdoorFlowRating ? propertyNoteInfo.indoorOutdoorFlowRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="property-note-rating-category">Natural lighting</td>
+                  <td className="property-note-rating">
+                    {propertyNoteInfo.naturalLightRating ? propertyNoteInfo.naturalLightRating : "-"}
+                    <span>/5</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table> : 
+            ""
+          }
+        </div>
+        {propertyNoteInfo.text !== "" ? 
+          <div className="property-note-content property-note-text"
+            dangerouslySetInnerHTML={{ __html: propertyNoteInfo.text }}
+          ></div> : 
+          <div className="no-note-text">
+            Go to your notes page to add text to this note.
+          </div>
+        }
+      </div>
+      <div className="property-note--view-actions">
+        <Button id="close-view-note" className={classes.cancelButton} variant="contained" onClick={handleModalClose}>CLOSE</Button>
+      </div>
+    </div>
+  );
+
   return (
     <div>
       <SideMenu />
@@ -566,6 +720,7 @@ export default function InspectedProperties(props) {
           handleSaveButtonClick={handleSaveButtonClick}
           handleDeleteButtonClick={handleDeleteButtonClick}
           handleCreateNoteClick={handleCreateNoteClick}
+          handleViewNoteButtonClick={handleViewNoteButtonClick}
           propertyToEditId={propertyToEditId}
           handleInputClickAway={handleInputClickAway}
         />
@@ -576,7 +731,9 @@ export default function InspectedProperties(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        {modal.type === "confirmDelete" ? deleteBody : noteBody}
+        {modal.type === "confirmDelete" ? deleteBody : 
+        modal.type === "viewNote" ? viewNoteBody : 
+        createNoteBody}
       </Modal>
       <PopupMessage 
         open={popup.open}

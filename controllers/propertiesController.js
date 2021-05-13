@@ -15,7 +15,12 @@ const propertiesController = {
   getPropertyNotes: function(req, res) {
     db.inspectedProperties
       .findAll({
-        include: [db.note],
+        include: {
+          model: db.note,
+          include: {
+            model: db.review
+          }
+        },
         order: [["dateInspected", "DESC"]]
         // where: {
         //   propertyAddress: {
