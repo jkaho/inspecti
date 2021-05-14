@@ -17,7 +17,6 @@ export default function TableToolbar(props) {
         <TextField
           id="outlined-select-sort-table"
           select
-          // ref={props.sortRef}
           value={props.sortCriteria}
           label="Sort by"
           onChange={props.handleSortChange}
@@ -49,7 +48,6 @@ export default function TableToolbar(props) {
         <TextField
           id="outlined-select-filter-table"
           select
-          // ref={props.filterRef}
           value={props.filterCriteria}
           label="Filter by"
           onChange={props.handleFilterChange}

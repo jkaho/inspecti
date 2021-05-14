@@ -99,6 +99,21 @@ const filterOptions = [
     value: null
   },
   {
+    label: "House",
+    disabled: false,
+    value: "house"
+  },
+  {
+    label: "Apartment",
+    disabled: false,
+    value: "apartment"
+  },
+  {
+    label: "Townhouse",
+    disabled: false,
+    value: "townhouse"
+  },
+  {
     label: "Had auction",
     disabled: false,
     value: "hadAuction"
@@ -178,12 +193,9 @@ export default function InspectedProperties(props) {
   const lightingRef = useRef();
 
   const searchRef = useRef();
-  // const sortRef = useRef();
-  // const filterRef = useRef();
 
   // Helpers 
   const getAllProperties = () => {
-    // let propertyQuery = propertiesToRender[i].propertyAddress.replace("/", "%2F");
     propertiesAPI.getPropertyNotes()
       .then(res => {
         console.log(res);
@@ -786,32 +798,32 @@ export default function InspectedProperties(props) {
     let sortedResults = [];
     switch(event.target.value) {
       case "priceGuideAsc":
-        sortedResults = [...properties].sort(function(a, b) {
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
           return a.priceGuide - b.priceGuide;
         });
         break;
       case "priceGuideDesc":
-        sortedResults = [...properties].sort(function(a, b) {
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
           return b.priceGuide - a.priceGuide;
         });
         break;
       case "soldPriceAsc":
-        sortedResults = [...properties].sort(function(a, b) {
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
           return a.soldPrice - b.soldPrice;
         });
         break;
       case "soldPriceDesc":
-        sortedResults = [...properties].sort(function(a, b) {
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
           return b.soldPrice - a.soldPrice;
         });
         break;
       case "landSizeAsc":
-        sortedResults = [...properties].sort(function(a, b) {
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
           return a.landSize - b.landSize;
         });
         break;
       case "landSizeDesc":
-        sortedResults = [...properties].sort(function(a, b) {
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
           return b.landSize - a.landSize;
         });
         break;
@@ -824,8 +836,29 @@ export default function InspectedProperties(props) {
   const handleFilterChange = (event) => {
     setFilterCriteria(event.target.value);
     let filteredResults = [];
-    let propertiesCopy = [...properties];
+    let propertiesCopy = [...modifiedProperties];
     switch(event.target.value) {
+      case "house":
+        propertiesCopy.forEach(item => {
+          if (item.propertyType === "House") {
+            filteredResults.push(item);
+          }
+        });
+        break;
+      case "apartment":
+        propertiesCopy.forEach(item => {
+          if (item.propertyType === "Apartment") {
+            filteredResults.push(item);
+          }
+        });
+        break;
+      case "townhouse":
+        propertiesCopy.forEach(item => {
+          if (item.propertyType === "Townhouse") {
+            filteredResults.push(item);
+          }
+        });
+        break;
       case "hadAuction":
         propertiesCopy.forEach(item => {
           if (item.hadAuction) {
@@ -884,10 +917,7 @@ export default function InspectedProperties(props) {
           editGuideRef={editGuideRef}
           editSoldRef={editSoldRef}
           editAuctionRef={editAuctionRef}
-          // sortRef={sortRef}
           searchRef={searchRef}
-          // filterRef={filterRef}
-          // properties={properties}
           modifiedProperties={modifiedProperties}
           handleAddressInputChange={handleAddressInputChange}
           handleSuggestionClick={handleSuggestionClick}
