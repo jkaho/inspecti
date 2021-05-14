@@ -54,10 +54,77 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const sortOptions = [
+  {
+    label: "Select category",
+    disabled: true,
+    value: null
+  },
+  {
+    label: "Price guide (from lowest)",
+    disabled: false,
+    value: "priceGuideAsc"
+  },
+  {
+    label: "Price guide (from highest)",
+    disabled: false,
+    value: "priceGuideDesc"
+  },
+  {
+    label: "Sold price (from lowest)",
+    disabled: false,
+    value: "soldPriceAsc"
+  },
+  {
+    label: "Sold price (from highest)",
+    disabled: false,
+    value: "soldPriceDesc"
+  },
+  {
+    label: "Land size (from lowest)",
+    disabled: false,
+    value: "landSizeAsc"
+  },
+  {
+    label: "Land size (from highest)",
+    disabled: false,
+    value: "landSizeDesc"
+  }
+]
+
+const filterOptions = [
+  {
+    label: "Select category",
+    disabled: true,
+    value: null
+  },
+  {
+    label: "Had auction",
+    disabled: false,
+    value: "hadAuction"
+  },
+  {
+    label: "No auction",
+    disabled: false,
+    value: "noAuction"
+  },
+  {
+    label: "HasNotes",
+    disabled: false,
+    value: "hasNotes"
+  },
+  {
+    label: "noNotes",
+    disabled: false,
+    value: "noNotes"
+  }
+]
+
 export default function InspectedProperties(props) {
   const classes = useStyles();
   // States
   const [properties, setProperties] = useState([]);
+  const [modifiedProperties, setModifiedProperties] = useState([]);
   // const [fillInputsPopupIsOpen, setFillInputsPopupState] = useState(false);
   // const [createSuccessPopupIsOpen, setCreateSuccessPopupState] = useState(false);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "success", message: "" });
@@ -73,6 +140,8 @@ export default function InspectedProperties(props) {
     open: false,
     type: "deleteConfirm",
   });
+  const [sortCriteria, setSortCriteria] = useState("Select category");
+  const [filterCriteria, setFilterCriteria] = useState("Select category");
 
   // Initial render
   useEffect(() => {
@@ -108,12 +177,17 @@ export default function InspectedProperties(props) {
   const indoorOutdoorRef = useRef();
   const lightingRef = useRef();
 
+  const searchRef = useRef();
+  const sortRef = useRef();
+  const filterRef = filterRef();
+
   // Helpers 
   const getAllProperties = () => {
     // let propertyQuery = propertiesToRender[i].propertyAddress.replace("/", "%2F");
     propertiesAPI.getPropertyNotes()
       .then(res => {
         console.log(res);
+        setModifiedProperties(res.data);
         setProperties(res.data);
       })
       .catch(err => console.log(err))
@@ -691,6 +765,14 @@ export default function InspectedProperties(props) {
     </div>
   );
 
+  const handleSortChange = (event) => {
+    setSortCriteria(event.target.value);
+  };
+
+  const handleFilterChange = (event) => {
+    setFilterCriteria(event.target.value);
+  };
+
   return (
     <div>
       <SideMenu />
@@ -710,7 +792,11 @@ export default function InspectedProperties(props) {
           editGuideRef={editGuideRef}
           editSoldRef={editSoldRef}
           editAuctionRef={editAuctionRef}
-          properties={properties}
+          sortRef={sortRef}
+          searchRef={searchRef}
+          filterRef={filterRef}
+          // properties={properties}
+          modifiedProperties={modifiedProperties}
           handleAddressInputChange={handleAddressInputChange}
           handleSuggestionClick={handleSuggestionClick}
           addressSuggestions={addressSuggestions}
@@ -723,6 +809,12 @@ export default function InspectedProperties(props) {
           handleViewNoteButtonClick={handleViewNoteButtonClick}
           propertyToEditId={propertyToEditId}
           handleInputClickAway={handleInputClickAway}
+          sortCriteria={sortCriteria}
+          filterCriteria={filterCriteria}
+          sortOptions={sortOptions}
+          filterOptions={filterOptions}
+          handleSortChange={handleSortChange}
+          handleFilterChange={handleFilterChange}
         />
       </div>
       <Modal

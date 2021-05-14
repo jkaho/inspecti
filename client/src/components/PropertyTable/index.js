@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+// Components
+import TableToolbar from "../../components/TableToolbar";
+// Material Design 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -156,11 +159,11 @@ export default function PropertyTable(props) {
     }
 
     getAndSetProperties();
-  }, [props.properties]);
+  }, [props.modifiedProperties]);
 
   const getAndSetProperties = () => {
     let rowsToRender = [];
-    props.properties.forEach(property => {
+    props.modifiedProperties.forEach(property => {
       rowsToRender.push(createData(
         moment(property.dateInspected).format("YYYY-MM-DD"),
         property.propertyAddress,
@@ -296,6 +299,18 @@ export default function PropertyTable(props) {
 
   return (
     <>
+    <TableToolbar
+      sortRef={props.sortRef}
+      sortCriteria={props.sortCriteria}
+      handleSortChange={props.handleSortChange}
+      sortOptions={props.sortOptions}
+      handleClearSortButtonClick={props.handleClearSortButtonClick}
+      filterRef={props.filterRef}
+      filterCriteria={props.filterCriteria}
+      handleFilterChange={props.handleFilterChange}
+      filterOptions={props.filterOptions}
+      handleClearFilterButtonClick={props.handleClearFilterButtonClick}
+    />
     <TableContainer component={Paper} className={classes.table}>
       <Table>
         <TableHead>
