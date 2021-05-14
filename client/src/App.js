@@ -42,6 +42,7 @@ function App() {
             exact path="/login" 
             render={() => isAuthenticated ? 
               <Profile
+                id={userId}
                 info={userInfo}
               /> : 
               <Login />
@@ -51,6 +52,7 @@ function App() {
             exact path="/signup" 
             render={() => isAuthenticated ? 
               <Profile
+                id={userId}
                 info={userInfo}
               /> : 
               <Signup />
