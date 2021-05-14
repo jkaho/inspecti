@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import NavBar from "../../components/NavBar";
 import ReviewCard from "../../components/ReviewCard";
-import SearchBar from "../../components/SearchBar";
 import TextField from '@material-ui/core/TextField';
 import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -62,6 +61,7 @@ export default function Reviews() {
       });
   
       setModifiedReviews(searchResults);
+      console.log(modifiedReviews)
     } else {
       setModifiedReviews(reviews);
     }
@@ -69,135 +69,134 @@ export default function Reviews() {
 
   const handleSortButtonClick = (event) => {
     const sortType = event.target.id.split("-")[1];
-    let sortedResults;
+    let sortedResults = [];
     switch(criteria) {
       case "Date added":
         if (sortType === "desc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return new Date(b.dateShared) - new Date(a.dateShared);
           }); 
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return new Date(a.dateShared) - new Date(b.dateShared);
           }); 
         }
         break;
       case "Property condition":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.propertyConditionRating - b.review.propertyConditionRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.propertyConditionRating - a.review.propertyConditionRating;
           });
         }
         break;
       case "Potential to capitalise":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.potentialRating - b.review.potentialRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.potentialRating - a.review.potentialRating;
           });
         }
         break;
       case "Surroundings":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.surroundingsRating - b.review.surroundingsRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.surroundingsRating - a.review.surroundingsRating;
           });
         }
         break;
       case "Consistency with neighbours": 
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.neighbourComparisonRating - b.review.neighbourComparisonRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.neighbourComparisonRating - a.review.neighbourComparisonRating;
           });
         }
         break;
       case "Accessibility":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.accessibilityRating - b.review.accessibilityRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.accessibilityRating - a.review.accessibilityRating;
           });
         }
         break;
       case "Privacy":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.privacyRating - b.review.privacyRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.privacyRating - a.review.privacyRating;
           });
         }
         break;
       case "Floorplan":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.floorplanRating - b.review.floorplanRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.floorplanRating - a.review.floorplanRating;
           });
         }
         break;
       case "Outdoor space":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.outdoorSpaceRating - b.review.outdoorSpaceRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.outdoorSpaceRating - a.review.outdoorSpaceRating;
           });
         }
         break;
       case "Indoor-to-outdoor flow":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.indoorOutdoorFlowRating - b.review.indoorOutdoorFlowRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.indoorOutdoorFlowRating - a.review.indoorOutdoorFlowRating;
           });
         }
         break;
       case "Natural light":
         if (sortType === "asc") {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return a.review.naturalLightRating - b.review.naturalLightRating;
           });
         } else {
-          sortedResults = modifiedReviews.sort(function(a, b) {
+          sortedResults = [...modifiedReviews].sort(function(a, b) {
             return b.review.naturalLightRating - a.review.naturalLightRating;
           });
         }
         break;
       default:
-        console.log("nope")
         return;
     }
-    console.log(sortedResults)
 
+    console.log(sortedResults)
     setModifiedReviews(sortedResults);
   };
 
