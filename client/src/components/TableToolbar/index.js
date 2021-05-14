@@ -8,13 +8,16 @@ export default function TableToolbar(props) {
   return (
     <div className="table-toolbar">
       <div className="table-search">
-        <input type="text" placeholder="Search properties by address" />
+        <input type="text" placeholder="Search properties by address"
+          ref={props.searchRef} 
+          onChange={props.handleSearchChange}
+        />
       </div>
       <div className="table-sort">
         <TextField
           id="outlined-select-sort-table"
           select
-          ref={props.sortRef}
+          // ref={props.sortRef}
           value={props.sortCriteria}
           label="Sort by"
           onChange={props.handleSortChange}
@@ -46,7 +49,7 @@ export default function TableToolbar(props) {
         <TextField
           id="outlined-select-filter-table"
           select
-          ref={props.filterRef}
+          // ref={props.filterRef}
           value={props.filterCriteria}
           label="Filter by"
           onChange={props.handleFilterChange}

@@ -301,15 +301,17 @@ export default function PropertyTable(props) {
   return (
     <>
     <TableToolbar
-      sortRef={props.sortRef}
+      searchRef={props.searchRef}
+      // sortRef={props.sortRef}
       sortCriteria={props.sortCriteria}
       handleSortChange={props.handleSortChange}
       sortOptions={props.sortOptions}
-      filterRef={props.filterRef}
+      // filterRef={props.filterRef}
       filterCriteria={props.filterCriteria}
       handleFilterChange={props.handleFilterChange}
       filterOptions={props.filterOptions}
       handleClearButtonClick={props.handleClearButtonClick}
+      handleSearchChange={props.handleSearchChange}
     />
     <TableContainer component={Paper} className={classes.table}>
       <Table>

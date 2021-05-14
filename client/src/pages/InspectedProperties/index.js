@@ -178,8 +178,8 @@ export default function InspectedProperties(props) {
   const lightingRef = useRef();
 
   const searchRef = useRef();
-  const sortRef = useRef();
-  const filterRef = useRef();
+  // const sortRef = useRef();
+  // const filterRef = useRef();
 
   // Helpers 
   const getAllProperties = () => {
@@ -765,6 +765,22 @@ export default function InspectedProperties(props) {
     </div>
   );
 
+  const handleSearchChange = () => {
+    const query = searchRef.current.value;
+    let searchResults = [];
+    if (query !== "") {
+      modifiedProperties.forEach(item => {
+        if (item.propertyAddress.toLowerCase().includes(query)) {
+          searchResults.push(item);
+        }
+      });
+  
+      setModifiedProperties(searchResults);
+    } else {
+      setModifiedProperties(properties);
+    }
+  };
+
   const handleSortChange = (event) => {
     setSortCriteria(event.target.value);
     let sortedResults = [];
@@ -868,9 +884,9 @@ export default function InspectedProperties(props) {
           editGuideRef={editGuideRef}
           editSoldRef={editSoldRef}
           editAuctionRef={editAuctionRef}
-          sortRef={sortRef}
+          // sortRef={sortRef}
           searchRef={searchRef}
-          filterRef={filterRef}
+          // filterRef={filterRef}
           // properties={properties}
           modifiedProperties={modifiedProperties}
           handleAddressInputChange={handleAddressInputChange}
@@ -892,6 +908,7 @@ export default function InspectedProperties(props) {
           handleSortChange={handleSortChange}
           handleFilterChange={handleFilterChange}
           handleClearButtonClick={handleClearButtonClick}
+          handleSearchChange={handleSearchChange}
         />
       </div>
       <Modal
