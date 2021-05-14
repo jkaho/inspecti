@@ -112,9 +112,13 @@ export default function Profile(props) {
                             <i className="fas fa-user-circle" style={{ fontSize: "100px" }}></i>
                           </td>
                           <td>
-                            <div className="user-name user-text">SAM BOONEY</div>
-                            <div className="user-suburb user-text">Redfern, NSW</div>
-                            <div className="user-email user-text">s.booney88@gmail.com</div>
+                            <div className="user-name user-text">
+                              {`${props.info.firstName.toUpperCase()} ${props.info.lastName.toUpperCase()}`}
+                            </div>
+                            {/* <div className="user-suburb user-text">Redfern, NSW</div> */}
+                            <div className="user-email user-text">
+                              {props.info.email}
+                            </div>
                           </td>
                         </tr>
                       </tbody>

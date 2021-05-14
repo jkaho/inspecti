@@ -9,7 +9,12 @@ const propertiesController = require("../../controllers/propertiesController");
 // User routes
 router.get("/authenticated", (req, res) => {
   if (req.user) {
-    return res.json({ isAuthenticated: true, id: req.user.id });
+    return res.json({ isAuthenticated: true, 
+      id: req.user.id,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      email: req.user.email
+    });
   } 
   return res.json({ isAuthenticated: false });
 });

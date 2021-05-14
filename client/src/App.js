@@ -15,12 +15,19 @@ import "./App.css";
 function App() {
   const [isAuthenticated, setAuthentication] = useState(false);
   const [userId, setUserId] = useState();
+  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     authenticationAPI.authenticated()
       .then(res => {
+        console.log(res.data)
         setAuthentication(res.data.isAuthenticated);
         setUserId(res.data.id);
+        setUserInfo({
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          email: res.data.email
+        })
       })
       .catch(err => console.log(err));
   }, []);
@@ -34,14 +41,18 @@ function App() {
           <Route
             exact path="/login" 
             render={() => isAuthenticated ? 
-              <Profile /> : 
+              <Profile
+                info={userInfo}
+              /> : 
               <Login />
             }
           />
           <Route
             exact path="/signup" 
             render={() => isAuthenticated ? 
-              <Profile /> : 
+              <Profile
+                info={userInfo}
+              /> : 
               <Signup />
             }
           />
@@ -50,6 +61,7 @@ function App() {
             render={() => isAuthenticated ? 
               <Profile
                 id={userId}
+                info={userInfo}
               /> : 
               <Redirect to="/login" />
             }
