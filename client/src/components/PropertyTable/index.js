@@ -439,7 +439,7 @@ export default function PropertyTable(props) {
           <TableRow>
             <TablePagination
               rowsPerPageOptions={[10, 20, 30, { label: "All", value: -1 }]}
-              colSpan={10}
+              colSpan={12}
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}

@@ -770,44 +770,79 @@ export default function InspectedProperties(props) {
     let sortedResults = [];
     switch(event.target.value) {
       case "priceGuideAsc":
-        sortedResults = [...modifiedProperties].sort(function(a, b) {
+        sortedResults = [...properties].sort(function(a, b) {
           return a.priceGuide - b.priceGuide;
         });
         break;
       case "priceGuideDesc":
-        sortedResults = [...modifiedProperties].sort(function(a, b) {
+        sortedResults = [...properties].sort(function(a, b) {
           return b.priceGuide - a.priceGuide;
         });
         break;
       case "soldPriceAsc":
-        sortedResults = [...modifiedProperties].sort(function(a, b) {
+        sortedResults = [...properties].sort(function(a, b) {
           return a.soldPrice - b.soldPrice;
         });
         break;
       case "soldPriceDesc":
-        sortedResults = [...modifiedProperties].sort(function(a, b) {
+        sortedResults = [...properties].sort(function(a, b) {
           return b.soldPrice - a.soldPrice;
         });
         break;
       case "landSizeAsc":
-        sortedResults = [...modifiedProperties].sort(function(a, b) {
+        sortedResults = [...properties].sort(function(a, b) {
           return a.landSize - b.landSize;
         });
         break;
       case "landSizeDesc":
-        sortedResults = [...modifiedProperties].sort(function(a, b) {
+        sortedResults = [...properties].sort(function(a, b) {
           return b.landSize - a.landSize;
         });
         break;
       default: 
-        return;
+        break;
     }
     setModifiedProperties(sortedResults);
   };
 
   const handleFilterChange = (event) => {
     setFilterCriteria(event.target.value);
-    console.log(event.target.value)
+    let filteredResults = [];
+    let propertiesCopy = [...properties];
+    switch(event.target.value) {
+      case "hadAuction":
+        propertiesCopy.forEach(item => {
+          if (item.hadAuction) {
+            filteredResults.push(item);
+          }
+        });
+        break;
+      case "noAuction":
+        propertiesCopy.forEach(item => {
+          if (!item.hadAuction) {
+            filteredResults.push(item);
+          }
+        });
+        break;
+      case "hasNotes":
+        propertiesCopy.forEach(item => {
+          if (item.notes.length > 0) {
+            filteredResults.push(item);
+          }
+        });
+        break;
+      case "noNotes":
+        propertiesCopy.forEach(item => {
+          if (item.notes.length < 1) {
+            filteredResults.push(item);
+          }
+        });
+        break;
+      default:
+        break;
+    }
+    
+    setModifiedProperties(filteredResults);
   };
 
   const handleClearButtonClick = () => {
