@@ -1,0 +1,44 @@
+.table-toolbar {
+  width: 950px;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  background: white;
+  padding: 10px;
+  border: 1px solid rgb(223, 223, 223);
+  box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+.table-search, .table-sort, .table-filter {
+  display: inline-block;
+}
+
+.table-sort select {
+  width: 220px;
+}
+
+.table-filter select {
+  width: 150px;
+}
+
+.table-toolbar select {
+  background: white;
+  height: 30px;
+}
+
+.table-toolbar input {
+  height: 40px;
+  width: 250px;
+  border-radius: 2px;
+  border: 1px solid rgb(162, 14, 192);
+  padding: 5px;
+}
+
+.table-search {
+  margin-right: 200px;
+  height: 100%;
+}
+
+.table-sort {
+  margin-right: 30px;
+}

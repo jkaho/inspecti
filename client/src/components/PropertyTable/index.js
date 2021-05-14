@@ -39,7 +39,8 @@ const useStyles = makeStyles({
     borderWidth: 1,
     borderColor: "#E0E0E0",
     borderStyle: "solid",
-    margin: "50px auto"
+    margin: "0 auto",
+    marginBottom: "50px",
   },
   cell: {
     textAlign: "center"
@@ -304,12 +305,11 @@ export default function PropertyTable(props) {
       sortCriteria={props.sortCriteria}
       handleSortChange={props.handleSortChange}
       sortOptions={props.sortOptions}
-      handleClearSortButtonClick={props.handleClearSortButtonClick}
       filterRef={props.filterRef}
       filterCriteria={props.filterCriteria}
       handleFilterChange={props.handleFilterChange}
       filterOptions={props.filterOptions}
-      handleClearFilterButtonClick={props.handleClearFilterButtonClick}
+      handleClearButtonClick={props.handleClearButtonClick}
     />
     <TableContainer component={Paper} className={classes.table}>
       <Table>

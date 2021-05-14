@@ -1,11 +1,14 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import IconButton from "@material-ui/core/IconButton";
+import ClearIcon from "@material-ui/icons/Clear";
+import "./style.css";
 
 export default function TableToolbar(props) {
   return (
-    <div>
+    <div className="table-toolbar">
       <div className="table-search">
-        <input type="text" placeholder="Search for an address" />
+        <input type="text" placeholder="Search properties by address" />
       </div>
       <div className="table-sort">
         <TextField
@@ -35,7 +38,7 @@ export default function TableToolbar(props) {
               </option>
           ))}
         </TextField>
-        <IconButton className="sort-btn" onClick={props.handleClearSortButtonClick}>
+        <IconButton className="sort-btn" onClick={props.handleClearButtonClick}>
           <ClearIcon />
         </IconButton>
       </div>
@@ -45,7 +48,7 @@ export default function TableToolbar(props) {
           select
           ref={props.filterRef}
           value={props.filterCriteria}
-          label="Sort by"
+          label="Filter by"
           onChange={props.handleFilterChange}
           SelectProps={{
             native: true,
@@ -67,7 +70,7 @@ export default function TableToolbar(props) {
               </option>
           ))}
         </TextField>
-        <IconButton className="sort-btn" onClick={props.handleClearFilterButtonClick}>
+        <IconButton className="sort-btn" onClick={props.handleClearButtonClick}>
           <ClearIcon />
         </IconButton>
       </div>

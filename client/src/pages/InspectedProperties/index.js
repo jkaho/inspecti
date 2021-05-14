@@ -109,12 +109,12 @@ const filterOptions = [
     value: "noAuction"
   },
   {
-    label: "HasNotes",
+    label: "Has notes",
     disabled: false,
     value: "hasNotes"
   },
   {
-    label: "noNotes",
+    label: "No notes",
     disabled: false,
     value: "noNotes"
   }
@@ -179,7 +179,7 @@ export default function InspectedProperties(props) {
 
   const searchRef = useRef();
   const sortRef = useRef();
-  const filterRef = filterRef();
+  const filterRef = useRef();
 
   // Helpers 
   const getAllProperties = () => {
@@ -767,10 +767,51 @@ export default function InspectedProperties(props) {
 
   const handleSortChange = (event) => {
     setSortCriteria(event.target.value);
+    let sortedResults = [];
+    switch(event.target.value) {
+      case "priceGuideAsc":
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
+          return a.priceGuide - b.priceGuide;
+        });
+        break;
+      case "priceGuideDesc":
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
+          return b.priceGuide - a.priceGuide;
+        });
+        break;
+      case "soldPriceAsc":
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
+          return a.soldPrice - b.soldPrice;
+        });
+        break;
+      case "soldPriceDesc":
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
+          return b.soldPrice - a.soldPrice;
+        });
+        break;
+      case "landSizeAsc":
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
+          return a.landSize - b.landSize;
+        });
+        break;
+      case "landSizeDesc":
+        sortedResults = [...modifiedProperties].sort(function(a, b) {
+          return b.landSize - a.landSize;
+        });
+        break;
+      default: 
+        return;
+    }
+    setModifiedProperties(sortedResults);
   };
 
   const handleFilterChange = (event) => {
     setFilterCriteria(event.target.value);
+    console.log(event.target.value)
+  };
+
+  const handleClearButtonClick = () => {
+    setModifiedProperties(properties);
   };
 
   return (
@@ -815,6 +856,7 @@ export default function InspectedProperties(props) {
           filterOptions={filterOptions}
           handleSortChange={handleSortChange}
           handleFilterChange={handleFilterChange}
+          handleClearButtonClick={handleClearButtonClick}
         />
       </div>
       <Modal
