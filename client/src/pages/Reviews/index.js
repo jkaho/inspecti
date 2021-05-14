@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import NavBar from "../../components/NavBar";
 import ReviewCard from "../../components/ReviewCard";
 import SearchBar from "../../components/SearchBar";
@@ -25,14 +25,21 @@ const sortCriteria = [
 ]
 
 export default function Reviews() {
+  // States
   const [criteria, setCriteria] = useState('Criteria');
   const [reviews, setReviews] = useState([]);
+  const [modifiedReviews, setModifiedReviews] = useState([]);
 
+  // Refs
+  const inputRef = useRef();
+
+  // Initial render
   useEffect(() => {
     notesAPI.getSharedNotes()
       .then(res => {
         console.log(res);
         setReviews(res.data);
+        setModifiedReviews(res.data);
       })
       .catch(err => console.log(err));
   }, []);
@@ -40,20 +47,40 @@ export default function Reviews() {
   const handleChange = (event) => {
     setCriteria(event.target.value);
   };
+
+  const handleSearchChange = () => {
+    const search = inputRef.current.value.trim();
+    let searchResults = [];
+    console.log(search)
+    if (search !== "") {
+      reviews.forEach(review => {
+        if (review.propertyAddress.toLowerCase().includes(search)) {
+          searchResults.push(review);
+        }
+      });
+  
+      setModifiedReviews(searchResults);
+    } else {
+      setModifiedReviews(reviews);
+    }
+  };
   
   return (
-    <div>
+    <div className="reviews-page">
       <NavBar />
       <div className="review-search-div">
-        <SearchBar
-          placeholder="Search reviews by suburb, state or postcode"
+        <input
+          placeholder="Search reviews by address, suburb, state or postcode"
+          ref={inputRef}
+          type="text"
+          onChange={handleSearchChange}
         />
       </div>
       <div className="review-sort-div">
         <table>
           <tbody>
             <tr>
-              <td>5 REVIEWS</td>
+              <td>{modifiedReviews.length} REVIEWS</td>
               <td className="review-sort-td">
                 {/* <div 
                   style={{
@@ -65,7 +92,7 @@ export default function Reviews() {
                   SORT BY&nbsp;
                 </div> */}
                 <TextField
-                  id="outlined-select-native"
+                  id="outlined-select-reviews"
                   select
                   value={criteria}
                   label="Sort by"
@@ -103,7 +130,7 @@ export default function Reviews() {
         </table>
       </div>
       <div className="review-container">
-        {reviews.length > 0 ? reviews.map((review) => (
+        {modifiedReviews.length > 0 ? modifiedReviews.map((review) => (
           <ReviewCard
             key={review.id}
             title={review.title}
@@ -128,7 +155,7 @@ export default function Reviews() {
           />
         )) : 
           <div className="no-reviews">
-            <h2>There are currently no reviews</h2>
+            <h2>No reviews</h2>
           </div>
         }
       </div>

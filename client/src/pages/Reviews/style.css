@@ -1,14 +1,35 @@
+.reviews-page {
+  background: rgb(247, 247, 247);
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+
 .review-search-div {
+  margin: 0 auto;
   margin-top: 50px;
+  width: 600px;
+}
+
+.review-search-div input {
+  width: 80%;
+  height: 30px;
+  padding: 10px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid rgb(219, 219, 219);
+  font-size: 16px;
 }
 
 .review-sort-div {
   margin: 10px auto;
   width: fit-content;
-  background: white;
-  border: 1px solid rgb(219, 219, 219);
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(156, 18, 184);
   border-radius: 2px;
   padding: 10px;
+  box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.1);
 }
 
 .review-sort-div table {

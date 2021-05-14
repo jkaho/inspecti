@@ -10,6 +10,7 @@ import DailySchedule from "./pages/DailySchedule";
 import InspectedProperties from "./pages/InspectedProperties";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import authenticationAPI from "./utils/authenticationAPI";
+import "./App.css";
 
 function App() {
   const [isAuthenticated, setAuthentication] = useState(false);
