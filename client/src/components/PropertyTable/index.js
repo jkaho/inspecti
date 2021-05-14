@@ -302,11 +302,9 @@ export default function PropertyTable(props) {
     <>
     <TableToolbar
       searchRef={props.searchRef}
-      // sortRef={props.sortRef}
       sortCriteria={props.sortCriteria}
       handleSortChange={props.handleSortChange}
       sortOptions={props.sortOptions}
-      // filterRef={props.filterRef}
       filterCriteria={props.filterCriteria}
       handleFilterChange={props.handleFilterChange}
       filterOptions={props.filterOptions}
