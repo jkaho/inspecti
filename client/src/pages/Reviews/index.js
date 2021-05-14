@@ -21,17 +21,19 @@ const sortCriteria = [
   "Privacy",
   "Floorplan",
   "Outdoor space",
-  "Indoor-to-outdoor flow"
+  "Indoor-to-outdoor flow",
+  "Natural light"
 ]
 
 export default function Reviews() {
   // States
-  const [criteria, setCriteria] = useState('Criteria');
+  const [criteria, setCriteria] = useState('Date added');
   const [reviews, setReviews] = useState([]);
   const [modifiedReviews, setModifiedReviews] = useState([]);
 
   // Refs
   const inputRef = useRef();
+  const sortRef = useRef();
 
   // Initial render
   useEffect(() => {
@@ -44,14 +46,14 @@ export default function Reviews() {
       .catch(err => console.log(err));
   }, []);
 
-  const handleChange = (event) => {
+  // Helper functions
+  const handleSortChange = (event) => {
     setCriteria(event.target.value);
   };
 
   const handleSearchChange = () => {
     const search = inputRef.current.value.trim();
     let searchResults = [];
-    console.log(search)
     if (search !== "") {
       reviews.forEach(review => {
         if (review.propertyAddress.toLowerCase().includes(search)) {
@@ -63,6 +65,144 @@ export default function Reviews() {
     } else {
       setModifiedReviews(reviews);
     }
+  };
+
+  const handleSortButtonClick = (event) => {
+    const sortType = event.target.id.split("-")[1];
+    let sortedResults;
+    switch(criteria) {
+      case "Date added":
+        if (sortType === "desc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return new Date(b.dateShared) - new Date(a.dateShared);
+          }); 
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return new Date(a.dateShared) - new Date(b.dateShared);
+          }); 
+        }
+        break;
+      case "Property condition":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.propertyConditionRating - b.review.propertyConditionRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.propertyConditionRating - a.review.propertyConditionRating;
+          });
+        }
+        break;
+      case "Potential to capitalise":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.potentialRating - b.review.potentialRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.potentialRating - a.review.potentialRating;
+          });
+        }
+        break;
+      case "Surroundings":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.surroundingsRating - b.review.surroundingsRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.surroundingsRating - a.review.surroundingsRating;
+          });
+        }
+        break;
+      case "Consistency with neighbours": 
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.neighbourComparisonRating - b.review.neighbourComparisonRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.neighbourComparisonRating - a.review.neighbourComparisonRating;
+          });
+        }
+        break;
+      case "Accessibility":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.accessibilityRating - b.review.accessibilityRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.accessibilityRating - a.review.accessibilityRating;
+          });
+        }
+        break;
+      case "Privacy":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.privacyRating - b.review.privacyRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.privacyRating - a.review.privacyRating;
+          });
+        }
+        break;
+      case "Floorplan":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.floorplanRating - b.review.floorplanRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.floorplanRating - a.review.floorplanRating;
+          });
+        }
+        break;
+      case "Outdoor space":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.outdoorSpaceRating - b.review.outdoorSpaceRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.outdoorSpaceRating - a.review.outdoorSpaceRating;
+          });
+        }
+        break;
+      case "Indoor-to-outdoor flow":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.indoorOutdoorFlowRating - b.review.indoorOutdoorFlowRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.indoorOutdoorFlowRating - a.review.indoorOutdoorFlowRating;
+          });
+        }
+        break;
+      case "Natural light":
+        if (sortType === "asc") {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return a.review.naturalLightRating - b.review.naturalLightRating;
+          });
+        } else {
+          sortedResults = modifiedReviews.sort(function(a, b) {
+            return b.review.naturalLightRating - a.review.naturalLightRating;
+          });
+        }
+        break;
+      default:
+        console.log("nope")
+        return;
+    }
+    console.log(sortedResults)
+
+    setModifiedReviews(sortedResults);
+  };
+
+  const handleClearSortButtonClick = () => {
+    setModifiedReviews(reviews);
   };
   
   return (
@@ -94,9 +234,10 @@ export default function Reviews() {
                 <TextField
                   id="outlined-select-reviews"
                   select
+                  ref={sortRef}
                   value={criteria}
                   label="Sort by"
-                  onChange={handleChange}
+                  onChange={handleSortChange}
                   SelectProps={{
                     native: true,
                   }}
@@ -114,13 +255,13 @@ export default function Reviews() {
                   ))}
                 </TextField>
                 <div className="sort-btn-div">
-                  <IconButton className="sort-btn">
-                    <ExpandLessIcon />
+                  <IconButton id="sortbtn-asc" className="sort-btn" onClick={handleSortButtonClick}>
+                    <ExpandLessIcon id="sorticon-asc" />
                   </IconButton>
-                  <IconButton className="sort-btn">
-                    <ExpandMoreIcon />
+                  <IconButton id="sortbtn-desc" className="sort-btn" onClick={handleSortButtonClick}>
+                    <ExpandMoreIcon id="sorticon-desc" />
                   </IconButton>
-                  <IconButton className="sort-btn">
+                  <IconButton className="sort-btn" onClick={handleClearSortButtonClick}>
                     <ClearIcon />
                   </IconButton>
                 </div>
