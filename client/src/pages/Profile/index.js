@@ -23,7 +23,9 @@ export default function Profile(props) {
   const [state, setState] = useState({});
   const [numPropertiesInspected, setNumPropertiesInspected] = useState();
   const [numInspectionsScheduled, setNumInspectionsScheduled] = useState();
+  const [numAuctionsScheduled, setNumAuctionsScheduled] = useState();
   const [userInfo, setUserInfo] = useState({});
+  const [page, setPage] = useState("inspections");
 
   useEffect(() => {
     let monthlyData = [[], [], [], [], [], [], []];
@@ -85,12 +87,16 @@ export default function Profile(props) {
             .then(res => {
               console.log(res)
               let inspectionEvents = [];
+              let auctionEvents = [];
               res.data.forEach(item => {
                 if (item.eventType === "Inspection") {
                   inspectionEvents.push(item);
+                } else {
+                  auctionEvents.push(item);
                 }
               });
               setNumInspectionsScheduled(inspectionEvents.length);
+              setNumAuctionsScheduled(auctionEvents.length);
             })
             .catch(err => console.log(err))
         })
@@ -153,10 +159,10 @@ export default function Profile(props) {
               </tr>
               <tr className="stat-toggle-tr">
                 <td className="inspection-stat-toggle" width="50%">
-                  <button>INSPECTION STATS</button>
+                  <button onClick={() => setPage("inspections")}>INSPECTION STATS</button>
                 </td>
                 <td className="auction-stat-toggle" width="50%">
-                  <button>AUCTION STATS</button>
+                  <button onClick={() => setPage("auctions")}>AUCTION STATS</button>
                 </td>
               </tr>
               <tr className="stat-tr">
@@ -165,10 +171,16 @@ export default function Profile(props) {
                     <div className="stat-bubble">
                       <div className="num-inspections">
                         TOTAL<br/>
-                        <span className="large-num">{numPropertiesInspected}</span><br/>
+                        <span className="large-num">
+                          {page === "inspections" ? numPropertiesInspected : ""}
+                          </span><br/>
                         {
+                          page === "inspections" ? 
                           numPropertiesInspected > 1 ?
-                          "PROPERTIES INSPECTED" : "PROPERTY INSPECTED"
+                          "PROPERTIES INSPECTED" : "PROPERTY INSPECTED" : 
+                          ""
+                          // numAuctionsScheduled > 1 ? 
+                          // "AUCTIONS ATTENDED" : "AUCTION ATTENDED"
                         }
                       </div>
                       {/* <div className="inspection-type-num">
@@ -178,10 +190,15 @@ export default function Profile(props) {
                     <div className="stat-bubble">
                       <div className="num-inspections">
                         TOTAL<br/>
-                        <span className="large-num">{numInspectionsScheduled}</span><br/>
+                        <span className="large-num">
+                          {page === "inspections" ? numInspectionsScheduled : numAuctionsScheduled}
+                        </span><br/>
                         {
+                          page === "inspections" ?
                           numInspectionsScheduled > 1 ?
-                          "INSPECTIONS SCHEDULED" : "INSPECTION SCHEDULED"
+                          "INSPECTIONS SCHEDULED" : "INSPECTION SCHEDULED" : 
+                          numAuctionsScheduled > 1 ? 
+                          "AUCTIONS SCHEDULED" : "AUCTION SCHEDULED"                        
                         }
                       </div>
                       {/* <div className="inspection-type-num">
@@ -190,7 +207,7 @@ export default function Profile(props) {
                     </div>
                   </div>
                   <div className="chart-container">
-                    <PropertiesChart />
+                    {page === "inspections" ? <PropertiesChart /> : ""} 
                   </div>
                 </td>
               </tr>
