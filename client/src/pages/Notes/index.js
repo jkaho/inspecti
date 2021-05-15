@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
 import NoteListItem from "../../components/NoteListItem";
+import SearchAutocomplete from "../../components/SearchAutocomplete";
 import TextEditor from "../../components/TextEditor";
 import ReviewCard from "../../components/ReviewCard";
 import SimpleModal from "../../components/Modal";
@@ -184,7 +185,7 @@ export default function Notes(props) {
       // If there are no existing notes, create a new blank note
       if (res.data.length < 1) {
         titleRef.current.value = "";
-        textRef.current.value = "";
+        // textRef.current.value = "";
         setTitle("");
         setText("");
         
@@ -540,7 +541,7 @@ export default function Notes(props) {
   };
 
   const handleAddressInputChange = () => {
-    const address = addressRef.current.value.trim();
+    const address = addressRef.current.children[0].children[1].children[0].value.trim();
     // setAddressSearch(address);
     if (address !== "") {
       domainAPI.getAddressSuggestions(address)
@@ -554,10 +555,9 @@ export default function Notes(props) {
     console.log(addressSuggestions)
   };
 
-  const handleAddressSuggestionClick = (event) => {
-    const address = event.target.textContent;
+  const handleAddressSuggestionClick = (value) => {
     let propertyId;
-    setAddress(address);
+    setAddress(value.address);
 
     propertiesAPI.getAllProperties()
       .then(res => {
@@ -568,7 +568,7 @@ export default function Notes(props) {
           }
         });
 
-        domainAPI.getPropertyInfo(event.target.id)
+        domainAPI.getPropertyInfo(value.id)
         .then(res => {
           const propertyInfo = {
             bedrooms: res.data.bedrooms,
@@ -590,7 +590,7 @@ export default function Notes(props) {
             })
             .catch(err => console.log(err))
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
 
@@ -1150,7 +1150,7 @@ export default function Notes(props) {
                     `note-address-input 
                     ${addressInputIsOpen ? classes.show : classes.hide}`}
                 >
-                  <div className="address-search-input">
+                  {/* <div className="address-search-input">
                     <input 
                       ref={addressRef}
                       type="text" 
@@ -1167,14 +1167,19 @@ export default function Notes(props) {
                         >{suggestion.address}</li>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
 
                   
-                  {/* <SuggestionSearch
-                    suggestions={addressSuggestions}
-                    onChange={handleAddressInputChange}
-                    addressRef={addressRef}
-                  /> */}
+                <SearchAutocomplete
+                  id="search-autocomplete-notes"
+                  className="notes-search-address"
+                  // style={{ position: "fixed" }}
+                  addressRef={addressRef}
+                  onInputChange={handleAddressInputChange}
+                  suggestions={addressSuggestions}
+                  onChange={handleAddressSuggestionClick}
+                  smallInput={true}
+                />
                 </div>
                 <div 
                   className={
