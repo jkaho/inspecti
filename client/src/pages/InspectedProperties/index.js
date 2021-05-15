@@ -262,6 +262,20 @@ export default function InspectedProperties(props) {
           return;
         }
 
+        properties.forEach(property => {
+          if (property.propertyAddress === propertyEntry.propertyAddress) {
+            setPopup(
+              { 
+                open: true, 
+                type: "addressExists", 
+                severity: "warning",
+                message: "A record already exists for the property you're trying to add!"
+              }
+            );
+            return;
+          }
+        });
+        
         propertiesAPI.createProperty(propertyEntry)
           .then(res => {
             console.log(res);

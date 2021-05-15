@@ -20,7 +20,6 @@ function App() {
   useEffect(() => {
     authenticationAPI.authenticated()
       .then(res => {
-        console.log(res.data)
         setAuthentication(res.data.isAuthenticated);
         setUserId(res.data.id);
         setUserInfo({
@@ -31,6 +30,10 @@ function App() {
       })
       .catch(err => console.log(err));
   }, []);
+
+  const userIsLoggedIn = () => {
+    setAuthentication(true);
+  };
   
   return (
     <Router>
@@ -41,21 +44,19 @@ function App() {
           <Route
             exact path="/login" 
             render={() => isAuthenticated ? 
-              <Profile
-                id={userId}
-                info={userInfo}
-              /> : 
-              <Login />
+              <Redirect to="/profile" /> : 
+              <Login
+                onSuccess={userIsLoggedIn}
+              />
             }
           />
           <Route
             exact path="/signup" 
             render={() => isAuthenticated ? 
-              <Profile
-                id={userId}
-                info={userInfo}
-              /> : 
-              <Signup />
+              <Redirect to="/profile" /> : 
+              <Signup 
+                onSuccess={userIsLoggedIn}
+              />
             }
           />
           <Route

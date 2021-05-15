@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -90,7 +90,14 @@ export default function SignUp() {
     };
 
     userAPI.signUpUser(userData)
-      .then(() => console.log("User successfully signed up!"))
+      .then(() => {
+        userAPI.logInUser({
+          email: userData.email,
+          password: userData.password
+        })
+        .then(() => props.onSuccess())
+        .catch(err => console.log(err));
+      })
       .catch((err) => {
         console.log(err);
         setOpen(true);

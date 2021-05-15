@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import PopupMessage from "../../components/PopupMessage";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
@@ -8,7 +8,6 @@ import { Typography, Button, TextField } from "@material-ui/core";
 import userAPI from "../../utils/userAPI";
 import authenticationAPI from "../../utils/authenticationAPI";
 import notesAPI from "../../utils/notesAPI";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,11 +35,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function LogIn() {
+export default function LogIn(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
+  let history = useHistory();
 
   const handleLogInFormSubmit = (event) => {
     event.preventDefault();
@@ -82,7 +82,7 @@ export default function LogIn() {
       //   console.log("User successfully logged in!");
       //   console.log(res)
       // })
-      .then(() => window.location.replace("/profile"))
+      .then(() => props.onSuccess())
       .catch(err => {
         console.log(err);
         setOpen(true);
