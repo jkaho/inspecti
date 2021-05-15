@@ -9,6 +9,7 @@ import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
+import Tooltip from "@material-ui/core/Tooltip";
 import { EditorState, ContentState, convertFromHTML } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
@@ -90,7 +91,7 @@ const sortOptions = [
     disabled: false,
     value: "landSizeDesc"
   }
-]
+];
 
 const filterOptions = [
   {
@@ -139,7 +140,20 @@ const filterOptions = [
     disabled: false,
     value: "noNotes"
   }
-]
+];
+
+const ratingTooltips = {
+  condition: "The state of the property relative to its age.",
+  potential: "How much potential the property has to add value to it.",
+  surroundings: "How are the immediate surroundings? Is the property located on a tree-lined street? Is it close to an industrial area?",
+  neighbours: "The property's similarity in value and style to its neighbouring properties.",
+  accessibility: "Is the property located at the bottom/top of a steep hill? Is it tucked away into a narrow lane way or at the end of a long driveway?",
+  privacy: "How much of the inside of the property can be seen from neighbouring properties or from public areas?",
+  floorplan: "How functional is the floor plan? Are the dining room and kitchen on separate sides of the home?",
+  outdoorSpace: "The amount of outdoor space (garden, balcony, courtyard, etc.) relative to indoor space. How well-balanced is the indoor space to outdoor space ratio?",
+  indoorOutdoorFlow: "Does the internal floor plan flow seamlessly to the outdoors?",
+  naturalLight: "How well is the property illuminated with sunlight?"
+};
 
 export default function InspectedProperties(props) {
   const classes = useStyles();
@@ -572,61 +586,131 @@ export default function InspectedProperties(props) {
           <table>
             <tbody>
               <tr>
-                <td className="property-note-rating-category">Property condition</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Property condition&nbsp;</div>
+                    <Tooltip title={ratingTooltips.condition}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={conditionRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Potential</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Potential&nbsp;</div>
+                    <Tooltip title={ratingTooltips.potential}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={potentialRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Surroundings</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Surroundings&nbsp;</div>
+                    <Tooltip title={ratingTooltips.surroundings}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={surroundingsRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Consistency with neighbours</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Consistency with neighbours&nbsp;</div>
+                    <Tooltip title={ratingTooltips.neighbours}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={neighboursRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Accessibility</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Accessibility&nbsp;</div>
+                    <Tooltip title={ratingTooltips.accessibility}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={accessibilityRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Privacy</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Privacy&nbsp;</div>
+                    <Tooltip title={ratingTooltips.privacy}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={privacyRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Floorplan</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Floor plan&nbsp;</div>
+                    <Tooltip title={ratingTooltips.floorplan}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={floorplanRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Outdoor space</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Outdoor space&nbsp;</div>
+                    <Tooltip title={ratingTooltips.outdoorSpace}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={outdoorSpaceRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Indoor-to-outdoor flow</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Indoor-to-outdoor flow&nbsp;</div>
+                    <Tooltip title={ratingTooltips.indoorOutdoorFlow}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={indoorOutdoorRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>
               </tr>
               <tr>
-                <td className="property-note-rating-category">Natural lighting</td>
+                <td className="property-note-rating-category">
+                  <div className="rating-tooltip-div">
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Natural light&nbsp;</div>
+                    <Tooltip title={ratingTooltips.naturalLight}>
+                      <i className="fas fa-info-circle"></i>
+                    </Tooltip>
+                  </div>
+                </td>
                 <td className="property-note-rating">
                   <input ref={lightingRef} type="number" defaultValue="" /><span>&nbsp;/5</span>
                 </td>

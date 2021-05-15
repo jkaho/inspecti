@@ -6,18 +6,19 @@ const notesController = {
     db.note
       .findAll({
         where: {
-          userId: parseInt(req.params.id)
+          userId: parseInt(req.user.id)
         }
       })
       .then(notes => res.json(notes))
       .catch(err => console.log(err));
   },
   getNotesWithReviews: function(req, res) {
+    console.log(req.user)
     db.note
       .findAll({
         include: [db.review],
         where: {
-          userId: parseInt(req.params.id)
+          userId: parseInt(req.user.id)
         }
       })
       .then(notes => res.json(notes))
@@ -49,7 +50,7 @@ const notesController = {
     db.note
       .findAll({
         where: {
-          userId: parseInt(req.params.id),
+          userId: parseInt(req.user.id),
           starred: true
         }
       })
@@ -104,7 +105,7 @@ const notesController = {
         title: req.body.title,
         text: req.body.text,
         propertyAddress: req.body.propertyAddress,
-        userId: req.body.userId,
+        userId: req.user.id,
         propertyId: req.body.propertyId,
         hasReview: req.body.hasReview ? req.body.hasReview : false,
         bedrooms: req.body.bedrooms,

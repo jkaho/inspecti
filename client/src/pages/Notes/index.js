@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
+import Tooltip from "@material-ui/core/Tooltip";
 import PlaceIcon from "@material-ui/icons/Place";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -115,6 +116,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const ratingTooltips = {
+  condition: "The state of the property relative to its age.",
+  potential: "How much potential the property has to add value to it.",
+  surroundings: "How are the immediate surroundings? Is the property located on a tree-lined street? Is it close to an industrial area?",
+  neighbours: "The property's similarity in value and style to its neighbouring properties.",
+  accessibility: "Is the property located at the bottom/top of a steep hill? Is it tucked away into a narrow lane way or at the end of a long driveway?",
+  privacy: "How much of the inside of the property can be seen from neighbouring properties or from public areas?",
+  floorplan: "How functional is the floor plan? Are the dining room and kitchen on separate sides of the home?",
+  outdoorSpace: "The amount of outdoor space (garden, balcony, courtyard, etc.) relative to indoor space. How well-balanced is the indoor space to outdoor space ratio?",
+  indoorOutdoorFlow: "Does the internal floor plan flow seamlessly to the outdoors?",
+  naturalLight: "How well is the property illuminated with sunlight?"
+};
+
 export default function Notes(props) {
   // States
   const classes = useStyles();
@@ -179,7 +193,7 @@ export default function Notes(props) {
   // Helper functions
   const renderAllNotes = () => {
     // Check user's saved notes 
-    notesAPI.getNotesWithReviews(props.id)
+    notesAPI.getNotesWithReviews()
     .then(res => {
       console.log(res);
       // If there are no existing notes, create a new blank note
@@ -1248,7 +1262,12 @@ export default function Notes(props) {
                   </thead>
                   <tbody>
                     <tr className="review-criteria-row">
-                      <td>Property condition</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Property condition&nbsp;</div>
+                        <Tooltip title={ratingTooltips.condition}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip>
+                      </td>
                       <td>
                         <span 
                           className={
@@ -1271,7 +1290,12 @@ export default function Notes(props) {
                       </td> 
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Potential to capitalise</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Potential to capitalise&nbsp;</div>
+                          <Tooltip title={ratingTooltips.potential}>
+                            <i className="fas fa-info-circle"></i>
+                          </Tooltip>
+                        </td>
                       <td>
                         <span 
                           className={
@@ -1294,7 +1318,12 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Surroundings</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Surroundings&nbsp;</div>
+                        <Tooltip title={ratingTooltips.surroundings}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip>
+                      </td>
                       <td>
                         <span 
                           className={
@@ -1317,7 +1346,12 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Consistency with neighbours</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Consistency with neighbours&nbsp;</div>
+                        <Tooltip title={ratingTooltips.neighbours}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip>
+                      </td>
                       <td>
                         <span 
                           className={
@@ -1340,7 +1374,12 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Accessibility</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Accessibility&nbsp;</div>
+                        <Tooltip title={ratingTooltips.accessibility}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip>
+                      </td>
                       <td>
                         <span 
                           className={
@@ -1363,7 +1402,12 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Privacy</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Privacy&nbsp;</div>
+                        <Tooltip title={ratingTooltips.privacy}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip>
+                      </td>
                       <td>
                         <span 
                           className={
@@ -1386,7 +1430,12 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Floorplan</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Floor plan&nbsp;</div>
+                        <Tooltip title={ratingTooltips.floorplan}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip>
+                      </td>
                       <td>
                         <span 
                           className={
@@ -1409,7 +1458,12 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Outdoor space</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Outdoor space&nbsp;</div>
+                        <Tooltip title={ratingTooltips.outdoorSpace}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip>
+                      </td>
                       <td>
                         <span 
                           className={
@@ -1432,7 +1486,11 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Indoor-to-outdoor flow</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Indoor-to-outdoor flow&nbsp;</div>
+                        <Tooltip title={ratingTooltips.indoorOutdoorFlow}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip></td>
                       <td>
                         <span 
                           className={
@@ -1455,7 +1513,12 @@ export default function Notes(props) {
                       </td>
                     </tr>
                     <tr className="review-criteria-row">
-                      <td>Natural light</td>
+                      <td>
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Natural light&nbsp;</div>
+                        <Tooltip title={ratingTooltips.naturalLight}>
+                          <i className="fas fa-info-circle"></i>
+                        </Tooltip>
+                      </td>
                       <td>
                         <span 
                           className={
