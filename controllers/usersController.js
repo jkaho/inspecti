@@ -23,6 +23,12 @@ const usersController = {
       .then(user => res.json(user))
       .catch(err => console.log(err))
   },
+  getAllUsers: function(req, res) {
+    db.user
+      .findAll({})
+      .then(users => res.json(users))
+      .catch(err => console.log(err));
+  },
 };
 
 module.exports = usersController;

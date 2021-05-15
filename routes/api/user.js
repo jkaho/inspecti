@@ -37,6 +37,8 @@ router.get("/logout", (req, res) => {
 
 router.get("/find/:id", usersController.getOneUser);
 
+router.get("/all", usersController.getAllUsers);
+
 // Note routes 
 router.get("/notes/:id", notesController.getNotes);
 

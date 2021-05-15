@@ -17,7 +17,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (1, "2021-04-17", "35 Luxe Ave Bellavue Hill, NSW 2023", "House", 5, 3, 2, 655, 3200000, 3235000, FALSE, 1);
 
@@ -32,7 +32,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (2, "2021-04-21", "4/3 Barr Pl Waverley", "Townhouse", 3, 2, 2, 220, 2500000, 2600000, FALSE, 1);
 
@@ -47,7 +47,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (3, "2021-04-17", "53 Bore St Greenwood", "House", 5, 3, 2, 450, 3200000, 3330000, TRUE, 1);
 
@@ -62,7 +62,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (4, "2021-04-17", "3/35 Star Rd Starville", "Apartment", 2, 2, 1, 97, 2200000, 2760000, TRUE, 1);
 
@@ -77,7 +77,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (5, "2021-04-17", "54 Michael St Beverley", "House", 4, 3, 1, 650, 2200000, 2290000, FALSE, 1);
 
@@ -92,7 +92,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (6, "2021-04-10", "131 Euroka St Boxley", "House", 3, 2, 1, 280, 2200000, 2320000, FALSE, 1);
 
@@ -107,7 +107,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (7, "2021-04-10", "29 Euroka St Boxley", "House", 5, 2, 3, 980, 4200000, 4175000, TRUE, 1);
 
@@ -122,7 +122,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (8, "2021-04-10", "7/63 Bomson Ave Boxley", "Apartment", 4, 2, 2, 203, 3650000, 4000000, TRUE, 1);
 
@@ -137,7 +137,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (9, "2021-04-03", "9 Samson Rd Bondi", "House", 4, 3, 3, 267, 2900000, 3210000, FALSE, 1);
 
@@ -152,7 +152,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (10, "2021-04-03", "2/85 Samson Dr Bondi", "Townhouse", 3, 2, 1, 216, 1800000, 1891000, TRUE, 1);
 
@@ -167,7 +167,7 @@ INSERT INTO inspectedProperties (
   landSize,
   priceGuide,
   soldPrice,
-  hadAuction,
+  attendedAuction,
   userId
 ) VALUES (11, "2021-04-03", "42 Billy Ave Cronolla", "House", 3, 2, 1, 390, 2800000, 2600000, TRUE, 1);
 

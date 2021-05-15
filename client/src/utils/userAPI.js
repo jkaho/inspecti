@@ -13,7 +13,10 @@ const API = {
   },
   getOneUser: function(userId) {
     return axios.get(url + "/api/user/find/" + userId, { withCredentials: true })
-  }
+  },
+  getAllUsers: function() {
+    return axios.get(url + "/api/user/all", { withCredentials: true });
+  },
 };
 
 export default API;

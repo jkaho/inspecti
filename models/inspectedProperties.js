@@ -40,9 +40,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    hadAuction: {
+    attendedAuction: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
   }, { freezeTableName: true });
 

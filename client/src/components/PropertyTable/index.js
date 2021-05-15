@@ -175,7 +175,9 @@ export default function PropertyTable(props) {
         property.landSize,
         property.priceGuide,
         property.soldPrice,
-        property.hadAuction ? "true" : "false",
+        property.attendedAuction === true ? "true" : 
+        property.attendedAuction === false ? "false":
+        "noAuction",
         property.notes,
         property.id
       ))
@@ -238,11 +240,19 @@ export default function PropertyTable(props) {
                   <>
                     <option value={true}>Yes</option>
                     <option value={false}>No</option>
+                    <option value={null}>No auction</option>
                   </> : 
+                  row.auction === "false" ?
                   <>
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
-                  </>
+                    <option value={null}>No auction</option>
+                  </> : 
+                  <>
+                  <option value={null}>No auction</option>
+                  <option value={false}>No</option>
+                  <option value={true}>Yes</option>
+                </>
                 }
               </select>
               : row.auction 
@@ -394,6 +404,7 @@ export default function PropertyTable(props) {
               >
                 <option value={false}>No</option>
                 <option value={true}>Yes</option>
+                <option value={null}>No auction</option>
               </select>
               {/* <input type="text" ref={props.auctionRef} placeholder="Required"
                 style={{ width: "60px", height: "20px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "4px" }}

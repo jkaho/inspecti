@@ -43,7 +43,7 @@ const propertiesController = {
         landSize: req.body.landSize,
         priceGuide: req.body.priceGuide,
         soldPrice: req.body.soldPrice,
-        hadAuction: req.body.hadAuction,
+        attendedAuction: req.body.attendedAuction,
         userId: req.user.id,
       })
       .then(propertyEntry => res.json(propertyEntry))
@@ -56,7 +56,7 @@ const propertiesController = {
           dateInspected: req.body.dateInspected,
           priceGuide: req.body.priceGuide,
           soldPrice: req.body.soldPrice,
-          hadAuction: req.body.hadAuction
+          attendedAuction: req.body.attendedAuction
         },
         {
           where: {

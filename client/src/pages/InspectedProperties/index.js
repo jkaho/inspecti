@@ -114,10 +114,16 @@ const filterOptions = [
     value: "townhouse"
   },
   {
-    label: "Had auction",
+    label: "Attended auction",
     disabled: false,
-    value: "hadAuction"
+    value: "attendedAuction"
   },
+  {
+    label: "Did not attend auction",
+    disabled: false,
+    value: "didNotAttendAuction"
+  },
+  ,
   {
     label: "No auction",
     disabled: false,
@@ -238,7 +244,7 @@ export default function InspectedProperties(props) {
           propertyType: res.data.propertyCategory,
           priceGuide: guideRef.current.value,
           soldPrice: soldRef.current.value,
-          hadAuction: auctionRef.current.value === "true" ? true : false,
+          attendedAuction: auctionRef.current.value === "true" ? true : false,
         };
     
         if (
@@ -301,7 +307,7 @@ export default function InspectedProperties(props) {
       dateInspected: editDateRef.current.value,
       priceGuide: parseInt(editGuideRef.current.value.trim()),
       soldPrice: parseInt(editSoldRef.current.value.trim()),
-      hadAuction: editAuctionRef.current.value === "true" ? true : false
+      attendedAuction: editAuctionRef.current.value === "true" ? true : false
     };
 
     propertiesAPI.updateProperty(propertyId, updatedPropertyData)
@@ -859,16 +865,23 @@ export default function InspectedProperties(props) {
           }
         });
         break;
-      case "hadAuction":
+      case "attendedAuction":
         propertiesCopy.forEach(item => {
-          if (item.hadAuction) {
+          if (item.attendedAuction) {
+            filteredResults.push(item);
+          }
+        });
+        break;
+      case "didNotAttendAuction":
+        propertiesCopy.forEach(item => {
+          if (item.attendedAuction === false) {
             filteredResults.push(item);
           }
         });
         break;
       case "noAuction":
         propertiesCopy.forEach(item => {
-          if (!item.hadAuction) {
+          if (item.attendedAuction === null) {
             filteredResults.push(item);
           }
         });

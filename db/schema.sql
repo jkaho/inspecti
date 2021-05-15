@@ -25,7 +25,7 @@ CREATE TABLE inspectedProperties (
   landSize INT,
   priceGuide INT,
   soldPrice INT,
-  hadAuction BOOLEAN NOT NULL,
+  attendedAuction BOOLEAN,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   userId INT NOT NULL,

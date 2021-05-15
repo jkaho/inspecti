@@ -11,7 +11,15 @@
 
 .stat-td {
   border-top: 1px solid #dbdbdb;
+  width: 40%;
 }
+
+.chart-td {
+  vertical-align: top;
+  border-top: 1px solid #dbdbdb;
+  width: 60%;
+}
+
 
 .user-text {
   padding-left: 20px;
@@ -38,10 +46,13 @@
 
 .stat-container {
   padding: 10px;
+  width: 100%;
 }
 
 .chart-container {
-  vertical-align: top;
+  display: block;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .stat-bubble {
@@ -50,6 +61,8 @@
   color: rgb(71, 71, 71);
   padding: 10px;
   border-radius: 30px;
+  display: block;
+  margin: 0 auto;
   margin-bottom: 10px;
   text-align: center;
 }

@@ -20,7 +20,7 @@ export default function PopupMessage(props) {
   // const classes = useStyles();
 
   return (
-  <Snackbar open={props.open} onClose={props.handleClose}>
+  <Snackbar open={props.open} autoHideDuration={6000} onClose={props.handleClose}>
     <Alert onClose={props.handleClose} severity={props.severity}>
       {props.message}
     </Alert>

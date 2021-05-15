@@ -20,15 +20,18 @@ const recentMonths = {
 
 
 export default function Profile(props) {
-  const [state, setState] = useState({});
+  const [propertyChartState, setPropertyChartState] = useState({});
   const [numPropertiesInspected, setNumPropertiesInspected] = useState();
   const [numInspectionsScheduled, setNumInspectionsScheduled] = useState();
+  const [numAuctionsAttended, setNumAuctionsAttended] = useState();
   const [numAuctionsScheduled, setNumAuctionsScheduled] = useState();
   const [userInfo, setUserInfo] = useState({});
   const [page, setPage] = useState("inspections");
 
   useEffect(() => {
-    let monthlyData = [[], [], [], [], [], [], []];
+    let monthlyPropertyData = [[], [], [], [], [], [], []];
+    let attendedAuctions = [];
+
     authenticationAPI.authenticated()
       .then(res => {
         setUserInfo(res.data);
@@ -38,23 +41,28 @@ export default function Profile(props) {
           res.data.forEach(item => {
             let monthYearInspected = moment(item.dateInspected).format("MMYY");
             if (monthYearInspected === recentMonths.sixMonthsAgo.format("MMYY")) {
-              monthlyData[0].push(item);
+              monthlyPropertyData[0].push(item);
             } else if (monthYearInspected === recentMonths.fiveMonthsAgo.format("MMYY")) {
-              monthlyData[1].push(item);
+              monthlyPropertyData[1].push(item);
             } else if (monthYearInspected === recentMonths.fourMonthsAgo.format("MMYY")) {
-              monthlyData[2].push(item);
+              monthlyPropertyData[2].push(item);
             } else if (monthYearInspected === recentMonths.threeMonthsAgo.format("MMYY")) {
-              monthlyData[3].push(item);
+              monthlyPropertyData[3].push(item);
             } else if (monthYearInspected === recentMonths.twoMonthsAgo.format("MMYY")) {
-              monthlyData[4].push(item);
+              monthlyPropertyData[4].push(item);
             } else if (monthYearInspected === recentMonths.oneMonthAgo.format("MMYY")) {
-              monthlyData[5].push(item);
+              monthlyPropertyData[5].push(item);
             } else {
-              monthlyData[6].push(item);
+              monthlyPropertyData[6].push(item);
             } 
+
+            if (item.attendedAuction === true) {
+              attendedAuctions.push(item);
+            }
           });
   
-          setState({
+          setNumAuctionsAttended(attendedAuctions.length);
+          setPropertyChartState({
             labels: [
               recentMonths.sixMonthsAgo.format("MMM"),
               recentMonths.fiveMonthsAgo.format("MMM"),
@@ -71,13 +79,13 @@ export default function Profile(props) {
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
                 data: [
-                  monthlyData[0].length,
-                  monthlyData[1].length, 
-                  monthlyData[2].length, 
-                  monthlyData[3].length, 
-                  monthlyData[4].length,
-                  monthlyData[5].length,
-                  monthlyData[6].length
+                  monthlyPropertyData[0].length,
+                  monthlyPropertyData[1].length, 
+                  monthlyPropertyData[2].length, 
+                  monthlyPropertyData[3].length, 
+                  monthlyPropertyData[4].length,
+                  monthlyPropertyData[5].length,
+                  monthlyPropertyData[6].length
                 ]
               }
             ]
@@ -109,7 +117,7 @@ export default function Profile(props) {
     return (
       <div>
         <Bar
-          data={state}
+          data={propertyChartState}
           options={{
             title: {
               display: true,
@@ -119,7 +127,9 @@ export default function Profile(props) {
             legend: {
               display: true,
               position: 'right'
-            }
+            },
+            responsive: true,
+            maintainAspectRatio: false
           }}
         />
       </div>
@@ -166,13 +176,13 @@ export default function Profile(props) {
                 </td>
               </tr>
               <tr className="stat-tr">
-                <td className="stat-td" colSpan="2">
+                <td className="stat-td">
                   <div className="stat-container">
                     <div className="stat-bubble">
                       <div className="num-inspections">
                         TOTAL<br/>
                         <span className="large-num">
-                          {page === "inspections" ? numPropertiesInspected : ""}
+                          {page === "inspections" ? numPropertiesInspected : numAuctionsAttended}
                           </span><br/>
                         {
                           page === "inspections" ? 
@@ -206,6 +216,8 @@ export default function Profile(props) {
                       </div> */}
                     </div>
                   </div>
+                </td>
+                <td className="chart-td">
                   <div className="chart-container">
                     {page === "inspections" ? <PropertiesChart /> : ""} 
                   </div>

@@ -7,6 +7,8 @@ import "./style.css";
 import { Typography, Button, TextField } from "@material-ui/core";
 import userAPI from "../../utils/userAPI";
 import authenticationAPI from "../../utils/authenticationAPI";
+import notesAPI from "../../utils/notesAPI";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,6 +97,15 @@ export default function LogIn() {
     setOpen(false);
   };
 
+  const checkUsers = () => {
+    userAPI.getAllUsers()
+    .then(res => {
+      console.log(res);
+      console.log("hello!")
+    })
+    .catch(err => console.log(err));
+  };
+
   return (
     <div className={classes.root}>
       <Grid container spacing={0} className={classes.page}>
@@ -142,16 +153,20 @@ export default function LogIn() {
                 </div>
               </form>
               <button onClick={() => authenticationAPI.authenticated().then(res => console.log(res)).catch(err => console.log(err))}>Authenticated?</button>
+              <button onClick={checkUsers}>All users</button>
+              <button onClick={() => notesAPI.getAllNotes().then(res => console.log(res)).catch(err => console.log(err))}>Notes</button>
             </div>
           </div>
         </Grid>
       </Grid>
-      <PopupMessage 
-        handleClose={handleClose}
-        open={open}
-        message="You have inputted an incorrect email or password"
-        severity="error"
-      />
+      {/* <ClickAwayListener onClickAway={handleClickAway}> */}
+        <PopupMessage 
+          handleClose={handleClose}
+          open={open}
+          message="You have inputted an incorrect email or password"
+          severity="error"
+        />
+      {/* </ClickAwayListener> */}
     </div>
   );
 }
