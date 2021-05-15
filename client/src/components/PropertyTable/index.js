@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-// Components
+// Child components
 import TableToolbar from "../../components/TableToolbar";
 // Material Design 
+import Tooltip from "@material-ui/core/Tooltip";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -65,6 +66,13 @@ const useStyles = makeStyles({
     fontSize: 12
   }
 });
+
+const tooltipTitles = {
+  guide: "The price guide of the property",
+  sold: "The sold price of the property",
+  auction: "Did you attend the auction? Or was there no auction?",
+  notes: "Create a note OR click on a note title to view it"
+};
 
 function TablePaginationActions(props) {
   const classes = useStylesPagination();
@@ -332,10 +340,34 @@ export default function PropertyTable(props) {
             <TableCell>Bath</TableCell>
             <TableCell>Car</TableCell>
             <TableCell>Land</TableCell>
-            <TableCell>Guide</TableCell>
-            <TableCell>Sold</TableCell>
-            <TableCell>Auction</TableCell>
-            <TableCell>Notes</TableCell>
+            <TableCell>
+              <Tooltip title={tooltipTitles.guide}>
+                <div className="tooltip">
+                  Guide
+                </div>
+              </Tooltip>
+            </TableCell>
+            <TableCell>
+              <Tooltip title={tooltipTitles.sold}>
+                <div className="tooltip">
+                  Sold
+                </div>
+              </Tooltip>
+            </TableCell>
+            <TableCell>
+              <Tooltip title={tooltipTitles.auction}>
+                <div className="tooltip">
+                  Auction
+                </div>
+              </Tooltip>
+            </TableCell>
+            <TableCell>
+              <Tooltip title={tooltipTitles.notes}>
+                <div className="tooltip">
+                  Notes
+                </div>
+              </Tooltip>
+            </TableCell>
             <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>

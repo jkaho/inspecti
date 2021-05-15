@@ -116,3 +116,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .property-note--view-actions {
   text-align: center;
 }
+
+.tooltip {
+  cursor: help;
+}
