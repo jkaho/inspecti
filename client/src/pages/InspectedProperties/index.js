@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Tooltip from "@material-ui/core/Tooltip";
 // react-draft-wysiwyg
-import { EditorState, ContentState, convertFromHTML } from 'draft-js';
+import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
@@ -133,7 +133,6 @@ const filterOptions = [
     disabled: false,
     value: "didNotAttendAuction"
   },
-  ,
   {
     label: "No auction",
     disabled: false,
@@ -178,7 +177,7 @@ export default function InspectedProperties(props) {
   const [editModeIsOn, setEditMode] = useState(false);
   const [propertyToEditId, setPropertyToEditId] = useState();
   const [modalStyle] = useState(getModalStyle);
-  const [noteModalIsOpen, setNoteModalState] = useState(false);
+  // const [noteModalIsOpen, setNoteModalState] = useState(false);
   const [modal, setModalState] = useState({
     open: false,
     type: "deleteConfirm",
@@ -391,7 +390,7 @@ export default function InspectedProperties(props) {
   };
 
   const handleModalClose = () => {
-    setNoteModalState(false);
+    // setNoteModalState(false);
     setModalState({ open: false, type: "" });
   };
 
@@ -519,7 +518,7 @@ export default function InspectedProperties(props) {
   };
 
   const handleCreateNoteClick = (event) => {
-    setNoteModalState(true);
+    // setNoteModalState(true);
     setEditorState(() => EditorState.createEmpty());
     setModalState({ open: true, type: "createNote" });
     setPropertyNoteInfo({
@@ -534,7 +533,7 @@ export default function InspectedProperties(props) {
 
   const handleConfirmNewNoteButtonClick = (event) => {
     event.preventDefault();
-    setNoteModalState(false);
+    // setNoteModalState(false);
     const newNote = {
       propertyAddress: propertyNoteInfo.address,
       title: titleRef.current.value,

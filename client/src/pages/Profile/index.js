@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
 import "./style.css";
-import { Bar } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import moment from "moment";
 import propertiesAPI from "../../utils/propertiesAPI";
 import eventsAPI from "../../utils/eventsAPI";
@@ -16,11 +16,12 @@ const recentMonths = {
   twoMonthsAgo: moment().add(-2, "M"),
   oneMonthAgo: moment().add(-1, "M"),
   thisMonth: moment()
-}
+};
 
 
-export default function Profile(props) {
+export default function Profile() {
   const [propertyChartState, setPropertyChartState] = useState({});
+  const [priceChartState, setPriceChartState] = useState({});
   const [numPropertiesInspected, setNumPropertiesInspected] = useState();
   const [numInspectionsScheduled, setNumInspectionsScheduled] = useState();
   const [numAuctionsAttended, setNumAuctionsAttended] = useState();
@@ -30,6 +31,7 @@ export default function Profile(props) {
 
   useEffect(() => {
     let monthlyPropertyData = [[], [], [], [], [], [], []];
+    let priceData = [[], [], [], [], [], []];
     let attendedAuctions = [];
 
     authenticationAPI.authenticated()
@@ -59,6 +61,22 @@ export default function Profile(props) {
             if (item.attendedAuction === true) {
               attendedAuctions.push(item);
             }
+
+            if (item.soldPrice) {
+              if (item.soldPrice < 1000000) {
+                priceData[0].push(item);
+              } else if (item.soldPrice >= 1000000 && item.soldPrice < 2000000) {
+                priceData[1].push(item);
+              } else if (item.soldPrice >= 2000000 && item.soldPrice < 3000000) {
+                priceData[2].push(item);
+              } else if (item.soldPrice >= 3000000 && item.soldPrice < 4000000) {
+                priceData[3].push(item);
+              } else if (item.soldPrice >= 4000000 && item.soldPrice < 5000000) {
+                priceData[4].push(item);
+              } else {
+                priceData[5].push(item);
+              }
+            }
           });
   
           setNumAuctionsAttended(attendedAuctions.length);
@@ -74,7 +92,7 @@ export default function Profile(props) {
             ],
             datasets: [
               {
-                label: 'Properties',
+                label: 'Number of properties',
                 backgroundColor: 'rgba(75,192,192,1)',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
@@ -86,6 +104,39 @@ export default function Profile(props) {
                   monthlyPropertyData[4].length,
                   monthlyPropertyData[5].length,
                   monthlyPropertyData[6].length
+                ]
+              }
+            ]
+          });
+
+          setPriceChartState({
+            labels: ["<$1m", "$1-2m", "$2-3m", "$3-4m", "$4-$5m", "$5m+"],
+            datasets: [
+              {
+                label: 'Sold price',
+                backgroundColor: [
+                  "rgb(236, 91, 135)",
+                  "rgb(166, 91, 236)",
+                  "rgb(57, 201, 182)",
+                  "rgb(236, 185, 91)",
+                  "rgb(91, 130, 236)",
+                  "rgb(236, 137, 91)"
+                ],
+                hoverBackgroundColor: [
+                  "rgb(236, 91, 135, 0.5)",
+                  "rgb(166, 91, 236, 0.5)",
+                  "rgb(57, 201, 182, 0.5)",
+                  "rgb(236, 185, 91, 0.5)",
+                  "rgb(91, 130, 236, 0.5)",
+                  "rgb(236, 137, 91, 0.5)"
+                ],
+                data: [
+                  priceData[0].length,
+                  priceData[1].length,
+                  priceData[2].length,
+                  priceData[3].length,
+                  priceData[4].length,
+                  priceData[5].length,
                 ]
               }
             ]
@@ -119,17 +170,43 @@ export default function Profile(props) {
         <Bar
           data={propertyChartState}
           options={{
-            title: {
-              display: true,
-              text: 'Properties inspected in the past 6 months',
-              fontSize: 20
-            },
-            legend: {
-              display: true,
-              position: 'right'
-            },
             responsive: true,
-            maintainAspectRatio: false
+            plugins: {
+              // title: {
+              //   display: true,
+              //   text: "Total number of sold inspected properties in each price range",
+              //   fontSize: 20
+              // },
+              legend: {
+                display: true,
+                position: "bottom"
+              },
+            }
+          }}
+        />
+      </div>
+    )
+  };
+
+  function PriceChart() {
+    return (
+      <div>
+        <Pie
+          data={priceChartState}
+          options={{
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              // title: {
+              //   display: true,
+              //   text: "Total number of sold inspected properties in each price range",
+              //   fontSize: 20
+              // },
+              legend: {
+                display: true,
+                position: "bottom"
+              }
+            }
           }}
         />
       </div>
@@ -168,15 +245,27 @@ export default function Profile(props) {
                 </td>
               </tr>
               <tr className="stat-toggle-tr">
-                <td className="inspection-stat-toggle" width="50%">
-                  <button onClick={() => setPage("inspections")}>INSPECTION STATS</button>
+                <td width="50%" 
+                  className="inspection-stat-toggle"
+                >
+                  <button 
+                    id={page === "inspections" ? "selected-toggle" : ""}
+                    onClick={() => setPage("inspections")}>
+                    INSPECTION STATS
+                  </button>
                 </td>
-                <td className="auction-stat-toggle" width="50%">
-                  <button onClick={() => setPage("auctions")}>AUCTION STATS</button>
+                <td width="50%" 
+                  className="auction-stat-toggle"
+                >                  
+                  <button 
+                    id={page === "auctions" ? "selected-toggle" : ""}
+                    onClick={() => setPage("auctions")}>
+                    AUCTION STATS
+                  </button>
                 </td>
               </tr>
               <tr className="stat-tr">
-                <td className="stat-td">
+                <td className="stat-td" colSpan="2">
                   <div className="stat-container">
                     <div className="stat-bubble">
                       <div className="num-inspections">
@@ -186,11 +275,10 @@ export default function Profile(props) {
                           </span><br/>
                         {
                           page === "inspections" ? 
-                          numPropertiesInspected > 1 ?
+                          numPropertiesInspected !== 1 ?
                           "PROPERTIES INSPECTED" : "PROPERTY INSPECTED" : 
-                          ""
-                          // numAuctionsScheduled > 1 ? 
-                          // "AUCTIONS ATTENDED" : "AUCTION ATTENDED"
+                          numAuctionsAttended !== 1 ? 
+                          "AUCTIONS ATTENDED" : "AUCTION ATTENDED"
                         }
                       </div>
                       {/* <div className="inspection-type-num">
@@ -205,9 +293,9 @@ export default function Profile(props) {
                         </span><br/>
                         {
                           page === "inspections" ?
-                          numInspectionsScheduled > 1 ?
+                          numInspectionsScheduled !== 1 ?
                           "INSPECTIONS SCHEDULED" : "INSPECTION SCHEDULED" : 
-                          numAuctionsScheduled > 1 ? 
+                          numAuctionsScheduled !== 1 ? 
                           "AUCTIONS SCHEDULED" : "AUCTION SCHEDULED"                        
                         }
                       </div>
@@ -216,10 +304,16 @@ export default function Profile(props) {
                       </div> */}
                     </div>
                   </div>
-                </td>
-                <td className="chart-td">
-                  <div className="chart-container">
-                    {page === "inspections" ? <PropertiesChart /> : ""} 
+                  <hr className="stats-hr" />
+                  <div className="chart-section">
+                    {
+                      page === "inspections" ?
+                      <h3>Properties viewed in the past 6 months</h3> : 
+                      <h3>Inspected property sold prices</h3>
+                    }
+                    <div className="chart-container">
+                      {page === "inspections" ? <PropertiesChart /> : <PriceChart />} 
+                    </div>
                   </div>
                 </td>
               </tr>

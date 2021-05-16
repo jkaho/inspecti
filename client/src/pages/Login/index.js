@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import PopupMessage from "../../components/PopupMessage";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
@@ -40,7 +40,6 @@ export default function LogIn(props) {
   const [open, setOpen] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
-  let history = useHistory();
 
   const handleLogInFormSubmit = (event) => {
     event.preventDefault();

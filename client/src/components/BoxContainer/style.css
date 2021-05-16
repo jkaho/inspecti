@@ -13,6 +13,7 @@
   height: 70%;
   width: 85%;
   margin: 40px auto;
+  overflow: auto;
 }
 
 /* -------MEDIA QUERIES------- */
@@ -25,5 +26,6 @@
   .box-container {
     margin: 20px auto;
     width: 90%;
+    height: 80%;
   }
 }

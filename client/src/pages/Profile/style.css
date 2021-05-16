@@ -9,17 +9,18 @@
   border-bottom: 1px solid #dbdbdb;
 }
 
+/* .stat-tr {
+  background: rgb(241, 234, 255);
+} */
+
 .stat-td {
-  border-top: 1px solid #dbdbdb;
   width: 40%;
 }
 
 .chart-td {
   vertical-align: top;
-  border-top: 1px solid #dbdbdb;
   width: 60%;
 }
-
 
 .user-text {
   padding-left: 20px;
@@ -31,6 +32,7 @@
 
 .stat-toggle-tr button {
   width: 100%;
+  height: 100%;
   background: none;
   border: none;
   cursor: pointer;
@@ -38,40 +40,111 @@
 
 .inspection-stat-toggle {
   border-right: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+  height: 40px;
 }
 
-.stat-container, .chart-container {
+.auction-stat-toggle {
+  border-bottom: 1px solid #dbdbdb;
+  height: 40px;
+}
+
+.stat-toggle-tr #selected-toggle {
+  border-bottom: 4px solid rgb(171, 42, 175);
+  transition: 0.3s;
+}
+
+.stat-container, .chart-section {
   display: inline-block;
 }
 
 .stat-container {
   padding: 10px;
-  width: 100%;
+  padding-top: 20px;
+  width: 40%;
+}
+
+.chart-section {
+  width: 55%;
+  margin: 20px auto;
+  vertical-align: top;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 5px rgb(182, 160, 201);
+  background: white;
+  border-radius: 20px;
+}
+
+.chart-section h4 {
+  margin-bottom: 5px;
 }
 
 .chart-container {
-  display: block;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
 
 .stat-bubble {
   width: 200px;
-  background: rgb(230, 230, 230);
+  /* background: white; */
+  background: rgb(253, 253, 253);
   color: rgb(71, 71, 71);
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 20px;
   display: block;
   margin: 0 auto;
   margin-bottom: 10px;
   text-align: center;
+  box-shadow: 0 1px 5px rgb(182, 160, 201);
 }
 
 .large-num {
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .inspection-type-num {
   color: rgb(148, 148, 148);
 }
 
+.stats-hr {
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  margin: 10px;
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .stat-bubble {
+    width: 150px;
+    padding: 10px;
+  }
+
+  .large-num {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 750px) {
+  .stat-container, .chart-section {
+    width: 100%;
+    display: block;
+  }
+
+  .stat-bubble {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .stat-container {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .chart-section {
+    margin-bottom: 20px;
+  }
+
+  .stats-hr {
+    display: block;
+  }
+}
