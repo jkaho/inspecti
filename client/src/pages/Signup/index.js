@@ -131,7 +131,9 @@ export default function SignUp(props) {
           <div id="left-seg" className="signup-seg">
             <div id="inner-left-seg">
               <div className="logo-div">
-                <img src={logo} alt="Inspecti logo" />
+                <Link to="/">
+                  <img src={logo} alt="Inspecti logo" />
+                </Link>
               </div>
               <div className="graphic-div">
                 <img src={graphic} alt="Artwork of man on laptop" />

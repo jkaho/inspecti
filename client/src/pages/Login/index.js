@@ -119,7 +119,9 @@ export default function LogIn(props) {
           <div id="left-seg" className="login-seg">
             <div id="inner-left-seg">
               <div className="logo-div">
-                <img src={logo} alt="Inspecti logo" />
+                <Link to="/">
+                  <img src={logo} alt="Inspecti logo" />
+                </Link>
               </div>
               <div className="graphic-div">
                 <img src={graphic} alt="Artwork of girl on laptop" />
