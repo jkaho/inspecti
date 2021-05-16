@@ -1,14 +1,25 @@
+// React
 import React, { useRef, useState } from "react";
-import PopupMessage from "../../components/PopupMessage";
+// react-router-dom
 import { Link } from "react-router-dom";
+// Child components
+import PopupMessage from "../../components/PopupMessage";
+// Material Design
 import { makeStyles } from "@material-ui/core/styles";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import Grid from "@material-ui/core/Grid";
-import "./style.css";
 import { Typography, Button, TextField } from "@material-ui/core";
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+// CSS
+import "./style.css";
+// Images
+import logo from "../../images/logo.png";
+import graphic from "../../images/login-graphic.png";
+// API routes
 import userAPI from "../../utils/userAPI";
-import authenticationAPI from "../../utils/authenticationAPI";
-import notesAPI from "../../utils/notesAPI";
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -77,10 +88,6 @@ export default function LogIn(props) {
     };
 
     userAPI.logInUser(userData)
-      // .then((res) => {
-      //   console.log("User successfully logged in!");
-      //   console.log(res)
-      // })
       .then(() => props.onSuccess())
       .catch(err => {
         console.log(err);
@@ -111,6 +118,12 @@ export default function LogIn(props) {
         <Grid item xs={12} sm={6}>
           <div id="left-seg" className="login-seg">
             <div id="inner-left-seg">
+              <div className="logo-div">
+                <img src={logo} alt="Inspecti logo" />
+              </div>
+              <div className="graphic-div">
+                <img src={graphic} alt="Artwork of girl on laptop" />
+              </div>
               <div className="seg-text">
                 <div className="no-account-text">
                   <Typography variant="h6" className={classes.purpleFont}>
@@ -129,7 +142,7 @@ export default function LogIn(props) {
         <Grid item xs={12} sm={6}>
           <div id="right-seg" className="login-seg">
             <div className="login-form-div">
-              <h1>Welcome back to Inspecti</h1>
+              <h1>Welcome back!</h1>
               <form onSubmit={handleLogInFormSubmit}>
                 <div className="field-div">
                   <TextField 
@@ -137,6 +150,9 @@ export default function LogIn(props) {
                     label="Email" 
                     className={classes.input}
                     ref={emailRef}
+                    InputProps={{
+                      endAdornment: <InputAdornment position="start"><MailOutlineIcon /></InputAdornment>,
+                    }}
                   ></TextField>
                 </div>
                 <div className="field-div">
@@ -145,15 +161,15 @@ export default function LogIn(props) {
                     label="Password" 
                     className={classes.input}
                     ref={passwordRef}
+                    InputProps={{
+                      endAdornment: <InputAdornment position="start"><LockOutlinedIcon /></InputAdornment>,
+                    }}
                   ></TextField>
                 </div>
                 <div className="login-btn">
                   <Button type="submit" variant="contained" className={classes.button}>LOG IN</Button>
                 </div>
               </form>
-              <button onClick={() => authenticationAPI.authenticated().then(res => console.log(res)).catch(err => console.log(err))}>Authenticated?</button>
-              <button onClick={checkUsers}>All users</button>
-              <button onClick={() => notesAPI.getAllNotes().then(res => console.log(res)).catch(err => console.log(err))}>Notes</button>
             </div>
           </div>
         </Grid>

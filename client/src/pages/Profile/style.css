@@ -117,6 +117,7 @@
   .stat-bubble {
     width: 150px;
     padding: 10px;
+    font-size: 14px;
   }
 
   .large-num {
@@ -126,8 +127,9 @@
 
 @media (max-width: 750px) {
   .stat-container, .chart-section {
-    width: 100%;
+    width: 95%;
     display: block;
+    padding: 10px 0;
   }
 
   .stat-bubble {

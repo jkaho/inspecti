@@ -14,7 +14,7 @@
 }
 
 .seg-text {
-  padding-top: 200px;
+  /* padding-top: 200px; */
   text-align: center;
 }
 
@@ -72,7 +72,7 @@
   }
 
   .seg-text {
-    padding-top: 50px;
+    padding-top: 70px;
   }
 
   .signup-form-div {
