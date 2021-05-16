@@ -6,8 +6,10 @@ import InfographicCard from "../../components/InfographicCard";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import FilterDiv from "../../components/FilterDiv";
 import Grid from "@material-ui/core/Grid";
+import SearchIcon from "@material-ui/icons/Search";
 // import Paper from "@material-ui/core/Paper";
 import TextField from '@material-ui/core/TextField';
 import Typography from "@material-ui/core/Typography";
@@ -163,21 +165,29 @@ export default function Home() {
       <NavBar />
       <Grid item xs={12}>
         <div className="bg">
-          <Typography variant="h4" className={classes.heading}>Search properties for sale</Typography>
+          <Typography variant="h3" className={classes.heading}>Search properties for sale</Typography>
           <form onSubmit={handleFormSubmit}>
             <div className="location-autocomplete-wrapper">
               <Autocomplete
                 id="location-autocomplete"
                 freeSolo
+                // fullWidth={true}
                 ref={locationRef}
                 onInputChange={handleLocationInputChange}
                 onChange={(event, value) => handleSuggestionClick(value)}
+                // style={{ width: "90% ", display: "inline-block" }}
                 options={locationSuggestions}
                 getOptionLabel={(option) => formatLocationSuggestion(option)}
-                style={{ width: 300, padding: 0 }}
-                renderInput={(params) => <TextField {...params} label="Search for an address" variant="outlined"
+                // style={{ width: 300, padding: 0 }}
+                renderInput={(params) => <TextField {...params} label="Search for a suburb, state or postcode" variant="outlined"
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>,
+                  }}
                 />}
               />
+              {/* <div className="search-location-icon">
+                <SearchIcon />
+              </div> */}
             </div>
           </form>
           <FilterDiv />

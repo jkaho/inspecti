@@ -1,16 +1,26 @@
+// React
 import React, { useEffect, useState } from 'react';
+// react-router-dom
 import { Link } from "react-router-dom";
+// Child components
+import MyPagesMenu from "../MyPagesMenu";
+// Material Design
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 // import IconButton from '@material-ui/core/IconButton';
+// CSS
 import "./style.css";
+// Images
+import logo from "../../images/logo.png";
+import logoWhite from "../../images/logo-white.png";
+// API routes
 import authenticationAPI from "../../utils/authenticationAPI";
 import userAPI from "../../utils/userAPI";
-import MyPagesMenu from "../MyPagesMenu";
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid grey"
   },
   appBarHome: {
-    background: "#ab3ec9",
-    borderBottom: "1px solid #ab3ec9"
+    background: "rgb(195, 63, 232)",
+    borderBottom: "1px solid rgb(195, 63, 232)"
   },
   joinBtn: {
     border: "1px solid black",
@@ -47,10 +57,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ButtonAppBar() {
+export default function Navbar() {
   const classes = useStyles();
+
+  // States
   const [isAuthenticated, setAuthentication] = useState(false);
 
+  // Initial render
   useEffect(() => {
     authenticationAPI.authenticated()
       .then(res => {
@@ -62,6 +75,7 @@ export default function ButtonAppBar() {
       });
   }, []);
 
+  // Helper functions
   const logOut = () => {
     userAPI.logOutUser()
       // .then(() => console.log("User successfully logged out"))
@@ -87,7 +101,7 @@ export default function ButtonAppBar() {
             "nav-toolbar"          
           }
         >
-          <Typography
+          {/* <Typography
             variant="h6"
             className={
               window.location.href === "http://localhost:3000/" ?
@@ -96,7 +110,16 @@ export default function ButtonAppBar() {
             }
           >
             Inspecti
-          </Typography>
+          </Typography> */}
+          <Link to="/" style={{ flexGrow: 1, marginTop: "10px" }}>
+            <img src={
+              window.location.href === "http://localhost:3000/" ?
+              logoWhite : logo
+            } 
+              alt="Inspecti logo" 
+              width="200px"
+            />
+          </Link>
           <Button
             className={
               window.location.href === "http://localhost:3000/" ?

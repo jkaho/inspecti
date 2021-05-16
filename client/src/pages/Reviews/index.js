@@ -234,15 +234,6 @@ export default function Reviews() {
             <tr>
               <td>{modifiedReviews.length} REVIEWS</td>
               <td className="review-sort-td">
-                {/* <div 
-                  style={{
-                    display: "inline-block",
-                    paddingTop: 5,
-                    verticalAlign: "top"
-                  }}
-                >
-                  SORT BY&nbsp;
-                </div> */}
                 <TextField
                   id="outlined-select-reviews"
                   select

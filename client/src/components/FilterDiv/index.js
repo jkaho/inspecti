@@ -1,27 +1,31 @@
+// React
 import React from 'react';
+// Material Design
 import { makeStyles } from "@material-ui/core/styles";
+import NativeSelect from '@material-ui/core/NativeSelect';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import NativeSelect from '@material-ui/core/NativeSelect';
+// CSS
 import "./style.css";
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   unselected: {
-    background: "rgb(250, 225, 250)",
+    background: "white",
     color: "black",
     padding: 5,
     "&:hover": {
-      background: "rgb(250, 225, 250)",
+      background: "white",
     },
     fontSize: 12,
-    width: 40
+    width: 40,
   },
   selected: {
-    backgroundColor: "rgb(102, 4, 148)!important",
+    backgroundColor: "rgb(116, 32, 139)!important",
     color: "white!important",
     padding: 5,
     fontSize: 12,
-    width: 40
+    width: 40,
   },
   formControl: {
     minWidth: 120,
@@ -32,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toggleBtn: {
     verticalAlign: "top",
+    marginRight: 10,
   },
   span: {
     verticalAlign: "top"
@@ -89,6 +94,7 @@ function CategorySelect(props) {
   return (
     <div className="category-select-div">
       <NativeSelect
+        variant="standard"
         id={props.selectId}
         className={classes.bedWidth}
         value={state.category}
@@ -114,6 +120,7 @@ export default function FilterDiv() {
     <div className="filter-div">
       <MinMaxToggle />
       <CategorySelect
+        className="search-category-select"
         selectId="bed-select"
         category="Bed"
         options={[
@@ -125,6 +132,7 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        className="search-category-select"
         selectId="bath-select"
         category="Bath"
         options={[
@@ -136,6 +144,7 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        className="search-category-select"
         selectId="car-select"
         category="Car"
         options={[
@@ -147,6 +156,7 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        className="search-category-select"
         selectId="price-select"
         category="Price"
         options={[
@@ -162,6 +172,7 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        className="search-category-select"
         selectId="size-select"
         category="Size"
         options={[
@@ -180,8 +191,9 @@ export default function FilterDiv() {
           { value: 1000, text: "1000m²" },
         ]}
       />
-      <span className={classes.span}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      {/* <span className={classes.span}>&nbsp;&nbsp;|&nbsp;&nbsp;</span> */}
       <CategorySelect
+        className="search-category-select"
         selectId="type-select"
         category="Type"
         options={[

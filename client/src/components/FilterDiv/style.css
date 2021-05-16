@@ -23,3 +23,16 @@
 #price-select {
   width: 38px;
 }
+
+.search-category-select {
+  border: none;
+}
+
+.category-select-div :nth-child(1) {
+  color: rgb(81, 6, 102);
+}
+
+.MuiInput-underline:before,
+.MuiInput-underline:after {
+  border: none!important;
+}
