@@ -2,12 +2,14 @@
 import React, { useState, useRef } from "react";
 // Child components
 import NavBar from "../../components/NavBar";
+import FilterDiv from "../../components/FilterDiv";
 import InfographicCard from "../../components/InfographicCard";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import Button from "@material-ui/core/Button";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FilterDiv from "../../components/FilterDiv";
+import PersonIcon from "@material-ui/icons/Person";
 import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
 // import Paper from "@material-ui/core/Paper";
@@ -245,6 +247,14 @@ export default function Home() {
               title={infographicData.profile.title}
               text={infographicData.profile.text}
             />
+          </div>
+          <div className="create-account-div">
+            <Button
+              id="create-account-btn"
+              endIcon={<PersonIcon />}
+            >
+              CREATE AN ACCOUNT NOW
+            </Button>
           </div>
         </div>
       </div>
