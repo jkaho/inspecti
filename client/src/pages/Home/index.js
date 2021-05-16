@@ -1,19 +1,28 @@
-import React, { useRef, useState } from "react";
+// React
+import React, { useState, useRef } from "react";
+// Child components
 import NavBar from "../../components/NavBar";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from '@material-ui/core/TextField';
-
-// import SearchAutocomplete from "../../components/SearchAutocomplete";
-// import SearchBar from "../../components/SearchBar";
-// import SuggestionMenu from "../../components/SuggestionMenu";
-import FilterDiv from "../../components/FilterDiv";
+import InfographicCard from "../../components/InfographicCard";
+// Material Design
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import FilterDiv from "../../components/FilterDiv";
 import Grid from "@material-ui/core/Grid";
+// import Paper from "@material-ui/core/Paper";
+import TextField from '@material-ui/core/TextField';
+import Typography from "@material-ui/core/Typography";
+// CSS
 import "./style.css";
-import { Typography } from "@material-ui/core";
+// Images
+import reviewsImage from "../../images/social.png";
+import propertyImage from "../../images/house.png";
+import noteImage from "../../images/idea.png";
+import scheduleImage from "../../images/calendar.png";
+import profileImage from "../../images/stats.png";
+// API routes
 import domainAPI from "../../utils/domainAPI";
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -35,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// Format locations from API data 
 function formatLocationSuggestion(obj) {
   let location = `${obj.name}, ${obj.state.toUpperCase()}`;
   if (obj.type === "suburb") {
@@ -44,6 +54,39 @@ function formatLocationSuggestion(obj) {
   return location;
 };
 
+// Infographic data
+const infographicData = {
+  reviews: {
+    src: reviewsImage,
+    alt: "Graphic of social media UI on smartphone screen",
+    title: "Read reviews",
+    text: "See what other people have to say about properties they’ve inspected."
+  },
+  notes: {
+    src: noteImage,
+    alt: "Graphic of turned on lightbulb",
+    title: "Share your thoughts",
+    text: "Write notes about the properties you inspect. You can turn a note into a public review by sharing it."
+  },
+  properties: {
+    src: propertyImage,
+    alt: "Graphic of white house in front of tall trees",
+    title: "Look back",
+    text: "Keep track of all the properties you inspect by adding entries to your inspected properties table."
+  },
+  schedule: {
+    src: scheduleImage,
+    alt: "Graphic of a calendar",
+    title: "Look forward",
+    text: "Stay organised by adding inspection and auction events to your schedule."
+  },
+  profile: {
+    src: profileImage,
+    alt: "Graphic of bar chart and pie chart",
+    title: "Get insights",
+    text: "View useful personalised inspection and auction stats on your profile page."
+  }
+};
 
 export default function Home() {
   const classes = useStyles();
@@ -73,6 +116,7 @@ export default function Home() {
   //     .catch(err => console.log(err));
   //   }
   // };
+
   const handleLocationInputChange = () => {
     const newValue = locationRef.current.children[0].children[1].children[0].value;
     if (newValue === "") {
@@ -120,17 +164,6 @@ export default function Home() {
       <Grid item xs={12}>
         <div className="bg">
           <Typography variant="h4" className={classes.heading}>Search properties for sale</Typography>
-          {/* <SearchBar
-            placeholder="Search by suburb, state or postcode"
-            inputRef={searchRef}
-            onSubmit={handleFormSubmit}
-            onChange={handleInputChange}
-          /> */}
-          {/* <SuggestionMenu
-            suggestions={suggestions}
-            open={suggestionOpen}
-            onClick={handleLocationSuggestionClick}
-          /> */}
           <form onSubmit={handleFormSubmit}>
             <div className="location-autocomplete-wrapper">
               <Autocomplete
@@ -150,7 +183,62 @@ export default function Home() {
           <FilterDiv />
         </div>
       </Grid>
-      <Grid container spacing={2} className={classes.guide} alignItems="center">
+      <div className="home-content">
+        <div className="home-heading-div">
+          <Typography variant="h4" align="center">
+            How to use Inspecti
+          </Typography>
+        </div>
+        <hr />
+        <div className="infographics-home">
+          <div className="infographics-subheading">
+            <Typography variant="h5" align="center">
+              For everyone
+            </Typography>
+          </div>
+          <div className="infographics-everyone">
+            <InfographicCard
+              src={infographicData.reviews.src}
+              alt={infographicData.reviews.alt}
+              title={infographicData.reviews.title}
+              text={infographicData.reviews.text}
+            />
+          </div>
+          <hr />
+          <div className="infographics-subheading">
+            <Typography variant="h5" align="center">
+              For members only
+            </Typography>
+          </div>
+          <div className="infographics-members">
+            <InfographicCard
+              src={infographicData.notes.src}
+              alt={infographicData.notes.alt}
+              title={infographicData.notes.title}
+              text={infographicData.notes.text}
+            />
+            <InfographicCard
+              src={infographicData.properties.src}
+              alt={infographicData.properties.alt}
+              title={infographicData.properties.title}
+              text={infographicData.properties.text}
+            />
+            <InfographicCard
+              src={infographicData.schedule.src}
+              alt={infographicData.schedule.alt}
+              title={infographicData.schedule.title}
+              text={infographicData.schedule.text}
+            />
+            <InfographicCard
+              src={infographicData.profile.src}
+              alt={infographicData.profile.alt}
+              title={infographicData.profile.title}
+              text={infographicData.profile.text}
+            />
+          </div>
+        </div>
+      </div>
+      {/* <Grid container spacing={2} className={classes.guide} alignItems="center">
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
             How to use Inspecti
@@ -181,7 +269,7 @@ export default function Home() {
             View all of your previously inspected properties
           </Paper>
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   );
 }

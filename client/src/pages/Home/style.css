@@ -10,3 +10,28 @@
   width: fit-content;
   margin: 0 auto;
 }
+
+.home-content {
+  width: 100%;
+}
+
+.home-heading-div {
+  margin: 50px 0 10px 0;
+}
+
+.infographics-subheading {
+  margin: 20px 0;
+}
+
+.infographics-everyone,
+.infographics-members {
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.home-content hr {
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  margin: 40px;
+}
