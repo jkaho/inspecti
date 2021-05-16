@@ -27,13 +27,12 @@ import RateReviewIcon from "@material-ui/icons/RateReview";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // CSS
 import "./style.css";
-// API 
+// API routes
 import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
 import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
 import userAPI from "../../utils/userAPI";
-
 // Moment.js
 import moment from "moment";
 
@@ -172,7 +171,7 @@ export default function Notes(props) {
   // Refs
   const searchRef = useRef();
   const titleRef = useRef();
-  const textRef = useRef();
+  // const textRef = useRef();
   const addressRef = useRef();
   const conditionRef = useRef();
   const potentialRef = useRef();
@@ -392,9 +391,34 @@ export default function Notes(props) {
     };
 
     notesAPI.updateNote(currentNoteId, titleData)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        // Check user's saved notes to update list
+        notesAPI.getNotesWithReviews()
+        .then(res => {    
+        // Separate starred and non-starred notes 
+        let starredNotes = [];
+        let nonStarredNotes = [];
+        res.data.forEach(note => {
+          if (note.starred) {
+            starredNotes.push(note);
+          } else {
+            nonStarredNotes.push(note);
+          };
+        });
+
+        // Reverse order of notes to display newest first 
+        res.data.reverse(); // to display latest note
+        starredNotes.reverse(); // to display starred notes list
+        nonStarredNotes.reverse(); // to display all notes list 
+        setStarredNotes(starredNotes);
+        setNonStarredNotes(nonStarredNotes);
+        })
+        .catch(err => console.log(err));
+      })
       .catch(err => console.log(err));
   };
+
 
   // const handleTextInputChange = () => {
   //   const textValue = textRef.current.value;
@@ -1084,6 +1108,7 @@ export default function Notes(props) {
                         deleteOnClick={handleDeleteNoteButtonClick}
                         starOnClick={handleStarButtonClick}
                         noteIsStarred={note.starred}
+                        title={title}
                       />
                     )) : 
                     <div>
@@ -1113,6 +1138,7 @@ export default function Notes(props) {
                         deleteOnClick={handleDeleteNoteButtonClick}
                         starOnClick={handleStarButtonClick}
                         noteIsStarred={note.starred}
+                        title={title}
                       />
                     )) : 
                     <div>

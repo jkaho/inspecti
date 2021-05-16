@@ -35,7 +35,7 @@ function getModalStyle() {
   };
 };
 
-// General styles
+// Class styles
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',

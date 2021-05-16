@@ -30,6 +30,7 @@ export default function NoteListItem(props) {
         <ListItemText id={`notetitle-${props.noteId}`}
           primary={props.currentNoteId === props.noteId && props.sideTitle !== "" ? props.sideTitle
             : props.noteTitle
+          // primary={props.currentNoteId === props.noteId ? props.title : props.noteTitle
           } />
       </ListItem>
       <div className={
