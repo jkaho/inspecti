@@ -5,6 +5,9 @@ const propertiesAPI = {
   getAllProperties: function() {
     return axios.get(url + "/api/user/properties", { withCredentials: true });
   },
+  getOneProperty: function(inspectedPropertyId) {
+    return axios.get(url + "/api/user/property/" + inspectedPropertyId, { withCredentials: true });
+  },
   getPropertyNotes: function() {
     return axios.get(url + "/api/user/property/notes", { withCredentials: true });
   },

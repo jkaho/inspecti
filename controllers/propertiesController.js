@@ -12,6 +12,16 @@ const propertiesController = {
       .then(properties => res.json(properties))
       .catch(err => console.log(err));
   },
+  getOneProperty: function(req, res) {
+    db.inspectedProperties
+      .findOne({
+        where: {
+          id: parseInt(req.params.id)
+        }
+      })
+      .then(property => res.json(property))
+      .catch(err => console.log(err));
+  },
   getPropertyNotes: function(req, res) {
     db.inspectedProperties
       .findAll({

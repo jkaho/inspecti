@@ -91,6 +91,7 @@ router.get("/property/notes", propertiesController.getPropertyNotes);
 router.post("/property", propertiesController.createPropertyEntry);
 
 router.route("/property/:id")
+  .get(propertiesController.getOneProperty)
   .put(propertiesController.updatePropertyEntry)
   .delete(propertiesController.deletePropertyEntry);
 

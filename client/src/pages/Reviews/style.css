@@ -1,5 +1,4 @@
 .reviews-page {
-  background: rgb(247, 247, 247);
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -11,29 +10,46 @@
   width: 600px;
 }
 
-.review-search-div input {
-  width: 80%;
-  height: 30px;
-  padding: 10px;
+#review-search-wrapper {
+  width: 500px;
+  border-radius: 4px;
   margin: 0 auto;
   display: block;
+  /* border: 1px solid rgb(156, 18, 184); */
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 1px 5px rgb(0, 0, 0, 0.12);
+}
+
+#reviews-search-input {
+  width: 80%;
+  height: 50px;
+  padding: 10px;
   border-radius: 4px;
-  border: 1px solid rgb(219, 219, 219);
+  border: none;
   font-size: 16px;
 }
 
+.search-review-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 15%;
+  text-align: center;
+}
+
 .review-sort-div {
-  margin: 10px auto;
+  margin: 0 auto;
+  margin-top: 20px;
   width: fit-content;
   background: rgb(255, 255, 255);
-  border: 1px solid rgb(156, 18, 184);
-  border-radius: 2px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
   padding: 10px;
-  box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.1);
+  border: 1px solid rgb(219, 219, 219);
+  border-bottom: none;
 }
 
 .review-sort-div table {
-  width: 600px;
+  width: 598px;
 }
 
 .review-sort-td {
@@ -55,6 +71,10 @@
   width: 620px;
   margin: 0 auto;
   margin-bottom: 50px;
+  border: 1px solid rgb(219, 219, 219);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-top: none;
 }
 
 .no-reviews {

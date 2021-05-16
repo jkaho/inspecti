@@ -1,13 +1,20 @@
+// React
 import React, { useEffect, useState, useRef } from "react";
+// Children components
 import NavBar from "../../components/NavBar";
 import ReviewCard from "../../components/ReviewCard";
+// Material Design 
 import TextField from '@material-ui/core/TextField';
 import IconButton from "@material-ui/core/IconButton";
+import PlaceIcon from "@material-ui/icons/Place";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ClearIcon from "@material-ui/icons/Clear";
+// CSS
 import "./style.css";
+// API routes
 import notesAPI from "../../utils/notesAPI";
+// Moment.js
 import moment from "moment";
 
 const sortCriteria = [
@@ -22,7 +29,7 @@ const sortCriteria = [
   "Outdoor space",
   "Indoor-to-outdoor flow",
   "Natural light"
-]
+];
 
 export default function Reviews() {
   // States
@@ -208,12 +215,18 @@ export default function Reviews() {
     <div className="reviews-page">
       <NavBar />
       <div className="review-search-div">
-        <input
-          placeholder="Search reviews by address, suburb, state or postcode"
-          ref={inputRef}
-          type="text"
-          onChange={handleSearchChange}
-        />
+        <div id="review-search-wrapper">
+          <input
+            id="reviews-search-input"
+            placeholder="Search reviews by address, suburb, state or postcode"
+            ref={inputRef}
+            type="text"
+            onChange={handleSearchChange}
+          />
+          <div className="search-review-icon">
+            <PlaceIcon />
+          </div>
+        </div>
       </div>
       <div className="review-sort-div">
         <table>
@@ -273,10 +286,12 @@ export default function Reviews() {
         {modifiedReviews.length > 0 ? modifiedReviews.map((review) => (
           <ReviewCard
             key={review.id}
+            propertyId={review.propertyId}
             title={review.title}
             text={review.text}
             address={review.propertyAddress}
             date={moment(review.dateShared).format("DD/MM/YY")}
+            dateInspected={moment(review.dateInspected).format("DD/MM/YY")}
             author={`${review.user.firstName} ${review.user.lastName}`}
             beds={review.bedrooms}
             baths={review.bathrooms}

@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import KingBedIcon from "@material-ui/icons/KingBed";
 // import BathtubIcon from "@material-ui/icons/Bathtub";
 // import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
 // import SquareFootIcon from "@material-ui/icons/SquareFoot";
 import "./style.css";
+import propertiesAPI from "../../utils/propertiesAPI";
+// Moment.js
+import moment from "moment";
 
 export default function ReviewCard(props) {
+  const [dateInspected, setDateInspected] = useState();
+
+  useEffect(() => {
+    if (props.propertyId) {
+      propertiesAPI.getOneProperty(props.propertyId)
+      .then(res => setDateInspected(res.data.dateInspected))
+      .catch(err => console.log(err));
+    }
+  }, []);
+
   return (
     <div> 
       <div className="review-card">
@@ -53,9 +66,11 @@ export default function ReviewCard(props) {
                   Also, the agents, Vanessa and Charlie from Northen Real Estate, are really friendly! */}
                   {/* {props.text} */}
                 </div>
-                <div className="inspected-on">
-                  PROPERTY INSPECTED ON <span className="inspected-date">12/04/21</span>
-                </div>
+                {dateInspected ? 
+                  <div className="inspected-on">
+                    PROPERTY INSPECTED ON <span className="inspected-date">{moment(dateInspected).format("DD/MM/YY")}</span>
+                  </div> : ""
+                }
               </td>
               <td>
                 <table className="review-rating-table">
