@@ -1,12 +1,22 @@
+// React
 import React, { useRef, useState } from "react";
-import PopupMessage from "../../components/PopupMessage";
+// react-router-dom
 import { Link } from "react-router-dom";
+// Child components
+import PopupMessage from "../../components/PopupMessage";
+// Material Design
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import "./style.css";
 import { Typography, Button, TextField } from "@material-ui/core";
+// CSS
+import "./style.css";
+// Images
+import logo from "../../images/logo.png";
+import graphic from "../../images/signup-graphic.png";
+// API routes
 import userAPI from "../../utils/userAPI";
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -35,13 +45,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp(props) {
   const classes = useStyles();
+
+  // States
   const [open, setOpen] = useState(false);
 
+  // Refs
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  // Helper functions
   const handleSignUpFormSubmit = (event) => {
     event.preventDefault();
     // Create user data object
@@ -50,9 +64,7 @@ export default function SignUp(props) {
       lastName: lastNameRef.current.children[1].children[0].value.trim(),
       email: emailRef.current.children[1].children[0].value.trim(),
       password: passwordRef.current.children[1].children[0].value.trim(),
-    }
-
-    console.log(userData);
+    };
 
     // Check that all values have been provided
     if (
@@ -118,6 +130,12 @@ export default function SignUp(props) {
         <Grid item xs={12} sm={6}>
           <div id="left-seg" className="signup-seg">
             <div id="inner-left-seg">
+              <div className="logo-div">
+                <img src={logo} alt="Inspecti logo" />
+              </div>
+              <div className="graphic-div">
+                <img src={graphic} alt="Artwork of man on laptop" />
+              </div>
               <div className="seg-text">
                 <div className="no-account-text">
                   <Typography variant="h6" className={classes.purpleFont}>
