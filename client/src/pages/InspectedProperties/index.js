@@ -1,23 +1,29 @@
+// React
 import React, { useState, useEffect, useRef } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// Children components
 import SideMenu from "../../components/SideMenu";
 import PropertyTable from "../../components/PropertyTable";
 import PopupMessage from "../../components/PopupMessage";
-// import TextEditor from "../../components/TextEditor";
-import "./style.css";
-import propertiesAPI from "../../utils/propertiesAPI";
-import domainAPI from "../../utils/domainAPI";
+// Material Design
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Tooltip from "@material-ui/core/Tooltip";
+// react-draft-wysiwyg
 import { EditorState, ContentState, convertFromHTML } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+// CSS
+import "./style.css";
+// API routes
+import propertiesAPI from "../../utils/propertiesAPI";
+import domainAPI from "../../utils/domainAPI";
 import notesAPI from "../../utils/notesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
 
+// Modal style
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -29,6 +35,7 @@ function getModalStyle() {
   };
 };
 
+// General styles
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
@@ -55,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// Options for sort select
 const sortOptions = [
   {
     label: "Select category",
@@ -93,6 +101,7 @@ const sortOptions = [
   }
 ];
 
+// Options for filter select
 const filterOptions = [
   {
     label: "Select category",
@@ -142,6 +151,7 @@ const filterOptions = [
   }
 ];
 
+// Rating criteria tooltips
 const ratingTooltips = {
   condition: "The state of the property relative to its age.",
   potential: "How much potential the property has to add value to it.",
@@ -160,8 +170,6 @@ export default function InspectedProperties(props) {
   // States
   const [properties, setProperties] = useState([]);
   const [modifiedProperties, setModifiedProperties] = useState([]);
-  // const [fillInputsPopupIsOpen, setFillInputsPopupState] = useState(false);
-  // const [createSuccessPopupIsOpen, setCreateSuccessPopupState] = useState(false);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "success", message: "" });
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   // const [addressQuery, setAddressQuery] = React.useState("");
@@ -214,7 +222,7 @@ export default function InspectedProperties(props) {
 
   const searchRef = useRef();
 
-  // Helpers 
+  // Helper functions
   const getAllProperties = () => {
     propertiesAPI.getPropertyNotes()
       .then(res => {
@@ -304,7 +312,6 @@ export default function InspectedProperties(props) {
             );
           })
           .catch(err => console.log(err));
-
       })
       .catch(err => console.log(err));
     } else {
@@ -360,7 +367,6 @@ export default function InspectedProperties(props) {
     setModalState({ open: true, type: "confirmDelete"});
   };
 
-
   const confirmDeleteClick = (event) => {
     event.preventDefault();
     propertiesAPI.deleteProperty(propertyToEditId)
@@ -405,6 +411,7 @@ export default function InspectedProperties(props) {
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty(),
   );
+
   const  [convertedContent, setConvertedContent] = useState(null);
 
   const handleEditorChange = (state) => {
@@ -513,6 +520,7 @@ export default function InspectedProperties(props) {
 
   const handleCreateNoteClick = (event) => {
     setNoteModalState(true);
+    setEditorState(() => EditorState.createEmpty());
     setModalState({ open: true, type: "createNote" });
     setPropertyNoteInfo({
       propertyId: event.target.id.split("-")[1],
