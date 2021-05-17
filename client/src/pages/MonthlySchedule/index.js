@@ -66,7 +66,7 @@ export default function MonthlySchedule() {
           }
 
           let eventWithCounter = {
-            title: `${eventType}s - ${existingEvents[i + 1]}`,
+            title: `${eventType}s: ${existingEvents[i + 1]}`,
             date: eventDate,
             color: color
           };
@@ -160,7 +160,7 @@ export default function MonthlySchedule() {
             dateClick={handleDateClick}
             customButtons={{
               eventButton: {
-                text: "ADD EVENT +",
+                text: "+ EVENT",
                 click: () => setAddEventModalState(true)
               }
             }}
@@ -189,8 +189,6 @@ export default function MonthlySchedule() {
           />
 
         </div>
-        {/* <MonthlyCalendar /> */}
-
       </div>
     </div>
   );

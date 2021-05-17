@@ -22,9 +22,22 @@
   border-right: 1px solid rgb(0, 0, 0, 0.04);
 }
 
+.current-note-top {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+}
+
+.current-note-date, .new-note-btn {
+  display: inline-block;
+  width: 50%;
+}
+
+.current-note-date {
+  padding-left: 10px;
+  color: grey;
+}
+
 .new-note-btn {
   text-align: right;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.12);
 }
 
 #new-note-btn {

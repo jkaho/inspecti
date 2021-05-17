@@ -144,6 +144,7 @@ export default function Notes(props) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [author, setAuthor] = useState({});
+  const [dateUpdated, setDateUpdated] = useState();
   const [currentNoteId, setCurrentNoteId] = useState();
   // const [allNotes, setAllNotes] = useState([]);
   const [starredNotes, setStarredNotes] = useState([]);
@@ -251,6 +252,7 @@ export default function Notes(props) {
         setCurrentNoteId(lastNote.id);
         setTitle(lastNote.title);
         setText(lastNote.text);
+        setDateUpdated(lastNote.updatedAt);
         if (lastNote.propertyAddress) {
           setAddress(lastNote.propertyAddress);
           setPropertySpecs({
@@ -371,6 +373,7 @@ export default function Notes(props) {
     setTitle("");
     setText("");
     setAddress("");
+    setDateUpdated(moment().format("DD/MM/YY"));
     setAddressInputState(false);
     setAddressInfoState(false);
     setRatingButtonState(false);
@@ -462,6 +465,7 @@ export default function Notes(props) {
             setTitle(res.data[i].title);
             sideTitle = res.data[i].title;
             setText(res.data[i].text);
+            setDateUpdated(res.data[i].updatedAt);
             setAddress(res.data[i].propertyAddress);
             setPropertySpecs({
               bedrooms: res.data[i].bedrooms,
@@ -1166,13 +1170,18 @@ export default function Notes(props) {
           </Grid>
           <Grid item id="note-area" className={classes.note}>
             <div className="current-note-div box-seg">
-              <div className="new-note-btn">
-                <IconButton
-                  onClick={handleNewNoteButtonClick}
-                  id="new-note-btn"
-                >
-                  <AddCircleOutlineIcon />
-                </IconButton>
+              <div className="current-note-top">
+                <div className="current-note-date">
+                  {moment(dateUpdated).format("DD/MM/YY h:mma")}
+                </div>
+                <div className="new-note-btn">
+                  <IconButton
+                    onClick={handleNewNoteButtonClick}
+                    id="new-note-btn"
+                  >
+                    <AddCircleOutlineIcon />
+                  </IconButton>
+                </div>
               </div>
               <div className="note-title-input-div">
                 <input 
@@ -1291,10 +1300,10 @@ export default function Notes(props) {
                   <tbody>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Property condition&nbsp;</div>
                         <Tooltip title={ratingTooltips.condition}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Property condition&nbsp;</div>
                       </td>
                       <td>
                         <span 
@@ -1319,10 +1328,10 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Potential to capitalise&nbsp;</div>
                           <Tooltip title={ratingTooltips.potential}>
                             <i className="fas fa-info-circle"></i>
-                          </Tooltip>
+                          </Tooltip>&nbsp;
+                          <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Potential to capitalise&nbsp;</div>
                         </td>
                       <td>
                         <span 
@@ -1347,10 +1356,10 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Surroundings&nbsp;</div>
                         <Tooltip title={ratingTooltips.surroundings}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Surroundings&nbsp;</div>
                       </td>
                       <td>
                         <span 
@@ -1375,10 +1384,10 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Consistency with neighbours&nbsp;</div>
                         <Tooltip title={ratingTooltips.neighbours}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Consistency with neighbours&nbsp;</div>
                       </td>
                       <td>
                         <span 
@@ -1403,10 +1412,10 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Accessibility&nbsp;</div>
                         <Tooltip title={ratingTooltips.accessibility}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Accessibility&nbsp;</div>
                       </td>
                       <td>
                         <span 
@@ -1431,10 +1440,10 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Privacy&nbsp;</div>
                         <Tooltip title={ratingTooltips.privacy}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Privacy&nbsp;</div>
                       </td>
                       <td>
                         <span 
@@ -1459,10 +1468,10 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Floor plan&nbsp;</div>
                         <Tooltip title={ratingTooltips.floorplan}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Floor plan&nbsp;</div>
                       </td>
                       <td>
                         <span 
@@ -1487,10 +1496,10 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Outdoor space&nbsp;</div>
                         <Tooltip title={ratingTooltips.outdoorSpace}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Outdoor space&nbsp;</div>
                       </td>
                       <td>
                         <span 
@@ -1515,10 +1524,11 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Indoor-to-outdoor flow&nbsp;</div>
                         <Tooltip title={ratingTooltips.indoorOutdoorFlow}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip></td>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Indoor-to-outdoor flow&nbsp;</div>
+                      </td>
                       <td>
                         <span 
                           className={
@@ -1542,10 +1552,10 @@ export default function Notes(props) {
                     </tr>
                     <tr className="review-criteria-row">
                       <td>
-                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Natural light&nbsp;</div>
                         <Tooltip title={ratingTooltips.naturalLight}>
                           <i className="fas fa-info-circle"></i>
-                        </Tooltip>
+                        </Tooltip>&nbsp;
+                        <div className="notes-rating-tooltip-div" style={{ display: "inline-block" }}>Natural light&nbsp;</div>
                       </td>
                       <td>
                         <span 

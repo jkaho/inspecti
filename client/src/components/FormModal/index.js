@@ -1,19 +1,25 @@
+// React
 import React from 'react';
-import clsx from "clsx";
+// Child components
+import PopupMessage from '../PopupMessage';
+import SearchAutocomplete from "../../components/SearchAutocomplete";
+// Material design
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import clsx from "clsx";
+import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
+import Modal from '@material-ui/core/Modal';
 // import InputLabel from "@material-ui/core/InputLabel";
 // import InputAdornment from "@material-ui/core/InputAdornment";
 // import OutlinedInput from "@material-ui/core/OutlinedInput";
 // import PlaceIcon from "@material-ui/icons/Place";
-import SearchAutocomplete from "../../components/SearchAutocomplete";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+// CSS
 import "./style.css";
+// Moment.js
 import moment from "moment";
-import PopupMessage from '../PopupMessage';
 
+// Modal style
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -25,6 +31,7 @@ function getModalStyle() {
   };
 };
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
@@ -71,101 +78,6 @@ export default function FormModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
-  // const [open, setOpen] = React.useState(false);
-  // const [eventType, setEventType] = React.useState("Inspection");
-  // const [hasAuction, setAuctionState] = React.useState(false);
-  // const [propertySpecs, setPropertySpecs] = React.useState({});
-  // const [address, setAddress] = React.useState();
-  // const [addEventPopupIsOpen, setAddEventPopupState] = React.useState(false);
-  // const [addressQuery, setAddressQuery] = React.useState("");
-  // const [addressSuggestions, setAddressSuggestions] = React.useState([]);
-
-  // const typeRef = useRef();
-  // const startTimeRef = useRef();
-  // const endTimeRef = useRef();
-  // // const auctionTimeRef = useRef();
-  // const addressRef = useRef();
-
-  // const handleModalOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleModalClose = () => {
-  //   setOpen(false);
-  // };
-
-  // const handleClose = () => {
-  //   setAddEventPopupState(false);
-  // };
-
-  // const handleEventTypeChange = (event) => {
-  //   setEventType(event.target.value);
-  // };
-
-  // const handleFormSubmit = (event) => {
-  //   event.preventDefault();
-  //   const newEvent = {
-  //     eventType: typeRef.current.children[1].children[0].value,
-  //     startTime: startTimeRef.current.value,
-  //     endTime: endTimeRef.current.value,
-  //     propertyAddress: address,
-  //     propertyType: propertySpecs.propertyType,
-  //     bedrooms: propertySpecs.bedrooms,
-  //     bathrooms: propertySpecs.bathrooms,
-  //     carSpaces: propertySpecs.carSpaces,
-  //     landSize: propertySpecs.landSize,
-  //     hasAuction: hasAuction,
-  //   };
-
-  //   eventsAPI.createEvent(newEvent)
-  //     .then(res => {
-  //       console.log(res);
-  //       props.close();
-  //       setAddEventPopupState(true);
-  //     })
-  //     .catch(err => console.log(err))
-  // };
-
-  // const handleOnSelect = (item) => {
-  //   // the item selected
-  //   console.log(item);
-  //   setAddress(item.address);
-  //   domainAPI.getPropertyInfo(item.id)
-  //     .then(res => {
-  //       console.log(res);
-  //       let propertyInfo = {
-  //         bedrooms: res.data.bedrooms,
-  //         bathrooms: res.data.bathrooms,
-  //         carSpaces: res.data.carSpaces,
-  //         landSize: res.data.areaSize,
-  //         propertyType: res.data.propertyCategory
-  //       };
-
-  //       setPropertySpecs(propertyInfo);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
-
-  // const handleAddressInputChange = () => {
-  //   const newValue = addressRef.current.children[0].children[1].children[0].value;
-  //   setAddressQuery(newValue);
-
-  //   if (newValue === "") {
-  //     setAddressSuggestions([]);
-  //   } else {
-  //     domainAPI.getAddressSuggestions(newValue)
-  //     .then(res => {
-  //       console.log(res);
-  //       setAddressSuggestions(res.data.splice(0, 10));
-  //     })
-  //     .catch(err => console.log(err))
-  //   }
-  // };
-
-  // const handleSuggestionClick = (value) => {
-  //   const newValue = value.address;
-  //   setAddress(newValue);
-  // };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -195,24 +107,6 @@ export default function FormModal(props) {
           </FormControl>
         </div>
         <div className="event-address-div event-div">
-          {/* <FormControl className={clsx(classes.margin, classes.addressTextField)} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-address">Search for an address</InputLabel>
-            <OutlinedInput
-              ref={addressRef}
-              labelWidth={160}
-              type="text"
-              id="outlined-adornment-address"
-              onChange={handleAddressInputChange}
-              endAdornment={
-                <InputAdornment position="end">
-                  <PlaceIcon />
-                </InputAdornment>
-              }
-            />
-          </FormControl> */}
-          {/* <SearchAutocomplete
-            handleOnSelect={handleOnSelect}
-          /> */}
           <SearchAutocomplete
             addressRef={props.addressRef}
             onInputChange={props.handleAddressInputChange}
@@ -284,7 +178,7 @@ export default function FormModal(props) {
         open={props.addEventPopupIsOpen}
         handleClose={props.handlePopupClose}
         severity="success"
-        message="Event successully created!"
+        message="Event successfully created!"
       />
     </div>
   );

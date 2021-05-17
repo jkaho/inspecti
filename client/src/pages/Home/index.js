@@ -123,7 +123,7 @@ const infographicData = {
     src: shareImage,
     alt: "Graphic of blue smartphone with a share icon coming out of the screen",
     title: "4. Share your note",
-    text: "Click on the share icon to share your thoughts with the world!"
+    text: "Click on the share button to share your thoughts with the world!"
   },
 };
 
@@ -166,7 +166,7 @@ const ratingCriteria = [
   },
   {
     name: "Natural light",
-    description: "How well is the property illuminated with sunlight?",
+    description: "How well is the home illuminated with sunlight?",
   }
 ];
 
