@@ -15,7 +15,7 @@
 
 ## Motivations
 
-This project was made for real estate enthusiasts, or anyone else involved in the real estate market who would benefit from having a platform to keep personal notes and records about properties they've inspected, as well as to be able to view other peoples' opinions about certain properties.
+This project was made for real estate enthusiasts and anyone else involved in the real estate market who would benefit from having a platform to keep personal notes and records about properties they've inspected, as well as to be able to view other peoples' opinions about certain properties.
 
 ## Instructions for Use
 
