@@ -134,7 +134,6 @@ export default function MonthlySchedule() {
     } else {
       domainAPI.getAddressSuggestions(newValue)
       .then(res => {
-        console.log(res);
         setAddressSuggestions(res.data.splice(0, 10));
       })
       .catch(err => console.log(err))
@@ -144,6 +143,17 @@ export default function MonthlySchedule() {
   const handleSuggestionClick = (value) => {
     const newValue = value.address;
     setAddress(newValue);
+    domainAPI.getPropertyInfo(value.id)
+      .then(res => {
+        setPropertySpecs({
+          propertyType: res.data.propertyCategory,
+          bedrooms: res.data.bedrooms,
+          bathrooms: res.data.bathrooms,
+          carSpaces: res.data.carSpaces,
+          landSize: res.data.areaSize,
+        });
+      })
+      .catch(err => console.log(err));
   };
   
   return (
