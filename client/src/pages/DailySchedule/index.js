@@ -90,13 +90,12 @@ export default function DailySchedule(props) {
   const [date, setDate] = useState();
   const [events, setEvents] = useState([]);
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-  const [eventType, setEventType] = React.useState("Inspection");
-  const [editEventPopupIsOpen, setEditEventPopupState] = React.useState(false);
-  const [deleteEventPopupIsOpen, setDeleteEventPopupState] = React.useState(false);
-  const [deleteEventModalIsOpen, setDeleteEventModalState] = React.useState(false);
-  const [eventToModify, setEventToModify] = React.useState();
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
+  const [eventType, setEventType] = useState("Inspection");
+  const [popup, setPopupState] = useState({ open: false, type: "", severity: "success", message: ""});
+  const [deleteEventModalIsOpen, setDeleteEventModalState] = useState(false);
+  const [eventToModify, setEventToModify] = useState();
 
   // Initial render
   useEffect(() => {
@@ -118,7 +117,13 @@ export default function DailySchedule(props) {
         console.log(res);
         setEvents(res.data);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
   };
 
   const handleForwardButtonClick = () => {
@@ -145,13 +150,17 @@ export default function DailySchedule(props) {
     setDeleteEventModalState(false);
   };
 
-  const handleEditPopupClose = () => {
-    setEditEventPopupState(false);
+  const handlePopupClose = () => {
+    setPopupState({ open: false, type: "", severity: "success", message: "" });
   };
 
-  const handleDeletePopupClose = () => {
-    setDeleteEventPopupState(false);
-  };
+  // const handleEditPopupClose = () => {
+  //   setEditEventPopupState(false);
+  // };
+
+  // const handleDeletePopupClose = () => {
+  //   setDeleteEventPopupState(false);
+  // };
 
   const handleEventTypeChange = (event) => {
     setEventType(event.target.value);
@@ -174,10 +183,19 @@ export default function DailySchedule(props) {
     eventsAPI.updateEvent(eventToModify, updatedValues)
       .then(res => {
         handleModalClose();
-        setEditEventPopupState(true);
+        setPopupState({ 
+          open: true, type: "editEvent", severity: "success", message: "Event successfully updated!"
+        })
+        // setEditEventPopupState(true);
         getDailyEvents(date);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while updating data. Please try again later." 
+        });
+      });
   };
 
   const handleDeleteButtonClick = (event) => {
@@ -186,13 +204,25 @@ export default function DailySchedule(props) {
     setDeleteEventModalState(true);
   };
 
-  const handleDeleteFormSubmit = () => {
+  const handleDeleteFormSubmit = (event) => {
+    event.preventDefault();
     eventsAPI.deleteEvent(eventToModify)
       .then(res => {
-        setDeleteEventPopupState(true);
+        setDeleteEventModalState(false);
+        setPopupState({ 
+          open: true, type: "deleteEvent", severity: "success", message: "Event successfully deleted"
+        })
+        // setDeleteEventPopupState(true);
         getDailyEvents(date);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setDeleteEventModalState(false);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error has occurred. Please try again later." 
+        });
+      });
   };
 
   const editBody = (
@@ -360,6 +390,12 @@ export default function DailySchedule(props) {
           {deleteBody}
         </Modal>
         <PopupMessage
+          open={popup.open}
+          handleClose={handlePopupClose}
+          severity={popup.severity}
+          message={popup.message}
+        />
+        {/* <PopupMessage
           open={editEventPopupIsOpen}
           handleClose={handleEditPopupClose}
           severity="success"
@@ -370,7 +406,7 @@ export default function DailySchedule(props) {
           handleClose={handleDeletePopupClose}
           severity="success"
           message="Event successully deleted"
-        />
+        /> */}
       </div>
     </div>
   );

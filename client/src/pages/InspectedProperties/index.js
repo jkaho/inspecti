@@ -232,11 +232,16 @@ export default function InspectedProperties(props) {
   const getAllProperties = () => {
     propertiesAPI.getPropertyNotes()
       .then(res => {
-        console.log(res);
         setModifiedProperties(res.data);
         setProperties(res.data);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving your data. Please try again later." 
+        });
+      });
   };
 
   const handleAddressInputChange = () => {
@@ -248,20 +253,24 @@ export default function InspectedProperties(props) {
       .then(res => {
         setAddressSuggestions(res.data.splice(0, 10));
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      })
     }
   };
 
   const handleSuggestionClick = (value) => {
     setAddress(value);
-    console.log(value);
   };
 
   const handleNewEntryButtonClick = () => {
     if (address) {
       domainAPI.getPropertyInfo(address.id)
       .then(res => {
-        console.log(res);
         const propertyEntry = {
           dateInspected: dateRef.current.value,
           propertyAddress: address.address,
@@ -306,7 +315,6 @@ export default function InspectedProperties(props) {
         
         propertiesAPI.createProperty(propertyEntry)
           .then(res => {
-            console.log(res);
             getAllProperties();
             setPopup(
               { 
@@ -317,9 +325,21 @@ export default function InspectedProperties(props) {
               }
             );
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            console.log(err);
+            setPopup({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while submitting your data. Please try again later." 
+            });
+          });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
     } else {
       return;
     }
@@ -336,9 +356,7 @@ export default function InspectedProperties(props) {
   const handleEditButtonClick = (event) => {
     const propertyId = event.target.id.split("-")[1];
     setPropertyToEditId(parseInt(propertyId));
-    console.log(event.target)
     setEditMode(true);
-    console.log(editModeIsOn)
   };
 
   const handleSaveButtonClick = (event) => {
@@ -353,7 +371,6 @@ export default function InspectedProperties(props) {
 
     propertiesAPI.updateProperty(propertyId, updatedPropertyData)
       .then(res => {
-        console.log(res);
         getAllProperties();
         setPopup(
           { 
@@ -364,7 +381,13 @@ export default function InspectedProperties(props) {
           }
         );
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while updating your data. Please try again later." 
+        });
+      });
   };
 
   const handleDeleteButtonClick = (event) => {
@@ -377,7 +400,6 @@ export default function InspectedProperties(props) {
     event.preventDefault();
     propertiesAPI.deleteProperty(propertyToEditId)
       .then(res => {
-        console.log(res);
         handleModalClose();
         getAllProperties();
         setPopup(
@@ -389,7 +411,13 @@ export default function InspectedProperties(props) {
           }
         );
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error occurred. Please try again later." 
+        });
+      });
   };
 
   const handleInputClickAway = () => {
@@ -558,7 +586,6 @@ export default function InspectedProperties(props) {
 
     notesAPI.createNote(newNote)
       .then(res => {
-        console.log(res);
         const newReview = {
           propertyConditionRating: parseInt(conditionRef.current.value),
           potentialRating: parseInt(potentialRef.current.value),
@@ -575,15 +602,26 @@ export default function InspectedProperties(props) {
 
         reviewsAPI.createReview(res.data.id, newReview)
           .then(res => {
-            console.log(res);
             handleModalClose();
             setPopup({ open: true, type: "createNote", severity: "success", message: "Note successfully created!" });
             getAllProperties();
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            console.log(err);
+            setPopup({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while submitting your data. Please try again later." 
+            });
+          });
         
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving your data. Please try again later." 
+        });
+      });
   };
 
   const handleTitleCheckboxChange = (event) => {
@@ -763,7 +801,6 @@ export default function InspectedProperties(props) {
     setModalState({ open: true, type: "viewNote" });
     reviewsAPI.getReview(noteId)
       .then(res => {
-        console.log(res);
         if (res.data) {
           setPropertyNoteInfo({
             noteId: noteId,

@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 // Children components
 import NavBar from "../../components/NavBar";
+import PopupMessage from "../../components/PopupMessage";
 import ReviewCard from "../../components/ReviewCard";
 // Material Design 
 import ClearIcon from "@material-ui/icons/Clear";
@@ -36,6 +37,7 @@ export default function Reviews() {
   const [criteria, setCriteria] = useState('Date added');
   const [reviews, setReviews] = useState([]);
   const [modifiedReviews, setModifiedReviews] = useState([]);
+  const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
 
   // Refs
   const inputRef = useRef();
@@ -45,11 +47,16 @@ export default function Reviews() {
   useEffect(() => {
     notesAPI.getSharedNotes()
       .then(res => {
-        console.log(res);
         setReviews(res.data);
         setModifiedReviews(res.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
   }, []);
 
   // Helper functions
@@ -68,7 +75,6 @@ export default function Reviews() {
       });
   
       setModifiedReviews(searchResults);
-      console.log(modifiedReviews)
     } else {
       setModifiedReviews(reviews);
     }
@@ -203,12 +209,19 @@ export default function Reviews() {
         return;
     }
 
-    console.log(sortedResults)
     setModifiedReviews(sortedResults);
   };
 
   const handleClearSortButtonClick = () => {
     setModifiedReviews(reviews);
+  };
+
+  const handlePopupClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setPopup({ open: false, type: "", severity: "", message: ""});
   };
   
   return (
@@ -305,6 +318,12 @@ export default function Reviews() {
           </div>
         }
       </div>
+      <PopupMessage 
+        handleClose={handlePopupClose}
+        open={popup.open}
+        message={popup.message}
+        severity={popup.severity}
+      />
     </div>
   );
 };

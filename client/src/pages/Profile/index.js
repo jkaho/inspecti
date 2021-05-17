@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 // Child components
 import BoxContainer from "../../components/BoxContainer";
+import PopupMessage from "../../components/PopupMessage";
 import SideMenu from "../../components/SideMenu";
 // CSS
 import "./style.css";
@@ -48,6 +49,7 @@ export default function Profile() {
   const [numAuctionsScheduled, setNumAuctionsScheduled] = useState();
   const [userInfo, setUserInfo] = useState({});
   const [page, setPage] = useState("inspections");
+  const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
 
   // Initial render
   useEffect(() => {
@@ -166,7 +168,6 @@ export default function Profile() {
   
           eventsAPI.getAllEvents()
             .then(res => {
-              console.log(res)
               let inspectionEvents = [];
               let auctionEvents = [];
               res.data.forEach(item => {
@@ -179,11 +180,29 @@ export default function Profile() {
               setNumInspectionsScheduled(inspectionEvents.length);
               setNumAuctionsScheduled(auctionEvents.length);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+              console.log(err);
+              setPopup({ 
+                open: true, type: "error", severity: "error", 
+                message: "An error was encountered while retrieving data. Please try again later." 
+              });
+            });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setPopup({ 
+            open: true, type: "error", severity: "error", 
+            message: "An error was encountered while retrieving data. Please try again later." 
+          });
+        });
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
   }, []);
 
   // Inspected properties bar chart
@@ -276,6 +295,14 @@ export default function Profile() {
       setIconState("short-1");
       localStorage.setItem("userIcon", "short-1");
     }
+  };
+
+  const handlePopupClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setPopup({ open: false, type: "", severity: "", message: ""});
   };
 
   return (
@@ -402,6 +429,12 @@ export default function Profile() {
             </tbody>
           </table>
       </BoxContainer>
+      <PopupMessage 
+        handleClose={handlePopupClose}
+        open={popup.open}
+        message={popup.message}
+        severity={popup.severity}
+      />
     </div>
   );
 };

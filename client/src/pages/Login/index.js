@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LogIn(props) {
   const classes = useStyles();
   // States
-  const [open, setOpen] = useState(false);
+  const [popup, setPopup] = useState({ open: false, type: "", severity: "warning", message: "" });
 
   // Refs
   const emailRef = useRef();
@@ -66,14 +66,14 @@ export default function LogIn(props) {
       password: passwordRef.current.children[1].children[0].value,
     }
 
-    console.log(userData);
     // Check that all values have been provided
     if (
       !userData.email || 
       !userData.password
     ) {
-      // RETURN "PLEASE FILL IN ALL DETAILS" ERROR MESSAGE
-      console.log("Value is missing.")
+      setPopup({ open: true, type: "loginError", severity: "warning",
+        message: "Please enter both your email and password"
+      });
       return;
     }
 
@@ -97,7 +97,9 @@ export default function LogIn(props) {
       .then(() => props.onSuccess())
       .catch(err => {
         console.log(err);
-        setOpen(true);
+        setPopup({ open: true, type: "loginError", severity: "warning",
+        message: "We can't find your email/password combo in our database..."
+        });
       });
   };
 
@@ -106,7 +108,7 @@ export default function LogIn(props) {
       return;
     }
 
-    setOpen(false);
+    setPopup({ open: false, type: "", severity: "success", message: "" });
   };
 
   return (
@@ -174,12 +176,12 @@ export default function LogIn(props) {
           </div>
         </Grid>
       </Grid>
-        <PopupMessage 
-          handleClose={handleClose}
-          open={open}
-          message="You have inputted an incorrect email or password"
-          severity="error"
-        />
+      <PopupMessage 
+        handleClose={handleClose}
+        open={popup.open}
+        message={popup.message}
+        severity={popup.severity}
+      />
     </div>
   );
 };

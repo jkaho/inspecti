@@ -49,7 +49,7 @@ export default function SignUp(props) {
   const classes = useStyles();
 
   // States
-  const [open, setOpen] = useState(false);
+  const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
 
   // Refs
   const firstNameRef = useRef();
@@ -75,8 +75,10 @@ export default function SignUp(props) {
       !userData.email || 
       !userData.password
     ) {
-      // RETURN "PLEASE FILL IN ALL DETAILS" ERROR MESSAGE
-      console.log("Value is missing.")
+      setPopup({ 
+        open: true, type: "allInputs", severity: "warning", 
+        message: "Please fill out all the form inputs" 
+      });
       return;
     }
 
@@ -110,20 +112,29 @@ export default function SignUp(props) {
           password: userData.password
         })
         .then(() => props.onSuccess())
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setPopup({ 
+            open: true, type: "error", severity: "error", 
+            message: "An error was encountered while submitting your data. Please try again later." 
+          });
+        });
       })
       .catch((err) => {
         console.log(err);
-        setOpen(true);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while submitting your data. Please try again later." 
+        });
       });
   };
 
-  const handleClose = (event, reason) => {
+  const handlePopupClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
+    setPopup({ open: false, type: "", severity: "", message: ""});
   };
 
   return (
@@ -210,10 +221,10 @@ export default function SignUp(props) {
         </Grid>
       </Grid>
       <PopupMessage 
-        handleClose={handleClose}
-        open={open}
-        message="Please format your inputs correctly"
-        severity="error"
+        handleClose={handlePopupClose}
+        open={popup.open}
+        message={popup.message}
+        severity={popup.severity}
       />
     </div>
   );

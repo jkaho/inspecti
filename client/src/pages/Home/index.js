@@ -1,19 +1,19 @@
 // React
 import React, { useState, useRef } from "react";
 // Child components
-import FilterDiv from "../../components/FilterDiv";
+// import FilterDiv from "../../components/FilterDiv";
 import InfographicCard from "../../components/InfographicCard";
 import NavBar from "../../components/NavBar";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+// import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import InputAdornment from "@material-ui/core/InputAdornment";
+// import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
-import SearchIcon from "@material-ui/icons/Search";
+// import SearchIcon from "@material-ui/icons/Search";
 // import Paper from "@material-ui/core/Paper";
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import Typography from "@material-ui/core/Typography";
 // CSS
 import "./style.css";
@@ -28,7 +28,7 @@ import reviewsImage from "../../images/social.png";
 import scheduleImage from "../../images/calendar.png";
 import shareImage from "../../images/share.png";
 // API routes
-import domainAPI from "../../utils/domainAPI";
+// import domainAPI from "../../utils/domainAPI";
 
 // Class styles
 const useStyles = makeStyles((theme) => ({
@@ -53,14 +53,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Format locations from API data 
-function formatLocationSuggestion(obj) {
-  let location = `${obj.name}, ${obj.state.toUpperCase()}`;
-  if (obj.type === "suburb") {
-    location += ` ${obj.postcode}`;
-  } 
+// function formatLocationSuggestion(obj) {
+//   let location = `${obj.name}, ${obj.state.toUpperCase()}`;
+//   if (obj.type === "suburb") {
+//     location += ` ${obj.postcode}`;
+//   } 
 
-  return location;
-};
+//   return location;
+// };
 
 // Infographic data
 const infographicData = {
@@ -175,13 +175,13 @@ export default function Home() {
   // States
   // const searchRef = useRef();
   // const [search, setSearch] = useState("");
-  const [locationSuggestions, setLocationSuggestions] = useState([]);
+  // const [locationSuggestions, setLocationSuggestions] = useState([]);
   // const [location, setLocation] = useState();
   // const [suggestionOpen, setSuggestionOpen] = useState(false);
   // const [search, setSearch] = useState("");
 
   // Refs
-  const locationRef = useRef();
+  // const locationRef = useRef();
 
   // Helper functions
   // const handleInputChange = () => {
@@ -202,32 +202,32 @@ export default function Home() {
   //   }
   // };
 
-  const handleLocationInputChange = () => {
-    const newValue = locationRef.current.children[0].children[1].children[0].value;
-    if (newValue === "") {
-      setLocationSuggestions([]);
-    } else {
-      domainAPI.getLocationSuggestions(newValue)
-      .then(res => {
-        setLocationSuggestions(res.data.splice(0, 10));
-      })
-      .catch(err => console.log(err))
-    }
-  };
+  // const handleLocationInputChange = () => {
+  //   const newValue = locationRef.current.children[0].children[1].children[0].value;
+  //   if (newValue === "") {
+  //     setLocationSuggestions([]);
+  //   } else {
+  //     domainAPI.getLocationSuggestions(newValue)
+  //     .then(res => {
+  //       setLocationSuggestions(res.data.splice(0, 10));
+  //     })
+  //     .catch(err => console.log(err))
+  //   }
+  // };
 
-  const handleSuggestionClick = (value) => {
-    setLocation(value);
-    console.log(value);
-  };
+  // const handleSuggestionClick = (value) => {
+  //   setLocation(value);
+  //   console.log(value);
+  // };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    // setSuggestionOpen(false);
-    setLocationSuggestions([]);
-    // API.getPropertyListings(search)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => console.log(err))
-  };
+  // const handleFormSubmit = (event) => {
+  //   event.preventDefault();
+  //   // setSuggestionOpen(false);
+  //   setLocationSuggestions([]);
+  //   // API.getPropertyListings(search)
+  //   //   .then(res => console.log(res.data))
+  //   //   .catch(err => console.log(err))
+  // };
 
   // const handleLocationSuggestionClick = (event) => {
   //   event.stopPropagation();
@@ -247,7 +247,7 @@ export default function Home() {
     <div className={classes.root}>
       <NavBar />
       <Grid item xs={12}>
-        <div className="bg" style={{ display: "none" }}>
+        {/* <div className="bg" style={{ display: "none" }}>
           <Typography variant="h3" className={classes.heading}>Search properties for sale</Typography>
           <form onSubmit={handleFormSubmit}>
             <div className="location-autocomplete-wrapper">
@@ -271,7 +271,7 @@ export default function Home() {
             </div>
           </form>
           <FilterDiv />
-        </div>
+        </div> */}
       </Grid>
       <div className="home-content">
         <div className="home-heading-div">

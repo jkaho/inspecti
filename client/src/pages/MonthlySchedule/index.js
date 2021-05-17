@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 // Child components
 import FormModal from "../../components/FormModal";
+import PopupMessage from "../../components/PopupMessage";
 import SideMenu from "../../components/SideMenu";
 // Full Calendar
 import FullCalendar from "@fullcalendar/react";
@@ -22,13 +23,14 @@ export default function MonthlySchedule() {
   // States
   const [addEventModalIsOpen, setAddEventModalState] = useState(false);
   const [events, setEvents] = useState([]);
-  const [eventType, setEventType] = React.useState("Inspection");
-  const [hasAuction, setAuctionState] = React.useState(false);
-  const [propertySpecs, setPropertySpecs] = React.useState({});
-  const [address, setAddress] = React.useState();
+  const [eventType, setEventType] = useState("Inspection");
+  const [hasAuction, setAuctionState] = useState(false);
+  const [propertySpecs, setPropertySpecs] = useState({});
+  const [address, setAddress] = useState();
   // const [addressQuery, setAddressQuery] = React.useState("");
-  const [addressSuggestions, setAddressSuggestions] = React.useState([]);
-  const [addEventPopupIsOpen, setAddEventPopupState] = React.useState(false);
+  const [addressSuggestions, setAddressSuggestions] = useState([]);
+  const [addEventPopupIsOpen, setAddEventPopupState] = useState(false);
+  const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
 
   // History
   const history = useHistory();
@@ -48,7 +50,6 @@ export default function MonthlySchedule() {
   const getAllEvents = () => {
     eventsAPI.getAllEvents()
       .then(res => {
-        console.log(res);
         let eventGroups = [];
         res.data.forEach(eventObj => {
           const eventObjDate = moment(eventObj.startTime).format("YYYY-MM-DD");
@@ -87,11 +88,16 @@ export default function MonthlySchedule() {
         
         setEvents(events);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
   };
 
   const handleDateClick = (info) => {
-    console.log(info.dateStr);
     const dateStr = info.dateStr;
     history.push({
       pathname: "/daily",
@@ -124,16 +130,25 @@ export default function MonthlySchedule() {
 
     eventsAPI.createEvent(newEvent)
       .then(res => {
-        console.log(res);
         handleModalClose();
         setAddEventPopupState(true);
         getAllEvents();
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while submitting your data. Please try again later." 
+        });
+      });
   };
 
   const handlePopupClose = () => {
     setAddEventPopupState(false);
+  };
+
+  const handleClose = () => {
+    setPopup({ open: false, type: "", severity: "error", message: "" });
   };
 
   const handleAddressInputChange = () => {
@@ -147,7 +162,13 @@ export default function MonthlySchedule() {
       .then(res => {
         setAddressSuggestions(res.data.splice(0, 10));
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
     }
   };
 
@@ -164,7 +185,13 @@ export default function MonthlySchedule() {
           landSize: res.data.areaSize,
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
   };
   
   return (
@@ -211,6 +238,12 @@ export default function MonthlySchedule() {
 
         </div>
       </div>
+      <PopupMessage 
+        handleClose={handleClose}
+        open={popup.open}
+        message={popup.message}
+        severity={popup.severity}
+      />
     </div>
   );
 };

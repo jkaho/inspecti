@@ -205,7 +205,6 @@ export default function Notes(props) {
     // Check user's saved notes 
     notesAPI.getNotesWithReviews()
     .then(res => {
-      console.log(res);
       // If there are no existing notes, create a new blank note
       if (res.data.length < 1) {
         titleRef.current.value = "";
@@ -223,10 +222,15 @@ export default function Notes(props) {
 
         notesAPI.createNote(newNote)
           .then(res => {
-            console.log(res.data);
             setCurrentNoteId(res.data.id);
           })
-          .catch(err => console.log(err))
+          .catch(err => {
+            console.log(err);
+            setPopupState({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while submitting your data. Please try again later." 
+            });
+          });
       // Else render the latest note 
       } else {
         // Separate starred and non-starred notes 
@@ -267,7 +271,6 @@ export default function Notes(props) {
             setSharedState(lastNote.shared) 
             setRatingSectionState(true);
             setPropertyReview(lastNote.review);
-            console.log(lastNote.review)
           } else {
             setRatingButtonState(true);
           }
@@ -278,7 +281,13 @@ export default function Notes(props) {
         }
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      setPopupState({ 
+        open: true, type: "error", severity: "error", 
+        message: "An error was encountered while retrieving data. Please try again later." 
+      });
+    });
   };
 
   const handleNewNoteButtonClick = () => {
@@ -303,10 +312,15 @@ export default function Notes(props) {
 
     notesAPI.createNote(noteData)
       .then(res => {
-        console.log(res);
         setCurrentNoteId(res.data.id);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while submitting your data. Please try again later." 
+        });
+      });
   };
 
   const handleTitleInputChange = () => {
@@ -319,7 +333,6 @@ export default function Notes(props) {
 
     notesAPI.updateNote(currentNoteId, titleData)
       .then(res => {
-        console.log(res);
         // Check user's saved notes to update list
         notesAPI.getNotesWithReviews()
         .then(res => {    
@@ -341,9 +354,21 @@ export default function Notes(props) {
         setStarredNotes(starredNotes);
         setNonStarredNotes(nonStarredNotes);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setPopupState({ 
+            open: true, type: "error", severity: "error", 
+            message: "An error was encountered while retrieving data. Please try again later." 
+          });
+        });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while updating data. Please try again later." 
+        });
+      });
   };
 
 
@@ -360,7 +385,6 @@ export default function Notes(props) {
     setCurrentNoteId(clickedNoteId);
     notesAPI.getNotesWithReviews(props.id)
       .then(res => {
-        console.log(res)
         // setAllNotes(res.data.reverse());
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].id === clickedNoteId) {
@@ -419,7 +443,13 @@ export default function Notes(props) {
       propertyAddress: null
     })
       .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while updating data. Please try again later." 
+        });
+      });
   };
 
   const handleModalNoClick = () => {
@@ -434,11 +464,16 @@ export default function Notes(props) {
       .then(res => {
         setAddressSuggestions(res.data);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
     } else {
       setAddressSuggestions([]);
     }
-    console.log(addressSuggestions)
   };
 
   const handleAddressSuggestionClick = (value) => {
@@ -447,7 +482,6 @@ export default function Notes(props) {
 
     propertiesAPI.getAllProperties()
       .then(res => {
-        console.log(res.data);
         res.data.forEach(item => {
           if (address === item.propertyAddress) {
             propertyId = item.id;
@@ -467,19 +501,35 @@ export default function Notes(props) {
           setPropertySpecs(propertyInfo);
   
           propertyInfo.propertyAddress = value.address;
-          console.log(propertyInfo)
           notesAPI.updateNote(currentNoteId, propertyInfo)
             .then(res => {
-              console.log(res);
               setAddressInfoState(true);
               setAddressInputState(false);
               setRatingButtonState(true);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+              console.log(err);
+              setPopupState({ 
+                open: true, type: "error", severity: "error", 
+                message: "An error was encountered while updating data. Please try again later." 
+              });
+            });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setPopupState({ 
+            open: true, type: "error", severity: "error", 
+            message: "An error was encountered while retrieving data. Please try again later." 
+          });
+        });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
   };
 
   const handleRatingButtonClick = () => {
@@ -499,19 +549,29 @@ export default function Notes(props) {
     };
     reviewsAPI.createReview(currentNoteId, review)
       .then(res => {
-        console.log(res);
         notesAPI.updateNote(currentNoteId, {
           hasReview: true
         })
           .then(res => console.log(res))
-          .catch(err => console.log(err))
+          .catch(err => {
+            console.log(err);
+            setPopupState({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while updating data. Please try again later." 
+            });
+          });
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while submitting your data. Please try again later." 
+        });
+      });
   };
 
   const handleRatingInputChange = (event) => {
     const target = event.target.id.split("-")[0];
-    console.log(target)
     const review = propertyReview;
     switch(target) {
       case "condition":
@@ -555,12 +615,17 @@ export default function Notes(props) {
     setRatingEditState(false);
     reviewsAPI.updateReview(currentNoteId, propertyReview)
       .then(res => console.log(res))
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while updating data. Please try again later." 
+        });
+      });
   };
 
   const handleDeleteNoteButtonClick = (event) => {
     event.stopPropagation();
-    console.log(event.target)
     const noteId = event.target.id.split("-")[1];
     setModalState({ isOpen: true, type: "noteDelete", title: "Confirmation", text: "Are you sure you want to delete this note?" });
     setNoteReviewToDelete(noteId);
@@ -569,7 +634,6 @@ export default function Notes(props) {
   const handleConfirmDeleteNoteYesClick = () => {
     notesAPI.deleteNote(noteReviewToDelete)
       .then(res => {
-        console.log(res);
         handleModalNoClick();
         notesAPI.getAllNotes(props.id)
           .then(res => {
@@ -611,9 +675,21 @@ export default function Notes(props) {
               }
             }
           })
-          .catch(err => console.log(err))
+          .catch(err => {
+            console.log(err);
+            setPopupState({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while retrieving data. Please try again later." 
+            });
+          });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error has occurred. Please try again later." 
+        });
+      });
   };
 
   const handleDeleteReviewButtonClick = () => {
@@ -623,7 +699,6 @@ export default function Notes(props) {
   const handleConfirmDeleteReviewYesClick = () => {
     reviewsAPI.deleteReview(currentNoteId)
       .then(res => {
-        console.log(res);
         setPropertyReview({});
         setRatingSectionState(false);
         setRatingButtonState(true);
@@ -633,9 +708,21 @@ export default function Notes(props) {
           hasReview: false,
         })
           .then(res => console.log(res))
-          .catch(err => console.log(err))
+          .catch(err => {
+            console.log(err);
+            setPopupState({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while updating data. Please try again later." 
+            });
+          });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error has occurred. Please try again later." 
+        });
+      });
   };
 
   const handleStarButtonClick = (event, isStarred) => {
@@ -645,7 +732,6 @@ export default function Notes(props) {
       starred: starred,
     })
       .then(res => {
-        console.log(res);
         notesAPI.getAllNotes(props.id)
           .then(res => {
             // Update starred and non-starred notes
@@ -666,20 +752,36 @@ export default function Notes(props) {
             setStarredNotes(starredNotes);
             setNonStarredNotes(nonStarredNotes);
           })
-          .catch(err => console.log(err))
+          .catch(err => {
+            console.log(err);
+            setPopupState({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while retrieving data. Please try again later." 
+            });
+          });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while updating data. Please try again later." 
+        });
+      });
   };
 
   const handleEditTextButtonClick = () => {
     notesAPI.getOneNote(currentNoteId)
     .then(res => {
-      console.log(res);
       setText(res.data.text);
-      console.log(res.data.text)
       setTextEditorMode(!textEditorModeOn);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      setPopupState({ 
+        open: true, type: "error", severity: "error", 
+        message: "An error was encountered while retrieving data. Please try again later." 
+      });
+    });
   };
 
   const handleNoteSearchInputChange = () => {
@@ -689,7 +791,6 @@ export default function Notes(props) {
     if (query !== "") {
       notesAPI.searchNotes(props.id, query)
       .then(res => {
-        console.log(res);
         if (res.data.length > 0) {
           res.data.reverse();
           let starredNotes = [];
@@ -725,7 +826,13 @@ export default function Notes(props) {
                       }
                     }
                   })
-                  .catch(err => console.log(err))
+                  .catch(err => {
+                    console.log(err);
+                    setPopupState({ 
+                      open: true, type: "error", severity: "error", 
+                      message: "An error was encountered while retrieving data. Please try again later." 
+                    });
+                  });
                 setRatingSectionState(true);
               } else {
                 setRatingButtonState(true);
@@ -741,7 +848,13 @@ export default function Notes(props) {
           setNonStarredNotes([]);
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
     } else {
       renderAllNotes();
     }
@@ -750,11 +863,16 @@ export default function Notes(props) {
   const handleShareButtonClick = () => {
     userAPI.getOneUser(props.id)
       .then(res => {
-        console.log(res);
         setAuthor({ firstName: res.data.firstName, lastName: res.data.lastName });
         setReviewModalState(true);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setPopupState({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while retrieving data. Please try again later." 
+        });
+      });
   };
 
   const handleUnshareButtonClick = () => {
@@ -768,12 +886,17 @@ export default function Notes(props) {
       dateShared: null
     })
     .then(res => {
-      console.log(res);
       handleModalNoClick();
       setPopupState({ open: true, type: "unshareSuccess", severity: "success", message: "Review successfully unshared"});
       setSharedState(!isShared);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      setPopupState({ 
+        open: true, type: "error", severity: "error", 
+        message: "An error was encountered while updating data. Please try again later." 
+      });
+    });
   };
 
   const confirmReviewShare = () => {
@@ -782,12 +905,17 @@ export default function Notes(props) {
       dateShared: moment().format("YYYY-MM-DD")
     })
     .then(res => {
-      console.log(res);
       setReviewModalState(false);
       setPopupState({ open: true, type: "shareSuccess", severity: "success", message: "Review successfully shared!"});
       setSharedState(!isShared);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      setPopupState({ 
+        open: true, type: "error", severity: "error", 
+        message: "An error was encountered while updating data. Please try again later." 
+      });
+    });
   };
 
   const handlePopupClose = () => {
