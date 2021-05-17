@@ -20,7 +20,8 @@ const eventsController = {
           startTime: {
             [Op.between]: [req.params.startTime, req.params.endTime]
           }
-        }
+        },
+        order: [["startTime", "ASC"]]
       })
       .then(dailyEvents => res.json(dailyEvents))
       .catch(err => res.status(422).json(err))

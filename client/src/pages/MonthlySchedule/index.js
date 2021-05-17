@@ -213,9 +213,9 @@ export default function MonthlySchedule() {
               }
             }}
             headerToolbar={{
-              center: 'eventButton dayGridMonth,timeGridDay',
+              // center: 'eventButton dayGridMonth,timeGridDay',
               left: 'title',
-              right: 'prev,next',
+              right: 'eventButton prev,next',
             }}
             events={events}
           />

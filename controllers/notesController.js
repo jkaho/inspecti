@@ -13,7 +13,6 @@ const notesController = {
       .catch(err => res.status(422).json(err));
   },
   getNotesWithReviews: function(req, res) {
-    console.log(req.user)
     db.note
       .findAll({
         include: [

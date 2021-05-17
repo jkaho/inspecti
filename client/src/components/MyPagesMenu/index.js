@@ -95,10 +95,7 @@ export default function MyPagesMenu(props) {
                       <MenuItem onClick={handleClose}>Notes & Reviews</MenuItem>
                     </Link>
                     <Link to="/monthly">
-                      <MenuItem onClick={handleClose}>Monthly Schedule</MenuItem>
-                    </Link>
-                    <Link to="/daily">
-                      <MenuItem onClick={handleClose}>Daily Schedule</MenuItem>
+                      <MenuItem onClick={handleClose}>Inspection Schedule</MenuItem>
                     </Link>
                     <Link to="/inspected">
                       <MenuItem onClick={handleClose}>Inspected Properties</MenuItem>

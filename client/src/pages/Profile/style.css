@@ -70,7 +70,7 @@
   vertical-align: top;
   text-align: center;
   margin-bottom: 20px;
-  box-shadow: 0 1px 5px rgb(182, 160, 201);
+  /* box-shadow: 0 1px 5px rgb(0, 0, 0, 0.12); */
   background: white;
   border-radius: 20px;
 }
@@ -87,15 +87,17 @@
 .stat-bubble {
   width: 200px;
   /* background: white; */
-  background: rgb(253, 253, 253);
+  background: rgb(241, 241, 241);
   color: rgb(71, 71, 71);
   padding: 10px;
   border-radius: 20px;
+  border: 1px solid rgb(231, 231, 231);
   display: block;
   margin: 0 auto;
   margin-bottom: 10px;
   text-align: center;
-  box-shadow: 0 1px 5px rgb(182, 160, 201);
+  /* color: rgb(99, 148, 238); */
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.12);
 }
 
 .large-num {

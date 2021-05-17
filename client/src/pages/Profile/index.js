@@ -86,7 +86,7 @@ export default function Profile() {
               attendedAuctions.push(item);
             }
 
-            if (item.soldPrice) {
+            if (item.soldPrice && item.hadAuction !== null) {
               if (item.soldPrice < 1000000) {
                 priceData[0].push(item);
               } else if (item.soldPrice >= 1000000 && item.soldPrice < 2000000) {
@@ -117,8 +117,8 @@ export default function Profile() {
             datasets: [
               {
                 label: 'Number of properties',
-                backgroundColor: 'rgba(75,192,192,1)',
-                borderColor: 'rgba(0,0,0,1)',
+                backgroundColor: 'rgb(99, 148, 238)',
+                borderColor: 'rgba(0, 0, 0, 1)',
                 borderWidth: 2,
                 data: [
                   monthlyPropertyData[0].length,
@@ -154,6 +154,7 @@ export default function Profile() {
                   "rgb(91, 130, 236, 0.5)",
                   "rgb(236, 137, 91, 0.5)"
                 ],
+                borderColor: 'rgba(0, 0, 0, 1)',
                 data: [
                   priceData[0].length,
                   priceData[1].length,
@@ -418,7 +419,7 @@ export default function Profile() {
                     {
                       page === "inspections" ?
                       <h3>Properties viewed in the past 6 months</h3> : 
-                      <h3>Inspected property sold prices</h3>
+                      <h3>Property sold prices</h3>
                     }
                     <div className="chart-container">
                       {page === "inspections" ? <PropertiesChart /> : <PriceChart />} 
