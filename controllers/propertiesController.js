@@ -10,7 +10,7 @@ const propertiesController = {
         }
       })
       .then(properties => res.json(properties))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   },
   getOneProperty: function(req, res) {
     db.inspectedProperties
@@ -20,7 +20,7 @@ const propertiesController = {
         }
       })
       .then(property => res.json(property))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   },
   getPropertyNotes: function(req, res) {
     db.inspectedProperties
@@ -75,7 +75,7 @@ const propertiesController = {
         }
       )
       .then(updatedPropertyEntry => res.json(updatedPropertyEntry))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   },
   deletePropertyEntry: function(req, res) {
     db.inspectedProperties
@@ -85,7 +85,7 @@ const propertiesController = {
         }
       })
       .then(deletedPropertyEntry => res.json(deletedPropertyEntry))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   }
 };
 

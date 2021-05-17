@@ -10,7 +10,7 @@ const eventsController = {
         }
       })
       .then(events => res.json(events))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   getDailyEvents: function(req, res) {
     console.log(req.params)
@@ -23,7 +23,7 @@ const eventsController = {
         }
       })
       .then(dailyEvents => res.json(dailyEvents))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   createEvent: function(req, res) {
     db.scheduledEvents
@@ -56,7 +56,7 @@ const eventsController = {
         }
       })
       .then(updatedEvent => res.json(updatedEvent))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   deleteEvent: function(req, res) {
     db.scheduledEvents
@@ -68,7 +68,7 @@ const eventsController = {
         }
       )
       .then(deletedEvent => res.json(deletedEvent))
-      .catch(err => res.status(422).json(err))
+      .catch(err =>res.status(422).json(err))
   }
 };
 

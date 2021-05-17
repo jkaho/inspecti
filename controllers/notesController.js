@@ -10,7 +10,7 @@ const notesController = {
         }
       })
       .then(notes => res.json(notes))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   },
   getNotesWithReviews: function(req, res) {
     console.log(req.user)
@@ -22,7 +22,7 @@ const notesController = {
         }
       })
       .then(notes => res.json(notes))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   },
   getSharedNotes: function(req, res) {
     db.note
@@ -34,7 +34,7 @@ const notesController = {
         order: [["dateShared", "DESC"]]
       })
       .then(sharedNotes => res.json(sharedNotes))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   },
   getOneNote: function(req, res) {
     db.note
@@ -44,7 +44,7 @@ const notesController = {
         }
       })
       .then(note => res.json(note))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   },
   getStarredNotes: function(req, res) {
     db.note
@@ -55,7 +55,7 @@ const notesController = {
         }
       })
       .then(notes => res.json(notes))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   searchNotes: function(req, res) {
     db.note
@@ -82,7 +82,7 @@ const notesController = {
         }
       })
       .then(notes => res.json(notes))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   searchNoteAddress: function(req, res) {
     console.log(req.body)
@@ -96,7 +96,7 @@ const notesController = {
         }
       })
       .then(notes => res.json(notes))
-      .catch(err => console.log(err));
+      .catch(err => res.status(422).json(err));
   },
   createNote: function(req, res) {
     db.note
@@ -114,7 +114,7 @@ const notesController = {
         landSize: req.body.landSize
       })
       .then(model => res.json(model))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   updateNote: function(req, res) {
     db.note

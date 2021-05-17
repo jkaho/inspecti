@@ -5,7 +5,7 @@ const reviewsController = {
     db.review
       .findAll()
       .then(reviews => res.json(reviews))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   getReview: function(req, res) {
     console.log(req.params)
@@ -16,7 +16,7 @@ const reviewsController = {
         }
       })
       .then(review => res.json(review))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   createReview: function(req, res) {
     console.log(req.user.id)
@@ -36,7 +36,7 @@ const reviewsController = {
         noteId: req.params.id
       })
       .then(newReview => res.json(newReview))
-      .catch(err => console.log(err))
+      .catch(err => res.status(422).json(err))
   },
   updateReview: function(req, res) {
     db.review
