@@ -92,6 +92,7 @@
   color: white!important;
 }
 
+/* ------- MEDIA QUERIES ------- */
 @media (max-width: 800px) {
   .fc-eventButton-button,
   .fc-prev-button,

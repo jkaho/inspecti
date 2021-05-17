@@ -113,6 +113,7 @@
   display: none;
 }
 
+/* ------- MEDIA QUERIES ------- */
 @media (max-width: 900px) {
   .stat-bubble {
     width: 150px;

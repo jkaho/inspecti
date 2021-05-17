@@ -6,13 +6,15 @@ import { Link } from "react-router-dom";
 import PopupMessage from "../../components/PopupMessage";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import { Typography, Button, TextField } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 // CSS
 import "./style.css";
 // Images
-import logo from "../../images/logo.png";
 import graphic from "../../images/signup-graphic.png";
+import logo from "../../images/logo.png";
 // API routes
 import userAPI from "../../utils/userAPI";
 
@@ -215,4 +217,4 @@ export default function SignUp(props) {
       />
     </div>
   );
-}
+};

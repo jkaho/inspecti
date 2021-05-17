@@ -55,6 +55,7 @@
   background: white;
 }
 
+/* ------- MEDIA QUERIES ------- */
 @media (max-width: 600px) {
   .daily-container {
     width: 100%;

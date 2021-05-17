@@ -1,9 +1,9 @@
 // React
 import React, { useState, useEffect, useRef } from "react";
 // Children components
-import SideMenu from "../../components/SideMenu";
 import PropertyTable from "../../components/PropertyTable";
 import PopupMessage from "../../components/PopupMessage";
+import SideMenu from "../../components/SideMenu";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -12,17 +12,17 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Modal from "@material-ui/core/Modal";
 import Tooltip from "@material-ui/core/Tooltip";
 // react-draft-wysiwyg
-import { EditorState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState } from 'draft-js';
 import DOMPurify from 'dompurify';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 // CSS
 import "./style.css";
 // API routes
-import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
 import notesAPI from "../../utils/notesAPI";
+import propertiesAPI from "../../utils/propertiesAPI";
 import reviewsAPI from "../../utils/reviewsAPI";
 
 // Modal style

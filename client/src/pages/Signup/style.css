@@ -51,7 +51,6 @@
 }
 
 /* ------- MEDIA QUERIES ------- */
-
 @media (max-width: 600px) {
   .signup-seg {
     min-height: 0;

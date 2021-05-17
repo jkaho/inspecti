@@ -1,39 +1,50 @@
+// React
 import React, { useState, useEffect, useRef } from "react";
+// react-router-dom
+import { useHistory } from "react-router-dom";
+// Child components
+import FormModal from "../../components/FormModal";
 import SideMenu from "../../components/SideMenu";
+// Full Calendar
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+// CSS
 import "./style.css";
-// import MonthlyCalendar from "../../components/MonthlyCalendar";
-import FormModal from "../../components/FormModal";
-import eventsAPI from "../../utils/eventsAPI";
-import moment from "moment";
-import { useHistory } from "react-router-dom";
+// API routes
 import domainAPI from "../../utils/domainAPI";
+import eventsAPI from "../../utils/eventsAPI";
+// Moment.js
+import moment from "moment";
 
 export default function MonthlySchedule() {
+  // States
   const [addEventModalIsOpen, setAddEventModalState] = useState(false);
   const [events, setEvents] = useState([]);
   const [eventType, setEventType] = React.useState("Inspection");
   const [hasAuction, setAuctionState] = React.useState(false);
   const [propertySpecs, setPropertySpecs] = React.useState({});
   const [address, setAddress] = React.useState();
-  const [addressQuery, setAddressQuery] = React.useState("");
+  // const [addressQuery, setAddressQuery] = React.useState("");
   const [addressSuggestions, setAddressSuggestions] = React.useState([]);
   const [addEventPopupIsOpen, setAddEventPopupState] = React.useState(false);
 
+  // History
   const history = useHistory();
 
+  // Refs
   const typeRef = useRef();
   const startTimeRef = useRef();
   const endTimeRef = useRef();
   const addressRef = useRef();
 
+  // Initial render
   useEffect(() => {
     getAllEvents();
   }, []);
 
+  // Helper functions
   const getAllEvents = () => {
     eventsAPI.getAllEvents()
       .then(res => {
@@ -127,7 +138,7 @@ export default function MonthlySchedule() {
 
   const handleAddressInputChange = () => {
     const newValue = addressRef.current.children[0].children[1].children[0].value;
-    setAddressQuery(newValue);
+    // setAddressQuery(newValue);
 
     if (newValue === "") {
       setAddressSuggestions([]);

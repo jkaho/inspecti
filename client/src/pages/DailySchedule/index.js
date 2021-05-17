@@ -1,22 +1,31 @@
+// React
 import React, { useState, useEffect, useRef } from "react";
+// react-router-dom
 import { Link, useLocation } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+// Child components
+import EventCard from "../../components/EventCard";
+import PopupMessage from "../../components/PopupMessage";
 import SideMenu from "../../components/SideMenu";
-import "./style.css";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+// Material Design
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import Button from "@material-ui/core/Button";
-import { IconButton, ListItemSecondaryAction } from "@material-ui/core";
-import moment from "moment";
-import eventsAPI from "../../utils/eventsAPI";
-import EventCard from "../../components/EventCard";
-import clsx from "clsx";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import FormControl from "@material-ui/core/FormControl";
+import IconButton from "@material-ui/core/IconButton";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import PopupMessage from "../../components/PopupMessage";
+// CSS
+import "./style.css";
+// Moment.js
+import moment from "moment";
+// API routes
+import eventsAPI from "../../utils/eventsAPI";
 
+// Modal style
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -28,6 +37,7 @@ function getModalStyle() {
   };
 };
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   arrowButton: {
     padding: 0,
@@ -76,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DailySchedule(props) {
   const classes = useStyles();
   let { state } = useLocation();
+  // States
   const [date, setDate] = useState();
   const [events, setEvents] = useState([]);
   // getModalStyle is not a pure function, we roll the style only on the first render
@@ -87,15 +98,18 @@ export default function DailySchedule(props) {
   const [deleteEventModalIsOpen, setDeleteEventModalState] = React.useState(false);
   const [eventToModify, setEventToModify] = React.useState();
 
+  // Initial render
   useEffect(() => {
     setDate(state);
     getDailyEvents(state);
   }, []);
 
+  // Refs
   const typeRef = useRef();
   const startTimeRef = useRef();
   const endTimeRef = useRef();
 
+  // Helper functions
   const getDailyEvents = (dateQuery) => {
     let startTime = moment(dateQuery).format("YYYY-MM-DD HH:mm:ss");
     let endTime = moment(dateQuery).add(1, "d").format("YYYY-MM-DD HH:mm:ss");
@@ -157,12 +171,8 @@ export default function DailySchedule(props) {
       endTime: endTimeRef.current.value,
     };
 
-    console.log(updatedValues)
-
-    console.log(eventToModify)
     eventsAPI.updateEvent(eventToModify, updatedValues)
       .then(res => {
-        console.log(res);
         handleModalClose();
         setEditEventPopupState(true);
         getDailyEvents(date);
@@ -179,7 +189,6 @@ export default function DailySchedule(props) {
   const handleDeleteFormSubmit = () => {
     eventsAPI.deleteEvent(eventToModify)
       .then(res => {
-        console.log(res);
         setDeleteEventPopupState(true);
         getDailyEvents(date);
       })
@@ -334,38 +343,35 @@ export default function DailySchedule(props) {
         </div>
       </div>
       <div>
-      {/* <button type="button" onClick={handleModalOpen}>
-        Open Modal
-      </button> */}
-      <Modal
-        open={open}
-        onClose={handleModalClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {editBody}
-      </Modal>
-      <Modal
-        open={deleteEventModalIsOpen}
-        onClose={handleDeleteModalClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {deleteBody}
-      </Modal>
-      <PopupMessage
-        open={editEventPopupIsOpen}
-        handleClose={handleEditPopupClose}
-        severity="success"
-        message="Event successully updated!"
-      />
-      <PopupMessage
-        open={deleteEventPopupIsOpen}
-        handleClose={handleDeletePopupClose}
-        severity="success"
-        message="Event successully deleted"
-      />
-    </div>
+        <Modal
+          open={open}
+          onClose={handleModalClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          {editBody}
+        </Modal>
+        <Modal
+          open={deleteEventModalIsOpen}
+          onClose={handleDeleteModalClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          {deleteBody}
+        </Modal>
+        <PopupMessage
+          open={editEventPopupIsOpen}
+          handleClose={handleEditPopupClose}
+          severity="success"
+          message="Event successully updated!"
+        />
+        <PopupMessage
+          open={deleteEventPopupIsOpen}
+          handleClose={handleDeletePopupClose}
+          severity="success"
+          message="Event successully deleted"
+        />
+      </div>
     </div>
   );
 };

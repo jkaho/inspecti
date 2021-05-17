@@ -2,10 +2,6 @@
   width: 220px;
 }
 
-/* .current-note-div {
-  min-width: 270px;
-} */
-
 .note-search-div {
   padding: 10px;
 }
@@ -105,10 +101,6 @@
   font-size: 16px;
 }
 
-/* .under-suggestion-box {
-  position: absolute;
-} */
-
 .note-review-attach-button {
   padding: 10px;
 }
@@ -172,7 +164,6 @@
 }
 
 /* ------- MEDIA QUERIES ------- */
-
 @media (max-width: 850px) {
   #note-bar {
     display: none;

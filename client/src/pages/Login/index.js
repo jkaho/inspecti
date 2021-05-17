@@ -6,16 +6,18 @@ import { Link } from "react-router-dom";
 import PopupMessage from "../../components/PopupMessage";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import { Typography, Button, TextField } from "@material-ui/core";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 // CSS
 import "./style.css";
 // Images
-import logo from "../../images/logo.png";
 import graphic from "../../images/login-graphic.png";
+import logo from "../../images/logo.png";
 // API routes
 import userAPI from "../../utils/userAPI";
 
@@ -48,10 +50,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LogIn(props) {
   const classes = useStyles();
+  // States
   const [open, setOpen] = useState(false);
+
+  // Refs
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  // Helper functions
   const handleLogInFormSubmit = (event) => {
     event.preventDefault();
     // Create user data object
@@ -101,15 +107,6 @@ export default function LogIn(props) {
     }
 
     setOpen(false);
-  };
-
-  const checkUsers = () => {
-    userAPI.getAllUsers()
-    .then(res => {
-      console.log(res);
-      console.log("hello!")
-    })
-    .catch(err => console.log(err));
   };
 
   return (
@@ -177,14 +174,12 @@ export default function LogIn(props) {
           </div>
         </Grid>
       </Grid>
-      {/* <ClickAwayListener onClickAway={handleClickAway}> */}
         <PopupMessage 
           handleClose={handleClose}
           open={open}
           message="You have inputted an incorrect email or password"
           severity="error"
         />
-      {/* </ClickAwayListener> */}
     </div>
   );
-}
+};

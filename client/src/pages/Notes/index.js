@@ -280,92 +280,6 @@ export default function Notes(props) {
     })
     .catch(err => console.log(err));
   };
-  // const renderAllNotes = () => {
-  //   // Check user's saved notes 
-  //   notesAPI.getAllNotes(props.id)
-  //   .then(res => {
-  //     console.log(res);
-  //     // If there are no existing notes, create a new blank note
-  //     if (res.data.length < 1) {
-  //       titleRef.current.value = "";
-  //       textRef.current.value = "";
-  //       setTitle("");
-  //       setText("");
-        
-  //       const newNote = {
-  //         starred: false,
-  //         title: title,
-  //         text: text,
-  //         propertyAddress: null,
-  //         userId: props.id
-  //       };
-
-  //       notesAPI.createNote(newNote)
-  //         .then(res => {
-  //           console.log(res.data);
-  //           setCurrentNoteId(res.data.id);
-  //         })
-  //         .catch(err => console.log(err))
-  //     // Else render the latest note 
-  //     } else {
-  //       // Separate starred and non-starred notes 
-  //       let starredNotes = [];
-  //       let nonStarredNotes = [];
-  //       res.data.forEach(note => {
-  //         if (note.starred) {
-  //           starredNotes.push(note);
-  //         } else {
-  //           nonStarredNotes.push(note);
-  //         };
-  //       });
-
-  //       // Reverse order of notes to display newest first 
-  //       res.data.reverse(); // to display latest note
-  //       starredNotes.reverse(); // to display starred notes list
-  //       nonStarredNotes.reverse(); // to display all notes list 
-  //       setStarredNotes(starredNotes);
-  //       setNonStarredNotes(nonStarredNotes);
-
-  //       // Render latest note
-  //       const lastNote = res.data[0];
-  //       setCurrentNoteId(lastNote.id);
-  //       setTitle(lastNote.title);
-  //       setText(lastNote.text);
-  //       if (lastNote.propertyAddress) {
-  //         setAddress(lastNote.propertyAddress);
-  //         setPropertySpecs({
-  //           bedrooms: lastNote.bedrooms,
-  //           bathrooms: lastNote.bathrooms,
-  //           carSpaces: lastNote.carSpaces,
-  //           land: lastNote.landSize,
-  //         });
-  //         setAddressInfoState(true);
-  //         // Determine whether or not note has review
-  //         if (lastNote.hasReview) {
-  //           reviewsAPI.getAllReviews()
-  //             .then(res => {
-  //               for (let i = 0; i < res.data.length; i++) {
-  //                 if (res.data[i].noteId === lastNote.id) {
-  //                   setPropertyReview(res.data[i]);
-  //                   setSharedState(res.data[i].shared);
-  //                   console.log(res.data[i].shared)
-  //                 }
-  //               }
-  //             })
-  //             .catch(err => console.log(err))
-  //           setRatingSectionState(true);
-  //         } else {
-  //           setRatingButtonState(true);
-  //         }
-  //       } else {
-  //         setAddressInfoState(false);
-  //         setRatingSectionState(false);
-  //         setRatingButtonState(false);
-  //       }
-  //     }
-  //   })
-  //   .catch(err => console.log(err));
-  // };
 
   const handleNewNoteButtonClick = () => {
     // titleRef.current.value = "";
@@ -433,18 +347,6 @@ export default function Notes(props) {
   };
 
 
-  // const handleTextInputChange = () => {
-  //   const textValue = textRef.current.value;
-  //   setText(textValue);
-
-  //   const textData = {
-  //     text: textValue
-  //   }
-  //   notesAPI.updateNote(currentNoteId, textData)
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err))
-  // };
-
   const handleNoteButtonClick = (event) => {
     setTextEditorMode(false);
 
@@ -493,76 +395,8 @@ export default function Notes(props) {
           }
         }
       })
-    // for (let i = 0; i < allNotes.length; i++) {
-    //   if (allNotes[i].id === clickedNoteId) {
-    //     setTitle(allNotes[i].title);
-    //     setText(allNotes[i].text);
-    //   }
-    // }
   };
-  // const handleNoteButtonClick = (event) => {
-  //   setTextEditorMode(false);
-
-  //   let clickedNoteId;
-  //   if (event.target.id) {
-  //     clickedNoteId = parseInt(event.target.id.split("-")[1]);
-  //   } else {
-  //     clickedNoteId = parseInt(event.target.parentElement.id.split("-")[1]);
-  //   }
-
-  //   setCurrentNoteId(clickedNoteId);
-  //   notesAPI.getAllNotes(props.id)
-  //     .then(res => {
-  //       // setAllNotes(res.data.reverse());
-  //       for (let i = 0; i < res.data.length; i++) {
-  //         if (res.data[i].id === clickedNoteId) {
-  //           setTitle(res.data[i].title);
-  //           sideTitle = res.data[i].title;
-  //           setText(res.data[i].text);
-  //           console.log(res.data[i].text)
-  //           setAddress(res.data[i].propertyAddress);
-  //           setPropertySpecs({
-  //             bedrooms: res.data[i].bedrooms,
-  //             bathrooms: res.data[i].bathrooms,
-  //             carSpaces: res.data[i].carSpaces,
-  //             landSize: res.data[i].landSize,
-  //           });
-  //           if (res.data[i].propertyAddress) {
-  //             setAddressInfoState(true);
-  //             if (res.data[i].hasReview) {
-  //               reviewsAPI.getAllReviews()
-  //               .then(res => {
-  //                 for (let i = 0; i < res.data.length; i++) {
-  //                   if (res.data[i].noteId === clickedNoteId) {
-  //                     setPropertyReview(res.data[i]);
-  //                     setSharedState(res.data[i].shared);
-  //                   }
-  //                 }
-  //               })
-  //               .catch(err => console.log(err))
-  //               setRatingSectionState(true);
-  //               setRatingButtonState(false);
-  //               setRatingEditState(false);
-  //             } else {
-  //               setRatingSectionState(false);
-  //               setRatingButtonState(true);
-  //             }
-  //           } else {
-  //             setAddressInfoState(false);
-  //             setRatingButtonState(false);
-  //             setRatingSectionState(false);
-  //           }
-  //         }
-  //       }
-  //     })
-  //   // for (let i = 0; i < allNotes.length; i++) {
-  //   //   if (allNotes[i].id === clickedNoteId) {
-  //   //     setTitle(allNotes[i].title);
-  //   //     setText(allNotes[i].text);
-  //   //   }
-  //   // }
-  // };
-
+  
   const handleLinkAddressButtonClick = () => {
     if (addressInputIsOpen) {
       setAddressInputState(false);
@@ -646,16 +480,6 @@ export default function Notes(props) {
         .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
-
-    // notesAPI.updateNote(currentNoteId, {
-    //   propertyAddress: address,
-    //   beds: propertySpecs.beds,
-    //   baths: propertySpecs.baths,
-    //   carSpaces: propertySpecs.carSpaces,
-    //   landSize: propertySpecs.land
-    // })
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err))
   };
 
   const handleRatingButtonClick = () => {
@@ -1002,91 +826,6 @@ export default function Notes(props) {
         <Button className={classes.createButton} variant="contained" onClick={confirmReviewShare}>SHARE REVIEW</Button>
         <Button className={classes.cancelButton} variant="contained" onClick={handleReviewModalClose}>CANCEL</Button>
       </div>
-      {/* <p>Tweak your note before sharing it as a review for others to see (your original note will not be modified).</p> */}
-      {/* <form onSubmit={confirmReviewShare}>
-        <div className="review-modal-div">
-          <div className="review-modal-title">
-            <input type="text" defaultValue={title} />
-          </div>
-          <div className="review-modal-ratings">
-            <table>
-              <tbody>
-                <tr>
-                  <td className="review-modal-rating-category">Property condition</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.propertyConditionRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Potential</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.potentialRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Surroundings</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.surroundingsRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Consistency with neighbours</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.neighbourComparisonRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Accessibility</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.accessibilityRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Privacy</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.privacyRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Floorplan</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.floorplanRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Outdoor space</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.outdoorSpaceRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Indoor-outdoor flow</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.indoorOutdoorFlowRating} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="review-modal-rating-category">Natural lighting</td>
-                  <td className="review-modal-rating">
-                    <input type="number" defaultValue={propertyReview.naturalLightRating} />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="review-modal-text">
-            <TextEditor
-              currentNoteId={currentNoteId}
-              editorModeOn={textEditorModeOn}
-              text={text}
-            />
-          </div>
-          <div className="review-modal-actions">
-            <Button className={classes.createButton} variant="contained" type="submit">SHARE REVIEW</Button>
-            <Button className={classes.cancelButton} variant="contained" onClick={handleReviewModalClose}>CANCEL</Button>
-          </div>
-        </div>
-      </form> */}
     </div>
   );
 
@@ -1647,5 +1386,5 @@ export default function Notes(props) {
         message={popup.message}
       />
     </div>
-  )
-}
+  );
+};

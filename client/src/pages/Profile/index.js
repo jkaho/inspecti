@@ -24,7 +24,7 @@ import moment from "moment";
 import authenticationAPI from "../../utils/authenticationAPI";
 import eventsAPI from "../../utils/eventsAPI";
 import propertiesAPI from "../../utils/propertiesAPI";
-import { Tooltip } from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
 
 // For dynamic chart data
 const recentMonths = {

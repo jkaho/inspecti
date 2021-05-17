@@ -4,12 +4,12 @@ import React, { useEffect, useState, useRef } from "react";
 import NavBar from "../../components/NavBar";
 import ReviewCard from "../../components/ReviewCard";
 // Material Design 
-import TextField from '@material-ui/core/TextField';
-import IconButton from "@material-ui/core/IconButton";
-import PlaceIcon from "@material-ui/icons/Place";
+import ClearIcon from "@material-ui/icons/Clear";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ClearIcon from "@material-ui/icons/Clear";
+import IconButton from "@material-ui/core/IconButton";
+import PlaceIcon from "@material-ui/icons/Place";
+import TextField from '@material-ui/core/TextField';
 // CSS
 import "./style.css";
 // API routes

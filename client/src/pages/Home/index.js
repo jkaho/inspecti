@@ -1,16 +1,16 @@
 // React
 import React, { useState, useRef } from "react";
 // Child components
-import NavBar from "../../components/NavBar";
 import FilterDiv from "../../components/FilterDiv";
 import InfographicCard from "../../components/InfographicCard";
+import NavBar from "../../components/NavBar";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
-import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
 // import Paper from "@material-ui/core/Paper";
 import TextField from '@material-ui/core/TextField';
@@ -18,14 +18,14 @@ import Typography from "@material-ui/core/Typography";
 // CSS
 import "./style.css";
 // Images
-import reviewsImage from "../../images/social.png";
-import propertyImage from "../../images/house.png";
-import noteImage from "../../images/idea.png";
-import scheduleImage from "../../images/calendar.png";
-import profileImage from "../../images/stats.png";
 import attachRatingImage from "../../images/opinion.png";
-import ratingImage from "../../images/rating.png";
+import noteImage from "../../images/idea.png";
 import noThoughtsImage from "../../images/no-thoughts.png";
+import profileImage from "../../images/stats.png";
+import propertyImage from "../../images/house.png";
+import ratingImage from "../../images/rating.png";
+import reviewsImage from "../../images/social.png";
+import scheduleImage from "../../images/calendar.png";
 import shareImage from "../../images/share.png";
 // API routes
 import domainAPI from "../../utils/domainAPI";
@@ -173,14 +173,17 @@ const ratingCriteria = [
 export default function Home() {
   const classes = useStyles();
   // States
-  const searchRef = useRef();
+  // const searchRef = useRef();
   // const [search, setSearch] = useState("");
   const [locationSuggestions, setLocationSuggestions] = useState([]);
-  const [location, setLocation] = useState();
+  // const [location, setLocation] = useState();
   // const [suggestionOpen, setSuggestionOpen] = useState(false);
   // const [search, setSearch] = useState("");
+
   // Refs
   const locationRef = useRef();
+
+  // Helper functions
   // const handleInputChange = () => {
   //   const query = searchRef.current.value;
   //   setSearch(query);
@@ -265,9 +268,6 @@ export default function Home() {
                   }}
                 />}
               />
-              {/* <div className="search-location-icon">
-                <SearchIcon />
-              </div> */}
             </div>
           </form>
           <FilterDiv />
@@ -403,38 +403,6 @@ export default function Home() {
           </div> 
         </div>
       </div>
-      {/* <Grid container spacing={2} className={classes.guide} alignItems="center">
-        <Grid item xs={12}>
-          <Typography variant="h4" align="center">
-            How to use Inspecti
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            Anyone can view property reviews
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            Take property notes
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            Rate properties and share your reviews
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            Keep track of scheduled inspections and auctions
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            View all of your previously inspected properties
-          </Paper>
-        </Grid>
-      </Grid> */}
     </div>
   );
-}
+};
