@@ -1,29 +1,38 @@
+// React
 import React from 'react';
+// react-router-dom
 import { Link } from "react-router-dom";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+// Child components 
 import MyPagesMenu from "../MyPagesMenu";
-import Drawer from '@material-ui/core/Drawer';
+// Material Design
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
+import Drawer from '@material-ui/core/Drawer';
+import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
+import EventIcon from '@material-ui/icons/Event';
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from '@material-ui/core/IconButton';
+import InsertChartOutlinedIcon from '@material-ui/icons/InsertChartOutlined';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
-import InsertChartOutlinedIcon from '@material-ui/icons/InsertChartOutlined';
-import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
-import EventIcon from '@material-ui/icons/Event';
-import TableChartOutlinedIcon from '@material-ui/icons/TableChartOutlined';
 import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
-import Hidden from "@material-ui/core/Hidden";
+import TableChartOutlinedIcon from '@material-ui/icons/TableChartOutlined';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+// CSS
 import "./style.css";
+// Images
+import logo from '../../images/logo.png';
+// API routes
 import userAPI from "../../utils/userAPI";
 
 const drawerWidth = 240;
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -84,7 +93,7 @@ export default function SideMenu(props) {
     <div>
     <Toolbar />
     <div className={classes.drawerContainer}>
-      <List className="link-list">
+      <List className="link-list" style={{ paddingTop: "30px" }}>
         <Link to="/profile">
           <ListItem button>
             <ListItemIcon>
@@ -157,9 +166,15 @@ export default function SideMenu(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap className={classes.title}>
+          {/* <Typography variant="h6" noWrap className={classes.title}>
             Inspecti
-          </Typography>
+          </Typography> */}
+          <Link to="/" style={{ flexGrow: 1, marginTop: "10px" }}>
+            <img src={logo} 
+              alt="Inspecti logo" 
+              width="200px"
+            />
+          </Link>
           <Button className={classes.colorBlack}>
             <Link to="/">Home</Link>
           </Button>

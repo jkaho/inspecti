@@ -1,37 +1,38 @@
 // React 
 import React, { useEffect, useState, useRef } from "react";
 // Children components 
-import SideMenu from "../../components/SideMenu";
 import BoxContainer from "../../components/BoxContainer";
 import NoteListItem from "../../components/NoteListItem";
-import SearchAutocomplete from "../../components/SearchAutocomplete";
-import TextEditor from "../../components/TextEditor";
-import ReviewCard from "../../components/ReviewCard";
-import SimpleModal from "../../components/Modal";
 import PopupMessage from "../../components/PopupMessage";
+import ReviewCard from "../../components/ReviewCard";
+import SearchAutocomplete from "../../components/SearchAutocomplete";
+import SideMenu from "../../components/SideMenu";
+import SimpleModal from "../../components/Modal";
+import TextEditor from "../../components/TextEditor";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
-import Tooltip from "@material-ui/core/Tooltip";
-import PlaceIcon from "@material-ui/icons/Place";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import SaveIcon from "@material-ui/icons/Save";
-import RateReviewIcon from "@material-ui/icons/RateReview";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import Button from "@material-ui/core/Button";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import LocationOffIcon from "@material-ui/icons/LocationOff";
+import Modal from "@material-ui/core/Modal";
+import PlaceIcon from "@material-ui/icons/Place";
+import RateReviewIcon from "@material-ui/icons/RateReview";
+import SaveIcon from "@material-ui/icons/Save";
+import Tooltip from "@material-ui/core/Tooltip";
 // CSS
 import "./style.css";
 // API routes
-import notesAPI from "../../utils/notesAPI";
-import reviewsAPI from "../../utils/reviewsAPI";
-import propertiesAPI from "../../utils/propertiesAPI";
 import domainAPI from "../../utils/domainAPI";
+import notesAPI from "../../utils/notesAPI";
+import propertiesAPI from "../../utils/propertiesAPI";
+import reviewsAPI from "../../utils/reviewsAPI";
 import userAPI from "../../utils/userAPI";
 // Moment.js
 import moment from "moment";
@@ -85,6 +86,15 @@ const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     padding: 2,
+    margin: "0 2px",
+  },
+  shareButton: {
+    borderRadius: 20,
+    marginLeft: 5,
+    fontSize: 12,
+    padding: 2,
+    background: "white",
+    border: "1px solid rgb(0, 0, 0, 0.82)",
   },
   paper: {
     position: 'absolute',
@@ -618,7 +628,8 @@ export default function Notes(props) {
   
           setPropertySpecs(propertyInfo);
   
-          propertyInfo.propertyAddress = address;
+          propertyInfo.propertyAddress = value.address;
+          console.log(propertyInfo)
           notesAPI.updateNote(currentNoteId, propertyInfo)
             .then(res => {
               console.log(res);
@@ -1172,44 +1183,35 @@ export default function Notes(props) {
                   value={title}
                 />
               </div>
-              <div className="note-address note-seg">
+              <div id="note-address" className="note-address note-seg">
                 <div className="note-address-btn">
-                  <Button
-                    className={classes.attachButton}
-                    variant="contained"
-                    color="secondary"
-                    startIcon={<PlaceIcon />}
-                    onClick={!addressInfoIsOpen ? handleLinkAddressButtonClick
-                    : handleUnlinkAddressButtonClick}
-                  >
-                    {addressInfoIsOpen ? "Unlink address" : "Link an address"}
-                  </Button>
+                  {addressInfoIsOpen ? 
+                    <IconButton
+                      className={classes.attachButton}
+                      variant="contained"
+                      color="secondary"
+                      onClick={!addressInfoIsOpen ? handleLinkAddressButtonClick
+                      : handleUnlinkAddressButtonClick}
+                    >
+                      <LocationOffIcon />
+                    </IconButton> : 
+                    <Button
+                      className={classes.attachButton}
+                      variant="contained"
+                      color="secondary"
+                      startIcon={<PlaceIcon />}
+                      onClick={!addressInfoIsOpen ? handleLinkAddressButtonClick
+                      : handleUnlinkAddressButtonClick}
+                    >
+                      LINK A PROPERTY
+                    </Button>
+                  }
                 </div>
                 <div 
                   className={
                     `note-address-input 
                     ${addressInputIsOpen ? classes.show : classes.hide}`}
                 >
-                  {/* <div className="address-search-input">
-                    <input 
-                      ref={addressRef}
-                      type="text" 
-                      placeholder="Search an address" 
-                      onChange={handleAddressInputChange}
-                    />
-                    <div className="address-suggestion-box">
-                      {addressSuggestions.splice(0, 10).map(suggestion => (
-                        <li 
-                          key={suggestion.address} 
-                          id={suggestion.id}
-                          value={suggestion.address}
-                          onClick={handleAddressSuggestionClick}
-                        >{suggestion.address}</li>
-                      ))}
-                    </div>
-                  </div> */}
-
-                  
                 <SearchAutocomplete
                   id="search-autocomplete-notes"
                   className="notes-search-address"
@@ -1224,7 +1226,7 @@ export default function Notes(props) {
                 <div 
                   className={
                     `note-address-text 
-                    ${addressInfoIsOpen ? classes.show : classes.hide}`
+                    ${addressInfoIsOpen ? classes.showSpan : classes.hide}`
                   }>
                   <div className="note-address-text">
                     {address}
@@ -1256,7 +1258,7 @@ export default function Notes(props) {
                   startIcon={<RateReviewIcon />}
                   onClick={handleRatingButtonClick}
                 >
-                  Rate the property
+                  Rate property
                 </Button>
               </div>
               <div 
@@ -1266,12 +1268,9 @@ export default function Notes(props) {
               >
                 <table>
                   <thead>
-                    <tr>
-                      <th className="note-section-heading">PROPERTY REVIEW</th>
+                    <tr style={{ paddingBottom: "10px" }}>
+                      <th className="note-section-heading">RATINGS</th>
                       <th className="note-action-btns">
-                        <Button onClick={isShared ? handleUnshareButtonClick : handleShareButtonClick} variant="contained" aria-label="share">
-                          {isShared ? "UNSHARE" : "SHARE"}  
-                        </Button>
                         {ratingEditIsOpen ? 
                           <IconButton onClick={handleReviewSaveButtonClick} className={classes.iconButton} aria-label="save">
                             <SaveIcon/>
@@ -1283,6 +1282,9 @@ export default function Notes(props) {
                         <IconButton className={classes.iconButton}  aria-label="delete" onClick={handleDeleteReviewButtonClick}>
                           <DeleteIcon />
                         </IconButton>
+                        <Button className={classes.shareButton} onClick={isShared ? handleUnshareButtonClick : handleShareButtonClick} variant="contained" aria-label="share">
+                          {isShared ? "UNSHARE" : "SHARE"}  
+                        </Button>
                       </th>
                     </tr>
                   </thead>
@@ -1569,16 +1571,17 @@ export default function Notes(props) {
                   </tbody>
                 </table>
               </div>
-              <div className="note-text-section note-seg">
+              <hr id="note-text-hr"/>
+              <div id="note-text-section" className="note-text-section note-seg">
                 <table>
                   <thead>
                     <tr>
-                      <th className="note-section-heading">PROPERTY NOTES</th>
+                      <th className="note-section-heading">NOTES</th>
                       <th className="note-action-btns">
                         <IconButton
                           onClick={handleEditTextButtonClick}
                         >
-                          <EditIcon />
+                          {textEditorModeOn ? <SaveIcon /> : <EditIcon />}
                         </IconButton>
                       </th>
                     </tr>

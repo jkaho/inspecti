@@ -1,13 +1,29 @@
 .list-item {
   padding-bottom: 0!important;
+  padding-right: 0!important;
+  height: 70px;
+
+}
+
+.list-item-text {
+  width: 160px;
+}
+
+.list-item-text .MuiListItemText-primary {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 160px;
 }
 
 .list-item-actions {
-  width: 100%;
+  /* width: 100%; */
   padding-left: 10px;
+  background: none;
 }
 
 .list-item-actions button {
+  /* display: block; */
   height: 30px;
   width: 30px;
   padding: 5px;
@@ -20,11 +36,11 @@
 .list-item-actions button:hover {
   background: rgb(247, 247, 247);
 }
-
+/* 
 .onHover, .list-item:hover {
   background-color: rgba(0, 0, 0, 0.04);
   transition: 0.3s;
-}
+} */
 
 .noHover {
   background-color: white;

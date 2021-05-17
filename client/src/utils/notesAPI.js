@@ -2,8 +2,8 @@ import axios from "axios";
 const url = "http://localhost:3001";
 
 const notesAPI = {
-  getAllNotes: function(userId) {
-    return axios.get(url + "/api/user/notes/" + userId, { withCredentials: true });
+  getAllNotes: function() {
+    return axios.get(url + "/api/user/notes", { withCredentials: true });
   },
   getNotesWithReviews: function() {
     return axios.get(url + "/api/user/notes/reviews", { withCredentials: true });

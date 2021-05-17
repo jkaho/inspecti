@@ -40,7 +40,7 @@ router.get("/find/:id", usersController.getOneUser);
 router.get("/all", usersController.getAllUsers);
 
 // Note routes 
-router.get("/notes/:id", notesController.getNotes);
+router.get("/notes", notesController.getNotes);
 
 router.get("/notes/reviews", notesController.getNotesWithReviews);
 

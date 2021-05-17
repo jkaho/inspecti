@@ -16,7 +16,7 @@ const notesController = {
     console.log(req.user)
     db.note
       .findAll({
-        include: [db.review],
+        include: { all: true },
         where: {
           userId: parseInt(req.user.id)
         }
