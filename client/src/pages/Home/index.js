@@ -23,6 +23,10 @@ import propertyImage from "../../images/house.png";
 import noteImage from "../../images/idea.png";
 import scheduleImage from "../../images/calendar.png";
 import profileImage from "../../images/stats.png";
+import attachRatingImage from "../../images/opinion.png";
+import ratingImage from "../../images/rating.png";
+import noThoughtsImage from "../../images/no-thoughts.png";
+import shareImage from "../../images/share.png";
 // API routes
 import domainAPI from "../../utils/domainAPI";
 
@@ -89,8 +93,82 @@ const infographicData = {
     alt: "Graphic of bar chart and pie chart",
     title: "Get insights",
     text: "View useful personalised inspection and auction stats on your profile page."
-  }
+  },
+  attachRating: {
+    src: attachRatingImage,
+    alt: "Graphic of hands holding smartphone with speech bubble coming out of screen containing a red unhappy face, a yellow neutral face and a green happy face",
+    title: "1. Attach ratings",
+    text: "After creating a note, you must link a property to the note before being able to attach ratings."
+  },
+  rating: {
+    src: ratingImage,
+    alt: "Graphic of five yellow stars, two on top and three at the bottom, with a hand holding the star on the bottom right",
+    title: "2. Rate criteria",
+    text: function ratingText() {
+      return (
+        <div>
+          Use the standard rating criteria provided to rate a property out of five. 
+          View <a id="rating-text-link" href="#rating-criteria-explanation">below</a> for more info.
+        </div>
+      )
+    }
+  },
+  noThoughts: {
+    src: noThoughtsImage,
+    alt: "Graphic of girl with brown hair to the left of an orange thought bubble containing an ellipsis",
+    title: "3. No pressure",
+    text: "Don't worry if you don't have thoughts on a certain rating criteria - you can leave ratings blank."
+  },
+  share: {
+    src: shareImage,
+    alt: "Graphic of blue smartphone with a share icon coming out of the screen",
+    title: "4. Share your note",
+    text: "Click on the share icon to share your thoughts with the world!"
+  },
 };
+
+const ratingCriteria = [
+  {
+    name: "Property condition", 
+    description: "The state of the property relative to its age.",
+  },
+  {
+    name: "Potential to capitalise",
+    description: "How much potential the property has to add value to it."
+  },
+  {
+    name: "Surroundings",
+    description: "How are the immediate surroundings? Is the property located on a tree-lined street? Is it close to an industrial area?",
+  },
+  {
+    name: "Consistency with neighbours",
+    description: "The property's similarity in value and style to its neighbouring properties.",
+  },
+  {
+    name: "Accessibility",
+    description: "Is the property located at the bottom/top of a steep hill? Is it tucked away into a narrow lane way or at the end of a long driveway?",
+  },
+  {
+    name: "Privacy",
+    description: "How much of the inside of the property can be seen from neighbouring properties or from public areas?",
+  },
+  {
+    name: "Floor plan",
+    description: "How functional is the floor plan? Are the dining room and kitchen on separate sides of the home?",
+  },
+  {
+    name: "Outdoor space",
+    description: "The amount of outdoor space (garden, balcony, courtyard, etc.) relative to indoor space. How well-balanced is the indoor space to outdoor space ratio?",
+  },
+  {
+    name: "Indoor-to-outfoor flow",
+    description: "Does the internal floor plan flow seamlessly to the outdoors?",
+  },
+  {
+    name: "Natural light",
+    description: "How well is the property illuminated with sunlight?",
+  }
+];
 
 export default function Home() {
   const classes = useStyles();
@@ -256,6 +334,73 @@ export default function Home() {
               CREATE AN ACCOUNT NOW
             </Button>
           </div>
+          <hr />
+          <div className="infographics-subheading">
+            <Typography variant="h5" align="center">
+              How to turn a note into a review
+            </Typography>
+            <Typography variant="body1" align="center"
+              style={{ margin: "20px" }}
+            >
+              A note that has a linked property as well as attached ratings becomes a 
+              review once it is shared. 
+            </Typography>
+          </div> 
+          <div className="infographics-review">
+            <div className="infographics-review-upper">
+              <InfographicCard
+                src={infographicData.attachRating.src}
+                alt={infographicData.attachRating.alt}
+                title={infographicData.attachRating.title}
+                text={infographicData.attachRating.text}
+              />
+              <InfographicCard
+                src={infographicData.rating.src}
+                alt={infographicData.rating.alt}
+                title={infographicData.rating.title}
+                text={infographicData.rating.text()}
+              />
+              <InfographicCard
+                src={infographicData.noThoughts.src}
+                alt={infographicData.noThoughts.alt}
+                title={infographicData.noThoughts.title}
+                text={infographicData.noThoughts.text}
+              />
+              <InfographicCard
+                src={infographicData.share.src}
+                alt={infographicData.share.alt}
+                title={infographicData.share.title}
+                text={infographicData.share.text}
+              />
+            </div>
+            <div id="rating-criteria-explanation" className="rating-criteria-explanation">
+              <Typography variant="h6" align="center" style={{ marginTop: "40px" }}>Rating criteria</Typography>
+              <Typography variant="body1" align="center"
+                style={{ margin: "20px" }}
+              >
+                We've provided a set of ten property rating criterion commonly used by property valuers 
+                to help guide you in evaluating the properties you inspect.
+            </Typography>
+              <table>
+                <tbody>
+                  {ratingCriteria.map(item => (
+                    <tr>
+                      <td className="rating-criteria-value">
+                        <Typography variant="body2" >
+                          {item.name}
+                        </Typography>
+                      </td>
+                      <td className="rating-criteria-key">
+                        <Typography variant="body2">
+                          {item.description}
+                        </Typography>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div> 
         </div>
       </div>
       {/* <Grid container spacing={2} className={classes.guide} alignItems="center">

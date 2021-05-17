@@ -34,6 +34,12 @@
   margin-bottom: 50px;
 }
 
+.infographics-review {
+  width: 100%;
+  margin: 20px auto;
+  margin-bottom: 100px;
+}
+
 .home-content hr {
   border: none;
   border-bottom: 1px solid rgb(0, 0, 0, 0.1);
@@ -43,7 +49,7 @@
 .create-account-div {
   width: 100%;
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 #create-account-btn {
@@ -55,3 +61,41 @@
 #create-account-btn:hover {
   background: rgb(159, 32, 194);
 }
+
+.infographics-review-upper {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.rating-criteria-explanation table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.12);
+}
+
+.rating-criteria-explanation table td {
+  padding: 10px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+}
+
+.rating-criteria-explanation tbody :last-child td {
+  border: none;
+}
+
+.rating-criteria-value {
+  text-align: right;
+}
+
+.rating-criteria-value p {
+  font-weight: 700;
+}
+
+#rating-text-link,
+#rating-text-link:focus,
+#rating-text-link:active {
+  color: rgb(159, 32, 194);
+}
+
