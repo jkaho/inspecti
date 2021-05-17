@@ -161,6 +161,7 @@ export default function LogIn(props) {
                   <TextField 
                     variant="outlined" 
                     label="Password" 
+                    type="password"
                     className={classes.input}
                     ref={passwordRef}
                     InputProps={{

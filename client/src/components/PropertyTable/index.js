@@ -1,17 +1,20 @@
+// React
 import React, { useEffect, useRef } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 // Child components
+import SearchAutocomplete from "../../components/SearchAutocomplete";
 import TableToolbar from "../../components/TableToolbar";
 // Material Design 
-import Tooltip from "@material-ui/core/Tooltip";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-// Pagination
+import Tooltip from "@material-ui/core/Tooltip";
+// Table Pagination
 import PropTypes from "prop-types";
 import TablePagination from "@material-ui/core/TablePagination";
 import IconButton from "@material-ui/core/IconButton";
@@ -20,12 +23,14 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import TableFooter from "@material-ui/core/TableFooter";
-import moment from "moment";
+// CSS
 import "./style.css";
-import SearchAutocomplete from "../../components/SearchAutocomplete";
+// Moment.js
+import moment from "moment";
+// number-abbreviate
 import abbreviate from "number-abbreviate";
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
+// Material Design table pagination
 const useStylesPagination = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
@@ -33,6 +38,7 @@ const useStylesPagination = makeStyles((theme) => ({
   },
 }))
 
+// Class styles
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -67,6 +73,7 @@ const useStyles = makeStyles({
   }
 });
 
+// Tooltip text
 const tooltipTitles = {
   guide: "The price guide of the property",
   sold: "The sold price of the property",
@@ -183,9 +190,9 @@ export default function PropertyTable(props) {
         property.landSize,
         property.priceGuide,
         property.soldPrice,
-        property.attendedAuction === true ? "true" : 
-        property.attendedAuction === false ? "false":
-        "noAuction",
+        property.attendedAuction === true ? "Yes" : 
+        property.attendedAuction === false ? "No":
+        "N/A",
         property.notes,
         property.id
       ))
@@ -305,11 +312,11 @@ export default function PropertyTable(props) {
               <i id={`saveProperty-${row.id}`} className="fas fa-save" style={{ color: "black"}}></i>
             </button> :
             <button id={`editPropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleEditButtonClick}>
-              <i id={`editProperty-${row.id}`} className="fas fa-edit" style={{ color: "rgb(177, 90, 177)"}}></i>
+              <i id={`editProperty-${row.id}`} className="fas fa-edit" style={{ color: "grey"}}></i>
             </button> 
           }
           <button id={`deletePropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleDeleteButtonClick}>
-            <i id={`deleteProperty-${row.id}`} className="fas fa-trash" style={{ color: "rgb(177, 90, 177)"}}></i>
+            <i id={`deleteProperty-${row.id}`} className="fas fa-trash" style={{ color: "grey"}}></i>
           </button>
         </TableCell>
       </TableRow>

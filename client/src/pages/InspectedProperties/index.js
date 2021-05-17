@@ -7,6 +7,8 @@ import PopupMessage from "../../components/PopupMessage";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Modal from "@material-ui/core/Modal";
 import Tooltip from "@material-ui/core/Tooltip";
 // react-draft-wysiwyg
@@ -44,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    overflow: "auto",
+  },
+  tallModal: {
+    height: 500,
   },
   createButton: {
     color: "rgb(255, 235, 255)",
@@ -182,6 +188,7 @@ export default function InspectedProperties(props) {
     open: false,
     type: "deleteConfirm",
   });
+  const [titleCheckboxState, setTitleCheckboxState] = useState(false);
   const [sortCriteria, setSortCriteria] = useState("Select category");
   const [filterCriteria, setFilterCriteria] = useState("Select category");
 
@@ -579,15 +586,30 @@ export default function InspectedProperties(props) {
       .catch(err => console.log(err))
   };
 
+  const handleTitleCheckboxChange = (event) => {
+    setTitleCheckboxState(event.target.checked);
+    if (event.target.checked) {
+      titleRef.current.value = propertyNoteInfo.address;
+    } else {
+      titleRef.current.value = "";
+    }
+  };
+
   const createNoteBody = (
-    <div style={modalStyle} className={classes.paper}>
+    <div id="create-note-body" style={modalStyle} className={`${classes.paper} ${classes.tallModal}`}>
       <h2 id="simple-modal-note-create">
-        Create a property note for <span color="purple">{propertyNoteInfo.address}</span>
+        Create a property note for<br/>
+        <span id="view-note-address">{propertyNoteInfo.address}</span>
       </h2>
-      {/* <p>{propertyNoteInfo.address}</p> */}
       <form onSubmit={handleConfirmNewNoteButtonClick}>
         <div className="property-note-content">
-          <input ref={titleRef} type="text" placeholder="Title" />
+          <input id="property-note-create-title" ref={titleRef} type="text" placeholder="Title" />
+        </div>
+        <div className="auto-title">
+          <FormControlLabel
+            control={<Checkbox checked={titleCheckboxState} onChange={handleTitleCheckboxChange} name="checked" />}
+            label="Use property address as title"
+          />
         </div>
         <div className="property-note-content">
           <table>
@@ -595,10 +617,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Property condition&nbsp;</div>
                     <Tooltip title={ratingTooltips.condition}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Property condition&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -608,10 +630,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Potential&nbsp;</div>
                     <Tooltip title={ratingTooltips.potential}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Potential&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -621,10 +643,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Surroundings&nbsp;</div>
                     <Tooltip title={ratingTooltips.surroundings}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Surroundings&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -634,10 +656,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Consistency with neighbours&nbsp;</div>
                     <Tooltip title={ratingTooltips.neighbours}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Consistency with neighbours&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -647,10 +669,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Accessibility&nbsp;</div>
                     <Tooltip title={ratingTooltips.accessibility}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Accessibility&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -660,10 +682,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Privacy&nbsp;</div>
                     <Tooltip title={ratingTooltips.privacy}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Privacy&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -673,10 +695,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Floor plan&nbsp;</div>
                     <Tooltip title={ratingTooltips.floorplan}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Floor plan&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -686,10 +708,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Outdoor space&nbsp;</div>
                     <Tooltip title={ratingTooltips.outdoorSpace}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Outdoor space&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -699,10 +721,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Indoor-to-outdoor flow&nbsp;</div>
                     <Tooltip title={ratingTooltips.indoorOutdoorFlow}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Indoor-to-outdoor flow&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -712,10 +734,10 @@ export default function InspectedProperties(props) {
               <tr>
                 <td className="property-note-rating-category">
                   <div className="rating-tooltip-div">
-                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Natural light&nbsp;</div>
                     <Tooltip title={ratingTooltips.naturalLight}>
                       <i className="fas fa-info-circle"></i>
-                    </Tooltip>
+                    </Tooltip>&nbsp;
+                    <div className="rating-heading-div" style={{ display: "inline-block" }}>Natural light&nbsp;</div>
                   </div>
                 </td>
                 <td className="property-note-rating">
@@ -779,7 +801,7 @@ export default function InspectedProperties(props) {
   };
 
   const viewNoteBody = (
-    <div id="view-note" style={modalStyle} className={classes.paper}>
+    <div id="view-note" style={modalStyle} className={`${classes.paper} ${classes.tallModal}`}>
       <div id="view-note-body">
         <h2 id="simple-modal-note-view">{propertyNoteInfo.title}</h2>
         <div className="note-view-address">{propertyNoteInfo.address}</div>

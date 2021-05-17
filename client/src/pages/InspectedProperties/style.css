@@ -18,3 +18,43 @@
   width: 40px;
   height: 20px;
 }
+
+#view-note-address {
+  color: rgb(195, 63, 232);
+}
+
+#simple-modal-note-create {
+  text-align: center;
+}
+
+#property-note-create-title {
+  height: 40px;
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.property-note-content {
+  margin: 10px 0;
+}
+
+.property-note-content table {
+  width: 100%;
+}
+
+.property-note-rating {
+  text-align: right;
+}
+
+.property-note-actions {
+  margin-top: 20px;
+}
+
+#create-note-body table {
+  border-collapse: collapse;
+}
+
+#create-note-body table td {
+  border-bottom: 1px solid rgb(221, 221, 221);
+  padding: 2px 0;
+}

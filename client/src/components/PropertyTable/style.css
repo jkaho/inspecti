@@ -32,6 +32,10 @@
   text-decoration: underline;
 }
 
+.property-note-title button:hover {
+  color: rgb(165, 11, 204);
+}
+
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
@@ -55,16 +59,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .property-action-btn:hover {
   background: rgb(0 ,0 ,0, 0.04);
-}
-
-/* #view-note {
-  padding-right: 5px!important;
-} */
-
-#view-note-body {
-  height: 350px;
-  overflow: auto;
-  /* padding-right: 10px; */
 }
 
 #simple-modal-note-view {
@@ -99,7 +93,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .property-note-rating {
   text-align: right;
   padding-right: 10px;
-  font-weight: 300;
 }
 
 .property-note-rating span {

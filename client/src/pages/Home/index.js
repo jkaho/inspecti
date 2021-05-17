@@ -106,10 +106,10 @@ const infographicData = {
     title: "2. Rate criteria",
     text: function ratingText() {
       return (
-        <div>
+        <>
           Use the standard rating criteria provided to rate a property out of five. 
           View <a id="rating-text-link" href="#rating-criteria-explanation">below</a> for more info.
-        </div>
+        </>
       )
     }
   },
@@ -384,7 +384,7 @@ export default function Home() {
               <table>
                 <tbody>
                   {ratingCriteria.map(item => (
-                    <tr>
+                    <tr key={item.name}>
                       <td className="rating-criteria-value">
                         <Typography variant="body2" >
                           {item.name}
