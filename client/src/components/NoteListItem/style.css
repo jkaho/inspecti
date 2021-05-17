@@ -36,11 +36,6 @@
 .list-item-actions button:hover {
   background: rgb(247, 247, 247);
 }
-/* 
-.onHover, .list-item:hover {
-  background-color: rgba(0, 0, 0, 0.04);
-  transition: 0.3s;
-} */
 
 .noHover {
   background-color: white;

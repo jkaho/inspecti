@@ -1,4 +1,6 @@
+// React
 import React from "react";
+// CSS
 import "./style.css";
 
 export default function BoxContainer(props) {

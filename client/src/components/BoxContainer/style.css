@@ -16,7 +16,7 @@
   overflow: auto;
 }
 
-/* -------MEDIA QUERIES------- */
+/* ------- MEDIA QUERIES ------- */
 @media (max-width: 600px) {
   .main-container {
     left: 0;

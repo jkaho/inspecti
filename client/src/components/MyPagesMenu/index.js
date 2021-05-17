@@ -1,17 +1,21 @@
-import React from "react";
+// React
+import React, { useState, useRef, useEffect } from "react";
+// react-router-dom
 import { Link } from "react-router-dom";
+// Material Design
 import { makeStyles } from "@material-ui/core/styles";
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
+import Button from "@material-ui/core/Button";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
-import Button from "@material-ui/core/Button";
 // CSS
 import "./style.css";
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -26,8 +30,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyPagesMenu(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  // States
+  const [open, setOpen] = useState(false);
+  // Ref
+  const anchorRef = useRef(null);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -49,8 +55,8 @@ export default function MyPagesMenu(props) {
   }
 
   // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
+  const prevOpen = useRef(open);
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }

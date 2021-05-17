@@ -165,9 +165,6 @@ export default function FormModal(props) {
 
   return (
     <div>
-      {/* <button type="button" onClick={handleModalOpen}>
-        Open Modal
-      </button> */}
       <Modal
         open={props.open}
         onClose={props.close}

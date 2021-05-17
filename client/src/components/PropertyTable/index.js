@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // Child components
 import SearchAutocomplete from "../../components/SearchAutocomplete";
 import TableToolbar from "../../components/TableToolbar";
@@ -147,27 +147,15 @@ function createData(date, address, type, bed, bath, car, land, guide, sold, auct
   return { date, address, type, bed, bath, car, land, guide, sold, auction, notes, id };
 };
 
-// const rows = [
-//   createData("21/04/21", "4/3 Barr Pl Waverley", "Townhouse", 3, 2, 2, 220, "$2.5m", "$2.6m", "-", "21/04/21"),
-//   createData("17/04/21", "53 Bore St Greenwood", "House", 5, 3, 2, 450, "$3.2m", "$3.3m", "24/04/21", "18/04/21"),
-//   createData("17/04/21", "3/35 Star Rd Starville", "Apartment", 2, 2, 1, 97, "$2.2m", "$2.76m", "24/04/21", "-"),
-//   createData("17/04/21", "54 Michael St Beverley", "House", 4, 3, 1, 650, "$2.2m", "$2.29m", "-", "18/04/21"),
-//   createData("10/04/21", "131 Euroka St Boxley", "House", 3, 2, 1, 180, "$2.2m", "$2.32m", "-", "-"),
-//   createData("10/04/21", "29 Euroka St Boxley", "House", 5, 2, 3, 980, "$4.2m","$4.175m", "-", "10/04/21"),
-//   createData("10/04/21", "7/63 Bomson Ave Boxley", "Apartment", 4, 2, 2, 203, "$3.65m","4.0m", "-", "-"),
-//   createData("3/04/21", "9 Samson Rd Bondi", "House", 4, 3, 3, 267, "$2.9m", "$3.21m", "-", "-"),
-//   createData("3/04/21", "2/85 Samson Dr Bondi", "Townhouse", 3, 2, 1, 216, "$1.8m", "$1.891m", "-", "6/04/21"),
-//   createData("3/04/21", "42 Billy Ave Cronolla", "House", 3, 2, 1, 390, "$2.8m", "$2.6m", "-", "-"),
-
-// ];
-
 export default function PropertyTable(props) {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [rows, setRows] = React.useState([]);
+  // States
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rows, setRows] = useState([]);
   const firstUpdate = useRef(true);
 
+  // Initial render
   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
@@ -200,6 +188,7 @@ export default function PropertyTable(props) {
     setRows(rowsToRender);
   };
 
+  // Table pagination
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
@@ -506,6 +495,6 @@ export default function PropertyTable(props) {
       </Table>
     </TableContainer>
     </>
-  )
-}
+  );
+};
 

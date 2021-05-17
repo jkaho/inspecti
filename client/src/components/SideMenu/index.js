@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 // react-router-dom
 import { Link } from "react-router-dom";
 // Child components 
@@ -83,7 +83,7 @@ export default function SideMenu(props) {
 
   const { window1 } = props;
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -91,59 +91,58 @@ export default function SideMenu(props) {
 
   const drawer = (
     <div>
-    <Toolbar />
-    <div className={classes.drawerContainer}>
-      <List className="link-list" style={{ paddingTop: "30px" }}>
-        <Link to="/profile">
-          <ListItem button>
-            <ListItemIcon>
-              <InsertChartOutlinedIcon />
-            </ListItemIcon>
-              <ListItemText primary="Profile & Stats" />
-          </ListItem>
-        </Link>
-        <Link to="/notes">
-          <ListItem button>
-            <ListItemIcon>
-              <DescriptionOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Notes & Reviews" />
-          </ListItem>
-        </Link>
-        <Link to="/monthly">
-          <ListItem button>
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText primary="Monthly Schedule" />
-          </ListItem>
-        </Link>
-        <Link to="/daily">
-          <ListItem button>
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText primary="Daily Schedule" />
-          </ListItem>
-        </Link>
-        <Link to="/inspected">
-          <ListItem button>
-            <ListItemIcon>
-              <TableChartOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Inspected Properties" />
-          </ListItem>
-        </Link>
-      </List>
+      <Toolbar />
+      <div className={classes.drawerContainer}>
+        <List className="link-list" style={{ paddingTop: "30px" }}>
+          <Link to="/profile">
+            <ListItem button>
+              <ListItemIcon>
+                <InsertChartOutlinedIcon />
+              </ListItemIcon>
+                <ListItemText primary="Profile & Stats" />
+            </ListItem>
+          </Link>
+          <Link to="/notes">
+            <ListItem button>
+              <ListItemIcon>
+                <DescriptionOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Notes & Reviews" />
+            </ListItem>
+          </Link>
+          <Link to="/monthly">
+            <ListItem button>
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary="Monthly Schedule" />
+            </ListItem>
+          </Link>
+          <Link to="/daily">
+            <ListItem button>
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary="Daily Schedule" />
+            </ListItem>
+          </Link>
+          <Link to="/inspected">
+            <ListItem button>
+              <ListItemIcon>
+                <TableChartOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inspected Properties" />
+            </ListItem>
+          </Link>
+        </List>
+      </div>
     </div>
-    </div>
-  )
+  );
 
   const container = window1 !== undefined ? () => window().document.body : undefined;
 
   const logOut = () => {
     userAPI.logOutUser()
-      // .then(() => console.log("User successfully logged out"))
       .then(() => window.location.replace("/login"))
       .catch(err => console.log(err))
   };
@@ -184,9 +183,6 @@ export default function SideMenu(props) {
           <Typography variant="body1" className={classes.colorBlack}>
             &nbsp;&nbsp;|&nbsp;&nbsp;
           </Typography>
-          {/* <Button className={classes.colorBlack}>
-            My Pages
-          </Button> */}
           <MyPagesMenu />
           <Button className={classes.joinBtn} onClick={logOut}>Log Out</Button>
         </Toolbar>
@@ -246,9 +242,6 @@ export default function SideMenu(props) {
           ""
       }
       </nav>
-      {/* <main className={classes.content}>
-        <Toolbar />
-      </main> */}
     </div>
   );
 }

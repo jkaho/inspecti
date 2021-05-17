@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
-
   // States
   const [isAuthenticated, setAuthentication] = useState(false);
 
@@ -78,7 +77,6 @@ export default function Navbar() {
   // Helper functions
   const logOut = () => {
     userAPI.logOutUser()
-      // .then(() => console.log("User successfully logged out"))
       .then(() => window.location.replace("/login"))
       .catch(err => console.log(err))
   };

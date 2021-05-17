@@ -1,22 +1,9 @@
-// import React from 'react'
-// import FullCalendar from '@fullcalendar/react'
-// import dayGridPlugin from '@fullcalendar/daygrid'
-
-// export default class MonthlyCalendar extends React.Component {
-//   render() {
-//     return (
-//       <FullCalendar
-//         plugins={[ dayGridPlugin ]}
-//         initialView="dayGridMonth"
-//       />
-//     )
-//   }
-// }
+// React
 import React from "react";
+// Full Calendar
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-// import "./style.css";
 
 class MonthlyCalendar extends React.Component {
   handleDateClick = () => {

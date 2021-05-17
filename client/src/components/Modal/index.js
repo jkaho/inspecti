@@ -1,10 +1,14 @@
+// React
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+// Child components
 import Modal from '@material-ui/core/Modal';
-import DoneIcon from "@material-ui/icons/Done";
-import ClearIcon from "@material-ui/icons/Clear";
+// Material Design
+import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
+import ClearIcon from "@material-ui/icons/Clear";
+import DoneIcon from "@material-ui/icons/Done";
 
+// Modal style
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -16,6 +20,7 @@ function getModalStyle() {
   };
 }
 
+// Class styles
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
@@ -40,10 +45,6 @@ export default function SimpleModal(props) {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -87,4 +88,4 @@ export default function SimpleModal(props) {
       </Modal>
     </div>
   );
-}
+};

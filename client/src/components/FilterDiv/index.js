@@ -113,9 +113,7 @@ function CategorySelect(props) {
   );
 };
 
-export default function FilterDiv() {
-  const classes = useStyles();
-  
+export default function FilterDiv() {  
   return (
     <div className="filter-div">
       <MinMaxToggle />
@@ -191,7 +189,6 @@ export default function FilterDiv() {
           { value: 1000, text: "1000m²" },
         ]}
       />
-      {/* <span className={classes.span}>&nbsp;&nbsp;|&nbsp;&nbsp;</span> */}
       <CategorySelect
         className="search-category-select"
         selectId="type-select"

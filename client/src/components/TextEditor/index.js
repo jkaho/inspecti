@@ -1,13 +1,19 @@
+// React
 import React, { useState, useEffect } from "react";
+// Material Design
 import { makeStyles } from "@material-ui/core/styles";
+// react-draft-wysiwyg
 import { EditorState, ContentState, convertFromHTML } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+// CSS
 import './style.css';
+// API routes
 import notesAPI from "../../utils/notesAPI";
 
+// Class styles
 const useStyles = makeStyles({
   hide: {
     display: "none",
@@ -19,7 +25,7 @@ const useStyles = makeStyles({
 
 function TextEditor(props) {
   const classes = useStyles();
-
+  const  [convertedContent, setConvertedContent] = useState(null);
   // const [editorState, setEditorState] = useState(
   //   () => EditorState.createEmpty(),
   // );
@@ -39,9 +45,6 @@ function TextEditor(props) {
     )));
   }, [props.text]);
 
-  const  [convertedContent, setConvertedContent] = useState(null);
-  // const [text, setText] = useState();
-
   const handleEditorChange = (state) => {
     setEditorState(state);
     convertContentToHTML();
@@ -58,14 +61,8 @@ function TextEditor(props) {
     }
   };
 
-  // const saveTextToDB = () => {
-  //   console.log(createMarkup(convertedContent));
-  // };
-
   const handleTextInputChange = () => {
     const textValue = createMarkup(convertedContent).__html;
-    // setText(textValue);
-
     const textData = {
       text: textValue
     };
@@ -77,101 +74,102 @@ function TextEditor(props) {
 
   return (
     <div>
-    <div className=
-      {
-        `wysiwyg-text-editor
-        ${props.editorModeOn ? classes.show : classes.hide}`
-      }
-    >
-      <Editor 
-        editorState={editorState}
-        onEditorStateChange={handleEditorChange}
-        onChange={handleTextInputChange}
-        wrapperClassName="wrapper-class"
-        editorClassName="editor-class"
-        toolbarClassName="toolbar-class"
-        toolbar={{
-          options: ['inline', 'list', 'emoji', 'image', 'link'],
-          inline: {
-            inDropdown: true,
-            className: undefined,
-            component: undefined,
-            dropdownClassName: undefined,
-            options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
-            bold: { className: undefined },
-            italic: { className: undefined },
-            underline: { className: undefined },
-            strikethrough: { className: undefined },
-            monospace: { className: undefined },
-            superscript: { className: undefined },
-            subscript: { className: undefined },
-          },
-          list: {
-            inDropdown: true,
-            className: undefined,
-            component: undefined,
-            dropdownClassName: undefined,
-            options: ['unordered', 'ordered'],
-          },
-          link: {
-            inDropdown: false,
-            className: undefined,
-            component: undefined,
-            popupClassName: undefined,
-            dropdownClassName: undefined,
-            showOpenOptionOnHover: true,
-            defaultTargetOption: '_self',
-            options: ['link', 'unlink'],
-            link: { className: undefined },
-            unlink: { className: undefined },
-            linkCallback: undefined
-          },
-          emoji: {
-            className: undefined,
-            component: undefined,
-            popupClassName: undefined,
-            emojis: [
-              '😀', '😁', '😂', '😃', '😉', '😋', '😎', '😍', '😗', '🤗', '🤔', '😣', '😫', '😴', '😌', '🤓',
-              '😛', '😜', '😠', '😇', '😷', '😈', '👻', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '🙈',
-              '🙉', '🙊', '👼', '👮', '🕵', '💂', '👳', '🎅', '👸', '👰', '👲', '🙍', '🙇', '🚶', '🏃', '💃',
-              '⛷', '🏂', '🏌', '🏄', '🚣', '🏊', '⛹', '🏋', '🚴', '👫', '💪', '👈', '👉', '👉', '👆', '🖕',
-              '👇', '🖖', '🤘', '🖐', '👌', '👍', '👎', '✊', '👊', '👏', '🙌', '🙏', '🐵', '🐶', '🐇', '🐥',
-              '🐸', '🐌', '🐛', '🐜', '🐝', '🍉', '🍄', '🍔', '🍤', '🍨', '🍪', '🎂', '🍰', '🍾', '🍷', '🍸',
-              '🍺', '🌍', '🚑', '⏰', '🌙', '🌝', '🌞', '⭐', '🌟', '🌠', '🌨', '🌩', '⛄', '🔥', '🎄', '🎈',
-              '🎉', '🎊', '🎁', '🎗', '🏀', '🏈', '🎲', '🔇', '🔈', '📣', '🔔', '🎵', '🎷', '💰', '🖊', '📅',
-              '✅', '❎', '💯',
-            ],
-          },
-          image: {
-            className: undefined,
-            component: undefined,
-            popupClassName: undefined,
-            urlEnabled: true,
-            uploadEnabled: true,
-            alignmentEnabled: true,
-            uploadCallback: undefined,
-            previewImage: false,
-            inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
-            alt: { present: false, mandatory: false },
-            defaultSize: {
-              height: 'auto',
-              width: 'auto',
-            },
-          },
-        }}
-      />
-    </div>
-    <div className=
+      <div className=
         {
-          `preview 
-          ${props.editorModeOn ? classes.hide : classes.show}`
+          `wysiwyg-text-editor
+          ${props.editorModeOn ? classes.show : classes.hide}`
         }
-      dangerouslySetInnerHTML={{ __html: props.text }}
-    >
+      >
+        <Editor 
+          editorState={editorState}
+          onEditorStateChange={handleEditorChange}
+          onChange={handleTextInputChange}
+          wrapperClassName="wrapper-class"
+          editorClassName="editor-class"
+          toolbarClassName="toolbar-class"
+          toolbar={{
+            options: ['inline', 'list', 'emoji', 'image', 'link'],
+            inline: {
+              inDropdown: true,
+              className: undefined,
+              component: undefined,
+              dropdownClassName: undefined,
+              options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
+              bold: { className: undefined },
+              italic: { className: undefined },
+              underline: { className: undefined },
+              strikethrough: { className: undefined },
+              monospace: { className: undefined },
+              superscript: { className: undefined },
+              subscript: { className: undefined },
+            },
+            list: {
+              inDropdown: true,
+              className: undefined,
+              component: undefined,
+              dropdownClassName: undefined,
+              options: ['unordered', 'ordered'],
+            },
+            link: {
+              inDropdown: false,
+              className: undefined,
+              component: undefined,
+              popupClassName: undefined,
+              dropdownClassName: undefined,
+              showOpenOptionOnHover: true,
+              defaultTargetOption: '_self',
+              options: ['link', 'unlink'],
+              link: { className: undefined },
+              unlink: { className: undefined },
+              linkCallback: undefined
+            },
+            emoji: {
+              className: undefined,
+              component: undefined,
+              popupClassName: undefined,
+              emojis: [
+                '😀', '😁', '😂', '😃', '😉', '😋', '😎', '😍', '😗', '🤗', '🤔', '😣', '😫', '😴', '😌', '🤓',
+                '😛', '😜', '😠', '😇', '😷', '😈', '👻', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '🙈',
+                '🙉', '🙊', '👼', '👮', '🕵', '💂', '👳', '🎅', '👸', '👰', '👲', '🙍', '🙇', '🚶', '🏃', '💃',
+                '⛷', '🏂', '🏌', '🏄', '🚣', '🏊', '⛹', '🏋', '🚴', '👫', '💪', '👈', '👉', '👉', '👆', '🖕',
+                '👇', '🖖', '🤘', '🖐', '👌', '👍', '👎', '✊', '👊', '👏', '🙌', '🙏', '🐵', '🐶', '🐇', '🐥',
+                '🐸', '🐌', '🐛', '🐜', '🐝', '🍉', '🍄', '🍔', '🍤', '🍨', '🍪', '🎂', '🍰', '🍾', '🍷', '🍸',
+                '🍺', '🌍', '🚑', '⏰', '🌙', '🌝', '🌞', '⭐', '🌟', '🌠', '🌨', '🌩', '⛄', '🔥', '🎄', '🎈',
+                '🎉', '🎊', '🎁', '🎗', '🏀', '🏈', '🎲', '🔇', '🔈', '📣', '🔔', '🎵', '🎷', '💰', '🖊', '📅',
+                '✅', '❎', '💯',
+              ],
+            },
+            image: {
+              className: undefined,
+              component: undefined,
+              popupClassName: undefined,
+              urlEnabled: true,
+              uploadEnabled: true,
+              alignmentEnabled: true,
+              uploadCallback: undefined,
+              previewImage: false,
+              inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
+              alt: { present: false, mandatory: false },
+              defaultSize: {
+                height: 'auto',
+                width: 'auto',
+              },
+            },
+          }}
+        />
+      </div>
+      <div className=
+          {
+            `preview 
+            ${props.editorModeOn ? classes.hide : classes.show}`
+          }
+        dangerouslySetInnerHTML={{ __html: props.text }}
+      >
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
+
 export default TextEditor;
 
 /*

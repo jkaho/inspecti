@@ -5,9 +5,7 @@ import Typography from "@material-ui/core/Typography";
 // CSS 
 import "./style.css";
 
-export default function InfographicCard(props) {
-  const img = props.src;
-  
+export default function InfographicCard(props) {  
   return (
     <div className="infographic-card">
       <div className="infographic-image">
