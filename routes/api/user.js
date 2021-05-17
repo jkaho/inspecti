@@ -63,21 +63,20 @@ router.route("/note/:id")
   .delete(notesController.deleteNote)
 
 // Review routes 
+router.get("/reviews", reviewsController.getAllReviews);
+
 router.route("/review/:id")
   .post(reviewsController.createReview)
   .put(reviewsController.updateReview)
   .get(reviewsController.getReview)
   .delete(reviewsController.deleteReview)
 
-router.get("/reviews", reviewsController.getAllReviews);
-
 // Event routes 
 router.get("/events", eventsController.getEvents);
 
 router.get("/events/:startTime/:endTime", eventsController.getDailyEvents);
 
-router.route("/event")
-  .post(eventsController.createEvent)
+router.post("/event", eventsController.createEvent);
 
 router.route("/event/:id")
   .put(eventsController.updateEvent)
