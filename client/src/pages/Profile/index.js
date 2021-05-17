@@ -1,13 +1,32 @@
+// React
 import React, { useState, useEffect } from "react";
-import SideMenu from "../../components/SideMenu";
+// Child components
 import BoxContainer from "../../components/BoxContainer";
+import SideMenu from "../../components/SideMenu";
+// CSS
 import "./style.css";
+// Images
+import longOneIcon from "../../images/long-1.png";
+import longTwoIcon from "../../images/long-2.png";
+import longThreeIcon from "../../images/long-3.png";
+import longFourIcon from "../../images/long-4.png";
+import longFiveIcon from "../../images/long-5.png";
+import shortOneIcon from "../../images/short-1.png";
+import shortTwoIcon from "../../images/short-2.png";
+import shortThreeIcon from "../../images/short-3.png";
+import shortFourIcon from "../../images/short-4.png";
+import shortFiveIcon from "../../images/short-5.png";
+// Chart.js
 import { Bar, Pie } from 'react-chartjs-2';
+// Moment.js
 import moment from "moment";
-import propertiesAPI from "../../utils/propertiesAPI";
-import eventsAPI from "../../utils/eventsAPI";
+// API routes
 import authenticationAPI from "../../utils/authenticationAPI";
+import eventsAPI from "../../utils/eventsAPI";
+import propertiesAPI from "../../utils/propertiesAPI";
+import { Tooltip } from "@material-ui/core";
 
+// For dynamic chart data
 const recentMonths = {
   sixMonthsAgo: moment().add(-6, "M"),
   fiveMonthsAgo: moment().add(-5, "M"),
@@ -18,10 +37,11 @@ const recentMonths = {
   thisMonth: moment()
 };
 
-
 export default function Profile() {
-  const [propertyChartState, setPropertyChartState] = useState({});
+  // States
+  const [iconState, setIconState] = useState("short");
   const [priceChartState, setPriceChartState] = useState({});
+  const [propertyChartState, setPropertyChartState] = useState({});
   const [numPropertiesInspected, setNumPropertiesInspected] = useState();
   const [numInspectionsScheduled, setNumInspectionsScheduled] = useState();
   const [numAuctionsAttended, setNumAuctionsAttended] = useState();
@@ -29,11 +49,13 @@ export default function Profile() {
   const [userInfo, setUserInfo] = useState({});
   const [page, setPage] = useState("inspections");
 
+  // Initial render
   useEffect(() => {
     let monthlyPropertyData = [[], [], [], [], [], [], []];
     let priceData = [[], [], [], [], [], []];
     let attendedAuctions = [];
 
+    initialiseIcon();
     authenticationAPI.authenticated()
       .then(res => {
         setUserInfo(res.data);
@@ -164,6 +186,7 @@ export default function Profile() {
       .catch(err => console.log(err))
   }, []);
 
+  // Inspected properties bar chart
   function PropertiesChart() {
     return (
       <div>
@@ -188,6 +211,7 @@ export default function Profile() {
     )
   };
 
+  // Auction sold prices pie chart
   function PriceChart() {
     return (
       <div>
@@ -213,6 +237,47 @@ export default function Profile() {
     )
   };
 
+  function initialiseIcon() {
+    var userIcon = localStorage.getItem("userIcon");
+    if (userIcon !== null) {
+        setIconState(userIcon);
+    }
+  };
+
+  const handleIconClick = () => {
+    if (iconState === "short-1") {
+      setIconState("long-1");
+      localStorage.setItem("userIcon", "long-1");
+    } else if (iconState === "long-1") {
+      setIconState("short-2");
+      localStorage.setItem("userIcon", "short-2");
+    } else if (iconState === "short-2") {
+      setIconState("long-2");
+      localStorage.setItem("userIcon", "long-2");
+    } else if (iconState === "long-2") {
+      setIconState("short-3");
+      localStorage.setItem("userIcon", "short-3");
+    } else if (iconState === "short-3") {
+      setIconState("long-3");
+      localStorage.setItem("userIcon", "long-3");
+    } else if (iconState === "long-3") {
+      setIconState("short-4");
+      localStorage.setItem("userIcon", "short-4");
+    } else if (iconState === "short-4") {
+      setIconState("long-4");
+      localStorage.setItem("userIcon", "long-4");
+    } else if (iconState === "long-4") {
+      setIconState("short-5");
+      localStorage.setItem("userIcon", "short-5");
+    } else if (iconState === "short-5") {
+      setIconState("long-5");
+      localStorage.setItem("userIcon", "long-5");
+    } else {
+      setIconState("short-1");
+      localStorage.setItem("userIcon", "short-1");
+    }
+  };
+
   return (
     <div>
       <SideMenu />
@@ -226,7 +291,24 @@ export default function Profile() {
                       <tbody>
                         <tr>
                           <td>
-                            <i className="fas fa-user-circle" style={{ fontSize: "100px" }}></i>
+                            <Tooltip title="Click to change">
+                              <img src={
+                                iconState === "short-1" ? shortOneIcon : 
+                                iconState === "long-1" ? longOneIcon : 
+                                iconState === "short-2" ? shortTwoIcon :
+                                iconState === "long-2" ? longTwoIcon :
+                                iconState === "short-3" ? shortThreeIcon :
+                                iconState === "long-3" ? longThreeIcon :
+                                iconState === "short-4" ? shortFourIcon :
+                                iconState === "long-4" ? longFourIcon :
+                                iconState === "short-5" ? shortFiveIcon :
+                                longFiveIcon
+                              }
+                                onClick={handleIconClick}
+                                style={{ width: "100px", cursor: "pointer" }} alt="Graphic user icon of person with short hair"
+                              />
+                            </Tooltip>
+                            {/* <i className="fas fa-user-circle" style={{ fontSize: "100px" }}></i> */}
                           </td>
                           <td>
                             <div className="user-name user-text">

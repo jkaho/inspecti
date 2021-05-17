@@ -244,7 +244,7 @@ export default function Home() {
     <div className={classes.root}>
       <NavBar />
       <Grid item xs={12}>
-        <div className="bg">
+        <div className="bg" style={{ display: "none" }}>
           <Typography variant="h3" className={classes.heading}>Search properties for sale</Typography>
           <form onSubmit={handleFormSubmit}>
             <div className="location-autocomplete-wrapper">
