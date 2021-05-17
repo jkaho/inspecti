@@ -23,16 +23,36 @@ This project was made for real estate enthusiasts, or anyone else involved in th
 
 ## Technologies Used
 
-- React / Create React App
-- JSX 
+- React / [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) / JSX 
 - JavaScript
-- Node.js
-- Express
-- MongoDB / Mongoose 
-- bcrypt 
+- [Node.js](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- SQL / [Sequelize](https://sequelize.org/)
+- [Material-UI](https://material-ui.com/)
+- [react-draft-wysiwyg](https://www.npmjs.com/package/react-draft-wysiwyg)
+- [DOMPurify](https://www.npmjs.com/package/dompurify)
+- [Passport.js](http://www.passportjs.org/)
+- [bcrypt](https://www.npmjs.com/package/bcrypt) 
+- [FullCalendar React](https://www.npmjs.com/package/@fullcalendar/react)
 
 ## Screenshots
 
+### Homepage
+![]()
+
+### Reviews
+![]()
+
+### Profile (members only)
+![]()
+
+### Notes & Reviews (members only)
+![]()
+
+### Inspection Schedule (members only)
+![]()
+
+### Inspected Properties (members only)
 ![]()
 
 ## Questions 
