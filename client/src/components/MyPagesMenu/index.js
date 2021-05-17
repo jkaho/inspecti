@@ -9,6 +9,8 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import Button from "@material-ui/core/Button";
+// CSS
+import "./style.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,7 +89,10 @@ export default function MyPagesMenu(props) {
                       <MenuItem onClick={handleClose}>Notes & Reviews</MenuItem>
                     </Link>
                     <Link to="/monthly">
-                      <MenuItem onClick={handleClose}>Inspection Schedule</MenuItem>
+                      <MenuItem onClick={handleClose}>Monthly Schedule</MenuItem>
+                    </Link>
+                    <Link to="/daily">
+                      <MenuItem onClick={handleClose}>Daily Schedule</MenuItem>
                     </Link>
                     <Link to="/inspected">
                       <MenuItem onClick={handleClose}>Inspected Properties</MenuItem>
