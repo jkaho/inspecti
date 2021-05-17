@@ -2,6 +2,8 @@
 
 ## Description
 
+*Inspecti* is a residential real estate application to help users keep up with the property market. Users can take notes on properties, rate properties and share reviews, as well as keep track of past and future property inspections. 
+
 ## Table of Contents
 
 - [Motivations](#Motivations)
@@ -12,6 +14,8 @@
 - [Questions](#Questions)
 
 ## Motivations
+
+This project was made for real estate enthusiasts, or anyone else involved in the real estate market who would benefit from having a platform to keep personal notes and records about properties they've inspected, as well as to be able to view other peoples' opinions about certain properties.
 
 ## Instructions for Use
 
