@@ -1,5 +1,7 @@
 // React
 import React, { useState, useEffect } from "react";
+// Child components
+import PopupMessage from "../../components/PopupMessage";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 // react-draft-wysiwyg
@@ -25,6 +27,7 @@ const useStyles = makeStyles({
 
 function TextEditor(props) {
   const classes = useStyles();
+  const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: ""});
   const  [convertedContent, setConvertedContent] = useState(null);
   // const [editorState, setEditorState] = useState(
   //   () => EditorState.createEmpty(),
@@ -68,8 +71,22 @@ function TextEditor(props) {
     };
 
     notesAPI.updateNote(props.currentNoteId, textData)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .then()
+      .catch(err => {
+        console.log(err);
+        setPopup({ 
+          open: true, type: "error", severity: "error", 
+          message: "An error was encountered while updating data. Please try again later." 
+        });
+      });
+  };
+
+  const handlePopupClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setPopup({ open: false, type: "", severity: "", message: ""});
   };
 
   return (
@@ -166,6 +183,12 @@ function TextEditor(props) {
         dangerouslySetInnerHTML={{ __html: props.text }}
       >
       </div>
+      <PopupMessage
+        open={popup.open}
+        handleClose={handlePopupClose}
+        severity={popup.severity}
+        message={popup.message}
+      />
     </div>
   );
 };

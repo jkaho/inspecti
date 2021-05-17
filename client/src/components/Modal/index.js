@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 // Child components
 import Modal from '@material-ui/core/Modal';
 // Material Design
@@ -42,10 +42,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleModal(props) {
   const classes = useStyles();
+  // States
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
 
+  // Helper functions
   const handleClose = () => {
     setOpen(false);
   };

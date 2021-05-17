@@ -395,18 +395,6 @@ export default function DailySchedule(props) {
           severity={popup.severity}
           message={popup.message}
         />
-        {/* <PopupMessage
-          open={editEventPopupIsOpen}
-          handleClose={handleEditPopupClose}
-          severity="success"
-          message="Event successully updated!"
-        />
-        <PopupMessage
-          open={deleteEventPopupIsOpen}
-          handleClose={handleDeletePopupClose}
-          severity="success"
-          message="Event successully deleted"
-        /> */}
       </div>
     </div>
   );
