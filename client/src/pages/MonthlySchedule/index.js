@@ -24,7 +24,7 @@ export default function MonthlySchedule() {
   const [addEventModalIsOpen, setAddEventModalState] = useState(false);
   const [events, setEvents] = useState([]);
   const [eventType, setEventType] = useState("Inspection");
-  const [hasAuction, setAuctionState] = useState(false);
+  // const [hasAuction, setAuctionState] = useState(false);
   const [propertySpecs, setPropertySpecs] = useState({});
   const [address, setAddress] = useState();
   // const [addressQuery, setAddressQuery] = React.useState("");
@@ -125,7 +125,7 @@ export default function MonthlySchedule() {
       bathrooms: propertySpecs.bathrooms,
       carSpaces: propertySpecs.carSpaces,
       landSize: propertySpecs.landSize,
-      hasAuction: hasAuction,
+      // hasAuction: hasAuction,
     };
 
     eventsAPI.createEvent(newEvent)

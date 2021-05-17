@@ -1,5 +1,5 @@
 // React
-import React, { useState, useRef } from "react";
+import React from "react";
 // Child components
 // import FilterDiv from "../../components/FilterDiv";
 import InfographicCard from "../../components/InfographicCard";
