@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     endTime: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     propertyAddress: {
       type: DataTypes.STRING,

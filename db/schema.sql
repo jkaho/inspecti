@@ -97,7 +97,7 @@ CREATE TABLE attendedAuctions (
 CREATE TABLE scheduledEvents (
   id INT AUTO_INCREMENT NOT NULL,
   eventType VARCHAR(20) NOT NULL,
-  startTime DATETIME,
+  startTime DATETIME NOT NULL,
   endTime DATETIME,
   propertyAddress VARCHAR(255) NOT NULL,
   propertyType VARCHAR(20),

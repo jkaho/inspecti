@@ -174,69 +174,71 @@ export default function EventCard(props) {
   //   </div>
   // );
 
-  return(
+  return (
     <div>
-    <div className="eventcard-container">
-      <div className="eventcard-heading eventcard-block">
-        <div className="eventcard-timetype">
-          <div className="eventcard-time">
-            <i className="fas fa-clock"></i>&nbsp;
-            {props.startTime} - {props.endTime}
+      <div className="eventcard-container">
+        <div className="eventcard-heading eventcard-block">
+          <div className="eventcard-timetype">
+            <div className="eventcard-time">
+              <i className="fas fa-clock"></i>&nbsp;
+              {props.type === "Inspection" ? 
+                `${props.startTime} - ${props.endTime}` : props.startTime
+              }
+            </div>
+            <div 
+              className={
+                `eventcard-type 
+                ${props.type === "Inspection" ? "inspection-event" : "auction-event"}`
+              }
+            >
+              <i className="fas fa-glasses"></i>&nbsp;
+              {props.type.toUpperCase()}
+            </div>
           </div>
-          <div 
-            className={
-              `eventcard-type 
-              ${props.type === "Inspection" ? "inspection-event" : "auction-event"}`
-            }
-          >
-            <i className="fas fa-glasses"></i>&nbsp;
-            {props.type.toUpperCase()}
+          <div className="eventcard-actions">
+            <button id={`editbtn-${props.id}`} onClick={props.editClick}>
+              <i id={`editicon-${props.id}`} className="fas fa-edit"></i>
+            </button>
+            <button id={`deletebtn-${props.id}`} onClick={props.deleteClick}>
+              <i id={`deleteicon-${props.id}`} className="fas fa-trash"></i>
+            </button>
           </div>
         </div>
-        <div className="eventcard-actions">
-          <button id={`editbtn-${props.id}`} onClick={props.editClick}>
-            <i id={`editicon-${props.id}`} className="fas fa-edit"></i>
-          </button>
-          <button id={`deletebtn-${props.id}`} onClick={props.deleteClick}>
-            <i id={`deleteicon-${props.id}`} className="fas fa-trash"></i>
-          </button>
+        <div className="eventcard-content eventcard-block">
+          <div className="eventcard-address">
+            {props.address}
+          </div>
+          <div className="eventcard-specs">
+            <i className="fas fa-bed"></i>&nbsp;
+            <span className="num-beds">{props.bedrooms}</span>&nbsp;&nbsp;
+            <i className="fas fa-shower"></i>&nbsp;
+            <span className="num-baths">{props.bathrooms}</span>&nbsp;&nbsp;
+            <i className="fas fa-car"></i>&nbsp;
+            <span className="num-cars">{props.carSpaces}</span>&nbsp;&nbsp;
+            <i className="fas fa-ruler-combined"></i>&nbsp;
+            <span className="num-land">{props.landSize}m²</span>&nbsp;&nbsp;
+          </div>
         </div>
       </div>
-      <div className="eventcard-content eventcard-block">
-        <div className="eventcard-address">
-          {props.address}
-        </div>
-        <div className="eventcard-specs">
-          <i className="fas fa-bed"></i>&nbsp;
-          <span className="num-beds">{props.bedrooms}</span>&nbsp;&nbsp;
-          <i className="fas fa-shower"></i>&nbsp;
-          <span className="num-baths">{props.bathrooms}</span>&nbsp;&nbsp;
-          <i className="fas fa-car"></i>&nbsp;
-          <span className="num-cars">{props.carSpaces}</span>&nbsp;&nbsp;
-          <i className="fas fa-ruler-combined"></i>&nbsp;
-          <span className="num-land">{props.landSize}m²</span>&nbsp;&nbsp;
-        </div>
-      </div>
-    </div>
-    {/* <div>
-      <button type="button" onClick={handleModalOpen}>
-        Open Modal
-      </button>
-      <Modal
-        open={open}
-        onClose={handleModalClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-      <PopupMessage
-        open={addEventPopupIsOpen}
-        handleClose={handleClose}
-        severity="success"
-        message="Event successully updated!"
-      />
-    </div> */}
+      {/* <div>
+        <button type="button" onClick={handleModalOpen}>
+          Open Modal
+        </button>
+        <Modal
+          open={open}
+          onClose={handleModalClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          {body}
+        </Modal>
+        <PopupMessage
+          open={addEventPopupIsOpen}
+          handleClose={handleClose}
+          severity="success"
+          message="Event successully updated!"
+        />
+      </div> */}
     </div>
   )
 };

@@ -52,6 +52,7 @@
 .daily-box-container {
   border: 1px solid rgb(228, 228, 228);
   margin: 20px 0;
+  background: white;
 }
 
 @media (max-width: 600px) {
