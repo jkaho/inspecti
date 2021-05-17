@@ -47,6 +47,7 @@ export default function Reviews() {
   useEffect(() => {
     notesAPI.getSharedNotes()
       .then(res => {
+        console.log(res)
         setReviews(res.data);
         setModifiedReviews(res.data);
       })

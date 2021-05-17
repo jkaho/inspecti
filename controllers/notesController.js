@@ -16,7 +16,15 @@ const notesController = {
     console.log(req.user)
     db.note
       .findAll({
-        include: { all: true },
+        include: [
+          {
+            model: db.review
+          },
+          { 
+            model: db.user,
+            attributes: ["firstName", "lastName", "email", "id"]
+          }
+        ],
         where: {
           userId: parseInt(req.user.id)
         }
@@ -27,7 +35,15 @@ const notesController = {
   getSharedNotes: function(req, res) {
     db.note
       .findAll({
-        include: { all: true },
+        include: [
+          {
+            model: db.review
+          },
+          { 
+            model: db.user,
+            attributes: ["firstName", "lastName", "email", "id"]
+          }
+        ],
         where: {
           shared: true
         },

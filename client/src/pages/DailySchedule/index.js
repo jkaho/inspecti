@@ -15,7 +15,6 @@ import Button from "@material-ui/core/Button";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import FormControl from "@material-ui/core/FormControl";
 import IconButton from "@material-ui/core/IconButton";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 // CSS
@@ -153,14 +152,6 @@ export default function DailySchedule(props) {
   const handlePopupClose = () => {
     setPopupState({ open: false, type: "", severity: "success", message: "" });
   };
-
-  // const handleEditPopupClose = () => {
-  //   setEditEventPopupState(false);
-  // };
-
-  // const handleDeletePopupClose = () => {
-  //   setDeleteEventPopupState(false);
-  // };
 
   const handleEventTypeChange = (event) => {
     setEventType(event.target.value);
