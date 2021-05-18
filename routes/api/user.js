@@ -127,13 +127,15 @@ router.get("/domain/address/q=:query", function(req, res) {
 // );
 
 router.get("/domain/property/q=:query", function(req, res) {
-  return axios.get("https://api.domain.com.au/v1/properties/" + req.params.id,
+  axios.get("https://api.domain.com.au/v1/properties/" + req.params.id,
     { 
       headers: {
         "X-Api-Key": process.env.DOMAIN_API_KEY
       }
     }
   )
+  .then(result => res.json(result))
+  .catch(err => console.log(err));
 });
 
 module.exports = router;
