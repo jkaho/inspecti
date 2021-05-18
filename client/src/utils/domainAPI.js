@@ -13,7 +13,7 @@ const domainAPI = {
   //   );
   // },
   getLocationSuggestions: function(query) {
-    return axios.get(url + "/api/user/domain/location/q=" + query);
+    return axios.get("/api/user/domain/location/q=" + query);
   },
   // getAddressSuggestions: function(query) {
   //   return axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + query + "&channel=Residential",
@@ -25,7 +25,7 @@ const domainAPI = {
   //   );
   // },
   getAddressSuggestions: function(query) {
-    return axios.get(url + "/api/user/domain/address/q=" + query);
+    return axios.get("/api/user/domain/address/q=" + query);
   },
   // getPropertyInfo: function(propertyId) {
   //   return axios.get("https://api.domain.com.au/v1/properties/" + propertyId,
@@ -37,7 +37,7 @@ const domainAPI = {
   //   );
   // }
   getPropertyInfo: function(propertyId) {
-    return axios.get(url + "/api/user/domain/property/q=" + propertyId);
+    return axios.get("/api/user/domain/property/q=" + propertyId);
   }
   // getPropertyListings: function(query) {
   //   return axios.post(
