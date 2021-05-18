@@ -96,9 +96,23 @@ router.route("/property/:id")
   .delete(propertiesController.deletePropertyEntry);
 
 // Domain API 
-router.get("/domain/location/q=:query", function(req, res) {
-  axios.get(
-    "https://api.domain.com.au/v1/listings/locations?terms=" + req.params.query + "&pageNumber=1&pageSize=10",
+// router.get("/domain/location/q=:query", function(req, res) {
+//   axios.get(
+//     "https://api.domain.com.au/v1/listings/locations?terms=" + req.params.query + "&pageNumber=1&pageSize=10",
+//     { 
+//       headers: {
+//         "X-Api-Key": process.env.DOMAIN_API_KEY
+//       }
+//     }
+//   )
+//   .then(result => {
+//     res.json(result.data);
+//   })
+//   .catch(err => console.log(err));
+// });
+
+router.get("/domain/address/q=:query", function(req, res) {
+  axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + req.params.query + "&channel=Residential",
     { 
       headers: {
         "X-Api-Key": process.env.DOMAIN_API_KEY
@@ -106,35 +120,20 @@ router.get("/domain/location/q=:query", function(req, res) {
     }
   )
   .then(result => {
-    console.log(result)
-    res.json(result);
+    res.json(result.data);
   })
   .catch(err => console.log(err));
 });
 
-router.get("/domain/address/q=:query", function(req, res) {
-  return axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + req.params.query + "&channel=Residential",
-    { 
-      headers: {
-        "X-Api-Key": process.env.DOMAIN_API_KEY
-      }
-    }
-  )
-});
-// router.get("/API_KEY", function(req, res) {
-//     res.json(process.env.DOMAIN_API_KEY)
-//   }
-// );
-
 router.get("/domain/property/q=:query", function(req, res) {
-  axios.get("https://api.domain.com.au/v1/properties/" + req.params.id,
+  axios.get("https://api.domain.com.au/v1/properties/" + req.params.query,
     { 
       headers: {
         "X-Api-Key": process.env.DOMAIN_API_KEY
       }
     }
   )
-  .then(result => res.json(result))
+  .then(result => res.json(result.data))
   .catch(err => console.log(err));
 });
 

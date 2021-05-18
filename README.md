@@ -55,10 +55,10 @@ Use the following login credentials for functionality testing purposes:
 ## Screenshots
 
 ### Homepage
-![Inspecti homepage]()
+![Inspecti homepage](screenshots/homepage.png)
 
 ### Reviews
-![Inspecti reviews page]()
+![Inspecti reviews page](screenshots/review.png)
 
 ### Profile (members only)
 ![Inspecti profile page]()

@@ -564,6 +564,7 @@ export default function Notes(props) {
   const handleAddressSuggestionClick = (value) => {
     let propertyId;
     setAddress(value.address);
+    console.log(value);
 
     propertiesAPI.getAllProperties()
       .then(res => {
@@ -573,8 +574,10 @@ export default function Notes(props) {
           }
         });
 
+        console.log(value.id)
         domainAPI.getPropertyInfo(value.id)
         .then(res => {
+          console.log(value.id)
           const propertyInfo = {
             bedrooms: res.data.bedrooms,
             bathrooms: res.data.bathrooms,

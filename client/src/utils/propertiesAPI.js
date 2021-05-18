@@ -1,24 +1,25 @@
 import axios from "axios";
-const url = "http://localhost:3001";
+const url = window.location.hostname.includes("localhost") ?
+  "http://localhost:3001" : ""
 
 const propertiesAPI = {
   getAllProperties: function() {
-    return axios.get("/api/user/properties", { withCredentials: true });
+    return axios.get(url + "/api/user/properties", { withCredentials: true });
   },
   getOneProperty: function(inspectedPropertyId) {
-    return axios.get("/api/user/property/" + inspectedPropertyId, { withCredentials: true });
+    return axios.get(url + "/api/user/property/" + inspectedPropertyId, { withCredentials: true });
   },
   getPropertyNotes: function() {
-    return axios.get("/api/user/property/notes", { withCredentials: true });
+    return axios.get(url + "/api/user/property/notes", { withCredentials: true });
   },
   createProperty: function(propertyData) {
-    return axios.post("/api/user/property", propertyData, { withCredentials: true });
+    return axios.post(url + "/api/user/property", propertyData, { withCredentials: true });
   },
   updateProperty: function(inspectedPropertyId, propertyData) {
-    return axios.put("/api/user/property/" + inspectedPropertyId, propertyData, { withCredentials: true });
+    return axios.put(url + "/api/user/property/" + inspectedPropertyId, propertyData, { withCredentials: true });
   },
   deleteProperty: function(inspectedPropertyId) {
-    return axios.delete("/api/user/property/" + inspectedPropertyId, { withCredentials: true });
+    return axios.delete(url + "/api/user/property/" + inspectedPropertyId, { withCredentials: true });
   },
 };
 
