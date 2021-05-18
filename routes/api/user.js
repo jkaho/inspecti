@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const axios = require("axios");
 const passport = require("../../config/passport");
 const usersController = require("../../controllers/usersController");
 const notesController = require("../../controllers/notesController");
@@ -93,5 +94,43 @@ router.route("/property/:id")
   .get(propertiesController.getOneProperty)
   .put(propertiesController.updatePropertyEntry)
   .delete(propertiesController.deletePropertyEntry);
+
+// Domain API 
+router.get("/domain/location/q=:query", function(req, res) {
+  axios.get(
+    "https://api.domain.com.au/v1/listings/locations?terms=" + req.params.query + "&pageNumber=1&pageSize=10",
+    { 
+      headers: {
+        "X-Api-Key": process.env.DOMAIN_API_KEY
+      }
+    }
+  )
+  .then(result => res.json(result))
+  .catch(err => console.log(err));
+});
+
+router.get("/domain/address/q=:query", function(req, res) {
+  axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + req.params.query + "&channel=Residential",
+    { 
+      headers: {
+        "X-Api-Key": process.env.DOMAIN_API_KEY
+      }
+    }
+  )
+  .then(result => res.json(result))
+  .catch(err => console.log(err));
+});
+
+router.get("/domain/property/q=:query", function(req, res) {
+  axios.get("https://api.domain.com.au/v1/properties/" + req.params.id,
+    { 
+      headers: {
+        "X-Api-Key": process.env.DOMAIN_API_KEY
+      }
+    }
+  )
+  .then(result => res.json(result))
+  .catch(err => console.log(err));
+});
 
 module.exports = router;
