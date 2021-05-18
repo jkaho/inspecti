@@ -67,6 +67,7 @@ Use the following login credentials for functionality testing purposes:
 ![Inspecti notes page]()
 
 ### Inspection Schedule (members only)
+
 #### Monthly View
 ![Inspecti monthly schedule page]()
 #### Daily View
