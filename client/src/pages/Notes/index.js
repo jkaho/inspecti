@@ -718,7 +718,7 @@ export default function Notes(props) {
       .then(res => {
         handleModalNoClick();
         setPopupState({ 
-          open: true, type: "deleteSuccess", severity: "sucess", 
+          open: true, type: "deleteSuccess", severity: "success", 
           message: "Note successfully deleted!" 
         });
         notesAPI.getAllNotes()

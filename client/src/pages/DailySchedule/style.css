@@ -2,7 +2,7 @@
   position: fixed;
   top: 65px;
   left: 240px;
-  height: 100%;
+  height: fit-content;
   width: calc(100vw - 240px);
   padding: 20px 50px;
 }
