@@ -45,18 +45,20 @@ const domainAPI = {
   //     );
   //     })
   // },
-  getPropertyInfo: function(propertyId) {
-    return axios.get("https://api.domain.com.au/v1/properties/" + propertyId,
-      { 
-        headers: {
-          "X-Api-Key": "key_dc635e3e95b67de404f3b44abbcc09e2"
-        }
-      }
-    );
-  }
   // getPropertyInfo: function(propertyId) {
-  //   return axios.get("/api/user/domain/property/q=" + propertyId);
+  //   return axios.get("https://api.domain.com.au/v1/properties/" + propertyId,
+  //     { 
+  //       headers: {
+  //         "X-Api-Key": "key_dc635e3e95b67de404f3b44abbcc09e2"
+  //       }
+  //     }
+  //   );
   // }
+  getPropertyInfo: function(propertyId) {
+    axios.get("/api/user/domain/property/q=" + propertyId)
+      .then(result => res.json(result))
+      .catch(err => console.log(err));
+  },
   // getPropertyListings: function(query) {
   //   return axios.post(
   //     "https://api.domain.com.au/v1/listings/residential/_search",
