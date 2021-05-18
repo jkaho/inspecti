@@ -25,12 +25,7 @@ const domainAPI = {
   //   );
   // },
   getAddressSuggestions: function(query) {
-    axios.get("/api/user/domain/address/q=" + query)
-      .then(result => {
-        console.log(result)
-        return result;
-      })
-      .catch(err => console.log(err))
+    return axios.get("/api/user/domain/address/q=" + query);
   },
   // getAddressSuggestions: function(query) {
   //   axios.get("/api/user/API_KEY")
@@ -55,12 +50,7 @@ const domainAPI = {
   //   );
   // }
   getPropertyInfo: function(propertyId) {
-    axios.get("/api/user/domain/property/q=" + propertyId)
-      .then(result => {
-        console.log(result);
-        return result;
-      })
-      .catch(err => console.log(err));
+    return axios.get("/api/user/domain/property/q=" + propertyId)
   },
   // getPropertyListings: function(query) {
   //   return axios.post(

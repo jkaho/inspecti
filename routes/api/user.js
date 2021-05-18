@@ -113,18 +113,13 @@ router.get("/domain/location/q=:query", function(req, res) {
 });
 
 router.get("/domain/address/q=:query", function(req, res) {
-  axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + req.params.query + "&channel=Residential",
+  return axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + req.params.query + "&channel=Residential",
     { 
       headers: {
         "X-Api-Key": process.env.DOMAIN_API_KEY
       }
     }
   )
-  .then(result => {
-    console.log(result);
-    res.json(result);
-  })
-  .catch(err => console.log(err));
 });
 // router.get("/API_KEY", function(req, res) {
 //     res.json(process.env.DOMAIN_API_KEY)
@@ -132,18 +127,13 @@ router.get("/domain/address/q=:query", function(req, res) {
 // );
 
 router.get("/domain/property/q=:query", function(req, res) {
-  axios.get("https://api.domain.com.au/v1/properties/" + req.params.id,
+  return axios.get("https://api.domain.com.au/v1/properties/" + req.params.id,
     { 
       headers: {
         "X-Api-Key": process.env.DOMAIN_API_KEY
       }
     }
   )
-  .then(result => {
-    console.log(result);
-    res.json(result);
-  })
-  .catch(err => console.log(err));
 });
 
 module.exports = router;
