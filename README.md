@@ -61,20 +61,21 @@ Use the following login credentials for functionality testing purposes:
 ![Inspecti reviews page](screenshots/review.png)
 
 ### Profile (members only)
-![Inspecti profile page]()
+![Inspecti profile page](screenshots/profile.png)
 
 ### Notes & Reviews (members only)
-![Inspecti notes page]()
+![Inspecti notes page](screenshots/notes.png)
 
 ### Inspection Schedule (members only)
 
 #### Monthly View
-![Inspecti monthly schedule page]()
+![Inspecti monthly schedule page](screenshots/monthly.png)
+
 #### Daily View
-![Inspecti daily schedule page]()
+![Inspecti daily schedule page](screenshots/daily.png)
 
 ### Inspected Properties (members only)
-![Inspecti inspected properties page]()
+![Inspecti inspected properties page](screenshots/inspected.png)
 
 ## License
 
