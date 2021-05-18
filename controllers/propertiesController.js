@@ -26,7 +26,7 @@ const propertiesController = {
     db.inspectedProperties
       .findAll({
         where: {
-          id: parseInt(req.user.id)
+          userId: parseInt(req.user.id)
         },
         include: {
           model: db.note,

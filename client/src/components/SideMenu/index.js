@@ -32,9 +32,6 @@ import userAPI from "../../utils/userAPI";
 
 const drawerWidth = 240;
 
-const url = window.location.hostname.includes("localhost") ?
-  "http://localhost:3001" : ""
-
 // Class styles
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,7 +100,7 @@ export default function SideMenu(props) {
           <Link to="/profile">
             <ListItem button 
               className={
-                window.location.href === "http://localhost:3000/profile" ||
+                window.location.href === "http://localhost:3000/profile" &&
                 window.location.href === "https://inspecti.herokuapp.com/profile" ?
                 classes.selected : ""
               }
@@ -117,7 +114,7 @@ export default function SideMenu(props) {
           <Link to="/notes">
             <ListItem button
               className={
-                window.location.href === "http://localhost:3000/notes" ||
+                window.location.href === "http://localhost:3000/notes" &&
                 window.location.href === "https://inspecti.herokuapp.com/notes" ?
                 classes.selected : ""
               }
@@ -131,7 +128,7 @@ export default function SideMenu(props) {
           <Link to="/monthly">
             <ListItem button
               className={
-                window.location.href === "http://localhost:3000/monthly" ||
+                window.location.href === "http://localhost:3000/monthly" &&
                 window.location.href === "https://inspecti.herokuapp.com/monthly" ?
                 classes.selected : ""
               }
@@ -153,7 +150,7 @@ export default function SideMenu(props) {
           <Link to="/inspected">
             <ListItem button
               className={
-                window.location.href === "http://localhost:3000/inspected" ||
+                window.location.href === "http://localhost:3000/inspected" &&
                 window.location.href === "https://inspecti.herokuapp.com/inspected" ?
                 classes.selected : ""
               }
@@ -189,7 +186,8 @@ export default function SideMenu(props) {
             onClick={handleDrawerToggle}
             className={
               `${classes.menuButton} 
-              ${window.location.href !== "https://inspecti.herokuapp.com/inspected" ? 
+              ${window.location.href !== "https://inspecti.herokuapp.com/inspected" &&
+              window.location.href === "https://inspecti.herokuapp.com/profile" ? 
               classes.menuButtonToggle : ""}`
             }
           >
@@ -218,10 +216,12 @@ export default function SideMenu(props) {
         </Toolbar>
       </AppBar>
       <nav 
-        className={window.location.href !== "https://inspecti.herokuapp.com/inspected" ? classes.drawer : ""}
+        className={window.location.href !== "https://inspecti.herokuapp.com/inspected" &&
+        window.location.href !== "http://localhost:3000/inspected" ? classes.drawer : ""}
         aria-label=""
       >
-      {window.location.href !== "https://inspecti.herokuapp.com/inspected" ? 
+      {window.location.href !== "https://inspecti.herokuapp.com/inspected" &&
+        window.location.href !== "http://localhost:3000/inspected" ? 
         <Hidden smUp implementation="css">
           <Drawer
             // className={classes.drawer}
@@ -257,7 +257,8 @@ export default function SideMenu(props) {
           {drawer}
         </Drawer>
       }
-      {window.location.href !== "https://inspecti.herokuapp.com/inspected" ? 
+      {window.location.href !== "https://inspecti.herokuapp.com/inspected" &&
+        window.location.href !== "http://localhost:3000/inspected"? 
         <Hidden xsDown implementation="css">
             <Drawer
               classes={{

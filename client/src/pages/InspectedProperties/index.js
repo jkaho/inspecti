@@ -232,6 +232,7 @@ export default function InspectedProperties(props) {
   const getAllProperties = () => {
     propertiesAPI.getPropertyNotes()
       .then(res => {
+        console.log(res.data)
         setModifiedProperties(res.data);
         setProperties(res.data);
       })
