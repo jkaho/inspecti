@@ -311,21 +311,6 @@ INSERT INTO reviews (
   noteId
 ) VALUES (6, 5, 5, 4, 3, 4, 5, 2, 2, 5, 4, 1, 9);
 
--- ATTENDED AUCTIONS -- 
-INSERT INTO attendedAuctions (
-  id, 
-  dateAttended, 
-  propertyAddress, 
-  propertyType,
-  bedrooms,
-  bathrooms,
-  carSpaces,
-  landSize,
-  priceGuide,
-  soldPrice,
-  userId
-) VALUES (1, "2021-04-10 12:30:00", "32 Milson Dr Mosman, NSW 2088", "Semi/Duplex", 3, 1, 2, 287, 2200000, 2450000, 1);
-
 -- SCHEDULED EVENTS --
 INSERT INTO scheduledEvents (
   id, 

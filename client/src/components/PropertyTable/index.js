@@ -162,10 +162,7 @@ export default function PropertyTable(props) {
       return;
     }
 
-    getAndSetProperties();
-  }, [props.modifiedProperties]);
-
-  const getAndSetProperties = () => {
+    // getAndSetProperties();
     let rowsToRender = [];
     props.modifiedProperties.forEach(property => {
       rowsToRender.push(createData(
@@ -186,7 +183,30 @@ export default function PropertyTable(props) {
       ))
     });    
     setRows(rowsToRender);
-  };
+  }, [props.modifiedProperties]);
+
+  // const getAndSetProperties = () => {
+  //   let rowsToRender = [];
+  //   props.modifiedProperties.forEach(property => {
+  //     rowsToRender.push(createData(
+  //       moment(property.dateInspected).format("YYYY-MM-DD"),
+  //       property.propertyAddress,
+  //       property.propertyType,
+  //       property.bedrooms,
+  //       property.bathrooms,
+  //       property.carSpaces,
+  //       property.landSize,
+  //       property.priceGuide,
+  //       property.soldPrice,
+  //       property.attendedAuction === true ? "Yes" : 
+  //       property.attendedAuction === false ? "No":
+  //       "N/A",
+  //       property.notes,
+  //       property.id
+  //     ))
+  //   });    
+  //   setRows(rowsToRender);
+  // };
 
   // Table pagination
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);

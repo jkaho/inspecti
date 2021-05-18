@@ -18,7 +18,7 @@ export default function ReviewCard(props) {
       .then(res => setDateInspected(res.data.dateInspected))
       .catch(err => console.log(err));
     }
-  }, []);
+  }, [props.propertyId]);
 
   return (
     <div> 

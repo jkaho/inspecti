@@ -197,7 +197,91 @@ export default function Notes(props) {
 
   // Initial render
   useEffect(() => {
-    renderAllNotes();
+    // Check user's saved notes 
+    notesAPI.getNotesWithReviews()
+    .then(res => {
+      // If there are no existing notes, create a new blank note
+      if (res.data.length < 1) {
+        titleRef.current.value = "";
+        // textRef.current.value = "";
+        setTitle("");
+        setText("");
+        
+        const newNote = {
+          starred: false,
+          title: "",
+          text: "",
+          propertyAddress: null,
+        };
+
+        notesAPI.createNote(newNote)
+          .then(res => {
+            setCurrentNoteId(res.data.id);
+          })
+          .catch(err => {
+            console.log(err);
+            setPopupState({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while submitting your data. Please try again later." 
+            });
+          });
+      // Else render the latest note 
+      } else {
+        // Separate starred and non-starred notes 
+        let starredNotes = [];
+        let nonStarredNotes = [];
+        res.data.forEach(note => {
+          if (note.starred) {
+            starredNotes.push(note);
+          } else {
+            nonStarredNotes.push(note);
+          };
+        });
+
+        // Reverse order of notes to display newest first 
+        res.data.reverse(); // to display latest note
+        starredNotes.reverse(); // to display starred notes list
+        nonStarredNotes.reverse(); // to display all notes list 
+        setStarredNotes(starredNotes);
+        setNonStarredNotes(nonStarredNotes);
+
+        // Render latest note
+        const lastNote = res.data[0];
+        setCurrentNoteId(lastNote.id);
+        setTitle(lastNote.title);
+        setText(lastNote.text);
+        setDateUpdated(lastNote.updatedAt);
+        if (lastNote.propertyAddress) {
+          setAddress(lastNote.propertyAddress);
+          setPropertySpecs({
+            bedrooms: lastNote.bedrooms,
+            bathrooms: lastNote.bathrooms,
+            carSpaces: lastNote.carSpaces,
+            land: lastNote.landSize,
+          });
+          setAddressInfoState(true);
+          // Determine whether or not note has review
+          if (lastNote.review) {    
+            setSharedState(lastNote.shared) 
+            setRatingSectionState(true);
+            setPropertyReview(lastNote.review);
+          } else {
+            setRatingButtonState(true);
+          }
+        } else {
+          setAddressInfoState(false);
+          setRatingSectionState(false);
+          setRatingButtonState(false);
+        }
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      setPopupState({ 
+        open: true, type: "error", severity: "error", 
+        message: "An error was encountered while retrieving data. Please try again later." 
+      });
+    });
   }, []);
 
   // Helper functions
@@ -217,7 +301,6 @@ export default function Notes(props) {
           title: title,
           text: text,
           propertyAddress: null,
-          userId: props.id
         };
 
         notesAPI.createNote(newNote)
@@ -307,7 +390,6 @@ export default function Notes(props) {
       title: "",
       text: "",
       propertyAddress: null,
-      userId: props.id
     };
 
     notesAPI.createNote(noteData)
@@ -383,7 +465,7 @@ export default function Notes(props) {
     }
 
     setCurrentNoteId(clickedNoteId);
-    notesAPI.getNotesWithReviews(props.id)
+    notesAPI.getNotesWithReviews()
       .then(res => {
         // setAllNotes(res.data.reverse());
         for (let i = 0; i < res.data.length; i++) {
@@ -635,7 +717,7 @@ export default function Notes(props) {
     notesAPI.deleteNote(noteReviewToDelete)
       .then(res => {
         handleModalNoClick();
-        notesAPI.getAllNotes(props.id)
+        notesAPI.getAllNotes()
           .then(res => {
             // setAllNotes(res.data.reverse());
             if (currentNoteId === noteReviewToDelete) {
@@ -732,7 +814,7 @@ export default function Notes(props) {
       starred: starred,
     })
       .then(res => {
-        notesAPI.getAllNotes(props.id)
+        notesAPI.getAllNotes()
           .then(res => {
             // Update starred and non-starred notes
             let starredNotes = [];
@@ -789,7 +871,7 @@ export default function Notes(props) {
     // setSearchword(query);
 
     if (query !== "") {
-      notesAPI.searchNotes(props.id, query)
+      notesAPI.searchNotes(query)
       .then(res => {
         if (res.data.length > 0) {
           res.data.reverse();

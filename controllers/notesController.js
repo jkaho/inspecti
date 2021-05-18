@@ -120,7 +120,7 @@ const notesController = {
         title: req.body.title,
         text: req.body.text,
         propertyAddress: req.body.propertyAddress,
-        userId: req.user.id,
+        userId: parseInt(req.user.id),
         propertyId: req.body.propertyId,
         hasReview: req.body.hasReview ? req.body.hasReview : false,
         bedrooms: req.body.bedrooms,

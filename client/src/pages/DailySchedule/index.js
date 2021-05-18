@@ -100,7 +100,7 @@ export default function DailySchedule(props) {
   useEffect(() => {
     setDate(state);
     getDailyEvents(state);
-  }, []);
+  }, [state]);
 
   // Refs
   const typeRef = useRef();
