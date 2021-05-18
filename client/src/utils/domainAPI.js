@@ -25,7 +25,11 @@ const domainAPI = {
   //   );
   // },
   getAddressSuggestions: function(query) {
-    return axios.get("/api/user/domain/address/q=" + query);
+    axios.get("/api/user/domain/address/q=" + query)
+      .then(result => {
+        return result;
+      })
+      .catch(err => console.log(err))
   },
   // getAddressSuggestions: function(query) {
   //   axios.get("/api/user/API_KEY")
