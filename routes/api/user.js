@@ -105,7 +105,10 @@ router.get("/domain/location/q=:query", function(req, res) {
       }
     }
   )
-  .then(result => res.json(result))
+  .then(result => {
+    console.log(result)
+    res.json(result);
+  })
   .catch(err => console.log(err));
 });
 
