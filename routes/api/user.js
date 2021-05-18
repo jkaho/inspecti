@@ -109,17 +109,21 @@ router.get("/domain/location/q=:query", function(req, res) {
   .catch(err => console.log(err));
 });
 
-router.get("/domain/address/q=:query", function(req, res) {
-  axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + req.params.query + "&channel=Residential",
-    { 
-      headers: {
-        "X-Api-Key": process.env.DOMAIN_API_KEY
-      }
-    }
-  )
-  .then(result => res.json(result))
-  .catch(err => console.log(err));
-});
+// router.get("/domain/address/q=:query", function(req, res) {
+//   axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + req.params.query + "&channel=Residential",
+//     { 
+//       headers: {
+//         "X-Api-Key": process.env.DOMAIN_API_KEY
+//       }
+//     }
+//   )
+//   .then(result => res.json(result))
+//   .catch(err => console.log(err));
+// });
+router.get("/API_KEY", function(req, res) {
+    res.json(process.env.DOMAIN_API_KEY)
+  }
+);
 
 router.get("/domain/property/q=:query", function(req, res) {
   axios.get("https://api.domain.com.au/v1/properties/" + req.params.id,

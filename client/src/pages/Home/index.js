@@ -329,7 +329,7 @@ export default function Home() {
             />
           </div>
           <div className="create-account-div">
-            <Link to="/signup">
+            <Link to="/signup" style={{ textDecoration: "none" }}>
               <Button
                 id="create-account-btn"
                 endIcon={<PersonIcon />}

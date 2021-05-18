@@ -24,8 +24,21 @@ const domainAPI = {
   //     }
   //   );
   // },
+  // getAddressSuggestions: function(query) {
+  //   return axios.get("/api/user/domain/address/q=" + query);
+  // },
   getAddressSuggestions: function(query) {
-    return axios.get("/api/user/domain/address/q=" + query);
+    axios.get("/api/user/API_KEY")
+      .then(result => {
+        console.log(result.data)
+        return axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + query + "&channel=Residential",
+        { 
+          headers: {
+            "X-Api-Key": result.data.API_KEY
+          }
+        }
+      );
+      })
   },
   // getPropertyInfo: function(propertyId) {
   //   return axios.get("https://api.domain.com.au/v1/properties/" + propertyId,

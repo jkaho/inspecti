@@ -159,7 +159,7 @@ export default function SideMenu(props) {
             onClick={handleDrawerToggle}
             className={
               `${classes.menuButton} 
-              ${window.location.href !== "http://inspecti.herokuapp.com/inspected" ? 
+              ${window.location.href !== "https://inspecti.herokuapp.com/inspected" ? 
               classes.menuButtonToggle : ""}`
             }
           >
@@ -188,10 +188,10 @@ export default function SideMenu(props) {
         </Toolbar>
       </AppBar>
       <nav 
-        className={window.location.href !== "http://inspecti.herokuapp.com/inspected" ? classes.drawer : ""}
+        className={window.location.href !== "https://inspecti.herokuapp.com/inspected" ? classes.drawer : ""}
         aria-label=""
       >
-      {window.location.href !== "http://inspecti.herokuapp.com/inspected" ? 
+      {window.location.href !== "https://inspecti.herokuapp.com/inspected" ? 
         <Hidden smUp implementation="css">
           <Drawer
             // className={classes.drawer}
@@ -227,7 +227,7 @@ export default function SideMenu(props) {
           {drawer}
         </Drawer>
       }
-      {window.location.href !== "http://inspecti.herokuapp.com/inspected" ? 
+      {window.location.href !== "https://inspecti.herokuapp.com/inspected" ? 
         <Hidden xsDown implementation="css">
             <Drawer
               classes={{
