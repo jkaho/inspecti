@@ -32,6 +32,9 @@ import userAPI from "../../utils/userAPI";
 
 const drawerWidth = 240;
 
+const url = window.location.hostname.includes("localhost") ?
+  "http://localhost:3001" : ""
+
 // Class styles
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +78,9 @@ const useStyles = makeStyles((theme) => ({
   },
   colorBlack: {
     color: "black"
+  },
+  selected: {
+    background: "rgb(0, 0, 0, 0.06)",
   }
 }));
 
@@ -95,7 +101,13 @@ export default function SideMenu(props) {
       <div className={classes.drawerContainer}>
         <List className="link-list" style={{ paddingTop: "30px" }}>
           <Link to="/profile">
-            <ListItem button>
+            <ListItem button 
+              className={
+                window.location.href === "http://localhost:3000/profile" ||
+                window.location.href === "https://inspecti.herokuapp.com/profile" ?
+                classes.selected : ""
+              }
+            >
               <ListItemIcon>
                 <InsertChartOutlinedIcon />
               </ListItemIcon>
@@ -103,7 +115,13 @@ export default function SideMenu(props) {
             </ListItem>
           </Link>
           <Link to="/notes">
-            <ListItem button>
+            <ListItem button
+              className={
+                window.location.href === "http://localhost:3000/notes" ||
+                window.location.href === "https://inspecti.herokuapp.com/notes" ?
+                classes.selected : ""
+              }
+            >
               <ListItemIcon>
                 <DescriptionOutlinedIcon />
               </ListItemIcon>
@@ -111,7 +129,13 @@ export default function SideMenu(props) {
             </ListItem>
           </Link>
           <Link to="/monthly">
-            <ListItem button>
+            <ListItem button
+              className={
+                window.location.href === "http://localhost:3000/monthly" ||
+                window.location.href === "https://inspecti.herokuapp.com/monthly" ?
+                classes.selected : ""
+              }
+            >
               <ListItemIcon>
                 <EventIcon />
               </ListItemIcon>
@@ -127,7 +151,13 @@ export default function SideMenu(props) {
             </ListItem>
           </Link> */}
           <Link to="/inspected">
-            <ListItem button>
+            <ListItem button
+              className={
+                window.location.href === "http://localhost:3000/inspected" ||
+                window.location.href === "https://inspecti.herokuapp.com/inspected" ?
+                classes.selected : ""
+              }
+            >
               <ListItemIcon>
                 <TableChartOutlinedIcon />
               </ListItemIcon>
