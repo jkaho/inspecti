@@ -34,7 +34,7 @@ const domainAPI = {
         return axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + query + "&channel=Residential",
         { 
           headers: {
-            "X-Api-Key": result.data.API_KEY
+            "X-Api-Key": result.data
           }
         }
       );
