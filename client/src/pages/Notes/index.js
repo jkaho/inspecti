@@ -717,6 +717,10 @@ export default function Notes(props) {
     notesAPI.deleteNote(noteReviewToDelete)
       .then(res => {
         handleModalNoClick();
+        setPopupState({ 
+          open: true, type: "deleteSuccess", severity: "sucess", 
+          message: "Note successfully deleted!" 
+        });
         notesAPI.getAllNotes()
           .then(res => {
             // setAllNotes(res.data.reverse());
@@ -756,6 +760,7 @@ export default function Notes(props) {
                 setPropertySpecs({});
               }
             }
+            renderAllNotes();
           })
           .catch(err => {
             console.log(err);
