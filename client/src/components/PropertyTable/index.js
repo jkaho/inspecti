@@ -315,7 +315,7 @@ export default function PropertyTable(props) {
             }
           </ul>
         </TableCell>
-        <TableCell style={{ paddingLeft: "30px" }}>
+        <TableCell style={{ textAlign: "center" }}>
           {props.editMode && props.propertyToEditId === row.id ? 
             <button id={`savePropertyBtn-${row.id}`} className="property-action-btn" onClick={props.handleSaveButtonClick}>
               <i id={`saveProperty-${row.id}`} className="fas fa-save" style={{ color: "black"}}></i>
@@ -471,7 +471,7 @@ export default function PropertyTable(props) {
               >Create</button> */}
               <div className="no-input-cell">-</div>
             </TableCell>
-            <TableCell>
+            <TableCell style={{ textAlign: "center" }}>
               <button className="property-action-btn" type="submit" onClick={props.handleNewEntryButtonClick}>
                 <i className="fas fa-plus-circle" style={{ color: "rgb(102, 185, 106)", fontSize: "20px" }}></i>
               </button>

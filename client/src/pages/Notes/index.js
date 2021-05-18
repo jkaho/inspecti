@@ -206,6 +206,7 @@ export default function Notes(props) {
         // textRef.current.value = "";
         setTitle("");
         setText("");
+        setDateUpdated(moment());
         
         const newNote = {
           starred: false,
@@ -379,7 +380,7 @@ export default function Notes(props) {
     setTitle("");
     setText("");
     setAddress("");
-    setDateUpdated(moment().format("DD/MM/YY"));
+    setDateUpdated(moment());
     setAddressInputState(false);
     setAddressInfoState(false);
     setRatingButtonState(false);

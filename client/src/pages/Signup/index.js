@@ -37,7 +37,10 @@ const useStyles = makeStyles((theme) => ({
     height: 40,
     borderRadius: 25,
     background: "rgb(164, 0, 197)",
-    color: "white"
+    color: "white",
+    "&:hover" : {
+      background: "rgb(134, 3, 160)",
+    }
   },
   input: {
     width: "100%",
