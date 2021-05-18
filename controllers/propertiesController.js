@@ -25,6 +25,9 @@ const propertiesController = {
   getPropertyNotes: function(req, res) {
     db.inspectedProperties
       .findAll({
+        where: {
+          id: parseInt(req.user.id)
+        },
         include: {
           model: db.note,
           include: {
