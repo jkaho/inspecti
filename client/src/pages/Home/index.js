@@ -1,5 +1,7 @@
 // React
 import React from "react";
+// react-router-dom
+import { Link } from "react-router-dom";
 // Child components
 // import FilterDiv from "../../components/FilterDiv";
 import InfographicCard from "../../components/InfographicCard";
@@ -327,12 +329,14 @@ export default function Home() {
             />
           </div>
           <div className="create-account-div">
-            <Button
-              id="create-account-btn"
-              endIcon={<PersonIcon />}
-            >
-              CREATE AN ACCOUNT NOW
-            </Button>
+            <Link to="/signup">
+              <Button
+                id="create-account-btn"
+                endIcon={<PersonIcon />}
+              >
+                CREATE AN ACCOUNT NOW
+              </Button>
+            </Link>
           </div>
           <hr />
           <div className="infographics-subheading">
