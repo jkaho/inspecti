@@ -331,7 +331,7 @@ export default function Profile() {
                                 iconState === "long-4" ? longFourIcon :
                                 iconState === "short-5" ? shortFiveIcon :
                                 iconState === "long-5" ? longFiveIcon :
-                                shortOnceIcon
+                                shortOneIcon
                               }
                                 onClick={handleIconClick}
                                 style={{ width: "100px", cursor: "pointer" }} alt="Graphic user icon of person with short hair"
