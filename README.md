@@ -21,10 +21,10 @@ This project was made for real estate enthusiasts and anyone else involved in th
 
 ## What you can do with Inspecti
 
-Everyone can: 
+**Everyone can:** 
 - View property reviews
 
-Only members can: 
+**Only members can:** 
 - Access a personalised profile/stats page
 - Use Inspecti's property note-taking functionality
 - Keep a schedule of property events (inspections and auctions)
@@ -34,8 +34,8 @@ Only members can:
 
 Use the following login credentials for functionality testing purposes: 
 
-- **Email**: bobby@email.com
-- **Password**: password
+- **Email**: `bobby@email.com`
+- **Password**: `password`
 
 ## Technologies Used
 
