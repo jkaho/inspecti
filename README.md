@@ -13,6 +13,7 @@
 - [Testing](#Testing)
 - [Technologies used](#Technologies-used)
 - [Screenshots](#Screenshots)
+- [License](#License)
 - [Questions](#Questions)
 
 ## Motivations
