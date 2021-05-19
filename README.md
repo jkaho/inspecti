@@ -51,6 +51,7 @@ Use the following login credentials for functionality testing purposes:
 - [bcrypt](https://www.npmjs.com/package/bcrypt) 
 - [FullCalendar React](https://www.npmjs.com/package/@fullcalendar/react)
 - [Chart.js](https://www.chartjs.org/docs/latest/)
+- [number-abbreviate](https://www.npmjs.com/package/number-abbreviate)
 
 ## Screenshots
 
