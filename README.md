@@ -4,7 +4,7 @@
 
 ## Description
 
-*Inspecti* is a residential real estate application to help users keep up with the property market. Users can take notes on properties, rate properties and share reviews, as well as keep track of past and future property inspections. 
+*Inspecti* is an Australian residential real estate application to help users keep up with the property market. Users can take notes on properties, rate properties and share reviews, as well as keep track of past and future property inspections. 
 
 ## Table of Contents
 
@@ -13,6 +13,7 @@
 - [Testing](#Testing)
 - [Technologies used](#Technologies-used)
 - [Screenshots](#Screenshots)
+- [License](#License)
 - [Questions](#Questions)
 
 ## Motivations
@@ -21,10 +22,10 @@ This project was made for real estate enthusiasts and anyone else involved in th
 
 ## What you can do with Inspecti
 
-Everyone can: 
+**Everyone can:** 
 - View property reviews
 
-Only members can: 
+**Only members can:** 
 - Access a personalised profile/stats page
 - Use Inspecti's property note-taking functionality
 - Keep a schedule of property events (inspections and auctions)
@@ -34,8 +35,8 @@ Only members can:
 
 Use the following login credentials for functionality testing purposes: 
 
-- **Email**: bobby@email.com
-- **Password**: password
+- **Email**: `bobby@email.com`
+- **Password**: `password`
 
 ## Technologies Used
 
@@ -51,6 +52,7 @@ Use the following login credentials for functionality testing purposes:
 - [bcrypt](https://www.npmjs.com/package/bcrypt) 
 - [FullCalendar React](https://www.npmjs.com/package/@fullcalendar/react)
 - [Chart.js](https://www.chartjs.org/docs/latest/)
+- [number-abbreviate](https://www.npmjs.com/package/number-abbreviate)
 
 ## Screenshots
 
