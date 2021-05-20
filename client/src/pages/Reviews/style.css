@@ -70,7 +70,6 @@
 .review-container {
   width: 620px;
   margin: 0 auto;
-  margin-bottom: 50px;
   border: 1px solid rgb(219, 219, 219);
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -85,4 +84,39 @@
 
 .no-reviews h2 {
   margin: 0;
+}
+
+.review-page-navigator {
+  width: 600px;
+  height: 30px;
+  /* background: white;
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.04);
+  border-radius: 4px; */
+  padding: 5px;
+  margin: 10px auto;
+  margin-bottom: 50px;
+}
+
+.review-page-navigator table {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.review-page-navigator table td {
+  padding: 0 10px;
+}
+
+.review-page-navigator button {
+  font-family: "Roboto", sans-serif;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgb(0, 0, 0, 0.12);
+  background: none;
+  cursor: pointer;
+}
+
+#selected-page {
+  border: 1px solid rgba(160, 39, 207);
+  background: rgb(245, 212, 245);
 }

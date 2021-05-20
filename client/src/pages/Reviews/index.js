@@ -319,6 +319,33 @@ export default function Reviews() {
           </div>
         }
       </div>
+      <div className="review-page-navigator">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <button id="selected-page">1</button>
+              </td>
+              <td>
+                <button>2</button>
+              </td>
+              <td>
+                <button>3</button>
+              </td>
+              <td>
+                <button>4</button>
+              </td>
+              <td>
+                <button>5</button>
+              </td>
+              <td>...</td>
+              <td>
+                <button>10</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <PopupMessage 
         handleClose={handlePopupClose}
         open={popup.open}
