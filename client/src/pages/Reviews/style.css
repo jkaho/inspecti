@@ -116,7 +116,16 @@
   cursor: pointer;
 }
 
-#selected-page {
+.review-page-navigator .selected-page {
   border: 1px solid rgba(160, 39, 207);
   background: rgb(245, 212, 245);
 }
+
+.review-page-navigator .prev-review-page,
+.review-page-navigator .next-review-page {
+  width: 50px;
+  border-radius: 2px;
+  background: rgba(160, 39, 207);
+  color: white;
+}
+

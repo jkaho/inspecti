@@ -37,6 +37,10 @@ export default function Reviews() {
   const [criteria, setCriteria] = useState('Date added');
   const [reviews, setReviews] = useState([]);
   const [modifiedReviews, setModifiedReviews] = useState([]);
+  const [numOfPages, setNumOfPages] = useState();
+  const [pageArray, setPageArray] = useState([]);
+  const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4, 5]);
+  const [page, setPage] = useState(1);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
 
   // Refs
@@ -47,9 +51,9 @@ export default function Reviews() {
   useEffect(() => {
     notesAPI.getSharedNotes()
       .then(res => {
-        console.log(res)
         setReviews(res.data);
-        setModifiedReviews(res.data);
+        setModifiedReviews(res.data.slice(0, 1));
+        createPageNav(res.data.length);
       })
       .catch(err => {
         console.log(err);
@@ -225,6 +229,34 @@ export default function Reviews() {
     setPopup({ open: false, type: "", severity: "", message: ""});
   };
   
+  const createPageNav = (totalReviews) => {
+    // 20 reviews on each page 
+    const numOfPagesB = Math.ceil(totalReviews / 1);
+    console.log(numOfPagesB)
+    setNumOfPages(numOfPagesB);
+    let pageArrayB = [];
+    for (let i = 1; i <= numOfPagesB; i++) {
+      pageArrayB.push(i);
+    };
+    setPageArray(pageArrayB);
+  };
+
+  const pageNavButtonClick = (event) => {
+    const pageClicked = parseInt(event.target.value);
+    setPage(pageClicked);
+    setModifiedReviews(reviews.slice(pageClicked - 1, pageClicked));
+  };
+
+  const pageNavNextButtonClick = () => {
+    setPage(page + 1);
+    setModifiedReviews(reviews.slice(page, page + 1));
+  };
+
+  const pageNavPrevButtonClick = () => {
+    setPage(page - 1);
+    setModifiedReviews(reviews.slice(page - 2, page - 1));
+  };
+
   return (
     <div className="reviews-page">
       <NavBar />
@@ -322,27 +354,64 @@ export default function Reviews() {
       <div className="review-page-navigator">
         <table>
           <tbody>
-            <tr>
-              <td>
-                <button id="selected-page">1</button>
-              </td>
-              <td>
-                <button>2</button>
-              </td>
-              <td>
-                <button>3</button>
-              </td>
-              <td>
-                <button>4</button>
-              </td>
-              <td>
-                <button>5</button>
-              </td>
-              <td>...</td>
-              <td>
-                <button>10</button>
-              </td>
-            </tr>
+            {
+              // If num of pages is less than five, render a page nav btn for each page
+              numOfPages <= 5 ? 
+                <tr>
+                  {page > 1 ? 
+                    <td>
+                      <button onClick={pageNavPrevButtonClick}
+                        className="prev-review-page">Prev</button>
+                    </td> : <td></td>
+                  }
+                  {pageArray.map(item => (
+                    <td key={item}>
+                      <button
+                        onClick={pageNavButtonClick}
+                        value={item}
+                        className={page === item ? "selected-page" : ""}
+                      >{item}</button>
+                    </td>
+                  ))}
+                  {page < numOfPages ? 
+                    <td>
+                      <button onClick={pageNavNextButtonClick}
+                        className="next-review-page">Next</button>
+                    </td> : <td></td>
+                  }
+                </tr>
+              :
+                <tr>
+                  {page > 1 ? 
+                    <td>
+                      <button onClick={pageNavPrevButtonClick}
+                        className="prev-review-page">Prev</button>
+                    </td> : <td></td>
+                  }
+                  {currentPageArray.map(item => (
+                    <td key={item}>
+                      <button
+                        value={item}
+                        onClick={pageNavButtonClick}
+                        className={page === item ? "selected-page" : ""}
+                      >{item}</button>
+                    </td>
+                  ))}
+                  {page < numOfPages ? 
+                    <td>
+                      <button onClick={pageNavNextButtonClick}
+                        className="next-review-page">Next</button>
+                    </td> : <td></td>
+                  }
+                  <td>
+                    <div>...</div>
+                  </td>
+                  <td>
+                    <button className={page === numOfPages ? "selected-page" : ""}
+                    >{numOfPages}</button>
+                  </td>
+                </tr>
+              }
           </tbody>
         </table>
       </div>
