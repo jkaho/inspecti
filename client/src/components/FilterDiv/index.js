@@ -58,8 +58,8 @@ function MinMaxRadioGroup() {
   return (
     <FormControl id="min-max-radiogroup" component="fieldset">
       <RadioGroup row aria-label="minMax" name="minMax" value={minMax} onChange={handleRadioChange}>
-        <FormControlLabel value="min" control={<Radio color="rgb(81, 6, 102)" />} label="Min" />
-        <FormControlLabel value="max" control={<Radio color="rgb(81, 6, 102)" />} label="Max" />
+        <FormControlLabel value="min" control={<Radio style={{ color: "rgb(81, 6, 102)" }} />} label="Min" />
+        <FormControlLabel value="max" control={<Radio style={{ color: "rgb(81, 6, 102)" }} />} label="Max" />
       </RadioGroup>
     </FormControl>
   );

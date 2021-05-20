@@ -97,8 +97,7 @@ router.route("/property/:id")
 
 // Domain API 
 router.get("/domain/location/q=:query", function(req, res) {
-  axios.get(
-    "https://api.domain.com.au/v1/listings/locations?terms=" + req.params.query + "&pageNumber=1&pageSize=10",
+  axios.get("https://api.domain.com.au/v1/listings/locations?terms=" + req.params.query + "&pageNumber=1&pageSize=10",
     { 
       headers: {
         "X-Api-Key": process.env.DOMAIN_API_KEY

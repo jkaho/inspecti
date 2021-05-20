@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const url = window.location.hostname.includes("localhost") ?
+  "http://localhost:3000/" : "https://inspecti.herokuapp.com/"
+
 export default function Navbar() {
   const classes = useStyles();
   // States
@@ -86,8 +89,8 @@ export default function Navbar() {
       <AppBar
         position="static"
         className={
-          window.location.href === "https://inspecti.herokuapp.com/" ||
-          window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+          window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
           classes.appBarHome :
           classes.appBar
         }
@@ -95,8 +98,8 @@ export default function Navbar() {
       >
         <Toolbar
           className={
-            window.location.href === "https://inspecti.herokuapp.com/" ||
-            window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+            window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
             "nav-toolbar-home" :
             "nav-toolbar"          
           }
@@ -113,10 +116,8 @@ export default function Navbar() {
           </Typography> */}
           <Link to="/" style={{ flexGrow: 1, marginTop: "10px" }}>
             <img src={
-              window.location.href === "https://inspecti.herokuapp.com/" ||
-              window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
-              logoWhite : 
-              window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+              window.location.href === url ||
+              window.location.href === url + "#rating-criteria-explanation" ?
               logoWhite : logo
             } 
               alt="Inspecti logo" 
@@ -125,8 +126,8 @@ export default function Navbar() {
           </Link>
           <Button
             className={
-              window.location.href === "https://inspecti.herokuapp.com/" ||
-              window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+              window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
               classes.colorWhite :
               classes.colorBlack
             }
@@ -135,8 +136,8 @@ export default function Navbar() {
           </Button>
           <Button
             className={
-              window.location.href === "https://inspecti.herokuapp.com/" ||
-              window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+              window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
               classes.colorWhite :
               classes.colorBlack
             }
@@ -146,8 +147,8 @@ export default function Navbar() {
           <Typography
             variant="body1"
             className={
-              window.location.href === "https://inspecti.herokuapp.com/" ||
-              window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+              window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
               classes.colorWhite :
               classes.colorBlack
             }
@@ -158,8 +159,8 @@ export default function Navbar() {
             <>
               <Button
                 className={
-                  window.location.href === "https://inspecti.herokuapp.com/" ||
-                  window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+                  window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
                   classes.colorWhite :
                   classes.colorBlack
                 }          
@@ -168,8 +169,8 @@ export default function Navbar() {
               </Button>
               <Button
                 className={
-                  window.location.href === "https://inspecti.herokuapp.com/" ||
-                  window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+                  window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
                   classes.joinBtnHome :
                   classes.joinBtn
                 }          
@@ -180,16 +181,16 @@ export default function Navbar() {
             <>
               <MyPagesMenu
                 colorProp={
-                  window.location.href === "https://inspecti.herokuapp.com/" ||
-                  window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+                  window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
                   "white" :
                   "black"
                 } 
               />
               <Button
                 className={
-                  window.location.href === "https://inspecti.herokuapp.com/" ||
-                  window.location.href ==="https://inspecti.herokuapp.com/#rating-criteria-explanation" ?
+                  window.location.href === url ||
+          window.location.href === url + "#rating-criteria-explanation" ?
                   classes.colorWhite :
                   classes.colorBlack
                 } 

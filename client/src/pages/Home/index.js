@@ -14,7 +14,6 @@ import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
-import Paper from "@material-ui/core/Paper";
 import TextField from '@material-ui/core/TextField';
 import Typography from "@material-ui/core/Typography";
 // CSS
@@ -191,19 +190,6 @@ export default function Home() {
   // });
 
   // Helper functions
-  const handleInputChange = () => {
-    const query = searchRef.current.value;
-    setSearch(query);
-    setLocationSuggestions([]);
-    if (query !== "") {
-      domainAPI.getLocationSuggestions(query)
-      .then(res => {
-        setLocationSuggestions(res.data);
-      })
-      .catch(err => console.log(err));
-    }
-  };
-
   const handleLocationInputChange = () => {
     const newValue = locationRef.current.children[0].children[1].children[0].value;
     if (newValue === "") {
@@ -211,7 +197,7 @@ export default function Home() {
     } else {
       domainAPI.getLocationSuggestions(newValue)
       .then(res => {
-        setLocationSuggestions(res.data.splice(0, 10));
+        setLocationSuggestions(res.data);
       })
       .catch(err => console.log(err))
     }
@@ -219,7 +205,6 @@ export default function Home() {
 
   const handleSuggestionClick = (value) => {
     setLocation(value);
-    console.log(value);
   };
 
   const handleFormSubmit = (event) => {
@@ -231,19 +216,19 @@ export default function Home() {
     //   .catch(err => console.log(err))
   };
 
-  const handleLocationSuggestionClick = (event) => {
-    event.stopPropagation();
-    const locationEl = event.target;
-    let locationQuery = "";
-    if (locationEl.value) {
-      locationQuery += locationEl.value.trim();
-    } else {
-      locationQuery += locationEl.textContent.trim();
-    }
+  // const handleLocationSuggestionClick = (event) => {
+  //   event.stopPropagation();
+  //   const locationEl = event.target;
+  //   let locationQuery = "";
+  //   if (locationEl.value) {
+  //     locationQuery += locationEl.value.trim();
+  //   } else {
+  //     locationQuery += locationEl.textContent.trim();
+  //   }
 
-    setSearch(locationQuery);
-    searchRef.current.value = locationQuery;
-  };
+  //   setSearch(locationQuery);
+  //   searchRef.current.value = locationQuery;
+  // };
 
   return (
     <div className={classes.root}>
@@ -262,15 +247,10 @@ export default function Home() {
                 onChange={(event, value) => handleSuggestionClick(value)}
                 options={locationSuggestions}
                 getOptionLabel={(option) => formatLocationSuggestion(option)}
-                renderInput={(params) => 
-                <TextField {...params} 
-                  label={showLabel === true ? "Search for a suburb, state or postcode" : ""}
-                  variant="outlined"
-                  onChange={() => setLabelState(false)}
-                  InputLabelProps={{shrink: false}}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>,
-                  }}
+                renderInput={(params) => <TextField {...params} label="Search for a suburb, state or postcode" variant="outlined"
+                  // InputProps={{
+                  //   endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>,
+                  // }}
                 />}
               />
             </div>

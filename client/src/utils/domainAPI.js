@@ -4,7 +4,7 @@ const url = window.location.hostname.includes("localhost") ?
 
 const domainAPI = {
   getLocationSuggestions: function(query) {
-    return axios.get("/api/user/domain/location/q=" + query);
+    return axios.get(url + "/api/user/domain/location/q=" + query);
   },
   getAddressSuggestions: function(query) {
     return axios.get(url + "/api/user/domain/address/q=" + query);
