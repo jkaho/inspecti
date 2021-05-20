@@ -1,10 +1,15 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
-import NativeSelect from '@material-ui/core/NativeSelect';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import NativeSelect from "@material-ui/core/NativeSelect";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+
 // CSS
 import "./style.css";
 
@@ -43,9 +48,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function MinMaxRadioGroup() {
+  const [minMax, setMinMax] = useState("min");
+
+  const handleRadioChange = (event) => {
+    setMinMax(event.target.value);
+  };
+
+  return (
+    <FormControl id="min-max-radiogroup" component="fieldset">
+      <RadioGroup row aria-label="minMax" name="minMax" value={minMax} onChange={handleRadioChange}>
+        <FormControlLabel value="min" control={<Radio color="rgb(81, 6, 102)" />} label="Min" />
+        <FormControlLabel value="max" control={<Radio color="rgb(81, 6, 102)" />} label="Max" />
+      </RadioGroup>
+    </FormControl>
+  );
+};
+
 function MinMaxToggle() {
   const classes = useStyles();
-  const [minMax, setMinMax] = React.useState("minimum");
+  const [minMax, setMinMax] = useState("minimum");
 
   const handleMinMax = (event, newMinMax) => {
     setMinMax(newMinMax);
@@ -116,7 +138,8 @@ function CategorySelect(props) {
 export default function FilterDiv() {  
   return (
     <div className="filter-div">
-      <MinMaxToggle />
+      <MinMaxRadioGroup />
+      <span style={{ color: "rgb(81, 6, 102)" }}>&nbsp;|&nbsp;&nbsp;&nbsp;</span>
       <CategorySelect
         className="search-category-select"
         selectId="bed-select"

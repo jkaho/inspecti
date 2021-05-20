@@ -96,20 +96,20 @@ router.route("/property/:id")
   .delete(propertiesController.deletePropertyEntry);
 
 // Domain API 
-// router.get("/domain/location/q=:query", function(req, res) {
-//   axios.get(
-//     "https://api.domain.com.au/v1/listings/locations?terms=" + req.params.query + "&pageNumber=1&pageSize=10",
-//     { 
-//       headers: {
-//         "X-Api-Key": process.env.DOMAIN_API_KEY
-//       }
-//     }
-//   )
-//   .then(result => {
-//     res.json(result.data);
-//   })
-//   .catch(err => console.log(err));
-// });
+router.get("/domain/location/q=:query", function(req, res) {
+  axios.get(
+    "https://api.domain.com.au/v1/listings/locations?terms=" + req.params.query + "&pageNumber=1&pageSize=10",
+    { 
+      headers: {
+        "X-Api-Key": process.env.DOMAIN_API_KEY
+      }
+    }
+  )
+  .then(result => {
+    res.json(result.data);
+  })
+  .catch(err => console.log(err));
+});
 
 router.get("/domain/address/q=:query", function(req, res) {
   axios.get("https://api.domain.com.au/v1/properties/_suggest?terms=" + req.params.query + "&channel=Residential",
@@ -132,6 +132,19 @@ router.get("/domain/property/q=:query", function(req, res) {
         "X-Api-Key": process.env.DOMAIN_API_KEY
       }
     }
+  )
+  .then(result => res.json(result.data))
+  .catch(err => console.log(err));
+});
+
+router.post("/domain/listings", function(req, res) {
+  axios.post("https://api.domain.com.au/v1/listings/residential/_search",
+    req.body,
+    { 
+      headers: {
+        "X-Api-Key": process.env.DOMAIN_API_KEY
+      }
+    }, 
   )
   .then(result => res.json(result.data))
   .catch(err => console.log(err));

@@ -1,21 +1,21 @@
 // React
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 // react-router-dom
 import { Link } from "react-router-dom";
 // Child components
-// import FilterDiv from "../../components/FilterDiv";
+import FilterDiv from "../../components/FilterDiv";
 import InfographicCard from "../../components/InfographicCard";
 import NavBar from "../../components/NavBar";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
-// import Autocomplete from "@material-ui/lab/Autocomplete";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-// import InputAdornment from "@material-ui/core/InputAdornment";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
-// import SearchIcon from "@material-ui/icons/Search";
-// import Paper from "@material-ui/core/Paper";
-// import TextField from '@material-ui/core/TextField';
+import SearchIcon from "@material-ui/icons/Search";
+import Paper from "@material-ui/core/Paper";
+import TextField from '@material-ui/core/TextField';
 import Typography from "@material-ui/core/Typography";
 // CSS
 import "./style.css";
@@ -30,7 +30,7 @@ import reviewsImage from "../../images/social.png";
 import scheduleImage from "../../images/calendar.png";
 import shareImage from "../../images/share.png";
 // API routes
-// import domainAPI from "../../utils/domainAPI";
+import domainAPI from "../../utils/domainAPI";
 
 // Class styles
 const useStyles = makeStyles((theme) => ({
@@ -55,14 +55,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Format locations from API data 
-// function formatLocationSuggestion(obj) {
-//   let location = `${obj.name}, ${obj.state.toUpperCase()}`;
-//   if (obj.type === "suburb") {
-//     location += ` ${obj.postcode}`;
-//   } 
+function formatLocationSuggestion(obj) {
+  let location = `${obj.name}, ${obj.state.toUpperCase()}`;
+  if (obj.type === "suburb") {
+    location += ` ${obj.postcode}`;
+  } 
 
-//   return location;
-// };
+  return location;
+};
 
 // Infographic data
 const infographicData = {
@@ -175,81 +175,81 @@ const ratingCriteria = [
 export default function Home() {
   const classes = useStyles();
   // States
-  // const searchRef = useRef();
-  // const [search, setSearch] = useState("");
-  // const [locationSuggestions, setLocationSuggestions] = useState([]);
-  // const [location, setLocation] = useState();
-  // const [suggestionOpen, setSuggestionOpen] = useState(false);
-  // const [search, setSearch] = useState("");
+  const searchRef = useRef();
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
+  const [location, setLocation] = useState();
+  const [search, setSearch] = useState("");
+  const [showLabel, setLabelState] = useState(true);
 
   // Refs
-  // const locationRef = useRef();
+  const locationRef = useRef();
+
+  // useEffect(() => {
+  //   domainAPI.getPropertyListings()
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err))
+  // });
 
   // Helper functions
-  // const handleInputChange = () => {
-  //   const query = searchRef.current.value;
-  //   setSearch(query);
-  //   setSuggestions([]);
-  //   if (query !== "") {
-  //     domainAPI.getLocationSuggestions(query)
-  //     .then(res => {
-  //       setSuggestions(res.data);
-  //       if (res.data.length > 0) {
-  //         setSuggestionOpen(true);
-  //       } else {
-  //         setSuggestionOpen(false);
-  //       }
-  //     })
-  //     .catch(err => console.log(err));
-  //   }
-  // };
+  const handleInputChange = () => {
+    const query = searchRef.current.value;
+    setSearch(query);
+    setLocationSuggestions([]);
+    if (query !== "") {
+      domainAPI.getLocationSuggestions(query)
+      .then(res => {
+        setLocationSuggestions(res.data);
+      })
+      .catch(err => console.log(err));
+    }
+  };
 
-  // const handleLocationInputChange = () => {
-  //   const newValue = locationRef.current.children[0].children[1].children[0].value;
-  //   if (newValue === "") {
-  //     setLocationSuggestions([]);
-  //   } else {
-  //     domainAPI.getLocationSuggestions(newValue)
-  //     .then(res => {
-  //       setLocationSuggestions(res.data.splice(0, 10));
-  //     })
-  //     .catch(err => console.log(err))
-  //   }
-  // };
+  const handleLocationInputChange = () => {
+    const newValue = locationRef.current.children[0].children[1].children[0].value;
+    if (newValue === "") {
+      setLocationSuggestions([]);
+    } else {
+      domainAPI.getLocationSuggestions(newValue)
+      .then(res => {
+        setLocationSuggestions(res.data.splice(0, 10));
+      })
+      .catch(err => console.log(err))
+    }
+  };
 
-  // const handleSuggestionClick = (value) => {
-  //   setLocation(value);
-  //   console.log(value);
-  // };
+  const handleSuggestionClick = (value) => {
+    setLocation(value);
+    console.log(value);
+  };
 
-  // const handleFormSubmit = (event) => {
-  //   event.preventDefault();
-  //   // setSuggestionOpen(false);
-  //   setLocationSuggestions([]);
-  //   // API.getPropertyListings(search)
-  //   //   .then(res => console.log(res.data))
-  //   //   .catch(err => console.log(err))
-  // };
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    // setSuggestionOpen(false);
+    setLocationSuggestions([]);
+    // API.getPropertyListings(search)
+    //   .then(res => console.log(res.data))
+    //   .catch(err => console.log(err))
+  };
 
-  // const handleLocationSuggestionClick = (event) => {
-  //   event.stopPropagation();
-  //   const locationEl = event.target;
-  //   let locationQuery = "";
-  //   if (locationEl.value) {
-  //     locationQuery += locationEl.value.trim();
-  //   } else {
-  //     locationQuery += locationEl.textContent.trim();
-  //   }
+  const handleLocationSuggestionClick = (event) => {
+    event.stopPropagation();
+    const locationEl = event.target;
+    let locationQuery = "";
+    if (locationEl.value) {
+      locationQuery += locationEl.value.trim();
+    } else {
+      locationQuery += locationEl.textContent.trim();
+    }
 
-  //   setSearch(locationQuery);
-  //   searchRef.current.value = locationQuery;
-  // };
+    setSearch(locationQuery);
+    searchRef.current.value = locationQuery;
+  };
 
   return (
     <div className={classes.root}>
       <NavBar />
       <Grid item xs={12}>
-        {/* <div className="bg" style={{ display: "none" }}>
+        <div className="bg">
           <Typography variant="h3" className={classes.heading}>Search properties for sale</Typography>
           <form onSubmit={handleFormSubmit}>
             <div className="location-autocomplete-wrapper">
@@ -260,11 +260,14 @@ export default function Home() {
                 ref={locationRef}
                 onInputChange={handleLocationInputChange}
                 onChange={(event, value) => handleSuggestionClick(value)}
-                // style={{ width: "90% ", display: "inline-block" }}
                 options={locationSuggestions}
                 getOptionLabel={(option) => formatLocationSuggestion(option)}
-                // style={{ width: 300, padding: 0 }}
-                renderInput={(params) => <TextField {...params} label="Search for a suburb, state or postcode" variant="outlined"
+                renderInput={(params) => 
+                <TextField {...params} 
+                  label={showLabel === true ? "Search for a suburb, state or postcode" : ""}
+                  variant="outlined"
+                  onChange={() => setLabelState(false)}
+                  InputLabelProps={{shrink: false}}
                   InputProps={{
                     endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>,
                   }}
@@ -273,7 +276,7 @@ export default function Home() {
             </div>
           </form>
           <FilterDiv />
-        </div> */}
+        </div>
       </Grid>
       <div className="home-content">
         <div className="home-heading-div">

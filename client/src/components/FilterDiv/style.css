@@ -1,5 +1,5 @@
 .filter-div {
-  width: 500px;
+  width: 75%;
   margin: 10px auto;
 }
 
@@ -35,4 +35,9 @@
 .MuiInput-underline:before,
 .MuiInput-underline:after {
   border: none!important;
+}
+
+#min-max-radiogroup {
+  margin-top: -6px;
+  color: rgb(81, 6, 102);
 }
