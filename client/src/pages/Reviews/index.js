@@ -231,8 +231,7 @@ export default function Reviews() {
   
   const createPageNav = (totalReviews) => {
     // 20 reviews on each page 
-    const numOfPagesB = Math.ceil(totalReviews / 1);
-    console.log(numOfPagesB)
+    const numOfPagesB = Math.ceil(totalReviews / 20);
     setNumOfPages(numOfPagesB);
     let pageArrayB = [];
     for (let i = 1; i <= numOfPagesB; i++) {
@@ -329,7 +328,7 @@ export default function Reviews() {
             address={review.propertyAddress}
             date={moment(review.dateShared).format("DD/MM/YY")}
             dateInspected={moment(review.dateInspected).format("DD/MM/YY")}
-            author={`${review.user.firstName} ${review.user.lastName}`}
+            author={`${review.user.firstName} ${review.user.lastName.slice(0, 1)}.`}
             beds={review.bedrooms}
             baths={review.bathrooms}
             cars={review.carSpaces}
