@@ -52,7 +52,7 @@ export default function Reviews() {
     notesAPI.getSharedNotes()
       .then(res => {
         setReviews(res.data);
-        setModifiedReviews(res.data.slice(0, 1));
+        setModifiedReviews(res.data.slice(0, 20));
         createPageNav(res.data.length);
       })
       .catch(err => {
@@ -244,17 +244,17 @@ export default function Reviews() {
   const pageNavButtonClick = (event) => {
     const pageClicked = parseInt(event.target.value);
     setPage(pageClicked);
-    setModifiedReviews(reviews.slice(pageClicked - 1, pageClicked));
+    setModifiedReviews(reviews.slice(pageClicked - 1, pageClicked + 20));
   };
 
   const pageNavNextButtonClick = () => {
     setPage(page + 1);
-    setModifiedReviews(reviews.slice(page, page + 1));
+    setModifiedReviews(reviews.slice(page, page + 20));
   };
 
   const pageNavPrevButtonClick = () => {
     setPage(page - 1);
-    setModifiedReviews(reviews.slice(page - 2, page - 1));
+    setModifiedReviews(reviews.slice(page - 2, page + 19));
   };
 
   return (
