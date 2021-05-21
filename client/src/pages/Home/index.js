@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 // Child components
 import FilterDiv from "../../components/FilterDiv";
 import InfographicCard from "../../components/InfographicCard";
+import LocationSearchBar from "../../components/LocationSearchBar";
 import NavBar from "../../components/NavBar";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import InputAdornment from "@material-ui/core/InputAdornment";
+// import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
@@ -52,16 +52,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 20
   }
 }));
-
-// Format locations from API data 
-function formatLocationSuggestion(obj) {
-  let location = `${obj.name}, ${obj.state.toUpperCase()}`;
-  if (obj.type === "suburb") {
-    location += ` ${obj.postcode}`;
-  } 
-
-  return location;
-};
 
 // Infographic data
 const infographicData = {
@@ -207,7 +197,7 @@ export default function Home() {
     setLocation(value);
   };
 
-  const handleFormSubmit = (event) => {
+  const handleLocationFormSubmit = (event) => {
     event.preventDefault();
     // setSuggestionOpen(false);
     setLocationSuggestions([]);
@@ -236,25 +226,13 @@ export default function Home() {
       <Grid item xs={12}>
         <div className="bg">
           <Typography variant="h3" className={classes.heading}>Search properties for sale</Typography>
-          <form onSubmit={handleFormSubmit}>
-            <div className="location-autocomplete-wrapper">
-              <Autocomplete
-                id="location-autocomplete"
-                freeSolo
-                // fullWidth={true}
-                ref={locationRef}
-                onInputChange={handleLocationInputChange}
-                onChange={(event, value) => handleSuggestionClick(value)}
-                options={locationSuggestions}
-                getOptionLabel={(option) => formatLocationSuggestion(option)}
-                renderInput={(params) => <TextField {...params} label="Search for a suburb, state or postcode" variant="outlined"
-                  // InputProps={{
-                  //   endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>,
-                  // }}
-                />}
-              />
-            </div>
-          </form>
+          <LocationSearchBar
+            handleLocationFormSubmit={handleLocationFormSubmit}
+            handleLocationInputChange={handleLocationInputChange}
+            locationRef={locationRef}
+            handleSuggestionClick={handleSuggestionClick}
+            locationSuggestions={locationSuggestions}
+          />
           <FilterDiv />
         </div>
       </Grid>

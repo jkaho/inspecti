@@ -4,11 +4,23 @@
   height: 250px;
 }
 
+.bg form {
+  text-align: center;
+}
+
 .location-autocomplete-wrapper {
   background: white;
   border-radius: 4px;
-  width: 80%;
-  margin: 0 auto;
+  width: 70%;
+  display: inline-block;
+  /* margin: 0 auto; */
+}
+
+#home-listing-search-btn {
+  height: 56px;
+  vertical-align: bottom;
+  margin-left: 2px;
+  background: purple;
 }
 
 .search-location-icon {

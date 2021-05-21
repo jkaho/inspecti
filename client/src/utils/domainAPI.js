@@ -12,7 +12,7 @@ const domainAPI = {
   getPropertyInfo: function(propertyId) {
     return axios.get(url + "/api/user/domain/property/q=" + propertyId)
   },
-  getPropertyListings: function() {
+  getPropertyListings: function(location) {
     return axios.post(url + "/api/user/domain/listings", {
         "listingType": "Sale",
         "propertyTypes": [
@@ -32,21 +32,21 @@ const domainAPI = {
         // "maxPrice": 0,
         // "minLandArea": 0,
         // "maxLandArea": 0,
-        // "locations": [
-        //   {
-        //     "state": "ACT",
-        //     "region": "string",
-        //     "area": "string",
-        //     "suburb": "string",
-        //     "postCode": "string",
-        //     "includeSurroundingSuburbs": true,
-        //     "surroundingRadiusInMeters": 0
-        //   }
-        // ],
-        // "locationTerms": "string",
-        "keywords": [
-          "North Sydney"
+        "locations": [
+          {
+            "state": location.state,
+            "region": location.region,
+            "area": location.area,
+            "suburb": location.suburb,
+            "postCode": location.postcode,
+            "includeSurroundingSuburbs": true,
+            // "surroundingRadiusInMeters": 0
+          }
         ],
+        // "locationTerms": "string",
+        // "keywords": [
+        //   "North Sydney"
+        // ],
         // "customSort": {
         //   "elements": [
         //     {

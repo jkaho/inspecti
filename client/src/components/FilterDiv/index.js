@@ -111,6 +111,8 @@ function CategorySelect(props) {
       ...state,
       [category]: event.target.value,
     });
+    console.log(event.target)
+    console.log(event.target.value)
   };
 
   return (
