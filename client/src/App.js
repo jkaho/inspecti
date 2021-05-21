@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import ListingResults from "./pages/ListingResults";
+import SingleListing from "./pages/SingleListing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Reviews from "./pages/Reviews";
@@ -43,6 +44,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/reviews" component={Reviews} />
           <Route exact path="/results" component={ListingResults} />
+          <Route exact path="/listing" component={SingleListing} />
           <Route
             exact path="/login" 
             render={() => isAuthenticated ? 

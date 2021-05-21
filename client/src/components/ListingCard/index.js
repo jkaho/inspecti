@@ -16,7 +16,7 @@ export default function ListingCard(props) {
           54 Artarmon Rd Artarmon, NSW 2064
         </div>
         <div className="listingCard-propertySpecs">
-        <i className="fas fa-bed"></i>&nbsp;
+          <i className="fas fa-bed"></i>&nbsp;
           <span className="num-beds">4</span>&nbsp;&nbsp;
           <i className="fas fa-shower"></i>&nbsp;
           <span className="num-baths">3</span>&nbsp;&nbsp;
