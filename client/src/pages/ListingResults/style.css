@@ -1,0 +1,16 @@
+.results-searchbar {
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 900px;
+}
+
+.results-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.results-filterdiv {
+  padding-left: 40px;
+}
