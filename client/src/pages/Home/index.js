@@ -1,7 +1,7 @@
 // React
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 // react-router-dom
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // Child components
 import FilterDiv from "../../components/FilterDiv";
 import InfographicCard from "../../components/InfographicCard";
@@ -163,6 +163,7 @@ const ratingCriteria = [
 
 export default function Home() {
   const classes = useStyles();
+  const history = useHistory();
   // States
   const searchRef = useRef();
   const [locationSuggestions, setLocationSuggestions] = useState([]);
@@ -188,6 +189,7 @@ export default function Home() {
   const [type, setType] = useState({
     state: "",
   });
+  // const [searchResults, setSearchResults] = useState([]);
 
   // Refs
   const locationRef = useRef();
@@ -214,14 +216,12 @@ export default function Home() {
 
   const handleSuggestionClick = (value) => {
     setLocation(value);
-    console.log(value)
   };
 
   const handleLocationFormSubmit = (event) => {
     event.preventDefault();
     // setSuggestionOpen(false);
     setLocationSuggestions([]);
-    console.log(beds, baths, cars, size, type, price)
     const search = {
       location: location,
       minMax: minMax,
@@ -234,7 +234,14 @@ export default function Home() {
     }
 
     domainAPI.getPropertyListings(search)
-      .then(res => console.log(res.data))
+      .then(res => {
+        console.log(res.data);
+        // setSearchResults(res.data);
+        history.push({
+          pathname: "/results",
+          state: res.data
+        })
+      })
       .catch(err => console.log(err))
   };
 
