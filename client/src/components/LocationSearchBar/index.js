@@ -39,6 +39,7 @@ export default function LocationSearchBar(props) {
         variant="contained"
         color="secondary"
         startIcon={<SearchIcon />}
+        type="submit"
       >
         Search
       </Button>
