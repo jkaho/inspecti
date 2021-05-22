@@ -219,8 +219,8 @@ export default function FilterDiv(props) {
           { value: "House", text: "House" },
           { value: "Apartment", text: "Apartment" },
           { value: "Townhouse", text: "Townhouse" },
-          { value: "Villa", text: "Villa" },
-          { value: "Land", text: "Land" },
+          // { value: "Villa", text: "Villa" },
+          // { value: "Land", text: "Land" },
         ]}
       />
     </div>

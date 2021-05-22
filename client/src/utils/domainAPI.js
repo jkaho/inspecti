@@ -16,7 +16,9 @@ const domainAPI = {
     return axios.post(url + "/api/user/domain/listings", {
         "listingType": "Sale",
         "propertyTypes": [
-          "House"
+          search.type = "Apartment" ? "apartmentUnitFlat" :
+          search.type = "House" ? "house" :
+          search.type = "Townhouse" ? "townhouse" : null
         ],
         "listingAttributes": [
           "HasPhotos"
