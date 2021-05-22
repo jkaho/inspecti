@@ -214,6 +214,7 @@ export default function Home() {
 
   const handleSuggestionClick = (value) => {
     setLocation(value);
+    console.log(value)
   };
 
   const handleLocationFormSubmit = (event) => {
@@ -221,9 +222,20 @@ export default function Home() {
     // setSuggestionOpen(false);
     setLocationSuggestions([]);
     console.log(beds, baths, cars, size, type, price)
-    // API.getPropertyListings(search)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => console.log(err))
+    const search = {
+      location: location,
+      minMax: minMax,
+      beds: beds.state === "" ? null : beds.state,
+      baths: baths.state === "" ? null : baths.state,
+      cars: cars.state === "" ? null : cars.state,
+      size: size.state === "" ? null : size.state,
+      type: type.state === "" ? null : type.state,
+      price: price.state === "" ? null : price.state,
+    }
+
+    domainAPI.getPropertyListings(search)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
   };
 
   // const handleLocationSuggestionClick = (event) => {
