@@ -48,16 +48,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function MinMaxRadioGroup() {
-  const [minMax, setMinMax] = useState("min");
-
-  const handleRadioChange = (event) => {
-    setMinMax(event.target.value);
-  };
-
+function MinMaxRadioGroup(props) {
   return (
     <FormControl id="min-max-radiogroup" component="fieldset">
-      <RadioGroup row aria-label="minMax" name="minMax" value={minMax} onChange={handleRadioChange}>
+      <RadioGroup row aria-label="minMax" name="minMax" value={props.minMax} onChange={props.handleRadioChange}>
         <FormControlLabel value="min" control={<Radio style={{ color: "rgb(81, 6, 102)" }} />} label="Min" />
         <FormControlLabel value="max" control={<Radio style={{ color: "rgb(81, 6, 102)" }} />} label="Max" />
       </RadioGroup>
@@ -65,39 +59,39 @@ function MinMaxRadioGroup() {
   );
 };
 
-function MinMaxToggle() {
-  const classes = useStyles();
-  const [minMax, setMinMax] = useState("minimum");
+// function MinMaxToggle() {
+//   const classes = useStyles();
+//   const [minMax, setMinMax] = useState("minimum");
 
-  const handleMinMax = (event, newMinMax) => {
-    setMinMax(newMinMax);
-  };
+//   const handleMinMax = (event, newMinMax) => {
+//     setMinMax(newMinMax);
+//   };
 
-  return (
-    <ToggleButtonGroup
-      value={minMax}
-      className={classes.toggleBtn}
-      onChange={handleMinMax}
-      exclusive
-      aria-label="minimum or maximum"
-    >
-      <ToggleButton 
-        value="minimum" 
-        aria-label="minimum"
-        className={minMax === "minimum" ? classes.selected : classes.unselected}
-      >
-        Min
-      </ToggleButton>
-      <ToggleButton 
-        value="maximum" 
-        aria-label="maximum"
-        className={minMax === "maximum" ? classes.selected : classes.unselected}
-      >
-        Max
-      </ToggleButton>
-    </ToggleButtonGroup>
-  );
-};
+//   return (
+//     <ToggleButtonGroup
+//       value={minMax}
+//       className={classes.toggleBtn}
+//       onChange={handleMinMax}
+//       exclusive
+//       aria-label="minimum or maximum"
+//     >
+//       <ToggleButton 
+//         value="minimum" 
+//         aria-label="minimum"
+//         className={minMax === "minimum" ? classes.selected : classes.unselected}
+//       >
+//         Min
+//       </ToggleButton>
+//       <ToggleButton 
+//         value="maximum" 
+//         aria-label="maximum"
+//         className={minMax === "maximum" ? classes.selected : classes.unselected}
+//       >
+//         Max
+//       </ToggleButton>
+//     </ToggleButtonGroup>
+//   );
+// };
 
 function CategorySelect(props) {
   const classes = useStyles();
@@ -140,7 +134,10 @@ function CategorySelect(props) {
 export default function FilterDiv() {  
   return (
     <div className="filter-div">
-      <MinMaxRadioGroup />
+      <MinMaxRadioGroup
+        handleRadioChange={props.handleRadioChange}
+        minMax={props.minMax}
+      />
       <span style={{ color: "rgb(81, 6, 102)" }}>&nbsp;|&nbsp;&nbsp;&nbsp;</span>
       <CategorySelect
         className="search-category-select"

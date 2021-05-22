@@ -167,8 +167,9 @@ export default function Home() {
   const searchRef = useRef();
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [location, setLocation] = useState();
-  const [search, setSearch] = useState("");
-  const [showLabel, setLabelState] = useState(true);
+  // const [search, setSearch] = useState("");
+  // const [showLabel, setLabelState] = useState(true);
+  const [minMax, setMinMax] = useState("min");
 
   // Refs
   const locationRef = useRef();
@@ -219,6 +220,9 @@ export default function Home() {
   //   setSearch(locationQuery);
   //   searchRef.current.value = locationQuery;
   // };
+  const handleRadioChange = (event) => {
+    setMinMax(event.target.value);
+  };
 
   return (
     <div className={classes.root}>
@@ -233,7 +237,10 @@ export default function Home() {
             handleSuggestionClick={handleSuggestionClick}
             locationSuggestions={locationSuggestions}
           />
-          <FilterDiv />
+          <FilterDiv
+            handleRadioChange={handleRadioChange}
+            minMax={minMax}
+          />
         </div>
       </Grid>
       <div className="home-content">
