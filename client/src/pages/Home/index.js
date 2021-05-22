@@ -170,6 +170,24 @@ export default function Home() {
   // const [search, setSearch] = useState("");
   // const [showLabel, setLabelState] = useState(true);
   const [minMax, setMinMax] = useState("min");
+  const [beds, setBeds] = useState({
+    state: "",
+  });
+  const [baths, setBaths] = useState({
+    state: "",
+  });
+  const [cars, setCars] = useState({
+    state: "",
+  });
+  const [size, setSize] = useState({
+    state: "",
+  });
+  const [price, setPrice] = useState({
+    state: "",
+  });
+  const [type, setType] = useState({
+    state: "",
+  });
 
   // Refs
   const locationRef = useRef();
@@ -202,6 +220,7 @@ export default function Home() {
     event.preventDefault();
     // setSuggestionOpen(false);
     setLocationSuggestions([]);
+    console.log(beds, baths, cars, size, type, price)
     // API.getPropertyListings(search)
     //   .then(res => console.log(res.data))
     //   .catch(err => console.log(err))
@@ -224,6 +243,32 @@ export default function Home() {
     setMinMax(event.target.value);
   };
 
+  const handleCategoryChange = (event) => {
+    const category = event.target.id;
+    switch (category) {
+      case "beds":
+        setBeds({ state: parseInt(event.target.value) });
+        break;
+      case "baths":
+        setBaths({ state: parseInt(event.target.value) });
+        break;
+      case "cars":
+        setCars({ state: parseInt(event.target.value) });
+        break;
+      case "size":
+        setSize({ state: parseInt(event.target.value) });
+        break;
+      case "price":
+        setPrice({ state: parseInt(event.target.value) });
+        break;
+      case "type":
+        setType({ state: event.target.value });
+        break;
+      default: 
+        break;
+    }
+  };
+
   return (
     <div className={classes.root}>
       <NavBar />
@@ -240,6 +285,13 @@ export default function Home() {
           <FilterDiv
             handleRadioChange={handleRadioChange}
             minMax={minMax}
+            handleCategoryChange={handleCategoryChange}
+            beds={beds}
+            baths={baths}
+            cars={cars}
+            size={size}
+            type={type}
+            price={price}
           />
         </div>
       </Grid>

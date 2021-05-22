@@ -8,19 +8,19 @@
   margin: 0 5px;
 }
 
-#bed-select, #size-select {
+#beds, #size {
   width: 30px;
 }
 
-#bath-select, #type-select {
+#baths, #type {
   width: 35px;
 }
 
-#car-select {
+#cars {
   width: 25px;
 }
 
-#price-select {
+#price {
   width: 38px;
 }
 

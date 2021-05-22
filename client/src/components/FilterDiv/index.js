@@ -94,30 +94,18 @@ function MinMaxRadioGroup(props) {
 // };
 
 function CategorySelect(props) {
-  const classes = useStyles();
-  const [state, setState] = React.useState({
-    category: '',
-  });
-
-  const handleChange = (event) => {
-    const category = event.target.category;
-    setState({
-      ...state,
-      [category]: event.target.value,
-    });
-    console.log(event.target)
-    console.log(event.target.value)
-  };
+  // const [state, setState] = useState({
+  //   category: "",
+  // });
 
   return (
     <div className="category-select-div">
       <NativeSelect
         variant="standard"
         id={props.selectId}
-        className={classes.bedWidth}
-        value={state.category}
+        value={props.select.state}
         category={props.category}
-        onChange={handleChange}
+        onChange={props.handleCategoryChange}
         inputProps={{ 'aria-label': props.category }}
       >
         <option value="" disabled>
@@ -131,7 +119,7 @@ function CategorySelect(props) {
   );
 };
 
-export default function FilterDiv() {  
+export default function FilterDiv(props) {  
   return (
     <div className="filter-div">
       <MinMaxRadioGroup
@@ -140,8 +128,10 @@ export default function FilterDiv() {
       />
       <span style={{ color: "rgb(81, 6, 102)" }}>&nbsp;|&nbsp;&nbsp;&nbsp;</span>
       <CategorySelect
+        select={props.beds}
+        handleCategoryChange={props.handleCategoryChange}
         className="search-category-select"
-        selectId="bed-select"
+        selectId="beds"
         category="Bed"
         options={[
           { value: 1, text: "1" },
@@ -152,8 +142,10 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        select={props.baths}
+        handleCategoryChange={props.handleCategoryChange}
         className="search-category-select"
-        selectId="bath-select"
+        selectId="baths"
         category="Bath"
         options={[
           { value: 1, text: "1" },
@@ -164,8 +156,10 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        select={props.cars}
+        handleCategoryChange={props.handleCategoryChange}
         className="search-category-select"
-        selectId="car-select"
+        selectId="cars"
         category="Car"
         options={[
           { value: 1, text: "1" },
@@ -176,8 +170,10 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        select={props.price}
+        handleCategoryChange={props.handleCategoryChange}
         className="search-category-select"
-        selectId="price-select"
+        selectId="price"
         category="Price"
         options={[
           { value: 500000, text: "$500k" },
@@ -192,8 +188,10 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        select={props.size}
+        handleCategoryChange={props.handleCategoryChange}
         className="search-category-select"
-        selectId="size-select"
+        selectId="size"
         category="Size"
         options={[
           { value: 100, text: "100m²" },
@@ -212,8 +210,10 @@ export default function FilterDiv() {
         ]}
       />
       <CategorySelect
+        select={props.type}
+        handleCategoryChange={props.handleCategoryChange}
         className="search-category-select"
-        selectId="type-select"
+        selectId="type"
         category="Type"
         options={[
           { value: "House", text: "House" },
