@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // CSS
 import "./style.css";
+// Moment.js
+import moment from "moment";
 // API routes
 import domainAPI from "../../utils/domainAPI";
 
@@ -81,6 +83,21 @@ export default function SingleListing() {
           </div>
           <div className="single-listing-auction">
             <h4>Auction</h4>
+            {listing.inspectionDetails.inspections.length > 0 ?
+              <table>
+                <tbody>
+                  {listing.inspectionDetails.inspections.map(inspection => (
+                    <tr key={inspection.openingDateTime}>
+                      <td>{moment(inspection.openingDateTime).format("dddd D MMMM")}</td>
+                      <td>
+                        {`${moment(inspection.openingDateTime).format("h:mma")} - 
+                        ${moment(inspection.closingDateTime).format("h:mma")}`}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table> : <span>No inspections scheduled</span>
+            }
           </div>
           <hr />
           <div className="single-listing-agent">
