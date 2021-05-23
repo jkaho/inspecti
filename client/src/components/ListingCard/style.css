@@ -6,6 +6,7 @@
   border-radius: 2px;
   display: flex;
   margin: 30px auto;
+  cursor: pointer;
 }
 
 .listingCard-image {

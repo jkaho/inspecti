@@ -6,46 +6,46 @@ import moment from "moment";
 
 export default function ListingCard(props) {
   return (
-    <div className="listingCard-box">
-      <div className="listingCard-image">
-        <img src={props.src} alt={props.alt} />
+    <div data-listing={`listingCardBox-${props.id}`} className="listingCard-box" onClick={props.onClick}>
+      <div data-listing={`listingCardBox-${props.id}`} className="listingCard-image">
+        <img data-listing={`listingCardBox-${props.id}`} src={props.src} alt={props.alt} />
       </div>
-      <div className="listingCard-info">
-      <div className="listingCard-agency-logo"
+      <div data-listing={`listingCardBox-${props.id}`} className="listingCard-info">
+        <div data-listing={`listingCardBox-${props.id}`} className="listingCard-agency-logo"
           style={{ background: props.agencyColour }}
         >
-          <img src={props.agencyLogo} alt="" />
+          <img data-listing={`listingCardBox-${props.id}`} src={props.agencyLogo} alt="" />
         </div>
-        <div className="listingCard-priceHeading">
+        <div data-listing={`listingCardBox-${props.id}`} className="listingCard-priceHeading">
           {props.priceDetails}
         </div>
-        <div className="listingCard-address">
+        <div data-listing={`listingCardBox-${props.id}`} className="listingCard-address">
           {props.address}
         </div>
-        <div className="listingCard-propertySpecs">
-          <i className="fas fa-bed"></i>&nbsp;
-          <span className="num-beds">{props.bedrooms ? props.bedrooms : "-"}</span>&nbsp;&nbsp;
-          <i className="fas fa-shower"></i>&nbsp;
-          <span className="num-baths">{props.bathrooms ? props.bathrooms : "-"}</span>&nbsp;&nbsp;
-          <i className="fas fa-car"></i>&nbsp;
-          <span className="num-cars">{props.carSpaces ? props.carSpaces : "-"}</span>&nbsp;&nbsp;
-          <i className="fas fa-ruler-combined"></i>&nbsp;
-          <span className="num-land">{props.landSize ? props.landSize : "- "}m²</span>&nbsp;&nbsp;
+        <div data-listing={`listingCardBox-${props.id}`} className="listingCard-propertySpecs">
+          <i data-listing={`listingCardBox-${props.id}`} className="fas fa-bed"></i>&nbsp;
+          <span data-listing={`listingCardBox-${props.id}`} className="num-beds">{props.bedrooms ? props.bedrooms : "-"}</span>&nbsp;&nbsp;
+          <i data-listing={`listingCardBox-${props.id}`} className="fas fa-shower"></i>&nbsp;
+          <span data-listing={`listingCardBox-${props.id}`} className="num-baths">{props.bathrooms ? props.bathrooms : "-"}</span>&nbsp;&nbsp;
+          <i data-listing={`listingCardBox-${props.id}`} className="fas fa-car"></i>&nbsp;
+          <span data-listing={`listingCardBox-${props.id}`} className="num-cars">{props.carSpaces ? props.carSpaces : "-"}</span>&nbsp;&nbsp;
+          <i data-listing={`listingCardBox-${props.id}`} className="fas fa-ruler-combined"></i>&nbsp;
+          <span data-listing={`listingCardBox-${props.id}`} className="num-land">{props.landSize ? props.landSize : "- "}m²</span>&nbsp;&nbsp;
         </div>
-        <div className="listingCard-inspection">
+        <div data-listing={`listingCardBox-${props.id}`} className="listingCard-inspection">
           {props.inspectionTime ? 
             `NEXT INSPECTION ON ${moment(props.inspectionTime).format("Mo MMM")} @${moment(props.inspectionTime).format("hA")}` :
             "NO INSPECTIONS SCHEDULED"
           }
         </div>
         <hr />
-        <div className="listingCard-agent">
-          <div className="listingCard-agent-photo">
-            <img src={props.agentSrc} alt="" />
+        <div data-listing={`listingCardBox-${props.id}`} className="listingCard-agent">
+          <div data-listing={`listingCardBox-${props.id}`} className="listingCard-agent-photo">
+            <img data-listing={`listingCardBox-${props.id}`} src={props.agentSrc} alt="" />
           </div>
-          <div className="listingCard-agent-info">
-            <div className="listingCard-agent-info-name">{props.agentName}</div>
-            <div className="listingCard-agent-info-agency">{props.agency}</div>
+          <div data-listing={`listingCardBox-${props.id}`} className="listingCard-agent-info">
+            <div data-listing={`listingCardBox-${props.id}`} className="listingCard-agent-info-name">{props.agentName}</div>
+            <div data-listing={`listingCardBox-${props.id}`} className="listingCard-agent-info-agency">{props.agency}</div>
           </div>
         </div>
       </div>

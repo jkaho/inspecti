@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 // react-router-dom
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // Child components
 import NavBar from "../../components/NavBar";
 // Material Design 
@@ -10,6 +10,12 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import "./style.css";
 
 export default function SingleListing() {
+  let { state } = useLocation();
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+  
   return (
     <div>
       <NavBar />

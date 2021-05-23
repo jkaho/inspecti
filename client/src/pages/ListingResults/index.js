@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 // react-router-dom
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 // Child components 
 import FilterDiv from "../../components/FilterDiv";
 import ListingCard from "../../components/ListingCard";
@@ -13,6 +13,7 @@ import domainAPI from "../../utils/domainAPI";
 
 export default function ListingResults() {
   let { state } = useLocation();
+  const history = useHistory();
   // States 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [location, setLocation] = useState("");
@@ -128,6 +129,24 @@ export default function ListingResults() {
   //   return location;
   // };
 
+  const handleListingClick = (event) => {
+    event.stopPropagation();
+    const listingId = event.target.dataset.listing.split("-")[1];
+    let listing = {};
+    for (let i = 0; i < state.length; i++) {
+      if (state[i].type === "PropertyListing") {
+        if (state[i].listing.id === parseInt(listingId)) {
+          listing = state[i];
+          i = state.length;
+        }
+      }
+    };
+    history.push({
+      pathname: "/listing",
+      state: listing
+    })
+  };
+
   return (
     <div>
       <NavBar />
@@ -157,8 +176,10 @@ export default function ListingResults() {
         {state.map(listing => (
           listing.type === "PropertyListing" ?
           <ListingCard
+            onClick={handleListingClick}
             key={listing.listing.listingSlug}
             src={listing.listing.media[0].url}
+            id={listing.listing.id}
             alt={listing.listing.listingSlug}
             priceDetails={listing.listing.priceDetails.displayPrice}
             address={listing.listing.propertyDetails.displayableAddress}
