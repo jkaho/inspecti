@@ -119,6 +119,15 @@ export default function ListingResults() {
     }
   };
 
+  // function formatAddress(obj) {
+  //   let location = `${obj.name}, ${obj.state.toUpperCase()}`;
+  //   if (obj.type === "suburb") {
+  //     location += ` ${obj.postcode}`;
+  //   } 
+
+  //   return location;
+  // };
+
   return (
     <div>
       <NavBar />
@@ -145,7 +154,28 @@ export default function ListingResults() {
         />
       </div>
       <div className="results-container">
-        <ListingCard />
+        {state.map(listing => (
+          listing.type === "PropertyListing" ?
+          <ListingCard
+            key={listing.listing.listingSlug}
+            src={listing.listing.media[0].url}
+            alt={listing.listing.listingSlug}
+            priceDetails={listing.listing.priceDetails.displayPrice}
+            address={listing.listing.propertyDetails.displayableAddress}
+            bedrooms={listing.listing.propertyDetails.bedrooms ? 
+              listing.listing.propertyDetails.bedrooms : null
+            }
+            bathrooms={listing.listing.propertyDetails.bathrooms ? 
+              listing.listing.propertyDetails.bathrooms : null
+            }
+            carSpaces={listing.listing.propertyDetails.carspaces ? 
+              listing.listing.propertyDetails.carspaces : null
+            }
+            landSize={listing.listing.propertyDetails.buildingArea ? 
+              listing.listing.propertyDetails.buildingArea : null
+            }
+          /> : ""
+        ))}
       </div>
     </div>
   );
