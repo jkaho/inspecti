@@ -80,9 +80,6 @@ export default function SingleListing() {
           <hr />
           <div className="single-listing-inspections">
             <h4>Inspection Times</h4>
-          </div>
-          <div className="single-listing-auction">
-            <h4>Auction</h4>
             {listing.inspectionDetails.inspections.length > 0 ?
               <table>
                 <tbody>
@@ -98,6 +95,26 @@ export default function SingleListing() {
                 </tbody>
               </table> : <span>No inspections scheduled</span>
             }
+          </div>
+          <div className="single-listing-auction">
+            <h4>Auction</h4>
+            {listing.saleDetails.saleMethod === "auction" ?
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      {`${moment(listing.saleDetails.auctionDetails.auctionSchedule.openingDateTime).format("dddd D MMMM")} 
+                      (${listing.saleDetails.auctionDetails.auctionSchedule.locationDescription})`}
+                    </td>
+                    <td>
+                      {`${moment(listing.saleDetails.auctionDetails.auctionSchedule.openingDateTime).format("h:mma")} - 
+                      ${moment(listing.saleDetails.auctionDetails.auctionSchedule.closingDateTime).format("h:mma")}`}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              : <span>No auction scheduled</span>
+            } 
           </div>
           <hr />
           <div className="single-listing-agent">
