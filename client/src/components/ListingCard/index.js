@@ -8,13 +8,13 @@ export default function ListingCard(props) {
   return (
     <div className="listingCard-box">
       <div className="listingCard-image">
-        <img src={props.src} alt={props.alt} width="355px" />
+        <img src={props.src} alt={props.alt} />
       </div>
       <div className="listingCard-info">
       <div className="listingCard-agency-logo"
           style={{ background: props.agencyColour }}
         >
-          <img src={props.agencyLogo} alt="" height="40px" />
+          <img src={props.agencyLogo} alt="" />
         </div>
         <div className="listingCard-priceHeading">
           {props.priceDetails}

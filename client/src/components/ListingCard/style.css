@@ -5,7 +5,7 @@
   border: 1px solid rgb(0, 0, 0, 0.12);
   border-radius: 2px;
   display: flex;
-  margin: 20px auto;
+  margin: 30px auto;
 }
 
 .listingCard-image {
@@ -15,10 +15,18 @@
   display: inline-block;
 }
 
+.listingCard-image img {
+  width: 355px;
+}
+
 .listingCard-info {
   width: calc(100% - 355px);
   /* height: 100%; */
   display: inline-block;
+}
+
+.listingCard-agency-logo img {
+  height: 40px;
 }
 
 .listingCard-priceHeading {
@@ -71,4 +79,25 @@
 
 .listingCard-agent-info-name {
   font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .listingCard-box {
+    height: fit-content;
+    display: block;
+  }
+
+  .listingCard-image, .listingCard-info {
+    display: block;
+  }
+
+  .listingCard-image,
+  .listingCard-image img,
+  .listingCard-info {
+    width: 500px;
+  }
+
+  .listingCard-image {
+    height: 334px;
+  }
 }

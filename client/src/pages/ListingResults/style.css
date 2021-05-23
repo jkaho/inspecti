@@ -14,3 +14,9 @@
 .results-filterdiv {
   padding-left: 40px;
 }
+
+@media (max-width: 900px) {
+  .results-container {
+    width: 500px;
+  }
+}
