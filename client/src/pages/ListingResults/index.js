@@ -174,6 +174,14 @@ export default function ListingResults() {
             landSize={listing.listing.propertyDetails.buildingArea ? 
               listing.listing.propertyDetails.buildingArea : null
             }
+            inspectionTime={listing.listing.inspectionSchedule.times[0] ?
+              listing.listing.inspectionSchedule.times[0].openingTime : null
+            }
+            agentSrc={listing.listing.advertiser.contacts[0].photoUrl}
+            agentName={listing.listing.advertiser.contacts[0].name}
+            agency={listing.listing.advertiser.name}
+            agencyColour={listing.listing.advertiser.preferredColourHex}
+            agencyLogo={listing.listing.advertiser.logoUrl}
           /> : ""
         ))}
       </div>

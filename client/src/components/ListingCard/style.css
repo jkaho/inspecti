@@ -16,11 +16,59 @@
 }
 
 .listingCard-info {
-  padding: 10px;
+  width: calc(100% - 355px);
   /* height: 100%; */
   display: inline-block;
 }
 
 .listingCard-priceHeading {
+  padding: 10px;
+  font-weight: 700;
+}
+
+.listingCard-propertySpecs, 
+.listingCard-address {
+  padding: 0 10px;
+}
+
+.listingCard-propertySpecs {
+  padding: 0 10px;
+}
+
+.listingCard-info hr {
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+  margin: 0;
+}
+
+.listingCard-inspection {
+  color: grey;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.listingCard-agent {
+  display: flex;
+}
+
+.listingCard-agent-photo {
+  display: inline-block;
+  padding: 10px;
+}
+
+.listingCard-agent-photo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
+
+.listingCard-agent-info {
+  display: inline-block;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.listingCard-agent-info-name {
   font-weight: 600;
 }
