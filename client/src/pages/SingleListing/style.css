@@ -5,21 +5,25 @@
 
 .single-listing-box {
   width: 80%;
-  height: 75vh;
+  height: 500px;
   background: white;
   border: 1px solid rgb(0, 0, 0, 0.12);
   border-radius: 2px;
   margin: 0 auto;
   margin-bottom: 50px;
-  display: flex;
+  display: block;
 }
 
 .single-listing-images {
-  width: 50%;
+  width: 530px;
   height: 100%;
   border-right: rgb(0, 0, 0, 0.12);
   overflow: auto;
   display: inline-block;
+}
+
+.single-listing-images img {
+  width: 530px;
 }
 
 .single-listing-info {
@@ -27,9 +31,14 @@
   height: 100%;
   overflow: auto;
   padding: 0 10px;
+  width: calc(100% - 550px);
 }
 
 .single-listing-info hr {
   border: none;
   border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+}
+
+.single-listing-heading h5 {
+  margin: 0;
 }

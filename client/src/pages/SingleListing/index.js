@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // react-router-dom
 import { Link, useLocation } from "react-router-dom";
 // Child components
@@ -8,14 +8,23 @@ import Button from "@material-ui/core/Button";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // CSS
 import "./style.css";
+// API routes
+import domainAPI from "../../utils/domainAPI";
 
 export default function SingleListing() {
   let { state } = useLocation();
+  // States
+  const [listing, setListing] = useState({});
 
   useEffect(() => {
-    console.log(state);
+    domainAPI.getSingleListing(state)
+      .then(res => {
+        setListing(res.data);
+        console.log(res.data)
+      })
+      .catch(err => console.log(err));
   }, [state]);
-  
+
   return (
     <div>
       <NavBar />
@@ -28,32 +37,44 @@ export default function SingleListing() {
       </div>
       <div className="single-listing-box">
         <div className="single-listing-images">
-          <img src="" alt="" width="250px"/>
+          {listing.media.map(image => (
+            <img src={image.url} alt={image.url} />
+          ))}
         </div>
         <div className="single-listing-info">
           <div className="single-listing-priceHeading">
-            <h3>Contact Agent</h3>
+            <h3>
+              {listing.priceDetails.displayPrice ? listing.priceDetails.displayPrice : ""}
+            </h3>
           </div>
           <div className="single-listing-address">
-            54 Artarmon Rd Artarmon, NSW 2064
+            {listing.addressParts.displayAddress}
           </div>
           <div className="single-listing-propertySpecs">
             <i className="fas fa-bed"></i>&nbsp;
-            <span className="num-beds">4</span>&nbsp;&nbsp;
+            <span className="num-beds">
+              {listing.bedrooms ? listing.bedrooms : "-"}
+            </span>&nbsp;&nbsp;
             <i className="fas fa-shower"></i>&nbsp;
-            <span className="num-baths">3</span>&nbsp;&nbsp;
+            <span className="num-baths">
+              {listing.bathrooms ? listing.bathrooms : "-"}
+            </span>&nbsp;&nbsp;
             <i className="fas fa-car"></i>&nbsp;
-            <span className="num-cars">2</span>&nbsp;&nbsp;
+            <span className="num-cars">
+              {listing.carspaces ? listing.carspaces : "-"}
+            </span>&nbsp;&nbsp;
             <i className="fas fa-ruler-combined"></i>&nbsp;
-            <span className="num-land">627m²</span>&nbsp;&nbsp;
+            <span className="num-land">
+              {listing.buildingAreaSqm ? listing.buildingAreaSqm : "- "}m²
+            </span>&nbsp;&nbsp;
           </div>
           <hr />
           <div className="single-listing-heading">
-            <h5>Family Entertainer</h5>
+            <h5>{listing.headline}</h5>
           </div>
-          <div className="single-listing-description">
-            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-          </div>
+          <div className="single-listing-description"
+            dangerouslySetInnerHTML={{ __html: listing.description }}
+          ></div>
           <hr />
           <div className="single-listing-inspections">
             <h4>Inspection Times</h4>

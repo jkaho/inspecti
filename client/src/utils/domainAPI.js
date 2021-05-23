@@ -64,6 +64,9 @@ const domainAPI = {
         "pageSize": 20,      
     });
   },
+  getSingleListing: function(listingId) {
+    return axios.get(url + "/api/user/domain/listing/" + listingId);
+  }
 };
 
 export default domainAPI;

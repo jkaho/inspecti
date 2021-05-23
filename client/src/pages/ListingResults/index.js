@@ -36,13 +36,14 @@ export default function ListingResults() {
   const [type, setType] = useState({
     state: "",
   });
+  const [results, setResults] = useState([]);
 
   // Refs
   const locationRef = useRef();
 
   // Initial render
   useEffect(() => {
-    console.log(state);
+    setResults(state);
   }, [state]);
 
   // Helper functions 
@@ -132,18 +133,19 @@ export default function ListingResults() {
   const handleListingClick = (event) => {
     event.stopPropagation();
     const listingId = event.target.dataset.listing.split("-")[1];
-    let listing = {};
-    for (let i = 0; i < state.length; i++) {
-      if (state[i].type === "PropertyListing") {
-        if (state[i].listing.id === parseInt(listingId)) {
-          listing = state[i];
-          i = state.length;
-        }
-      }
-    };
+    // let listing = {};
+    // for (let i = 0; i < state.length; i++) {
+    //   if (state[i].type === "PropertyListing") {
+    //     if (state[i].listing.id === parseInt(listingId)) {
+    //       listing = state[i];
+    //       i = state.length;
+    //     }
+    //   }
+    // };
     history.push({
       pathname: "/listing",
-      state: listing
+      state: listingId,
+      test: "this is a test"
     })
   };
 
@@ -173,7 +175,7 @@ export default function ListingResults() {
         />
       </div>
       <div className="results-container">
-        {state.map(listing => (
+        {results.map(listing => (
           listing.type === "PropertyListing" ?
           <ListingCard
             onClick={handleListingClick}

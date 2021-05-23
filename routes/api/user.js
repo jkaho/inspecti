@@ -149,4 +149,16 @@ router.post("/domain/listings", function(req, res) {
   .catch(err => console.log(err));
 });
 
+router.get("/domain/listing/:id", function(req, res) {
+  axios.get("https://api.domain.com.au/v1/listings/" + req.params.id,
+    { 
+      headers: {
+        "X-Api-Key": process.env.DOMAIN_API_KEY
+      }
+    }, 
+  )
+  .then(result => res.json(result.data))
+  .catch(err => console.log(err));
+})
+
 module.exports = router;
