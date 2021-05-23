@@ -4,7 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 // Child components
 import NavBar from "../../components/NavBar";
 // Material Design 
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // CSS
 import "./style.css";
@@ -19,10 +21,10 @@ export default function SingleListing() {
   const [listing, setListing] = useState({});
 
   useEffect(() => {
-    domainAPI.getSingleListing(state)
+    console.log(state)
+    domainAPI.getSingleListing(state.id)
       .then(res => {
         setListing(res.data);
-        console.log(res.data)
       })
       .catch(err => console.log(err));
   }, [state]);
@@ -40,7 +42,7 @@ export default function SingleListing() {
       <div className="single-listing-box">
         <div className="single-listing-images">
           {listing.media.map(image => (
-            <img src={image.url} alt={image.url} />
+            <img key={image.url} src={image.url} alt={image.url} />
           ))}
         </div>
         <div className="single-listing-info">
@@ -72,7 +74,7 @@ export default function SingleListing() {
           </div>
           <hr />
           <div className="single-listing-heading">
-            <h5>{listing.headline}</h5>
+            {listing.headline}
           </div>
           <div className="single-listing-description"
             dangerouslySetInnerHTML={{ __html: listing.description }}
@@ -85,10 +87,20 @@ export default function SingleListing() {
                 <tbody>
                   {listing.inspectionDetails.inspections.map(inspection => (
                     <tr key={inspection.openingDateTime}>
-                      <td>{moment(inspection.openingDateTime).format("dddd D MMMM")}</td>
+                      <td>
+                        <i className="far fa-calendar"></i>&nbsp;
+                        {moment(inspection.openingDateTime).format("ddd D MMMM")}
+                      </td>
                       <td>
                         {`${moment(inspection.openingDateTime).format("h:mma")} - 
                         ${moment(inspection.closingDateTime).format("h:mma")}`}
+                      </td>
+                      <td>
+                        <IconButton aria-label="add-to-schedule"
+                          style={{ padding: "5px" }}
+                        >
+                          <AddCircleIcon />
+                        </IconButton>
                       </td>
                     </tr>
                   ))}
@@ -103,12 +115,21 @@ export default function SingleListing() {
                 <tbody>
                   <tr>
                     <td>
-                      {`${moment(listing.saleDetails.auctionDetails.auctionSchedule.openingDateTime).format("dddd D MMMM")} 
-                      (${listing.saleDetails.auctionDetails.auctionSchedule.locationDescription})`}
+                      <i className="fas fa-gavel"></i>&nbsp;
+                      <span className="single-listing-auction-span">
+                        {`${moment(listing.saleDetails.auctionDetails.auctionSchedule.openingDateTime).format("ddd D MMMM")} 
+                        (${listing.saleDetails.auctionDetails.auctionSchedule.locationDescription})`}
+                      </span>
                     </td>
                     <td>
-                      {`${moment(listing.saleDetails.auctionDetails.auctionSchedule.openingDateTime).format("h:mma")} - 
-                      ${moment(listing.saleDetails.auctionDetails.auctionSchedule.closingDateTime).format("h:mma")}`}
+                      {moment(listing.saleDetails.auctionDetails.auctionSchedule.openingDateTime).format("h:mma")} 
+                    </td>
+                    <td>
+                      <IconButton aria-label="add-to-schedule"
+                        style={{ padding: "5px" }}
+                      >
+                        <AddCircleIcon />
+                      </IconButton>
                     </td>
                   </tr>
                 </tbody>
@@ -118,7 +139,26 @@ export default function SingleListing() {
           </div>
           <hr />
           <div className="single-listing-agent">
-            <h4>Agent</h4>
+            <h4>{state.advertiser.name}</h4>
+            <div className="single-listing-agent-info">
+              <table>
+                <tbody>
+                  {state.advertiser.contacts.map(agent => (
+                    <tr>
+                      <td className="single-listing-agent-image">
+                        <img src={agent.photoUrl} alt="" />
+                      </td>
+                      <td>{agent.name}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="single-listing-agency"
+              style={{ background: state.advertiser.preferredColourHex }}
+            >
+              <img src={state.advertiser.logoUrl}></img>
+            </div>
           </div>
         </div>
       </div>

@@ -30,15 +30,85 @@
   display: inline-block;
   height: 100%;
   overflow: auto;
+  width: calc(100% - 530px);
+}
+
+.single-listing-priceHeading,
+.single-listing-address, 
+.single-listing-propertySpecs,
+.single-listing-heading,
+.single-listing-description,
+.single-listing-inspections,
+.single-listing-auction,
+.single-listing-agent h4,
+.single-listing-agent-info {
   padding: 0 10px;
-  width: calc(100% - 550px);
+}
+
+.single-listing-address {
+  padding: 5px 10px;
 }
 
 .single-listing-info hr {
   border: none;
   border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+  margin: 10px;
 }
 
-.single-listing-heading h5 {
-  margin: 0;
+.single-listing-heading {
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+
+.single-listing-box h3 {
+  margin-bottom: 10px;
+}
+
+.single-listing-box h4 {
+  margin: 10px 0;
+}
+
+.single-listing-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.single-listing-inspections table tr :nth-child(1),
+.single-listing-auction-span {
+  font-weight: 500;
+}
+
+.single-listing-inspections table td {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+}
+
+.single-listing-inspections {
+  margin-bottom: 20px;
+}
+
+.single-listing-inspections tr :nth-child(2),
+.single-listing-auction tr :nth-child(2) {
+  text-align: right;
+}
+
+.single-listing-agent-image {
+  width: 50px;
+}
+
+.single-listing-agent-info td {
+  padding: 5px 0;
+}
+
+.single-listing-agent-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.single-listing-agency img {
+  height: 50px;
+}
+
+.single-listing-agency {
+  margin-top: 10px;
 }
