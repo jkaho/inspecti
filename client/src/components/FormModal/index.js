@@ -118,7 +118,7 @@ export default function FormModal(props) {
           <label htmlFor="event-startTime">Start time</label><br/>
           <input type="datetime-local" id="event-startTime"
             ref={props.startTimeRef} noValidate
-            name="event-startTime" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
+            name="event-startTime" defaultValue={moment().format("yyyy-MM-DDTHH:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
           />
         </div>
         {props.eventType === "Inspection" ? 
@@ -126,7 +126,7 @@ export default function FormModal(props) {
             <label htmlFor="event-endTime">End time</label><br/>
             <input type="datetime-local" id="event-endTime"
               ref={props.endTimeRef} noValidate
-              name="event-endTime" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
+              name="event-endTime" defaultValue={moment().format("yyyy-MM-DDTHH:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
             />
           </div> : ""
         }

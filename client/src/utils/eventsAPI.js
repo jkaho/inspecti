@@ -10,7 +10,7 @@ const eventsAPI = {
     return axios.get(url + "/api/user/events", { withCredentials: true });
   },
   getDailySchedule: function(startTime, endTime) {
-    return axios.get(url + "/api/user/events/" + startTime + url + "/" + endTime, { withCredentials: true });
+    return axios.get(url + "/api/user/events/" + startTime + "/" + endTime, { withCredentials: true });
   },
   updateEvent: function(eventId, updatedEvent) {
     return axios.put(url + "/api/user/event/" + eventId, updatedEvent, { withCredentials: true });

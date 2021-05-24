@@ -98,6 +98,7 @@ export default function DailySchedule(props) {
 
   // Initial render
   useEffect(() => {
+    console.log(state)
     setDate(state);
     getDailyEvents(state);
   }, [state]);
@@ -113,7 +114,7 @@ export default function DailySchedule(props) {
     let endTime = moment(dateQuery).add(1, "d").format("YYYY-MM-DD HH:mm:ss");
     eventsAPI.getDailySchedule(startTime, endTime)
       .then(res => {
-        console.log(res);
+        console.log(res.data);
         setEvents(res.data);
       })
       .catch(err => {
@@ -247,14 +248,14 @@ export default function DailySchedule(props) {
           <label htmlFor="event-startTime">Start time</label><br/>
           <input type="datetime-local" id="event-startTime"
             ref={startTimeRef} noValidate
-            name="event-startTime" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
+            name="event-startTime" defaultValue={moment().format("yyyy-MM-DDTHH:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
           />
         </div>
         <div className="event-time-div-2 event-div">
           <label htmlFor="event-endTime">End time</label><br/>
           <input type="datetime-local" id="event-endTime"
             ref={endTimeRef} noValidate
-            name="event-endTime" defaultValue={moment().format("yyyy-MM-DDThh:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
+            name="event-endTime" defaultValue={moment().format("yyyy-MM-DDTHH:mm")} min={moment().format("yyyy-MM-DDThh:mm")}
           />
         </div>
         <div className="event-create-div event-div">
