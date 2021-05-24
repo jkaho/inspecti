@@ -12,14 +12,14 @@ const domainAPI = {
   getPropertyInfo: function(propertyId) {
     return axios.get(url + "/api/user/domain/property/q=" + propertyId)
   },
-  getPropertyListings: function(search, searchType) {
-    console.log(search.type)
+  getPropertyListings: function(search) {
     return axios.post(url + "/api/user/domain/listings", {
         "listingType": "Sale",
         "propertyTypes": [
           search.type === "Apartment" ? "apartmentUnitFlat" :
           search.type === "House" ? "house" :
-          search.type === "Townhouse" ? "townhouse" : null
+          search.type === "Townhouse" ? "townhouse" :
+          "apartmentUnitFlat", "house", "townhouse"
         ],
         "listingAttributes": [
           "HasPhotos"
@@ -37,18 +37,18 @@ const domainAPI = {
         "maxLandArea": search.minMax === "min" ? search.size : null,
         "locations": [
           {
-            "state": search.location.state,
-            "region": search.location.region,
-            "area": search.location.area,
-            "suburb": search.location.name,
-            "postCode": search.location.postcode,
+            "state": search.location.state ? search.location.state : null,
+            "region": search.location.region ? search.location.region : null,
+            "area": search.location.area ? search.location.area : null,
+            "suburb": search.location.name ? search.location.name : null,
+            "postCode": search.location.postcode ? search.location.postcode : null,
             "includeSurroundingSuburbs": true,
             // "surroundingRadiusInMeters": 0
           }
         ],
         // "locationTerms": "string",
         // "keywords": [
-        //   "North Sydney"
+        //   !search.location.state ? search.location : null
         // ],
         // "customSort": {
         //   "elements": [

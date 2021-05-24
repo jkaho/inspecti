@@ -209,6 +209,7 @@ export default function Home() {
       domainAPI.getLocationSuggestions(newValue)
       .then(res => {
         setLocationSuggestions(res.data);
+        setLocation(res.data[0]);
       })
       .catch(err => console.log(err))
     }
@@ -234,7 +235,7 @@ export default function Home() {
       price: price.state === "" ? null : price.state,
     }
 
-    domainAPI.getPropertyListings(search, search.type)
+    domainAPI.getPropertyListings(search)
       .then(res => {
         console.log(res.data);
         // setSearchResults(res.data);

@@ -157,7 +157,7 @@ export default function SingleListing() {
             <div className="single-listing-agency"
               style={{ background: state.advertiser.preferredColourHex }}
             >
-              <img src={state.advertiser.logoUrl}></img>
+              <img src={state.advertiser.logoUrl} alt=""></img>
             </div>
           </div>
         </div>
