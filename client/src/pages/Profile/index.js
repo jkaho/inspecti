@@ -57,10 +57,10 @@ export default function Profile() {
     let priceData = [[], [], [], [], [], []];
     let attendedAuctions = [];
 
-    initialiseIcon();
     authenticationAPI.authenticated()
       .then(res => {
         setUserInfo(res.data);
+        initialiseIcon(res.data.email);
         propertiesAPI.getAllProperties()
         .then(res => {
           setNumPropertiesInspected(res.data.length);
@@ -257,8 +257,8 @@ export default function Profile() {
     )
   };
 
-  function initialiseIcon() {
-    var userIcon = localStorage.getItem("userIcon");
+  function initialiseIcon(userEmail) {
+    var userIcon = localStorage.getItem(userEmail);
     if (userIcon !== null) {
         setIconState(userIcon);
     }
@@ -267,34 +267,34 @@ export default function Profile() {
   const handleIconClick = () => {
     if (iconState === "short-1") {
       setIconState("long-1");
-      localStorage.setItem("userIcon", "long-1");
+      localStorage.setItem(userInfo.email, "long-1");
     } else if (iconState === "long-1") {
       setIconState("short-2");
-      localStorage.setItem("userIcon", "short-2");
+      localStorage.setItem(userInfo.email, "short-2");
     } else if (iconState === "short-2") {
       setIconState("long-2");
-      localStorage.setItem("userIcon", "long-2");
+      localStorage.setItem(userInfo.email, "long-2");
     } else if (iconState === "long-2") {
       setIconState("short-3");
-      localStorage.setItem("userIcon", "short-3");
+      localStorage.setItem(userInfo.email, "short-3");
     } else if (iconState === "short-3") {
       setIconState("long-3");
-      localStorage.setItem("userIcon", "long-3");
+      localStorage.setItem(userInfo.email, "long-3");
     } else if (iconState === "long-3") {
       setIconState("short-4");
-      localStorage.setItem("userIcon", "short-4");
+      localStorage.setItem(userInfo.email, "short-4");
     } else if (iconState === "short-4") {
       setIconState("long-4");
-      localStorage.setItem("userIcon", "long-4");
+      localStorage.setItem(userInfo.email, "long-4");
     } else if (iconState === "long-4") {
       setIconState("short-5");
-      localStorage.setItem("userIcon", "short-5");
+      localStorage.setItem(userInfo.email, "short-5");
     } else if (iconState === "short-5") {
       setIconState("long-5");
-      localStorage.setItem("userIcon", "long-5");
+      localStorage.setItem(userInfo.email, "long-5");
     } else {
       setIconState("short-1");
-      localStorage.setItem("userIcon", "short-1");
+      localStorage.setItem(userInfo.email, "short-1");
     }
   };
 
