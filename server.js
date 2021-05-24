@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "production") {
 
 // Set up sessions to keep track of user's login status
 app.use(
-  session({ secret: "happy donkey", resave: false, saveUninitialized: false })
+  session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false })
 );
 
 // Use passport middleware 
