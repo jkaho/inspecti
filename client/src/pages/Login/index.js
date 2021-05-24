@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 // react-router-dom
 import { Link } from "react-router-dom";
 // Child components
+import Popup from "../../components/Popup";
 import PopupMessage from "../../components/PopupMessage";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
