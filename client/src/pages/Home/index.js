@@ -13,8 +13,8 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 // import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
-import SearchIcon from "@material-ui/icons/Search";
-import TextField from '@material-ui/core/TextField';
+// import SearchIcon from "@material-ui/icons/Search";
+// import TextField from '@material-ui/core/TextField';
 import Typography from "@material-ui/core/Typography";
 // CSS
 import "./style.css";
@@ -165,7 +165,7 @@ export default function Home() {
   const classes = useStyles();
   const history = useHistory();
   // States
-  const searchRef = useRef();
+  // const searchRef = useRef();
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [location, setLocation] = useState();
   // const [search, setSearch] = useState("");
@@ -222,6 +222,7 @@ export default function Home() {
     event.preventDefault();
     // setSuggestionOpen(false);
     setLocationSuggestions([]);
+
     const search = {
       location: location,
       minMax: minMax,
@@ -233,9 +234,7 @@ export default function Home() {
       price: price.state === "" ? null : price.state,
     }
 
-    console.log(search)
-
-    domainAPI.getPropertyListings(search)
+    domainAPI.getPropertyListings(search, search.type)
       .then(res => {
         console.log(res.data);
         // setSearchResults(res.data);
@@ -265,6 +264,7 @@ export default function Home() {
   };
 
   const handleCategoryChange = (event) => {
+    console.log(event.target.value)
     const category = event.target.id;
     switch (category) {
       case "beds":

@@ -137,6 +137,7 @@ router.get("/domain/property/q=:query", function(req, res) {
 });
 
 router.post("/domain/listings", function(req, res) {
+  console.log(req.body)
   axios.post("https://api.domain.com.au/v1/listings/residential/_search",
     req.body,
     { 
