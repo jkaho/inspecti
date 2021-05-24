@@ -16,7 +16,7 @@ export default function ListingResults() {
   const history = useHistory();
   // States 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState({});
   const [minMax, setMinMax] = useState("min");
   const [beds, setBeds] = useState({
     state: "",
@@ -36,14 +36,14 @@ export default function ListingResults() {
   const [type, setType] = useState({
     state: "",
   });
-  const [results, setResults] = useState([]);
+  const [results, setSearchResults] = useState([]);
 
   // Refs
   const locationRef = useRef();
 
   // Initial render
   useEffect(() => {
-    setResults(state);
+    setSearchResults(state);
   }, [state]);
 
   // Helper functions 
@@ -55,8 +55,9 @@ export default function ListingResults() {
       domainAPI.getLocationSuggestions(newValue)
       .then(res => {
         setLocationSuggestions(res.data);
+        setLocation(res.data[0]);
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
     }
   };
 
@@ -81,12 +82,7 @@ export default function ListingResults() {
 
     domainAPI.getPropertyListings(search)
       .then(res => {
-        console.log(res.data);
-        // setSearchResults(res.data);
-        // history.push({
-        //   pathname: "/results",
-        //   state: res.data
-        // })
+        setSearchResults(res.data);
       })
       .catch(err => console.log(err))
   };
