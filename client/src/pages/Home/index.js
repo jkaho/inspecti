@@ -233,6 +233,8 @@ export default function Home() {
       price: price.state === "" ? null : price.state,
     }
 
+    console.log(search)
+
     domainAPI.getPropertyListings(search)
       .then(res => {
         console.log(res.data);

@@ -13,6 +13,7 @@ const domainAPI = {
     return axios.get(url + "/api/user/domain/property/q=" + propertyId)
   },
   getPropertyListings: function(search) {
+    console.log(search)
     return axios.post(url + "/api/user/domain/listings", {
         "listingType": "Sale",
         "propertyTypes": [
