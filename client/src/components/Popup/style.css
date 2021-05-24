@@ -1,0 +1,50 @@
+.popup-bg {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 15;
+}
+
+.popup-container {
+  display: flex;
+  position: fixed;
+  bottom: 40px;
+  left: calc(50% - 150px); /* 150px = half popup width / may need to change*/
+  z-index: 20;
+  min-width: 300px;
+  width: fit-content;
+  max-width: 500px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.5);
+  color: white;
+}
+
+.popup-message-icon {
+  display: inline-block;
+  width: 10%;
+}
+
+.popup-message {
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 20px;
+  font-weight: 600;
+  width: 70%;
+}
+
+.popup-clear-div {
+  display: inline-block;
+  text-align: right;
+  width: 20%;
+}
+
+.popup-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
