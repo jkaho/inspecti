@@ -513,7 +513,8 @@ export default function Notes(props) {
   };
 
   const handleUnlinkAddressButtonClick = () => {
-    setModalState({ isOpen: true, type: "addressUnlink", title: "Confirmation", text: "Are you sure you want to unlink this address?" });
+    setModalState({ isOpen: true, type: "addressUnlink", title: "Confirmation", 
+    text: "Are you sure you want to unlink this address? If applicable, ratings will be deleted and this note will be unshared." });
   };
 
   const unlinkModalYesClick = () => {
@@ -526,8 +527,19 @@ export default function Notes(props) {
     notesAPI.updateNote(currentNoteId, {
       propertyAddress: null,
       hasReview: false,
+      shared: false,
     })
-      .then(res => console.log(res))
+      .then(res => {
+        reviewsAPI.deleteReview(currentNoteId)
+          .then(res => console.log(res))
+          .catch(err => {
+            console.log(err);
+            setPopupState({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while updating data. Please try again later." 
+            });
+          })
+      })
       .catch(err => {
         console.log(err);
         setPopupState({ 
