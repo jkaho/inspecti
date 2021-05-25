@@ -244,7 +244,8 @@ export default function PropertyTable(props) {
               <input type="number" ref={props.editGuideRef} defaultValue={row.guide}
                 style={{ width: "65px", height: "30px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "2px" }}
               /> 
-            : `$${abbreviate(row.guide, 3)}` 
+            : 
+            row.guide ? `$${abbreviate(row.guide, 3)}` : "N/A"
           }
         </TableCell>
         <TableCell>
@@ -253,7 +254,8 @@ export default function PropertyTable(props) {
               <input type="number" ref={props.editSoldRef} defaultValue={row.sold}
                 style={{ width: "65px", height: "30px", border: "1px solid rgb(0, 0, 0, 0.23)", borderRadius: "2px" }}
               /> 
-            : `$${abbreviate(row.sold, 3)}`
+            : 
+            row.sold ? `$${abbreviate(row.sold, 3)}` : "N/A"
           }              
         </TableCell>
         <TableCell className={classes.cell}>

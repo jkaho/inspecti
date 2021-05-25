@@ -280,10 +280,11 @@ export default function InspectedProperties(props) {
           carSpaces: res.data.carSpaces,
           landSize: res.data.areaSize,
           propertyType: res.data.propertyCategory,
-          priceGuide: guideRef.current.value,
-          soldPrice: soldRef.current.value,
+          priceGuide: isNaN(parseInt(guideRef.current.value)) ? null : guideRef.current.value,
+          soldPrice: isNaN(parseInt(soldRef.current.value)) ? null : soldRef.current.value,
           attendedAuction: auctionRef.current.value === "true" ? true : false,
         };
+        console.log(propertyEntry)
     
         if (
           !propertyEntry.dateInspected || 
