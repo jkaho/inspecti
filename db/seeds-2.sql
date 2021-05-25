@@ -14,6 +14,22 @@ VALUES (4, "Michael", "Wang", "michael@email.com", "$2a$10$fVROFrOUeZHXowkv2HxNL
 INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
 VALUES (5, "Carol", "Diaz", "carol@email.com", "$2a$10$hPETfL.Za3KsPm.BhHwAKeYwpZj711WWEYS4fJgPYJCG1qZCAA4P2", "2020-11-28 10:32:22", "2020-11-28 10:32:22");
 
+-- PASSWORDS 
+INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
+VALUES (6, "Chen", "Zhang", "chen@email.com", "$2a$10$1YA6PcshnNaQo6o99wPitu54CW8qVgN786OKyjyL9ZERudHyVq1lO", "2020-11-28 10:32:22", "2020-11-28 10:32:22");
+
+INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
+VALUES (7, "Kira", "Forsyth", "kira@email.com", "$2a$10$kj0L0/AYQFbtRPXpgDhjC.Sdhk5Va1744Zks8cZWbn3SxFoXeB8Om", "2020-11-28 10:32:22", "2020-11-28 10:32:22");
+
+INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
+VALUES (8, "Youngtae", "Choi", "youngtae@email.com", "$2a$10$JPE7iXbZbO2DMPDFhb6LG.cb26AE0IJMhi4EDJygKgFjZ1YVMlDYm", "2020-11-28 10:32:22", "2020-11-28 10:32:22");
+
+INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
+VALUES (9, "George", "Andino", "george@email.com", "$2a$10$7qzLP8RwfxxJCm.aHL3ZpenuZtZ6vjueSn6cxFaNdZlWdAk8NRaIO", "2020-11-28 10:32:22", "2020-11-28 10:32:22");
+
+INSERT INTO users (id, firstName, lastName, email, password, createdAt, updatedAt)
+VALUES (10, "Sofia", "Ricci", "sofia@email.com", "$2a$10$akR5Xfh7rcuRMLSKJ1vunugDAKnhDepElJ/He7WpfsIaf.oEnegdW", "2020-11-28 10:32:22", "2020-11-28 10:32:22");
+
 -- INSPECTED PROPERTIES --
 INSERT INTO inspectedProperties (
   id, 
