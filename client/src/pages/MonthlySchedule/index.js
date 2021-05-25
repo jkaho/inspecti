@@ -118,7 +118,7 @@ export default function MonthlySchedule() {
     const newEvent = {
       eventType: typeRef.current.children[1].children[0].value,
       startTime: startTimeRef.current.value,
-      endTime: endTimeRef.current.value,
+      endTime: endTimeRef.current ? endTimeRef.current.value : null,
       propertyAddress: address,
       propertyType: propertySpecs.propertyType,
       bedrooms: propertySpecs.bedrooms,
