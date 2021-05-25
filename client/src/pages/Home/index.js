@@ -304,6 +304,7 @@ export default function Home() {
             locationRef={locationRef}
             handleSuggestionClick={handleSuggestionClick}
             locationSuggestions={locationSuggestions}
+            location={location}
           />
           <FilterDiv
             handleRadioChange={handleRadioChange}

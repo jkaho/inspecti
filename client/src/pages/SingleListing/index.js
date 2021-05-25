@@ -18,10 +18,9 @@ import domainAPI from "../../utils/domainAPI";
 export default function SingleListing() {
   let { state } = useLocation();
   // States
-  const [listing, setListing] = useState({});
+  const [listing, setListing] = useState();
 
   useEffect(() => {
-    console.log(state)
     domainAPI.getSingleListing(state.id)
       .then(res => {
         setListing(res.data);
@@ -39,7 +38,7 @@ export default function SingleListing() {
           </Button>
         </Link>
       </div>
-      <div className="single-listing-box">
+      {listing ? <div className="single-listing-box">
         <div className="single-listing-images">
           {listing.media.map(image => (
             <img key={image.url} src={image.url} alt={image.url} />
@@ -144,7 +143,7 @@ export default function SingleListing() {
               <table>
                 <tbody>
                   {state.advertiser.contacts.map(agent => (
-                    <tr>
+                    <tr key={agent.name}>
                       <td className="single-listing-agent-image">
                         <img src={agent.photoUrl} alt="" />
                       </td>
@@ -161,7 +160,7 @@ export default function SingleListing() {
             </div>
           </div>
         </div>
-      </div>
+      </div> : ""}
     </div>
   );
 };
