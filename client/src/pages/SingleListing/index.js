@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // react-router-dom
-import { Link, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 // Child components
 import NavBar from "../../components/NavBar";
 // Material Design 
@@ -16,7 +16,8 @@ import moment from "moment";
 import domainAPI from "../../utils/domainAPI";
 
 export default function SingleListing() {
-  let { state } = useLocation();
+  const history = useHistory();
+  let { state, results } = useLocation();
   // States
   const [listing, setListing] = useState();
 
@@ -28,15 +29,26 @@ export default function SingleListing() {
       .catch(err => console.log(err));
   }, [state]);
 
+  // Helper functions
+  const handleBackToSearchResultsClick = () => {
+    history.push({
+      pathname: "/results",
+      prevpath: "/listing",
+      state: results
+    });
+  };
+
   return (
     <div>
       <NavBar />
       <div className="back-to-search-results">
-        <Link to="/results" style={{ textDecoration: "none" }}>
-          <Button startIcon={<ChevronLeftIcon />}>
-            SEARCH RESULTS
-          </Button>
-        </Link>
+        {/* <Link to="/results" style={{ textDecoration: "none" }}> */}
+        <Button startIcon={<ChevronLeftIcon />}
+          onClick={handleBackToSearchResultsClick}
+        >
+          SEARCH RESULTS
+        </Button>
+        {/* </Link> */}
       </div>
       {listing ? <div className="single-listing-box">
         <div className="single-listing-images">

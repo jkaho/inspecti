@@ -141,7 +141,7 @@ export default function ListingResults() {
     history.push({
       pathname: "/listing",
       state: listing.listing,
-      test: "this is a test"
+      results: results
     })
   };
 

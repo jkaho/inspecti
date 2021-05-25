@@ -242,6 +242,7 @@ export default function Home() {
         // setSearchResults(res.data);
         history.push({
           pathname: "/results",
+          prevpath: "/",
           state: res.data
         })
       })
