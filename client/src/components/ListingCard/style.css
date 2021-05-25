@@ -5,7 +5,8 @@
   border: 1px solid rgb(0, 0, 0, 0.12);
   border-radius: 2px;
   display: flex;
-  margin: 30px auto;
+  margin: 0 auto;
+  margin-bottom: 30px;
   cursor: pointer;
 }
 

@@ -12,7 +12,7 @@ import "./style.css";
 import domainAPI from "../../utils/domainAPI";
 
 export default function ListingResults() {
-  let { state } = useLocation();
+  let { state, searchWord } = useLocation();
   const history = useHistory();
   // States 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
@@ -117,15 +117,6 @@ export default function ListingResults() {
     }
   };
 
-  // function formatAddress(obj) {
-  //   let location = `${obj.name}, ${obj.state.toUpperCase()}`;
-  //   if (obj.type === "suburb") {
-  //     location += ` ${obj.postcode}`;
-  //   } 
-
-  //   return location;
-  // };
-
   const handleListingClick = (event) => {
     event.stopPropagation();
     const listingId = event.target.dataset.listing.split("-")[1];
@@ -143,6 +134,15 @@ export default function ListingResults() {
       state: listing.listing,
       results: results
     })
+  };
+
+  function formatLocationSuggestion(obj) {
+    let location = `${obj.name}, ${obj.state.toUpperCase()}`;
+    if (obj.type === "suburb") {
+      location += ` ${obj.postcode}`;
+    } 
+
+    return location;
   };
 
   return (
@@ -169,6 +169,13 @@ export default function ListingResults() {
           type={type}
           price={price}
         />
+      </div>
+      <hr className="listing-search-break" />
+      <div className="results-info">
+        <div className="results-info-keyword">
+          Search results for&nbsp; 
+          <span style={{ fontWeight: "600" }}>"{formatLocationSuggestion(searchWord)}"</span>
+        </div>
       </div>
       <div className="results-container">
         {results.map(listing => (

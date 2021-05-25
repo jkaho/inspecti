@@ -242,8 +242,8 @@ export default function Home() {
         // setSearchResults(res.data);
         history.push({
           pathname: "/results",
-          prevpath: "/",
-          state: res.data
+          state: res.data,
+          searchWord: location,
         })
       })
       .catch(err => console.log(err))

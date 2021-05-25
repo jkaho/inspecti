@@ -9,14 +9,36 @@
   width: 80%;
   max-width: 750px;
   margin: 50px auto;
+  margin-top: 0;
 }
 
 .results-filterdiv {
   padding-left: 40px;
 }
 
+.results-info {
+  width: 80%;
+  max-width: 750px;
+  margin: 20px auto;
+  font-size: 18px;
+}
+
+.listing-search-break {
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.09);
+  margin: 20px 50px;
+}
+
 @media (max-width: 900px) {
   .results-container {
     width: 500px;
+  }
+
+  .results-info {
+    width: 500px;
+  }
+  
+  .listing-search-break {
+    margin: 20px 30px;
   }
 }

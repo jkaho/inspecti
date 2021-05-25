@@ -33,7 +33,6 @@ export default function SingleListing() {
   const handleBackToSearchResultsClick = () => {
     history.push({
       pathname: "/results",
-      prevpath: "/listing",
       state: results
     });
   };
