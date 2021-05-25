@@ -7,7 +7,8 @@ const notesController = {
       .findAll({
         where: {
           userId: parseInt(req.user.id)
-        }
+        },
+        order: [["updatedAt", "DESC"]]
       })
       .then(notes => res.json(notes))
       .catch(err => res.status(422).json(err));
@@ -26,7 +27,8 @@ const notesController = {
         ],
         where: {
           userId: parseInt(req.user.id)
-        }
+        },
+        order: [["updatedAt", "DESC"]]
       })
       .then(notes => res.json(notes))
       .catch(err => res.status(422).json(err));
@@ -67,7 +69,8 @@ const notesController = {
         where: {
           userId: parseInt(req.user.id),
           starred: true
-        }
+        },
+        order: [["updatedAt", "DESC"]]
       })
       .then(notes => res.json(notes))
       .catch(err => res.status(422).json(err))
@@ -94,7 +97,8 @@ const notesController = {
               }
             }
           ]
-        }
+        },
+        order: [["updatedAt", "DESC"]]
       })
       .then(notes => res.json(notes))
       .catch(err => res.status(422).json(err))
@@ -108,7 +112,8 @@ const notesController = {
           propertyAddress: {
             [Op.like]: "%" + req.params.query + "%"
           }
-        }
+        },
+        order: [["updatedAt", "DESC"]]
       })
       .then(notes => res.json(notes))
       .catch(err => res.status(422).json(err));

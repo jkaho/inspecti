@@ -240,9 +240,9 @@ export default function Notes(props) {
         });
 
         // Reverse order of notes to display newest first 
-        res.data.reverse(); // to display latest note
-        starredNotes.reverse(); // to display starred notes list
-        nonStarredNotes.reverse(); // to display all notes list 
+        // res.data.reverse(); // to display latest note
+        // starredNotes.reverse(); // to display starred notes list
+        // nonStarredNotes.reverse(); // to display all notes list 
         setStarredNotes(starredNotes);
         setNonStarredNotes(nonStarredNotes);
 
@@ -329,9 +329,9 @@ export default function Notes(props) {
         });
 
         // Reverse order of notes to display newest first 
-        res.data.reverse(); // to display latest note
-        starredNotes.reverse(); // to display starred notes list
-        nonStarredNotes.reverse(); // to display all notes list 
+        // res.data.reverse(); // to display latest note
+        // starredNotes.reverse(); // to display starred notes list
+        // nonStarredNotes.reverse(); // to display all notes list 
         setStarredNotes(starredNotes);
         setNonStarredNotes(nonStarredNotes);
 
@@ -431,9 +431,9 @@ export default function Notes(props) {
         });
 
         // Reverse order of notes to display newest first 
-        res.data.reverse(); // to display latest note
-        starredNotes.reverse(); // to display starred notes list
-        nonStarredNotes.reverse(); // to display all notes list 
+        // res.data.reverse(); // to display latest note
+        // starredNotes.reverse(); // to display starred notes list
+        // nonStarredNotes.reverse(); // to display all notes list 
         setStarredNotes(starredNotes);
         setNonStarredNotes(nonStarredNotes);
         })
@@ -851,9 +851,9 @@ export default function Notes(props) {
             });
 
             // Reverse order of notes to display newest first 
-            res.data.reverse(); // to display latest note
-            starredNotes.reverse(); // to display starred notes list
-            nonStarredNotes.reverse(); // to display all notes list 
+            // res.data.reverse(); // to display latest note
+            // starredNotes.reverse(); // to display starred notes list
+            // nonStarredNotes.reverse(); // to display all notes list 
             setStarredNotes(starredNotes);
             setNonStarredNotes(nonStarredNotes);
           })
@@ -897,7 +897,7 @@ export default function Notes(props) {
       notesAPI.searchNotes(query)
       .then(res => {
         if (res.data.length > 0) {
-          res.data.reverse();
+          // res.data.reverse();
           let starredNotes = [];
           let nonStarredNotes = [];
           for (let i = 0; i < res.data.length; i++) {

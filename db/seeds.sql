@@ -172,8 +172,8 @@ INSERT INTO inspectedProperties (
 ) VALUES (11, "2021-04-03", "42 Billy Ave Cronolla", "House", 3, 2, 1, 390, 2800000, 2600000, TRUE, 1);
 
 -- NOTES --
-INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
-VALUES (1, TRUE, "2021-05-14", "Renovation inspo", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, TRUE, TRUE, 1);
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2021-05-14", "Renovation inspo", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, TRUE, TRUE, 1, 1);
 
 INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
 VALUES (2, "City living", "", "135/23 Lore St Sydney, NSW 2000", 2, 2, 0, 90, FALSE, FALSE, 1);
@@ -201,6 +201,15 @@ VALUES (9, TRUE, "2021-04-10", "Ask for contract", "", "131 Euroka St Boxley", F
 
 INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId, propertyId)
 VALUES (10, "Ocean views", "", "9 Samson Rd Bondi", FALSE, FALSE, 1, 9);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (11, FALSE, "2021-05-25", "So good", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, FALSE, FALSE, 1, 1);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (12, FALSE, "2021-05-25", "Third note", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, FALSE, FALSE, 1, 1);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (13, FALSE, "2021-05-25", "Fourth note", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, FALSE, FALSE, 1, 1);
 
 -- REVIEWS -- 
 INSERT INTO reviews (
