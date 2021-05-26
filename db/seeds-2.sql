@@ -2290,7 +2290,281 @@ INSERT INTO inspectedProperties (
   userId
 ) VALUES (148, null, "11 Balls Head Rd, Waverton NSW 2060", "House", 5, 2, 1, 608, 5500000, 6600000, FALSE, 1);
 -- PRICE GUIDE 5.5-6m
--- OFF MARKET  
+-- OFF MARKET 2020
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (149, null, "2/32 Woolcott St, Waverton NSW 2060", "Townhouse", 4, 4, 2, null, 2800000, 2450000, FALSE, 1);
+-- FOR SALE 2.65m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (150, "2021-01-30", "29 Dettman Ave, Longueville NSW 2065", "House", 4, 2, 2, null, 3700000, 3800000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (151, "2021-01-30", "6/29B Shirley Rd, Wollstonecraft NSW 2060", "Apartment", 3, 2, 2, 318, 1800000, 1780000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (152, "2021-01-30", "11/24-26 Tryon Ave, Wollstonecraft NSW 2060", "Townhouse", 4, 2, 2, 472, 1900000, 2140000, FALSE, 1);
+-- PRICE GUIDE 1.9-2.1m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (153, "2021-02-06", "47 Union St, McMahons Pt NSW 2060", "House", 4, 2, 2, 224, 4000000, null, TRUE, 1);
+-- PRICE GUIDE 4-4.5m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (154, "2021-02-06", "46 Crows Nest Rd, Waverton NSW 2060", "House", 4, 2, 2, 750, 3750000, 5035000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (155, "2021-02-06", "20 Walker St, North Sydney NSW 2060", "House", 5, 3, 2, 272, null, 6700000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (156, "2021-02-20", "3/24 Woolcott St, Waverton NSW 2060", "Apartment", 3, 2, 1, 200, 2400000, 2275000, TRUE, 1);
+-- PRICE GUIDE 2.4-2.5m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (157, "2021-03-06", "36 Thomas St, McMahons Pt NSW 2060", "House", 3, 2, 0, null, 3250000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (158, "2021-03-06", "10/24-26 Tryon Ave, Wollstonecraft NSW 2060", "Townhouse", 4, 3, 1, 299, 2200000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (159, "2021-03-06", "27 Tunks St, Waverton NSW 2060", "House", 2, 1, 2, 450, 3000000, 5200000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (160, "2021-05-15", "2 Ross St, Waverton NSW 2060", "House", 2, 2, 2, 304, 4000000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (161, "2021-05-15", "31 Parnell St, East Killara NSW 2071", "House", 4, 4, 2, 841, 2200000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (162, "2021-05-15", "2 Mudies Rd, St Ives NSW 2075", "House", 4, 3, 2, null, 2600000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (163, "2021-05-15", "15 Barra Brui Cres, St Ives NSW 2075", "House", 5, 3, 2, 930, 2300000, 2650000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (164, "2021-05-15", "24 Tudor Pl, St Ives NSW 2075", "House", 4, 3, 2, 935, 2350000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (165, "2021-05-15", "15 Tudor Pl, St Ives NSW 2075", "House", 4, 2, 2, 1186, 2100000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (166, "2021-05-15", "42 Burdekin Cres, St Ives NSW 2075", "House", 4, 2, 2, 1201, 1850000, 2150000, FALSE, 1);
 
 -- NOTES --
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
