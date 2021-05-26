@@ -75,6 +75,8 @@ router.route("/review/:id")
 // Event routes 
 router.get("/events", eventsController.getEvents);
 
+router.get("/propertyEvents/:address", eventsController.getPropertyEvents);
+
 router.get("/events/:startTime/:endTime", eventsController.getDailyEvents);
 
 router.post("/event", eventsController.createEvent);

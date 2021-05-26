@@ -12,6 +12,16 @@ const eventsController = {
       .then(events => res.json(events))
       .catch(err => res.status(422).json(err))
   },
+  getPropertyEvents: function(req, res) {
+    db.scheduledEvents
+      .findAll({
+        where: {
+          propertyAddress: req.params.address
+        }
+      })
+      .then(events => res.json(events))
+      .catch(err => console.log(err));
+  },
   getDailyEvents: function(req, res) {
     console.log(req.params)
     db.scheduledEvents

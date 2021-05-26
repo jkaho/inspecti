@@ -70,20 +70,54 @@ export default function SingleListing(props) {
       endTime: eventData.event === "Inspection" ? eventData.end : null,
       propertyAddress: eventData.address,
       propertyType: eventData.property,
-      bedrooms: eventData.bedrooms,
-      bathrooms: eventData.bathrooms,
-      carSpaces: eventData.carspaces,
-      landSize: eventData.area,
+      bedrooms: eventData.bedrooms === "" ? null : eventData.bedrooms,
+      bathrooms: eventData.bathrooms === "" ? null : eventData.bathrooms,
+      carSpaces: eventData.carspaces === "" ? null : eventData.carspaces,
+      landSize: eventData.area === "" ? null : eventData.area,
     };
 
     setEventToAdd(eventToAddData);
-    setModalState({
-      isOpen: true,
-      type: "eventAdd",
-      title: `Add ${eventToAddData.eventType} Event`,
-      text: `Are you sure you want to add an ${eventToAddData.eventType} event for 
-      ${eventToAddData.propertyAddress} on ${moment(eventToAddData.startTime).format("dddd Do MMMM, h:mma")}?`
-    });
+    eventsAPI.getPropertyEvents(eventToAddData.propertyAddress)
+      .then(res => {
+        console.log(res);
+        if (res.data.length > 0) {
+          res.data.forEach(item => {
+            console.log(moment(eventToAddData.startTime).format("YYYY-MM-DD HH:mm:ss"), moment(item.startTime).format("YYYY-MM-DD HH:mm:ss"))
+            if (
+              item.eventType === eventToAddData.eventType &&
+              moment(item.startTime).format("YYYY-MM-DD HH:mm:ss") === 
+              moment(eventToAddData.startTime).format("YYYY-MM-DD HH:mm:ss")
+            ) {
+              setPopupState({
+                open: true,
+                type: "eventAddBlock",
+                severity: "warning",
+                message: "This event is already in your schedule"
+              });
+            } else {
+              setModalState({
+                isOpen: true,
+                type: "eventAdd",
+                title: `Add ${eventToAddData.eventType} Event`,
+                text: `Are you sure you want to add an ${eventToAddData.eventType} event for 
+                ${eventToAddData.propertyAddress} on ${moment(eventToAddData.startTime).format("dddd Do MMMM, h:mma")}?`
+              });
+            }
+          });
+        } else {
+          setModalState({
+            isOpen: true,
+            type: "eventAdd",
+            title: `Add ${eventToAddData.eventType} Event`,
+            text: `Are you sure you want to add an ${eventToAddData.eventType} event for 
+            ${eventToAddData.propertyAddress} on ${moment(eventToAddData.startTime).format("dddd Do MMMM, h:mma")}?`
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        setPopupState({ open: false, type: "", severity: "success", message: "" });
+      });
   };
 
   const handleAddEventConfirm = () => {

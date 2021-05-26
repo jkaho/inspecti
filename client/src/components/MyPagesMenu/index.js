@@ -19,6 +19,7 @@ import "./style.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    zIndex: "20",
   },
   black: {
     color: "black",

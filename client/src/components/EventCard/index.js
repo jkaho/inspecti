@@ -38,13 +38,13 @@ export default function EventCard(props) {
           </div>
           <div className="eventcard-specs">
             <i className="fas fa-bed"></i>&nbsp;
-            <span className="num-beds">{props.bedrooms}</span>&nbsp;&nbsp;
+            <span className="num-beds">{props.bedrooms ? props.bedrooms : "-"}</span>&nbsp;&nbsp;
             <i className="fas fa-shower"></i>&nbsp;
-            <span className="num-baths">{props.bathrooms}</span>&nbsp;&nbsp;
+            <span className="num-baths">{props.bathrooms ? props.bathrooms : "-"}</span>&nbsp;&nbsp;
             <i className="fas fa-car"></i>&nbsp;
-            <span className="num-cars">{props.carSpaces}</span>&nbsp;&nbsp;
+            <span className="num-cars">{props.carSpaces ? props.carSpaces : "-"}</span>&nbsp;&nbsp;
             <i className="fas fa-ruler-combined"></i>&nbsp;
-            <span className="num-land">{props.landSize}m²</span>&nbsp;&nbsp;
+            <span className="num-land">{props.landSize ? props.landSize : "- "}m²</span>&nbsp;&nbsp;
           </div>
         </div>
       </div>
