@@ -128,18 +128,52 @@ export default function MonthlySchedule() {
       // hasAuction: hasAuction,
     };
 
-    eventsAPI.createEvent(newEvent)
+    eventsAPI.getPropertyEvents(newEvent.propertyAddress)
       .then(res => {
-        handleModalClose();
-        setAddEventPopupState(true);
-        getAllEvents();
-      })
-      .catch(err => {
-        console.log(err);
-        setPopup({ 
-          open: true, type: "error", severity: "error", 
-          message: "An error was encountered while submitting your data. Please try again later." 
-        });
+        if (res.data.length > 0) {
+          res.data.forEach(item => {
+            if (
+              item.eventType === newEvent.eventType &&
+              moment(item.startTime).format("YYYY-MM-DD HH:mm:ss") === 
+              moment(newEvent.startTime).format("YYYY-MM-DD HH:mm:ss")
+            ) {
+              setPopup({
+                open: true,
+                type: "eventAddBlock",
+                severity: "warning",
+                message: "This event is already in your schedule"
+              });
+            } else {
+              eventsAPI.createEvent(newEvent)
+              .then(res => {
+                handleModalClose();
+                setAddEventPopupState(true);
+                getAllEvents();
+              })
+              .catch(err => {
+                console.log(err);
+                setPopup({ 
+                  open: true, type: "error", severity: "error", 
+                  message: "An error was encountered while submitting your data. Please try again later." 
+                });
+              });
+            }
+          });
+        } else {
+          eventsAPI.createEvent(newEvent)
+          .then(res => {
+            handleModalClose();
+            setAddEventPopupState(true);
+            getAllEvents();
+          })
+          .catch(err => {
+            console.log(err);
+            setPopup({ 
+              open: true, type: "error", severity: "error", 
+              message: "An error was encountered while submitting your data. Please try again later." 
+            });
+          });
+        }
       });
   };
 
