@@ -1264,7 +1264,7 @@ INSERT INTO inspectedProperties (
   soldPrice,
   attendedAuction,
   userId
-) VALUES (81, "2019-10-05", "39 View St, Chatswood NSW 2064", "House", 3, 2, 2, 553, 2500000, 2460000, FALSE, 1);
+) VALUES (81, "2019-10-05", "39 View St, Chatswood NSW 2067", "House", 3, 2, 2, 553, 2500000, 2460000, FALSE, 1);
 
 INSERT INTO inspectedProperties (
   id, 
@@ -2566,45 +2566,111 @@ INSERT INTO inspectedProperties (
   userId
 ) VALUES (166, "2021-05-15", "42 Burdekin Cres, St Ives NSW 2075", "House", 4, 2, 2, 1201, 1850000, 2150000, FALSE, 1);
 
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (167, "2019-09-28", "118 Young St, Cremorne NSW 2090", "House", 4, 3, 2, 917, 6000000, 7320000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (168, "2020-10-31", "7 Onyx Rd, Artarmon NSW 2064", "House", 3, 1, 1, 864, 2500000, 3230000, TRUE, 1);
+
 -- NOTES --
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
-VALUES (1, TRUE, "2021-05-14", "Renovation inspo", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, TRUE, TRUE, 1, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
-VALUES (2, "City living", "", "135/23 Lore St Sydney, NSW 2000", 2, 2, 0, 90, FALSE, FALSE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
-VALUES (3, "Harbour views", "", "76 Craigson St Greenwich, NSW 2065", 4, 2, 2, 427, TRUE, FALSE, 1);
-
-INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (4, TRUE, "2021-05-14", "Mosman semi auction", "", "32 Milson Dr Mosman, NSW 2088", FALSE, TRUE, 1);
-
-INSERT INTO notes (id, shared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId)
-VALUES (5, FALSE, "Potts Pt apartment", "", "72/15 Limey Rd Potts Pt, NSW 2011", 3, 2, 2, 121, TRUE, TRUE, 1);
-
-INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId)
-VALUES (6, "George from Bay Wright Real Estate", "", null, FALSE, FALSE, 1);
-
-INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, starred, hasReview, userId, propertyId, createdAt)
-VALUES (7, TRUE, "2021-04-21", "Brand new townhouse", "", "4/3 Barr Pl Waverley", FALSE, FALSE, 1, 2, "2021-04-21 14:14:41");
-
-INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, starred, hasReview, userId, propertyId, createdAt)
-VALUES (8, TRUE, "2021-04-18", "Garden apartment", "", "3/35 Star Rd Starville", FALSE, FALSE, 1, 4, "2021-04-17 21:42:23");
-
-INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, starred, hasReview, userId, propertyId, createdAt)
-VALUES (9, TRUE, "2021-04-10", "Ask for contract", "", "131 Euroka St Boxley", FALSE, FALSE, 1, 6, "2021-04-10 13:03:56");
-
-INSERT INTO notes (id, title, text, propertyAddress, starred, hasReview, userId, propertyId)
-VALUES (10, "Ocean views", "", "9 Samson Rd Bondi", FALSE, FALSE, 1, 9);
+VALUES (1, TRUE, "2019-02-07", "Next to Artarmon Reserve", 
+"<p>Pros:<br/><ul><li>Pushed back away from Artarmon Rd, backed onto the reserve</li><li>Contemporary design</li><li>10-15min walk to Artarmon station</li><li>Sizeable outdoor entertaining space</li></ul>Cons:<br/><ul><li>Possible drainage issues with the retaining wall on the lower level</li><li>Cannot turn right into the driveway if travelling east on Artarmon Rd</li><li>Lack of storage space</li></ul></p>", 
+"1/54A Artarmon Rd, Artarmon NSW 2064", 4, 2, 2, null, FALSE, TRUE, 1, 17);
 
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
-VALUES (11, FALSE, "2021-05-25", "So good", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, FALSE, FALSE, 1, 1);
+VALUES (1, TRUE, "2019-08-25", "64 Tindale Rd, Artarmon NSW 2064", 
+"<p>Price guide: $3.1-3.3m<br/>Sold price: $3.38m<br/>A decent-sized single-storey family home which has been partly renovated within the past few years (kitchen/dining area opened up). The home is quite ordinary.<br/> Also, apparently the property used to have a pool but that area was sold to the neighbouring property (66 Stafford Rd) a couple of years ago for about $450k.</p>", 
+"64 Tindale Rd, Artarmon NSW 2064", 5, 4, 2, 770, FALSE, TRUE, 1, 61);
 
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
-VALUES (12, FALSE, "2021-05-25", "Third note", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, FALSE, FALSE, 1, 1);
+VALUES (1, TRUE, "2019-09-07", "17 Muttama Rd, Artarmon NSW 2064", 
+"<p>Price guide: $2.75m<br/>Sold price: $3.351m (before auction)<br/>Built in the 1910s, single level. Kind of underwhelming, but there's a lot of potential to add value to the property. You've gotta go down some stairs from the decking at the back of the house to the backyard, which isn't ideal, but the backyard is relatively flat and well-maintained.</p>", 
+"17 Muttama Rd, Artarmon NSW 2064", 4, 1, 3, 871, FALSE, TRUE, 1, 68);
 
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
-VALUES (13, FALSE, "2021-05-25", "Fourth note", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, FALSE, FALSE, 1, 1);
+VALUES (1, TRUE, "2019-09-15", "Open living", 
+"<p>Really nice extension at the back of the house. Very open living/dining/kitchen area. Also loved the tall hedges around the backyard.</p>", 
+"33 Muttama Rd, Artarmon NSW 2064", 4, 2, 1, 816, FALSE, TRUE, 1, 71);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2020-09-05", "37 Muttama Rd, Artarmon NSW 2064", 
+"<p>Great contemporary renovated property with extension at the back. Seems to be the norm now in Artarmon.<br/>Agents didn't give an exact price guide but said maybe around $4-4.5m</p>", 
+"37 Muttama Rd, Artarmon NSW 2064", 4, 3, 2, 797, FALSE, TRUE, 1, 119);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2019-09-16", "Comfortable Family Home", 
+"<p>Federation style with large extension at the back. Great for big families but the lack of a car space may be an issue for some. Price guide is $3.5m</p>", 
+"6 Echo St, Cammeray NSW 2062", 5, 3, 0, 450, FALSE, TRUE, 1, 72);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2019-09-29", "Parkside luxury lifestyle", 
+"<p>Such a dreamy home!! Massive lounge area downstairs and family room upstairs! Really modern and beautiful leafy outlook. There isn't much of a backyard, but I guess you don't really need one when you live right next to the park.</p>", 
+"118 Young St, Cremorne NSW 2090", 4, 3, 2, 917, FALSE, TRUE, 1, 78);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2019-10-05", "39 View St, Chatswood NSW 2067", 
+"<p><em>auction guide - $2.5m</em>. brand new modern home, but didn't seem super high quality.. really long steep driveway too. but the floorplan is pretty functional and locale is convenient", 
+"39 View St, Chatswood NSW 2067", 3, 2, 2, 553, FALSE, TRUE, 1, 81);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2019-10-12", "Cammeray living", 
+"<p>A contemporary and comfortable home in Cammeray ($2.8m guide). Is a bit on the small side though. The living area is also really tight and the dining area is huge, but a bit of reconfiguration could easily fix that</p>", 
+"44 Warringa Rd, Cammeray NSW 2062", 3, 2, 2, 398, FALSE, TRUE, 1, 89);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2019-11-03", "Cremorne auction", 
+"<p>Stunning home, good for families. Probably around 50 people showed up for the auction, 3 of whom actually bid. Auction guide was $6m and it sold for $7.32m! Congrats to the new owners :-)</p>", 
+"118 Young St, Cremorne NSW 2090", 4, 3, 2, 917, FALSE, TRUE, 1, 167);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2020-10-17", "Tunks park", 
+"<p>Good size for a big family, and right next to Tunks Park. The back of the house, where the living area is, is a bit dark though.. Also, you have to trek up a staircase to get to the front door", 
+"7 Weringa Ave, Cammeray NSW 2062", 5, 4, 4, 461, FALSE, TRUE, 1, 134);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2020-10-27", "Opportunity to build dream home", 
+"<p>not quite in liveable condition but perfect opportunity for people looking to do one of those classic artarmon extensions. really level land. personally not a huge fan of onyx rd though, it's rlly narrow with cars parked on both sides</p>", 
+"7 Onyx Rd, Artarmon NSW 2064", 3, 1, 1, 864, FALSE, TRUE, 1, 168);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2020-11-14", "Packed auction", 
+"<p><strong>A LOT</strong> of spectators at the auction and at least 4 active bidders. Guide was $2.5m, first bid was $2.71m, sold for $3.23m...</p>", 
+"7 Onyx Rd, Artarmon NSW 2064", 3, 1, 1, 864, FALSE, TRUE, 1, 138);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2020-10-24", "Alright", 
+"<p>Floorplan could do with some tweaking. Don't love the main bathroom being smack-bang in the middle of the house and the lack of a master ensuite. The rest of the property was okay but $2.8m seems like a bit much in my opinion</p>", 
+"6 Sydney St, Artarmon NSW 2064", 4, 2, 2, 650, FALSE, TRUE, 1, 139);
+
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2020-10-24", "14 Godfrey St, Artarmon NSW 2064", 
+"<p>The insides need to be gutted cos the home is not in the best condition... It's also in the Artarmon conservation area so you'd have to be real creative with the reno. Price guide is 2.4-2.5m, which is considered reasonably affordable here in Artarmon</p>", 
+"14 Godfrey St, Artarmon NSW 2064", 3, 2, 2, 701, FALSE, TRUE, 1, 140);
 
 -- REVIEWS -- 
 INSERT INTO reviews (

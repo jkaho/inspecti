@@ -37,7 +37,7 @@ CREATE TABLE notes (
   id INT AUTO_INCREMENT NOT NULL,
   shared BOOLEAN NOT NULL DEFAULT FALSE,
   dateShared DATE,
-  title VARCHAR(40) NOT NULL,
+  title VARCHAR(100) NOT NULL,
   text VARCHAR(255), 
   propertyAddress VARCHAR(255),
   bedrooms INT,
