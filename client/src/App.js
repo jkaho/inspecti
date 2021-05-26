@@ -44,7 +44,16 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/reviews" component={Reviews} />
           <Route exact path="/results" component={ListingResults} />
-          <Route exact path="/listing" component={SingleListing} />
+          <Route exact path="/listing"
+            render={() => isAuthenticated ? 
+              <SingleListing
+                id={userId}
+              /> : 
+              <SingleListing
+                id=""
+              />
+            }
+          />
           <Route
             exact path="/login" 
             render={() => isAuthenticated ? 

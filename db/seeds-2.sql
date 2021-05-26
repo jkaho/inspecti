@@ -1508,6 +1508,773 @@ INSERT INTO inspectedProperties (
   userId
 ) VALUES (97, "2019-11-30", "44 Milray Ave, Wollstonecraft NSW 2065", "House", 4, 2, 2, 496, 1900000, null, TRUE, 1);
 
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-02-01", "19 Joseph St, Lane Cove NSW 2066", "House", 4, 3, 2, 917, 3900000, 3275000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-02-01", "51 Richardson St W, Lane Cove NSW 2066", "House", 4, 3, 2, 821, 2500000, 3500000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-02-29", "13 Milray Ave, Wollstonecraft NSW 2065", "House", 4, 2, 2, 684, 4500000, 4738000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-02-29", "54 Euroka St, Waverton NSW 2060", "House", 3, 2, 1, null, null, 2623000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-02-29", "2B Union St, McMahons Pt NSW 2060", "Semi", 3, 1, 0, 183, 2000000, 2300000, FALSE, 1);
+-- BEFORE AUCTION 
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-02-29", "30 McHatton St, McMahons Pt NSW 2060", "House", 5, 3, 4, 797, 4300000, 3940000, FALSE, 1);
+-- PRICE GUIDE 4.3-4.4m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-03-07", "17 King St, Waverton NSW 2060", "Semi", 2, 1, 0, 171, null, 2040000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-06-06", "29 Balls Head Rd, Waverton NSW 2060", "House", 6, 4, 3, 642, 3600000, 4000000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-06-06", "34 Ancrum St, Waverton NSW 2060", "Semi", 3, 2, 2, 200, 2000000, 1995000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-07-04", "8 Church St, North Sydney NSW 2060", "House", 3, 2, 1, 106, 1850000, 1825000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-07-04", "115 Union St, McMahons Pt NSW 2060", "Semi", 3, 2, 4, 331, 2900000, 2745000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-07-04", "22 Waiwera St, Lavender Bay NSW 2060", "House", 3, 2, 1, 175, 4500000, 4300000, TRUE, 1);
+-- PRICE GUIDE 4.5-5m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-08-01", "17 Yeo St, Neutral Bay NSW 2089", "Semi", 3, 2, 2, 261, 2000000, 2250000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-08-01", "8 Ross St, Waverton NSW 2060", "House", 6, 5, 2, 354, 6500000, 6020000, FALSE, 1);
+-- BEFORE AUCTION
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-08-01", "36 Victoria St, McMahons Pt NSW 2060", "House", 5, 3, 2, 508, 5350000, 5500000, FALSE, 1);
+-- BEFORE AUCTION 
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-08-01", "20 Martin St, Naremburn NSW 2065", "House", 3, 2, 1, null, 2800000, 2825000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-05", "11 Telopea St, Wollstonecraft NSW 2065", "House", 5, 3, 2, 1107, 5500000, 5850000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-05", "2/59 King St, Wollstonecraft NSW 2065", "Apartment", 3, 2, 2, null, 1950000, 2100000, FALSE, 1);
+-- BEFORE AUCTION
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-05", "56 Northcote St, Naremburn NSW 2065", "House", 4, 2, 1, 443, 2850000, 2950000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-05", "39 Union St, McMahons Pt NSW 2060", "House", 2, 1, 1, 266, 2500000, 2400000, TRUE, 1);
+-- BEFORE AUCTION 
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-05", "5/159 Longueville Rd, Lane Cove NSW 2066", "Townhouse", 4, 3, 2, 322, 2000000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-05", "37 Muttama Rd, Artarmon NSW 2064", "House", 4, 3, 2, 797, 4000000, 4690000, TRUE, 1);
+-- PRICE GUIDE - approx. 4-4.5m (not sure at first open)
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-05", "8 Burra Rd, Artarmon NSW 2064", "House", 4, 3, 1, 620, 4000000, 3910000, FALSE, 1);
+-- BEFORE AUCTION 
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-05", "34 King William St, Greenwich NSW 2065", "House", 5, 3, 2, 575, 3300000, 3500000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-12", "10A Rocklands Rd, Wollstonecraft NSW 2065", "House", 3, 2, 2, 234, 2250000, 2316000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-12", "1 George St, Greenwich NSW 2065", "House", 5, 2, 2, 625, null, 3400000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-12", "41 Bank St, North Sydney NSW 2060", "House", 4, 3, 2, 262, 5000000, 5200000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-26", "51 Park Rd, Naremburn NSW 2065", "House", 4, 3, 2, 193, 3200000, 3350000, FALSE, 1);
+-- BEFORE AUCTION 
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-26", "25 Vista St, Greenwich NSW 2065", "House", 4, 2, 2, 581, null, 4190000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-09-26", "1/27 Dumbarton St, McMahons Pt NSW 2060", "Apartment", 3, 2, 1, null, 1850000, 2050000, FALSE, 1);
+-- BEFORE AUCTION 
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-03", "48 Bay Rd, Waverton NSW 2060", "House", 5, 3, 1, 301, 3800000, 4000000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-03", "85 West St, Crows Nest NSW 2065", "House", 5, 3, 2, 485, 3500000, 3365000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-10", "67 Bank St, North Sydney NSW 2060", "House", 3, 2, 0, null, 2200000, 2020000, TRUE, 1);
+-- PRICE GUIDE FELL TO 1.95m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-17", "10 Ancrum St, Waverton NSW 2060", "House", 3, 2, 0, 112, 1900000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-17", "4 Milray Ave, Wollstonecraft NSW 2065", "House", 5, 3, 2, 853, 5750000, null, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-17", "22 Bank St, North Sydney NSW 2060", "House", 3, 2, 1, 189, 2300000, 2400000, FALSE, 1);
+-- BEFORE AUCTION
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-17", "7 Weringa Ave, Cammeray NSW 2062", "House", 5, 3, 3, 461, 3800000, 4175000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-17", "28 Willoughby St, Kirribilli NSW 2061", "House", 4, 4, 0, 202, 3600000, 3827500, FALSE, 1);
+-- PRICE GUIDE 3.6-3.8m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-24", "8/15 Belmont Ave, Wollstonecraft NSW 2065", "Townhouse", 3, 2, 2, null, 1600000, 1775000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-24", "9/28 West St, North Sydney NSW 2060", "Townhouse", 3, 3, 2, 244, 1775000, 1725000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-24", "7 Onyx Rd, Artarmon NSW 2064", "House", 3, 1, 1, 864, 2500000, 3230000, TRUE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-24", "6 Sydney St, Artarmon NSW 2064", "House", 4, 2, 2, 650, 2800000, 2950000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-24", "14 Godfrey St, Artarmon NSW 2064", "House", 3, 2, 2, 701, 2400000, 2550000, TRUE, 1);
+-- PRICE GUIDE 2.4-2.5m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-24", "12 Sophia St, Crows Nest NSW 2065", "House", 3, 2, 2, null, 2100000, 2305000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-10-24", "650 Willoughby Rd, Willougby NSW 2068", "House", 4, 2, 2, 398, 2000000, 2300000, FALSE, 1);
+-- PRICE GUIDE 2-2.2m
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-11-07", "18 Muttama Rd, Artarmon NSW 2064", "House", 4, 2, 1, 815, null, 3900000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-11-07", "44 Dalleys Rd, Naremburn NSW 2065", "House", 2, 2, 1, 360, 1900000, 1805000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-11-07", "46 Dalleys Rd, Naremburn NSW 2065", "House", 4, 2, 3, 930, 2500000, 2510000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-11-07", "20 Dargan St, Naremburn NSW 2065", "House", 5, 4, 2, 683, 4200000, 4200000, FALSE, 1);
+
+INSERT INTO inspectedProperties (
+  id, 
+  dateInspected, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+  priceGuide,
+  soldPrice,
+  attendedAuction,
+  userId
+) VALUES (97, "2020-11-14", "3 Commodore Cres, McMahons Pt NSW 2060", "House", 3, 2, 1, 598, 8000000, null, FALSE, 1);
+-- OFF MARKET  
+
 -- NOTES --
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (1, TRUE, "2021-05-14", "Renovation inspo", "", "35 Luxe Ave Bellavue Hill, NSW 2023", 5, 4, 3, 781, TRUE, TRUE, 1, 1);

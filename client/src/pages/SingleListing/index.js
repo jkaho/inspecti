@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 // Child components
 import NavBar from "../../components/NavBar";
+import PopupMessage from "../../components/PopupMessage";
+import SimpleModal from "../../components/Modal";
 // Material Design 
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Button from "@material-ui/core/Button";
@@ -14,19 +16,36 @@ import "./style.css";
 import moment from "moment";
 // API routes
 import domainAPI from "../../utils/domainAPI";
+import eventsAPI from "../../utils/eventsAPI";
 
-export default function SingleListing() {
+export default function SingleListing(props) {
   const history = useHistory();
   let { state, results } = useLocation();
   // States
   const [listing, setListing] = useState();
+  const [eventToAdd, setEventToAdd] = useState();
+  const [popup, setPopupState] = useState({ open: false, type: "", severity: "success", message: "" });
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    type: "",
+    title: "",
+    text: ""
+  });
 
   useEffect(() => {
     domainAPI.getSingleListing(state.id)
       .then(res => {
         setListing(res.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setPopupState({
+          open: true,
+          type: "error",
+          severity: "error",
+          message: "An error occurred while retrieving data from the database. Please try again later."
+        });
+      });
   }, [state]);
 
   // Helper functions
@@ -35,6 +54,84 @@ export default function SingleListing() {
       pathname: "/results",
       state: results
     });
+  };
+
+  const handleAddEventButtonClick = (event) => {
+    let eventData;
+    if (event.target.matches("svg")) {
+      eventData = event.target.parentElement.parentElement.dataset;
+    } else if (event.target.matches("path")) {
+      eventData = event.target.parentElement.parentElement.parentElement.dataset;
+    }
+
+    const eventToAddData = {
+      eventType: eventData.event,
+      startTime: eventData.start,
+      endTime: eventData.event === "Inspection" ? eventData.end : null,
+      propertyAddress: eventData.address,
+      propertyType: eventData.property,
+      bedrooms: eventData.bedrooms,
+      bathrooms: eventData.bathrooms,
+      carSpaces: eventData.carspaces,
+      landSize: eventData.area,
+    };
+
+    setEventToAdd(eventToAddData);
+    setModalState({
+      isOpen: true,
+      type: "eventAdd",
+      title: `Add ${eventToAddData.eventType} Event`,
+      text: `Are you sure you want to add an ${eventToAddData.eventType} event for 
+      ${eventToAddData.propertyAddress} on ${moment(eventToAddData.startTime).format("dddd Do MMMM, h:mma")}?`
+    });
+  };
+
+  const handleAddEventConfirm = () => {
+    eventsAPI.createEvent(eventToAdd)
+      .then(res => {
+        console.log(res);
+        setModalState({
+          isOpen: false,
+          type: "",
+          title: "",
+          message: ""
+        });
+        setPopupState({
+          open: true,
+          type: "addEventSuccess",
+          severity: "success",
+          message: "Event successfully added to schedule!"
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        setPopupState({
+          open: true,
+          type: "error",
+          severity: "error",
+          message: "An error occurred while adding data to the database. Please try again later."
+        });
+      });
+  };
+
+  // const handleAddAuctionButtonClick = (event) => {
+  //   if (event.target.matches("svg")) {
+  //     console.log("svg!")
+  //     console.log(event.target.parentElement.parentElement.dataset)
+  //   } else if (event.target.matches("path")) {
+  //     console.log("path!")
+  //     console.log(event.target.parentElement.parentElement.parentElement.dataset)
+  //   }
+  // };
+
+  const formatPropertyType = (str) => {
+    let propertyType;
+    str.toLowerCase() === "apartmentunitflat" ? propertyType = "Apartment" :
+    str.toLowerCase() === "house" ? propertyType = "House" :
+    str.toLowerCase() === "townhouse" ? propertyType = "Townhouse" :
+    propertyType = str;
+
+    return propertyType;
   };
 
   return (
@@ -81,6 +178,7 @@ export default function SingleListing() {
             <span className="num-land">
               {listing.buildingAreaSqm ? listing.buildingAreaSqm : "- "}m²
             </span>&nbsp;&nbsp;
+            <span>{formatPropertyType(listing.propertyTypes[0])}</span>
           </div>
           <hr />
           <div className="single-listing-heading">
@@ -105,13 +203,27 @@ export default function SingleListing() {
                         {`${moment(inspection.openingDateTime).format("h:mma")} - 
                         ${moment(inspection.closingDateTime).format("h:mma")}`}
                       </td>
-                      <td>
-                        <IconButton aria-label="add-to-schedule"
-                          style={{ padding: "5px" }}
-                        >
-                          <AddCircleIcon />
-                        </IconButton>
-                      </td>
+                      {props.id !== "" ? 
+                        <td>
+                          <IconButton aria-label="add-to-schedule"
+                            style={{ padding: "5px" }}
+                            onClick={handleAddEventButtonClick}
+                            data-event="Inspection"
+                            data-start={inspection.openingDateTime}
+                            data-end={inspection.closingDateTime}
+                            data-bedrooms={listing.bedrooms ? listing.bedrooms : ""}
+                            data-bathrooms={listing.bathrooms ? listing.bathrooms : ""}
+                            data-carspaces={listing.carspaces ? listing.carspaces : ""}
+                            data-area={listing.buildingAreaSqm ? listing.buildingAreaSqm : ""}
+                            data-address={listing.addressParts.displayAddress}
+                            data-property={formatPropertyType(listing.propertyTypes[0])}
+                          >
+                            <AddCircleIcon
+                              className="addcircle-icon"
+                            />
+                          </IconButton>
+                        </td> : <></>
+                      }
                     </tr>
                   ))}
                 </tbody>
@@ -134,13 +246,26 @@ export default function SingleListing() {
                     <td>
                       {moment(listing.saleDetails.auctionDetails.auctionSchedule.openingDateTime).format("h:mma")} 
                     </td>
-                    <td>
-                      <IconButton aria-label="add-to-schedule"
-                        style={{ padding: "5px" }}
-                      >
-                        <AddCircleIcon />
-                      </IconButton>
-                    </td>
+                    {props.id !== "" ? 
+                      <td>
+                        <IconButton aria-label="add-to-schedule"
+                          onClick={handleAddEventButtonClick}
+                          data-event="Auction"
+                          data-start={listing.saleDetails.auctionDetails.auctionSchedule.openingDateTime}
+                          data-bedrooms={listing.bedrooms ? listing.bedrooms : ""}
+                          data-bathrooms={listing.bathrooms ? listing.bathrooms : ""}
+                          data-carspaces={listing.carspaces ? listing.carspaces : ""}
+                          data-area={listing.buildingAreaSqm ? listing.buildingAreaSqm : ""}
+                          data-address={listing.addressParts.displayAddress}
+                          data-property={formatPropertyType(listing.propertyTypes[0])}
+                          style={{ padding: "5px" }}
+                        >
+                          <AddCircleIcon
+                            className="addcircle-icon"
+                          />
+                        </IconButton>
+                      </td> : <></>
+                    }
                   </tr>
                 </tbody>
               </table>
@@ -172,6 +297,24 @@ export default function SingleListing() {
           </div>
         </div>
       </div> : ""}
+      <SimpleModal
+        title={modalState.title}
+        text={modalState.text}
+        yesClick={handleAddEventConfirm}
+        noClick={() => setModalState({
+          isOpen: false,
+          type: "",
+          title: "",
+          text: ""
+        })}
+        modalState={modalState.isOpen}
+      />
+      <PopupMessage 
+        open={popup.open}
+        handleClose={() => setPopupState({ open: false, type: "", severity: "success", message: "" })}
+        severity={popup.severity}
+        message={popup.message}
+      />
     </div>
   );
 };
