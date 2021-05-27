@@ -70,70 +70,70 @@ export default function ReviewCard(props) {
                     <tr>
                       <td className="review-criteria">Property condition</td>
                       <td className="review-score">
-                        <span className="score">{props.propertyConditionRating}</span>
+                        <span className="score">{props.propertyConditionRating ? props.propertyConditionRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Potential to capitalise</td>
                       <td className="review-score">
-                        <span className="score">{props.potentialRating}</span>
+                        <span className="score">{props.potentialRating ? props.potentialRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Surroundings</td>
                       <td className="review-score">
-                        <span className="score">{props.surroundingsRating}</span>
+                        <span className="score">{props.surroundingsRating ? props.surroundingsRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Consistency with neighbours</td>
                       <td className="review-score">
-                        <span className="score">{props.neighbourComparisonRating}</span>
+                        <span className="score">{props.neighbourComparisonRating ? props.neighbourComparisonRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Accessibility</td>
                       <td className="review-score">
-                        <span className="score">{props.accessibilityRating}</span>
+                        <span className="score">{props.accessibilityRating ? props.accessibilityRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Privacy</td>
                       <td className="review-score">
-                        <span className="score">{props.privacyRating}</span>
+                        <span className="score">{props.privacyRating ? props.privacyRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Floor plan</td>
                       <td className="review-score">
-                        <span className="score">{props.floorplanRating}</span>
+                        <span className="score">{props.floorplanRating ? props.floorplanRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Outdoor space</td>
                       <td className="review-score">
-                        <span className="score">{props.outdoorSpaceRating}</span>
+                        <span className="score">{props.outdoorSpaceRating ? props.outdoorSpaceRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Indoor-to-outdoor flow</td>
                       <td className="review-score">
-                        <span className="score">{props.indoorOutdoorFlowRating}</span>
+                        <span className="score">{props.indoorOutdoorFlowRating ? props.indoorOutdoorFlowRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>
                     <tr>
                       <td className="review-criteria">Natural light</td>
                       <td className="review-score">
-                        <span className="score">{props.naturalLightRating}</span>
+                        <span className="score">{props.naturalLightRating ? props.naturalLightRating : "-"}</span>
                         <span className="out-of">/5</span>
                       </td>
                     </tr>

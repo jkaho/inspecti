@@ -17,7 +17,7 @@ CREATE TABLE users (
 CREATE TABLE inspectedProperties (
   id INT AUTO_INCREMENT NOT NULL,
   dateInspected DATE,
-  propertyAddress VARCHAR(255) UNIQUE NOT NULL,
+  propertyAddress VARCHAR(255) NOT NULL,
   propertyType VARCHAR(20) NOT NULL,
   bedrooms INT,
   bathrooms INT,
@@ -38,7 +38,7 @@ CREATE TABLE notes (
   shared BOOLEAN NOT NULL DEFAULT FALSE,
   dateShared DATE,
   title VARCHAR(100) NOT NULL,
-  text VARCHAR(255), 
+  text VARCHAR(1000), 
   propertyAddress VARCHAR(255),
   bedrooms INT,
   bathrooms INT,
