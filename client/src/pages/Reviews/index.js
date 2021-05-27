@@ -52,7 +52,7 @@ export default function Reviews() {
     notesAPI.getSharedNotes()
       .then(res => {
         setReviews(res.data);
-        setModifiedReviews(res.data.slice(0, 20));
+        setModifiedReviews(res.data.slice(0, 4));
         createPageNav(res.data.length);
       })
       .catch(err => {
@@ -231,7 +231,7 @@ export default function Reviews() {
   
   const createPageNav = (totalReviews) => {
     // 20 reviews on each page 
-    const numOfPagesB = Math.ceil(totalReviews / 20);
+    const numOfPagesB = Math.ceil(totalReviews / 4);
     setNumOfPages(numOfPagesB);
     let pageArrayB = [];
     for (let i = 1; i <= numOfPagesB; i++) {
@@ -243,17 +243,23 @@ export default function Reviews() {
   const pageNavButtonClick = (event) => {
     const pageClicked = parseInt(event.target.value);
     setPage(pageClicked);
-    setModifiedReviews(reviews.slice(pageClicked - 1, pageClicked + 20));
+    setModifiedReviews(reviews.slice((pageClicked - 1) * 4, (pageClicked - 1) * 4 + 4));
+  };
+
+  const lastPageNavButtonClick = () => {
+    const pageClicked = Math.ceil(reviews.length / 4);
+    setPage(pageClicked);
+    setModifiedReviews(reviews.slice((pageClicked - 1) * 4));
   };
 
   const pageNavNextButtonClick = () => {
     setPage(page + 1);
-    setModifiedReviews(reviews.slice(page, page + 20));
+    setModifiedReviews(reviews.slice(page * 4, (page * 4) + 4));
   };
 
   const pageNavPrevButtonClick = () => {
     setPage(page - 1);
-    setModifiedReviews(reviews.slice(page - 2, page + 19));
+    setModifiedReviews(reviews.slice((page - 1) * 4 - 4, (page - 1) * 4));
   };
 
   return (
@@ -277,7 +283,7 @@ export default function Reviews() {
         <table>
           <tbody>
             <tr>
-              <td>{modifiedReviews.length} REVIEWS</td>
+              <td>{reviews.length} REVIEWS</td>
               <td className="review-sort-td">
                 <TextField
                   id="outlined-select-reviews"
@@ -396,19 +402,21 @@ export default function Reviews() {
                       >{item}</button>
                     </td>
                   ))}
+                  <td>
+                    <div>...</div>
+                  </td>
+                  <td>
+                    <button 
+                      onClick={lastPageNavButtonClick}
+                      className={page === numOfPages ? "selected-page" : ""}
+                      >{numOfPages}</button>
+                  </td>
                   {page < numOfPages ? 
                     <td>
                       <button onClick={pageNavNextButtonClick}
                         className="next-review-page">Next</button>
                     </td> : <td></td>
                   }
-                  <td>
-                    <div>...</div>
-                  </td>
-                  <td>
-                    <button className={page === numOfPages ? "selected-page" : ""}
-                    >{numOfPages}</button>
-                  </td>
                 </tr>
               }
           </tbody>
