@@ -2732,11 +2732,7 @@ INSERT INTO reviews (
   naturalLightRating,
   userId,
   noteId
-) VALUES (1, 1, 2, 4, 3, 4, 3, 5, 4, 5, 5, 1, 1);
-
--- UPDATE notes 
--- SET reviewId = 1
--- WHERE id = 1;
+) VALUES (1, 5, 1, 4, 3, 2, 4, 4, 5, 5, 4, 1, 1);
 
 INSERT INTO reviews (
   id, 
@@ -2752,11 +2748,7 @@ INSERT INTO reviews (
   naturalLightRating,
   userId,
   noteId
-) VALUES (2, 3, 4, 2, 2, 1, 5, 3, 2, 2, 1, 1, 4);
-
--- UPDATE notes 
--- SET reviewId = 2
--- WHERE id = 4;
+) VALUES (2, 3, 3, 5, 3, 4, 4, 4, 5, 4, 5, 1, 2);
 
 INSERT INTO reviews (
   id, 
@@ -2772,11 +2764,7 @@ INSERT INTO reviews (
   naturalLightRating,
   userId,
   noteId
-) VALUES (3, 2, 1, 4, 2, 2, 5, 3, 4, 5, 4, 1, 5);
-
--- UPDATE notes 
--- SET reviewId = 3
--- WHERE id = 5;
+) VALUES (3, 5, 4, 3, 3, 4, 4, 3, 3, 5, 3, 1, 3);
 
 INSERT INTO reviews (
   id, 
@@ -2792,7 +2780,7 @@ INSERT INTO reviews (
   naturalLightRating,
   userId,
   noteId
-) VALUES (4, 4, 2, 5, 3, 4, 2, 3, 1, 4, 4, 1, 8);
+) VALUES (4, 5, 1, 3, 2, 2, 5, 2, 2, 4, 5, 1, 4);
 
 INSERT INTO reviews (
   id, 
@@ -2808,7 +2796,7 @@ INSERT INTO reviews (
   naturalLightRating,
   userId,
   noteId
-) VALUES (5, 4, 5, 4, 3, 2, 3, 3, 4, 5, 5, 1, 7);
+) VALUES (5, 5, 1, 5, 2, 5, 3, 4, 5, 5, 4, 1, 5);
 
 INSERT INTO reviews (
   id, 
@@ -2824,7 +2812,295 @@ INSERT INTO reviews (
   naturalLightRating,
   userId,
   noteId
-) VALUES (6, 5, 5, 4, 3, 4, 5, 2, 2, 5, 4, 1, 9);
+) VALUES (6, 4, 5, 3, 5, 2, 2, 3, 5, 2, 4, 1, 6);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (7, 4, 4, 1, 2, 4, 3, 4, 3, 3, 5, 1, 7);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (8, 5, 1, 4, 3, 3, 5, 4, 5, 5, 5, 1, 8);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (9, 5, 2, 4, 3, 4, 2, 4, 3, 4, 3, 1, 9);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (10, 5, 1, 5, 3, 3, 5, 5, 4, 5, 3, 1, 10);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (11, 5, 1, 2, 2, 2, 4, 2, 3, 3, 3, 1, 11);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (12, 5, 2, 4, 4, 5, 3, 3, 3, 4, 5, 1, 12);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (13, 5, 1, 4, 2, 3, 5, 4, 2, 4, 2, 2, 13);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (14, 5, 1, 2, 2, 3, 4, 5, 5, 5, 2, 1, 14);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (15, 5, 1, 1, 4, 3, 5, 4, 5, 3, 3, 1, 15);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (16, 5, 1, 4, 4, 3, 5, 5, 5, 5, 4, 1, 16);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (17, 5, 5, 4, 2, 5, 4, 2, 3, 3, 3, 1, 17);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (18, 4, 1, 4, 4, 4, 4, 3, 4, 3, 2, 1, 18);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (19, 4, 2, 4, 4, 3, 5, 3, 5, 3, 2, 1, 19);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (20, 2, 5, 3, 3, 3, 5, 1, 5, null, null, 1, 20);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (21, 1, 5, 4, 4, 2, 4, null, 5, 1, 2, 2, 21);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (22, 4, 3, 2, 5, 4, 5, 2, 5, 2, 2, 1, 22);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (23, 2, 4, 4, 3, 4, 4, 1, 4, 3, 2, 1, 23);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (24, 4, 2, 3, null, 4, 3, 3, 5, 1, 5, 1, 24);
 
 -- SCHEDULED EVENTS --
 INSERT INTO scheduledEvents (
