@@ -39,6 +39,7 @@ export default function Reviews() {
   const [modifiedReviews, setModifiedReviews] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const [pageArray, setPageArray] = useState([]);
+  const [reviewsToShow, setReviewsToShow] = useState([]);
   const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4, 5]);
   const [page, setPage] = useState(1);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
@@ -52,7 +53,8 @@ export default function Reviews() {
     notesAPI.getSharedNotes()
       .then(res => {
         setReviews(res.data);
-        setModifiedReviews(res.data.slice(0, 4));
+        setModifiedReviews(res.data);
+        setReviewsToShow(res.data.slice(0, 4));
         createPageNav(res.data.length);
       })
       .catch(err => {
@@ -215,10 +217,20 @@ export default function Reviews() {
     }
 
     setModifiedReviews(sortedResults);
+    if (page === sortedResults.length) {
+      setReviewsToShow(sortedResults.slice((page * 4) - 4));
+    } else {
+      setReviewsToShow(sortedResults.slice((page * 4) - 4, (page * 4)));
+    }
   };
 
   const handleClearSortButtonClick = () => {
     setModifiedReviews(reviews);
+    if (page === reviews.length) {
+      setReviewsToShow(reviews.slice((page * 4) - 4));
+    } else {
+      setReviewsToShow(reviews.slice((page * 4) - 4, (page * 4)));
+    }
   };
 
   const handlePopupClose = (event, reason) => {
@@ -243,23 +255,23 @@ export default function Reviews() {
   const pageNavButtonClick = (event) => {
     const pageClicked = parseInt(event.target.value);
     setPage(pageClicked);
-    setModifiedReviews(reviews.slice((pageClicked - 1) * 4, (pageClicked - 1) * 4 + 4));
+    setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * 4, (pageClicked - 1) * 4 + 4));
   };
 
   const lastPageNavButtonClick = () => {
     const pageClicked = Math.ceil(reviews.length / 4);
     setPage(pageClicked);
-    setModifiedReviews(reviews.slice((pageClicked - 1) * 4));
+    setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * 4));
   };
 
   const pageNavNextButtonClick = () => {
     setPage(page + 1);
-    setModifiedReviews(reviews.slice(page * 4, (page * 4) + 4));
+    setReviewsToShow(modifiedReviews.slice(page * 4, (page * 4) + 4));
   };
 
   const pageNavPrevButtonClick = () => {
     setPage(page - 1);
-    setModifiedReviews(reviews.slice((page - 1) * 4 - 4, (page - 1) * 4));
+    setReviewsToShow(modifiedReviews.slice((page - 1) * 4 - 4, (page - 1) * 4));
   };
 
   return (
@@ -325,7 +337,7 @@ export default function Reviews() {
         </table>
       </div>
       <div className="review-container">
-        {modifiedReviews.length > 0 ? modifiedReviews.map((review) => (
+        {reviewsToShow.length > 0 ? reviewsToShow.map((review) => (
           <ReviewCard
             key={review.id}
             propertyId={review.propertyId}
