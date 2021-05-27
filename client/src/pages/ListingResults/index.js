@@ -12,7 +12,7 @@ import "./style.css";
 import domainAPI from "../../utils/domainAPI";
 
 export default function ListingResults() {
-  let { state, searchWord } = useLocation();
+  let { state, searchWord, searchData } = useLocation();
   const history = useHistory();
   // States 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
@@ -37,7 +37,12 @@ export default function ListingResults() {
     state: "",
   });
   const [results, setSearchResults] = useState([]);
-  const [totalResults, setTotalResults] = useState();
+  // const [totalResults, setTotalResults] = useState();
+  const [numOfPages, setNumOfPages] = useState();
+  const [pageArray, setPageArray] = useState([]);
+  const currentPageArray = [1, 2, 3, 4, 5];
+  const [page, setPage] = useState(1);
+  const [numOfResults, setNumOfResults] = useState();
 
   // Refs
   const locationRef = useRef();
@@ -45,10 +50,56 @@ export default function ListingResults() {
   // Initial render
   useEffect(() => {
     setSearchResults(state.data);
-    setTotalResults(parseInt(state.headers["x-total-count"]))
+    setNumOfResults(parseInt(state.headers["x-total-count"]));
+    createPageNav(parseInt(state.headers["x-total-count"]));
   }, [state]);
 
   // Helper functions 
+  const createPageNav = (totalResults) => {
+    // 20 listings on each page 
+    const numOfPagesB = Math.ceil(totalResults / 20);
+    setNumOfPages(numOfPagesB);
+    let pageArrayB = [];
+    for (let i = 1; i <= numOfPagesB; i++) {
+      pageArrayB.push(i);
+    };
+    setPageArray(pageArrayB);
+  };
+
+  
+  const pageNavButtonClick = (event) => {
+    const pageClicked = parseInt(event.target.value);
+    setPage(pageClicked);
+    getListingsPage(pageClicked);
+  };
+
+  const lastPageNavButtonClick = () => {
+    const pageClicked = Math.ceil(numOfResults / 20);
+    setPage(pageClicked);
+    getListingsPage(pageClicked);
+  };
+
+  const pageNavNextButtonClick = () => {
+    setPage(page + 1);
+    getListingsPage(page + 1)
+  };
+
+  const pageNavPrevButtonClick = () => {
+    setPage(page - 1);
+    getListingsPage(page - 1);
+  };
+
+  const getListingsPage = (pageNumber) => {
+    domainAPI.getPropertyListings(searchData, pageNumber)
+      .then(res => {
+        console.log(res.data)
+        setSearchResults(res.data.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  };
+
   const handleLocationInputChange = () => {
     const newValue = locationRef.current.children[0].children[1].children[0].value;
     if (newValue === "") {
@@ -205,13 +256,79 @@ export default function ListingResults() {
             inspectionTime={listing.listing.inspectionSchedule.times[0] ?
               listing.listing.inspectionSchedule.times[0].openingTime : null
             }
-            agentSrc={listing.listing.advertiser.contacts[0].photoUrl}
-            agentName={listing.listing.advertiser.contacts[0].name}
+            agentSrc={listing.listing.advertiser.contacts.length > 0 ? listing.listing.advertiser.contacts[0].photoUrl : null}
+            agentName={listing.listing.advertiser.contacts.length > 0 ? listing.listing.advertiser.contacts[0].name : null}
             agency={listing.listing.advertiser.name}
             agencyColour={listing.listing.advertiser.preferredColourHex}
             agencyLogo={listing.listing.advertiser.logoUrl}
           /> : ""
         ))}
+      </div>
+      <div className="listing-page-navigator">
+        <table>
+          <tbody>
+            {
+              // If num of pages is less than five, render a page nav btn for each page
+              numOfPages <= 5 ? 
+                <tr>
+                  {page > 1 ? 
+                    <td>
+                      <button onClick={pageNavPrevButtonClick}
+                        className="prev-listing-page">Prev</button>
+                    </td> : <td></td>
+                  }
+                  {pageArray.map(item => (
+                    <td key={item}>
+                      <button
+                        onClick={pageNavButtonClick}
+                        value={item}
+                        className={page === item ? "selected-page" : ""}
+                      >{item}</button>
+                    </td>
+                  ))}
+                  {page < numOfPages ? 
+                    <td>
+                      <button onClick={pageNavNextButtonClick}
+                        className="next-listing-page">Next</button>
+                    </td> : <td></td>
+                  }
+                </tr>
+              :
+                <tr>
+                  {page > 1 ? 
+                    <td>
+                      <button onClick={pageNavPrevButtonClick}
+                        className="prev-listing-page">Prev</button>
+                    </td> : <td></td>
+                  }
+                  {currentPageArray.map(item => (
+                    <td key={item}>
+                      <button
+                        value={item}
+                        onClick={pageNavButtonClick}
+                        className={page === item ? "selected-page" : ""}
+                      >{item}</button>
+                    </td>
+                  ))}
+                  <td>
+                    <div>...</div>
+                  </td>
+                  <td>
+                    <button 
+                      onClick={lastPageNavButtonClick}
+                      className={page === numOfPages ? "selected-page" : ""}
+                      >{numOfPages}</button>
+                  </td>
+                  {page < numOfPages ? 
+                    <td>
+                      <button onClick={pageNavNextButtonClick}
+                        className="next-listing-page">Next</button>
+                    </td> : <td></td>
+                  }
+                </tr>
+              }
+          </tbody>
+        </table>
       </div>
     </div>
   );

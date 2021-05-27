@@ -1,6 +1,6 @@
 .listingCard-box {
   width: 100%;
-  height: fit-content;
+  height: 237px;
   background: white;
   border: 1px solid rgb(0, 0, 0, 0.12);
   border-radius: 2px;
@@ -13,7 +13,8 @@
 .listingCard-image {
   border-right: 1px solid rgb(0, 0, 0, 0.12);
   width: 355px;
-  /* height: 100%; */
+  height: 237px;
+  overflow: hidden;
   display: inline-block;
 }
 

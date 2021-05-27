@@ -236,12 +236,13 @@ export default function Home() {
       price: price.state === "" ? null : price.state,
     }
 
-    domainAPI.getPropertyListings(search)
+    domainAPI.getPropertyListings(search, 1)
       .then(res => {
         // setSearchResults(res.data);
         history.push({
           pathname: "/results",
           state: res.data,
+          searchData: search,
           searchWord: location,
         })
       })

@@ -12,7 +12,7 @@ const domainAPI = {
   getPropertyInfo: function(propertyId) {
     return axios.get(url + "/api/user/domain/property/q=" + propertyId)
   },
-  getPropertyListings: function(search) {
+  getPropertyListings: function(search, pageNumber) {
     return axios.post(url + "/api/user/domain/listings", {
         "listingType": "Sale",
         "propertyTypes": [
@@ -62,8 +62,8 @@ const domainAPI = {
           "sortKey": "Default",
           "direction": "Ascending",
         },
-        // "pageNumber": pageNumber,
-        // "pageSize": 20,      
+        "pageNumber": pageNumber,
+        "pageSize": 20,      
     });
   },
   getSingleListing: function(listingId) {
