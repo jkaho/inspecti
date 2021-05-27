@@ -40,7 +40,7 @@ export default function Reviews() {
   const [numOfPages, setNumOfPages] = useState();
   const [pageArray, setPageArray] = useState([]);
   const [reviewsToShow, setReviewsToShow] = useState([]);
-  const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4, 5]);
+  const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4]);
   const [page, setPage] = useState(1);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
 
@@ -256,22 +256,39 @@ export default function Reviews() {
     const pageClicked = parseInt(event.target.value);
     setPage(pageClicked);
     setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * 4, (pageClicked - 1) * 4 + 4));
+    setNavigationNumbers(pageClicked);
   };
 
   const lastPageNavButtonClick = () => {
     const pageClicked = Math.ceil(reviews.length / 4);
     setPage(pageClicked);
     setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * 4));
+    setNavigationNumbers(pageClicked);
   };
 
   const pageNavNextButtonClick = () => {
     setPage(page + 1);
     setReviewsToShow(modifiedReviews.slice(page * 4, (page * 4) + 4));
+    setNavigationNumbers(page + 1);
   };
 
   const pageNavPrevButtonClick = () => {
     setPage(page - 1);
     setReviewsToShow(modifiedReviews.slice((page - 1) * 4 - 4, (page - 1) * 4));
+    setNavigationNumbers(page - 1);
+  };
+
+  const setNavigationNumbers = (pageClicked) => {
+    if (reviews.length / 4 > 5) {
+      if (pageClicked > 3 && pageClicked < (reviews.length / 4) - 3) {
+        let navigationArr = [pageClicked - 1, pageClicked, pageClicked + 1];
+        setCurrentPageArray(navigationArr);
+      } else if (pageClicked < (reviews.length / 4) - 3) {
+        setCurrentPageArray([1, 2, 3, 4]);
+      } else if (pageClicked >= (reviews.length / 4) - 3) {
+        setCurrentPageArray([(reviews.length / 4) - 3, (reviews.length / 4) - 2, (reviews.length / 4) - 1, (reviews.length / 4)]);        
+      }  
+    }
   };
 
   return (
@@ -405,6 +422,20 @@ export default function Reviews() {
                         className="prev-review-page">Prev</button>
                     </td> : <td></td>
                   }
+                  {page >= (reviews.length / 4) - 3 ?
+                    <>
+                      <td>
+                        <button 
+                          value={1}
+                          onClick={pageNavButtonClick}
+                          className={page === numOfPages ? "selected-page" : ""}
+                          >{1}</button>
+                      </td>
+                      <td>
+                        <div>...</div>
+                      </td>
+                    </> : <></>
+                  }
                   {currentPageArray.map(item => (
                     <td key={item}>
                       <button
@@ -414,15 +445,19 @@ export default function Reviews() {
                       >{item}</button>
                     </td>
                   ))}
-                  <td>
-                    <div>...</div>
-                  </td>
-                  <td>
-                    <button 
-                      onClick={lastPageNavButtonClick}
-                      className={page === numOfPages ? "selected-page" : ""}
-                      >{numOfPages}</button>
-                  </td>
+                  {page < (reviews.length / 4) - 3 ?
+                    <>
+                      <td>
+                        <div>...</div>
+                      </td>
+                      <td>
+                        <button 
+                          onClick={lastPageNavButtonClick}
+                          className={page === numOfPages ? "selected-page" : ""}
+                          >{numOfPages}</button>
+                      </td>
+                    </> : <></>
+                  }
                   {page < numOfPages ? 
                     <td>
                       <button onClick={pageNavNextButtonClick}
