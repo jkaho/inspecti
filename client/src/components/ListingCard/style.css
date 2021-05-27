@@ -1,6 +1,6 @@
 .listingCard-box {
   width: 100%;
-  height: 237px;
+  height: fit-content;
   background: white;
   border: 1px solid rgb(0, 0, 0, 0.12);
   border-radius: 2px;

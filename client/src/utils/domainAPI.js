@@ -62,7 +62,8 @@ const domainAPI = {
           "sortKey": "Default",
           "direction": "Ascending",
         },
-        "pageSize": 20,      
+        // "pageNumber": pageNumber,
+        // "pageSize": 20,      
     });
   },
   getSingleListing: function(listingId) {

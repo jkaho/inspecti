@@ -37,13 +37,15 @@ export default function ListingResults() {
     state: "",
   });
   const [results, setSearchResults] = useState([]);
+  const [totalResults, setTotalResults] = useState();
 
   // Refs
   const locationRef = useRef();
 
   // Initial render
   useEffect(() => {
-    setSearchResults(state);
+    setSearchResults(state.data);
+    setTotalResults(parseInt(state.headers["x-total-count"]))
   }, [state]);
 
   // Helper functions 

@@ -238,7 +238,6 @@ export default function Home() {
 
     domainAPI.getPropertyListings(search)
       .then(res => {
-        console.log(res.data);
         // setSearchResults(res.data);
         history.push({
           pathname: "/results",

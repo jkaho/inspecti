@@ -147,7 +147,13 @@ router.post("/domain/listings", function(req, res) {
       }
     }, 
   )
-  .then(result => res.json(result.data))
+  .then(result => {
+    let obj = {
+      headers: result.headers,
+      data: result.data
+    }
+    res.json(obj)
+  })
   .catch(err => console.log(err));
 });
 
