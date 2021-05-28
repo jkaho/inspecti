@@ -43,6 +43,7 @@ export default function Reviews() {
   const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4]);
   const [page, setPage] = useState(1);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
+  const reviewsPerPage = 5;
 
   // Refs
   const inputRef = useRef();
@@ -54,7 +55,7 @@ export default function Reviews() {
       .then(res => {
         setReviews(res.data);
         setModifiedReviews(res.data);
-        setReviewsToShow(res.data.slice(0, 4));
+        setReviewsToShow(res.data.slice(0, reviewsPerPage));
         createPageNav(res.data.length);
       })
       .catch(err => {
@@ -218,18 +219,18 @@ export default function Reviews() {
 
     setModifiedReviews(sortedResults);
     if (page === sortedResults.length) {
-      setReviewsToShow(sortedResults.slice((page * 4) - 4));
+      setReviewsToShow(sortedResults.slice((page * reviewsPerPage) - reviewsPerPage));
     } else {
-      setReviewsToShow(sortedResults.slice((page * 4) - 4, (page * 4)));
+      setReviewsToShow(sortedResults.slice((page * reviewsPerPage) - reviewsPerPage, (page * reviewsPerPage)));
     }
   };
 
   const handleClearSortButtonClick = () => {
     setModifiedReviews(reviews);
     if (page === reviews.length) {
-      setReviewsToShow(reviews.slice((page * 4) - 4));
+      setReviewsToShow(reviews.slice((page * reviewsPerPage) - reviewsPerPage));
     } else {
-      setReviewsToShow(reviews.slice((page * 4) - 4, (page * 4)));
+      setReviewsToShow(reviews.slice((page * reviewsPerPage) - reviewsPerPage, (page * reviewsPerPage)));
     }
   };
 
@@ -243,7 +244,7 @@ export default function Reviews() {
   
   const createPageNav = (totalReviews) => {
     // 20 reviews on each page 
-    const numOfPagesB = Math.ceil(totalReviews / 4);
+    const numOfPagesB = Math.ceil(totalReviews / reviewsPerPage);
     setNumOfPages(numOfPagesB);
     let pageArrayB = [];
     for (let i = 1; i <= numOfPagesB; i++) {
@@ -255,39 +256,49 @@ export default function Reviews() {
   const pageNavButtonClick = (event) => {
     const pageClicked = parseInt(event.target.value);
     setPage(pageClicked);
-    setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * 4, (pageClicked - 1) * 4 + 4));
+    setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * reviewsPerPage, (pageClicked - 1) * reviewsPerPage + reviewsPerPage));
     setNavigationNumbers(pageClicked);
   };
 
   const lastPageNavButtonClick = () => {
-    const pageClicked = Math.ceil(reviews.length / 4);
+    const pageClicked = Math.ceilnumOfPages;
     setPage(pageClicked);
-    setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * 4));
+    setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * reviewsPerPage));
     setNavigationNumbers(pageClicked);
   };
 
   const pageNavNextButtonClick = () => {
     setPage(page + 1);
-    setReviewsToShow(modifiedReviews.slice(page * 4, (page * 4) + 4));
+    setReviewsToShow(modifiedReviews.slice(page * reviewsPerPage, (page * reviewsPerPage) + reviewsPerPage));
     setNavigationNumbers(page + 1);
   };
 
   const pageNavPrevButtonClick = () => {
     setPage(page - 1);
-    setReviewsToShow(modifiedReviews.slice((page - 1) * 4 - 4, (page - 1) * 4));
+    setReviewsToShow(modifiedReviews.slice((page - 1) * reviewsPerPage - reviewsPerPage, (page - 1) * reviewsPerPage));
     setNavigationNumbers(page - 1);
   };
 
   const setNavigationNumbers = (pageClicked) => {
-    if (reviews.length / 4 > 5) {
-      if (pageClicked > 3 && pageClicked < (reviews.length / 4) - 3) {
-        let navigationArr = [pageClicked - 1, pageClicked, pageClicked + 1];
-        setCurrentPageArray(navigationArr);
-      } else if (pageClicked < (reviews.length / 4) - 3) {
-        setCurrentPageArray([1, 2, 3, 4]);
-      } else if (pageClicked >= (reviews.length / 4) - 3) {
-        setCurrentPageArray([(reviews.length / 4) - 3, (reviews.length / 4) - 2, (reviews.length / 4) - 1, (reviews.length / 4)]);        
-      }  
+    if (numOfPages >= 6) {
+      if (pageClicked < 4) {
+        console.log("first")
+        setCurrentPageArray([1, 2, 3, 4])
+      } else if (pageClicked >= 4 && pageClicked < numOfPages - 2) {
+        console.log("middle")
+        setCurrentPageArray([pageClicked - 1, pageClicked, pageClicked + 1]);
+      } else if (pageClicked >= numOfPages - 2) {
+        console.log("last")
+        setCurrentPageArray([numOfPages - 3, numOfPages - 2, numOfPages - 1, numOfPages])
+      }
+      // if (pageClicked > 3 && pageClicked < numOfPages - 3) {
+      //   let navigationArr = [pageClicked - 1, pageClicked, pageClicked + 1];
+      //   setCurrentPageArray(navigationArr);
+      // } else if (pageClicked < numOfPages - 3) {
+      //   setCurrentPageArray([1, 2, 3, 4]);
+      // } else if (pageClicked >= numOfPages - 3) {
+      //   setCurrentPageArray([numOfPages - 3, numOfPages - 2, numOfPages - 1, numOfPages]);        
+      // }  
     }
   };
 
@@ -422,13 +433,13 @@ export default function Reviews() {
                         className="prev-review-page">Prev</button>
                     </td> : <td></td>
                   }
-                  {page >= (reviews.length / 4) - 3 ?
+                  {page > 3 ?
                     <>
                       <td>
                         <button 
                           value={1}
                           onClick={pageNavButtonClick}
-                          className={page === numOfPages ? "selected-page" : ""}
+                          className={page === 1 ? "selected-page" : ""}
                           >{1}</button>
                       </td>
                       <td>
@@ -445,7 +456,7 @@ export default function Reviews() {
                       >{item}</button>
                     </td>
                   ))}
-                  {page < (reviews.length / 4) - 3 ?
+                  {page < numOfPages - 2 ?
                     <>
                       <td>
                         <div>...</div>
