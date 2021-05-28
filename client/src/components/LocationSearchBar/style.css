@@ -1,0 +1,10 @@
+#search-bar-span {
+  display: inline;
+}
+
+/* ------- MEDIA QUERIES ------- */
+@media (max-width: 600px) {
+  #search-bar-span {
+    display: none;
+  }
+}

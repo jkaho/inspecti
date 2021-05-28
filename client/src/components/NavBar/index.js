@@ -16,6 +16,8 @@ import "./style.css";
 // Images
 import logo from "../../images/logo.png";
 import logoWhite from "../../images/logo-white.png";
+import logoSmall from "../../images/logo-sm.png";
+import logoSmallWhite from "../../images/logo-sm-white.png";
 // API routes
 import authenticationAPI from "../../utils/authenticationAPI";
 import userAPI from "../../utils/userAPI";
@@ -64,9 +66,16 @@ export default function Navbar() {
   const classes = useStyles();
   // States
   const [isAuthenticated, setAuthentication] = useState(false);
+  const [logoState, setLogoState] = useState();
 
   // Initial render
   useEffect(() => {
+    if (window.innerWidth > 600) {
+      setLogoState("lg");
+    } else {
+      setLogoState("sm");
+    }
+
     authenticationAPI.authenticated()
       .then(res => {
         if (res.data.isAuthenticated === true) {
@@ -85,7 +94,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className={classes.root}>
+    <div id="navbar" className={classes.root}>
       <AppBar
         position="static"
         className={
@@ -98,7 +107,7 @@ export default function Navbar() {
       >
         <Toolbar
           className={
-            window.location.href === url ||
+          window.location.href === url ||
           window.location.href === url + "#rating-criteria-explanation" ?
             "nav-toolbar-home" :
             "nav-toolbar"          
@@ -114,20 +123,31 @@ export default function Navbar() {
           >
             Inspecti
           </Typography> */}
-          <Link to="/" style={{ flexGrow: 1, marginTop: "10px" }}>
-            <img src={
+          <Link to="/" style={{ flexGrow: 1 }}>
+            <div id="navbar-logo-div"
+              className={
+                window.location.href === url ||
+                window.location.href === url + "#rating-criteria-explanation" ?
+                "logoWhite" : "logo"
+              }
+            ></div>
+            {/* <img src={
+              window.innerWidth > 600 ?
               window.location.href === url ||
               window.location.href === url + "#rating-criteria-explanation" ?
-              logoWhite : logo
+              logoWhite : logo : 
+              window.location.href === url ||
+              window.location.href === url + "#rating-criteria-explanation" ? 
+              logoSmallWhite : logoSmallWhite
             } 
+              id="navbar-logo"
               alt="Inspecti logo" 
-              width="200px"
-            />
+            /> */}
           </Link>
           <Button
             className={
               window.location.href === url ||
-          window.location.href === url + "#rating-criteria-explanation" ?
+              window.location.href === url + "#rating-criteria-explanation" ?
               classes.colorWhite :
               classes.colorBlack
             }
@@ -137,7 +157,7 @@ export default function Navbar() {
           <Button
             className={
               window.location.href === url ||
-          window.location.href === url + "#rating-criteria-explanation" ?
+              window.location.href === url + "#rating-criteria-explanation" ?
               classes.colorWhite :
               classes.colorBlack
             }
@@ -148,7 +168,7 @@ export default function Navbar() {
             variant="body1"
             className={
               window.location.href === url ||
-          window.location.href === url + "#rating-criteria-explanation" ?
+              window.location.href === url + "#rating-criteria-explanation" ?
               classes.colorWhite :
               classes.colorBlack
             }
@@ -160,7 +180,7 @@ export default function Navbar() {
               <Button
                 className={
                   window.location.href === url ||
-          window.location.href === url + "#rating-criteria-explanation" ?
+                  window.location.href === url + "#rating-criteria-explanation" ?
                   classes.colorWhite :
                   classes.colorBlack
                 }          
@@ -168,9 +188,10 @@ export default function Navbar() {
                 <Link to="/login">Log in</Link>
               </Button>
               <Button
+                id="signup-btn-nav"
                 className={
                   window.location.href === url ||
-          window.location.href === url + "#rating-criteria-explanation" ?
+                  window.location.href === url + "#rating-criteria-explanation" ?
                   classes.joinBtnHome :
                   classes.joinBtn
                 }          
@@ -182,7 +203,7 @@ export default function Navbar() {
               <MyPagesMenu
                 colorProp={
                   window.location.href === url ||
-          window.location.href === url + "#rating-criteria-explanation" ?
+                  window.location.href === url + "#rating-criteria-explanation" ?
                   "white" :
                   "black"
                 } 
@@ -190,7 +211,7 @@ export default function Navbar() {
               <Button
                 className={
                   window.location.href === url ||
-          window.location.href === url + "#rating-criteria-explanation" ?
+                  window.location.href === url + "#rating-criteria-explanation" ?
                   classes.colorWhite :
                   classes.colorBlack
                 } 

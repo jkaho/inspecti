@@ -50,7 +50,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: "white",
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
+    '@media (max-width:600px) and (min-width:500px)': {
+      fontSize: '2rem',
+    },
+    '@media (max-width:499px)': {
+      fontSize: '1.5rem',
+    },
   }
 }));
 

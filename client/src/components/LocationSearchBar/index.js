@@ -3,6 +3,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
+import "./style.css";
 
 export default function LocationSearchBar(props) {
   // Format locations from API data 
@@ -40,10 +41,10 @@ export default function LocationSearchBar(props) {
         id="home-listing-search-btn"
         variant="contained"
         color="secondary"
-        startIcon={<SearchIcon />}
+        endIcon={<SearchIcon style={{ fontSize: "30px" }}/>}
         type="submit"
       >
-        Search
+        <span id="search-bar-span">Search</span>
       </Button>
       {/* <button type="submit"></button> */}
     </form>
