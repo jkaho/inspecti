@@ -323,7 +323,7 @@ export default function Reviews() {
         <table>
           <tbody>
             <tr>
-              <td>{reviews.length} REVIEWS</td>
+              <td>{(page * reviewsPerPage) - (reviewsPerPage - 1)}-{page * reviewsPerPage} OUT OF {reviews.length} REVIEWS</td>
               <td className="review-sort-td">
                 <TextField
                   id="outlined-select-reviews"
