@@ -291,14 +291,6 @@ export default function Reviews() {
         console.log("last")
         setCurrentPageArray([numOfPages - 3, numOfPages - 2, numOfPages - 1, numOfPages])
       }
-      // if (pageClicked > 3 && pageClicked < numOfPages - 3) {
-      //   let navigationArr = [pageClicked - 1, pageClicked, pageClicked + 1];
-      //   setCurrentPageArray(navigationArr);
-      // } else if (pageClicked < numOfPages - 3) {
-      //   setCurrentPageArray([1, 2, 3, 4]);
-      // } else if (pageClicked >= numOfPages - 3) {
-      //   setCurrentPageArray([numOfPages - 3, numOfPages - 2, numOfPages - 1, numOfPages]);        
-      // }  
     }
   };
 

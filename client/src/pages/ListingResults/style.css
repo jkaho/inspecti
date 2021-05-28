@@ -73,6 +73,16 @@
   color: white;
 }
 
+.results-info-keyword, 
+.results-info-pages {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.results-info-keyword {
+  width: 75%;
+}
+
 @media (max-width: 900px) {
   .results-container {
     width: 500px;

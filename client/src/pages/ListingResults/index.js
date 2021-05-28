@@ -40,9 +40,10 @@ export default function ListingResults() {
   // const [totalResults, setTotalResults] = useState();
   const [numOfPages, setNumOfPages] = useState();
   const [pageArray, setPageArray] = useState([]);
-  const currentPageArray = [1, 2, 3, 4, 5];
+  const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4]);
   const [page, setPage] = useState(1);
   const [numOfResults, setNumOfResults] = useState();
+  const resultsPerPage = 20;
 
   // Refs
   const locationRef = useRef();
@@ -57,7 +58,7 @@ export default function ListingResults() {
   // Helper functions 
   const createPageNav = (totalResults) => {
     // 20 listings on each page 
-    const numOfPagesB = Math.ceil(totalResults / 20);
+    const numOfPagesB = Math.ceil(totalResults / resultsPerPage);
     setNumOfPages(numOfPagesB);
     let pageArrayB = [];
     for (let i = 1; i <= numOfPagesB; i++) {
@@ -71,22 +72,26 @@ export default function ListingResults() {
     const pageClicked = parseInt(event.target.value);
     setPage(pageClicked);
     getListingsPage(pageClicked);
+    setNavigationNumbers(pageClicked);
   };
 
   const lastPageNavButtonClick = () => {
-    const pageClicked = Math.ceil(numOfResults / 20);
+    const pageClicked = Math.ceil(numOfResults / resultsPerPage);
     setPage(pageClicked);
     getListingsPage(pageClicked);
+    setNavigationNumbers(pageClicked);
   };
 
   const pageNavNextButtonClick = () => {
     setPage(page + 1);
-    getListingsPage(page + 1)
+    getListingsPage(page + 1);
+    setNavigationNumbers(page + 1);
   };
 
   const pageNavPrevButtonClick = () => {
     setPage(page - 1);
     getListingsPage(page - 1);
+    setNavigationNumbers(page - 1);
   };
 
   const getListingsPage = (pageNumber) => {
@@ -98,6 +103,21 @@ export default function ListingResults() {
       .catch(err => {
         console.log(err);
       })
+  };
+
+  const setNavigationNumbers = (pageClicked) => {
+    if (numOfPages >= 6) {
+      if (pageClicked < 4) {
+        console.log("first")
+        setCurrentPageArray([1, 2, 3, 4])
+      } else if (pageClicked >= 4 && pageClicked < numOfPages - 2) {
+        console.log("middle")
+        setCurrentPageArray([pageClicked - 1, pageClicked, pageClicked + 1]);
+      } else if (pageClicked >= numOfPages - 2) {
+        console.log("last")
+        setCurrentPageArray([numOfPages - 3, numOfPages - 2, numOfPages - 1, numOfPages])
+      }
+    }
   };
 
   const handleLocationInputChange = () => {
@@ -229,6 +249,9 @@ export default function ListingResults() {
           Search results for&nbsp; 
           <span style={{ fontWeight: "600" }}>"{formatLocationSuggestion(searchWord)}"</span>
         </div>
+        <div className="results-info-pages">
+          <strong>{(page * resultsPerPage) - (resultsPerPage - 1)}-{page * resultsPerPage}</strong> out of <strong>{numOfResults}</strong> RESULTS
+        </div>
       </div>
       <div className="results-container">
         {results.map(listing => (
@@ -277,6 +300,7 @@ export default function ListingResults() {
                         className="prev-listing-page">Prev</button>
                     </td> : <td></td>
                   }
+
                   {pageArray.map(item => (
                     <td key={item}>
                       <button
@@ -301,6 +325,20 @@ export default function ListingResults() {
                         className="prev-listing-page">Prev</button>
                     </td> : <td></td>
                   }
+                  {page > 3 ?
+                    <>
+                      <td>
+                        <button 
+                          value={1}
+                          onClick={pageNavButtonClick}
+                          className={page === 1 ? "selected-page" : ""}
+                          >{1}</button>
+                      </td>
+                      <td>
+                        <div>...</div>
+                      </td>
+                    </> : <></>
+                  }
                   {currentPageArray.map(item => (
                     <td key={item}>
                       <button
@@ -310,15 +348,19 @@ export default function ListingResults() {
                       >{item}</button>
                     </td>
                   ))}
-                  <td>
-                    <div>...</div>
-                  </td>
-                  <td>
-                    <button 
-                      onClick={lastPageNavButtonClick}
-                      className={page === numOfPages ? "selected-page" : ""}
-                      >{numOfPages}</button>
-                  </td>
+                  {page < numOfPages - 2 ?
+                    <>
+                      <td>
+                        <div>...</div>
+                      </td>
+                      <td>
+                        <button 
+                          onClick={lastPageNavButtonClick}
+                          className={page === numOfPages ? "selected-page" : ""}
+                          >{numOfPages}</button>
+                      </td>
+                    </> : <></>
+                  }
                   {page < numOfPages ? 
                     <td>
                       <button onClick={pageNavNextButtonClick}
