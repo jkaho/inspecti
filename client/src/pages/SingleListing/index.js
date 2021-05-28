@@ -99,8 +99,8 @@ export default function SingleListing(props) {
                 isOpen: true,
                 type: "eventAdd",
                 title: `Add ${eventToAddData.eventType} Event`,
-                text: `Are you sure you want to add an ${eventToAddData.eventType} event for 
-                ${eventToAddData.propertyAddress} on ${moment(eventToAddData.startTime).format("dddd Do MMMM, h:mma")}?`
+                text: `Are you sure you want to add an ${eventToAddData.eventType.toLowerCase()} event for 
+                "${eventToAddData.propertyAddress}" on ${moment(eventToAddData.startTime).format("dddd Do MMMM, h:mma")}?`
               });
             }
           });
@@ -109,8 +109,8 @@ export default function SingleListing(props) {
             isOpen: true,
             type: "eventAdd",
             title: `Add ${eventToAddData.eventType} Event`,
-            text: `Are you sure you want to add an ${eventToAddData.eventType} event for 
-            ${eventToAddData.propertyAddress} on ${moment(eventToAddData.startTime).format("dddd Do MMMM, h:mma")}?`
+            text: `Are you sure you want to add an ${eventToAddData.eventType.toLowerCase()} event for 
+            "${eventToAddData.propertyAddress}" on ${moment(eventToAddData.startTime).format("dddd Do MMMM, h:mma")}?`
           });
         }
       })
