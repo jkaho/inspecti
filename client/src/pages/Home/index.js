@@ -225,6 +225,10 @@ export default function Home() {
     // setSuggestionOpen(false);
     setLocationSuggestions([]);
 
+    if (!location) {
+      return;
+    }
+    
     const search = {
       location: location,
       minMax: minMax,

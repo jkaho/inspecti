@@ -155,7 +155,7 @@ export default function ListingResults() {
 
     domainAPI.getPropertyListings(search)
       .then(res => {
-        setSearchResults(res.data);
+        setSearchResults(res.data.data);
       })
       .catch(err => console.log(err))
   };
@@ -254,7 +254,7 @@ export default function ListingResults() {
         </div>
       </div>
       <div className="results-container">
-        {results.map(listing => (
+        {results ? results.map(listing => (
           listing.type === "PropertyListing" ?
           <ListingCard
             onClick={handleListingClick}
@@ -285,7 +285,7 @@ export default function ListingResults() {
             agencyColour={listing.listing.advertiser.preferredColourHex}
             agencyLogo={listing.listing.advertiser.logoUrl}
           /> : ""
-        ))}
+        )) : <></>}
       </div>
       <div className="listing-page-navigator">
         <table>
