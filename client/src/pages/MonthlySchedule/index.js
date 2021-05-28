@@ -115,6 +115,16 @@ export default function MonthlySchedule() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    if (!address) {
+      setPopup({
+        open: true,
+        type: "noAddress",
+        severity: "warning",
+        message: "You must input a valid property address"
+      });
+      return;
+    }
+    
     const newEvent = {
       eventType: typeRef.current.children[1].children[0].value,
       startTime: startTimeRef.current.value,

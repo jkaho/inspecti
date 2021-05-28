@@ -108,6 +108,16 @@ export default function SignUp(props) {
       password: password
     };
 
+    if (password.length < 8) {
+      setPopup({
+        open: true,
+        severity: "warning",
+        type: "shortPassword",
+        message: "Your password must be at least 8 characters"
+      });
+      return;
+    }
+
     userAPI.signUpUser(userData)
       .then(() => {
         userAPI.logInUser({
@@ -197,6 +207,7 @@ export default function SignUp(props) {
                 </div>
                 <div className="field-div">
                   <TextField 
+                    type="email"
                     required 
                     variant="outlined" 
                     label="Email" 

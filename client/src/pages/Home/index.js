@@ -210,7 +210,8 @@ export default function Home() {
       domainAPI.getLocationSuggestions(newValue)
       .then(res => {
         setLocationSuggestions(res.data);
-        setLocation(res.data[0]);
+        // ADD BACK IN IF 229 DOESN'T WORK
+        // setLocation(res.data[0]);
       })
       .catch(err => console.log(err))
     }
@@ -224,6 +225,11 @@ export default function Home() {
     event.preventDefault();
     // setSuggestionOpen(false);
     setLocationSuggestions([]);
+
+    // TEST THIS 
+    // if (locationSuggestions.length > 0 && !location) {
+    //   setLocation(locationSuggestions[0]);
+    // }
 
     if (!location) {
       return;
