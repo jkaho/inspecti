@@ -7,46 +7,46 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+// import ToggleButton from "@material-ui/lab/ToggleButton";
+// import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 // CSS
 import "./style.css";
 
 // Class styles
-const useStyles = makeStyles((theme) => ({
-  unselected: {
-    background: "white",
-    color: "black",
-    padding: 5,
-    "&:hover": {
-      background: "white",
-    },
-    fontSize: 12,
-    width: 40,
-  },
-  selected: {
-    backgroundColor: "rgb(116, 32, 139)!important",
-    color: "white!important",
-    padding: 5,
-    fontSize: 12,
-    width: 40,
-  },
-  formControl: {
-    minWidth: 120,
-    marginLeft: 10
-  },
-  selectEmpty: {
-    color: "rgb(102, 4, 148)"
-  },
-  toggleBtn: {
-    verticalAlign: "top",
-    marginRight: 10,
-  },
-  span: {
-    verticalAlign: "top"
-  }
-}));
+// const useStyles = makeStyles((theme) => ({
+//   unselected: {
+//     background: "white",
+//     color: "black",
+//     padding: 5,
+//     "&:hover": {
+//       background: "white",
+//     },
+//     fontSize: 12,
+//     width: 40,
+//   },
+//   selected: {
+//     backgroundColor: "rgb(116, 32, 139)!important",
+//     color: "white!important",
+//     padding: 5,
+//     fontSize: 12,
+//     width: 40,
+//   },
+//   formControl: {
+//     minWidth: 120,
+//     marginLeft: 10
+//   },
+//   selectEmpty: {
+//     color: "rgb(102, 4, 148)"
+//   },
+//   toggleBtn: {
+//     verticalAlign: "top",
+//     marginRight: 10,
+//   },
+//   span: {
+//     verticalAlign: "top"
+//   }
+// }));
 
 function MinMaxRadioGroup(props) {
   return (

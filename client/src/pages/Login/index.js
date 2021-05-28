@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 // react-router-dom
 import { Link } from "react-router-dom";
 // Child components
-import Popup from "../../components/Popup";
+// import Popup from "../../components/Popup";
 import PopupMessage from "../../components/PopupMessage";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
@@ -31,7 +31,11 @@ const useStyles = makeStyles((theme) => ({
   },
   page: {
     minHeight: "100vh",
-    height: "100%"  
+    height: "100%",
+    // '@media (max-width:600px)': {
+    //   minHeight: "none",
+    //   height: "fit-content",
+    // },  
   },
   purpleFont: {
     color: "rgb(164, 0, 197)",

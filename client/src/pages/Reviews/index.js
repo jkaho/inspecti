@@ -258,6 +258,7 @@ export default function Reviews() {
     setPage(pageClicked);
     setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * reviewsPerPage, (pageClicked - 1) * reviewsPerPage + reviewsPerPage));
     setNavigationNumbers(pageClicked);
+    backToTop();
   };
 
   const lastPageNavButtonClick = () => {
@@ -265,18 +266,26 @@ export default function Reviews() {
     setPage(pageClicked);
     setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * reviewsPerPage));
     setNavigationNumbers(pageClicked);
+    backToTop();
   };
 
   const pageNavNextButtonClick = () => {
     setPage(page + 1);
     setReviewsToShow(modifiedReviews.slice(page * reviewsPerPage, (page * reviewsPerPage) + reviewsPerPage));
     setNavigationNumbers(page + 1);
+    backToTop();
   };
 
   const pageNavPrevButtonClick = () => {
     setPage(page - 1);
     setReviewsToShow(modifiedReviews.slice((page - 1) * reviewsPerPage - reviewsPerPage, (page - 1) * reviewsPerPage));
     setNavigationNumbers(page - 1);
+    backToTop();
+  };
+
+  const backToTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   };
 
   const setNavigationNumbers = (pageClicked) => {
@@ -293,6 +302,45 @@ export default function Reviews() {
       }
     }
   };
+
+  const sortSelect = (
+    <>
+      <TextField
+        id="outlined-select-reviews"
+        select
+        ref={sortRef}
+        value={criteria}
+        label="Sort by"
+        onChange={handleSortChange}
+        SelectProps={{
+          native: true,
+        }}
+        inputProps={{
+          style: {
+            padding: 5,
+          }
+        }}
+        variant="outlined"
+      >
+        {sortCriteria.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </TextField>
+      <div className="sort-btn-div">
+        <IconButton id="sortbtn-asc" className="sort-btn" onClick={handleSortButtonClick}>
+          <ExpandLessIcon id="sorticon-asc" />
+        </IconButton>
+        <IconButton id="sortbtn-desc" className="sort-btn" onClick={handleSortButtonClick}>
+          <ExpandMoreIcon id="sorticon-desc" />
+        </IconButton>
+        <IconButton className="sort-btn" onClick={handleClearSortButtonClick}>
+          <ClearIcon />
+        </IconButton>
+      </div>
+    </>
+  );
 
   return (
     <div className="reviews-page">
@@ -315,43 +363,15 @@ export default function Reviews() {
         <table>
           <tbody>
             <tr>
-              <td>{(page * reviewsPerPage) - (reviewsPerPage - 1)}-{page * reviewsPerPage} OUT OF {reviews.length} REVIEWS</td>
-              <td className="review-sort-td">
-                <TextField
-                  id="outlined-select-reviews"
-                  select
-                  ref={sortRef}
-                  value={criteria}
-                  label="Sort by"
-                  onChange={handleSortChange}
-                  SelectProps={{
-                    native: true,
-                  }}
-                  inputProps={{
-                    style: {
-                      padding: 5,
-                    }
-                  }}
-                  variant="outlined"
-                >
-                  {sortCriteria.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </TextField>
-                <div className="sort-btn-div">
-                  <IconButton id="sortbtn-asc" className="sort-btn" onClick={handleSortButtonClick}>
-                    <ExpandLessIcon id="sorticon-asc" />
-                  </IconButton>
-                  <IconButton id="sortbtn-desc" className="sort-btn" onClick={handleSortButtonClick}>
-                    <ExpandMoreIcon id="sorticon-desc" />
-                  </IconButton>
-                  <IconButton className="sort-btn" onClick={handleClearSortButtonClick}>
-                    <ClearIcon />
-                  </IconButton>
-                </div>
+              <td id="review-pages-outof">
+                <strong>{(page * reviewsPerPage) - (reviewsPerPage - 1)}-{page * reviewsPerPage}</strong> out of <strong>{reviews.length}</strong> REVIEWS
               </td>
+              <td className="review-sort-td">
+                {sortSelect}
+              </td>
+            </tr>
+            <tr className="review-sort-responsive">
+              <td>{sortSelect}</td>
             </tr>
           </tbody>
         </table>

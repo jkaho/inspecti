@@ -54,6 +54,12 @@
 
 .review-sort-td {
   text-align: right;
+  display: table-cell;
+}
+
+.review-sort-responsive {
+  display: none;
+  padding-top: 10px;
 }
 
 .sort-btn-div {
@@ -129,3 +135,54 @@
   color: white;
 }
 
+/* ------- MEDIA QUERIES ------- */
+@media (max-width: 600px) {
+  .review-search-div {
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  #review-search-wrapper {
+    width: 95%;
+  }
+
+  #reviews-search-input {
+    font-size: 13px;
+    height: 35px;
+  }
+
+  .search-review-icon {
+    width: 10%;
+  }
+
+  .review-sort-div {
+    width: 86%;
+    border: 1px solid rgb(219, 219, 219);
+    margin-bottom: 10px;
+  }
+
+  .review-sort-div table {
+    width: 100%;
+  }
+
+  .review-sort-responsive {
+    display: table-cell;
+  }
+
+  .review-sort-td {
+    display: none;
+  }
+
+  #review-pages-outof {
+    font-size: 13px;
+  }
+
+  .review-container {
+    width: 90%;
+  }
+
+  .review-page-navigator {
+    margin-top: 20px;
+    width: 90%;
+  }
+}

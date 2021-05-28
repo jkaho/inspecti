@@ -14,10 +14,10 @@ import Button from '@material-ui/core/Button';
 // CSS
 import "./style.css";
 // Images
-import logo from "../../images/logo.png";
-import logoWhite from "../../images/logo-white.png";
-import logoSmall from "../../images/logo-sm.png";
-import logoSmallWhite from "../../images/logo-sm-white.png";
+// import logo from "../../images/logo.png";
+// import logoWhite from "../../images/logo-white.png";
+// import logoSmall from "../../images/logo-sm.png";
+// import logoSmallWhite from "../../images/logo-sm-white.png";
 // API routes
 import authenticationAPI from "../../utils/authenticationAPI";
 import userAPI from "../../utils/userAPI";
@@ -45,11 +45,13 @@ const useStyles = makeStyles((theme) => ({
   },
   joinBtn: {
     border: "1px solid black",
-    color: "black"
+    color: "black",
+    marginLeft: "10px",
   },
   joinBtnHome: {
     border: "1px solid white",
-    color: "white"
+    color: "white",
+    marginLeft: "10px",
   },
   colorBlack: {
     color: "black",
@@ -66,16 +68,9 @@ export default function Navbar() {
   const classes = useStyles();
   // States
   const [isAuthenticated, setAuthentication] = useState(false);
-  const [logoState, setLogoState] = useState();
 
   // Initial render
   useEffect(() => {
-    if (window.innerWidth > 600) {
-      setLogoState("lg");
-    } else {
-      setLogoState("sm");
-    }
-
     authenticationAPI.authenticated()
       .then(res => {
         if (res.data.isAuthenticated === true) {

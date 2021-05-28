@@ -20,7 +20,6 @@
   padding-top: 0;
   height: 100%;
   overflow: auto;
-
 }
 
 .review-content-title h3 {
@@ -68,4 +67,47 @@
 
 .review-score {
   text-align: right;
+}
+
+.review-table {
+  display: table;
+}
+
+.review-table-responsive {
+  display: none;
+  width: 100%;
+}
+
+#property-specs-info {
+  display: table-cell;
+}
+
+#property-specs-info-responsive {
+  display: none;
+}
+
+/* ------- MEDIA QUERIES ------- */
+@media (max-width: 600px) {
+  .review-table {
+    display: none;
+  }
+  
+  .review-table-responsive {
+    display: table;
+  }
+
+  .review-text {
+    overflow: auto;
+    height: fit-content;
+    max-height: 250px;
+  }  
+
+  #property-specs-info {
+    display: none;
+  }
+  
+  #property-specs-info-responsive {
+    display: table-cell;
+    padding-bottom: 10px;
+  }
 }
