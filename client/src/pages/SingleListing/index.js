@@ -171,6 +171,8 @@ export default function SingleListing(props) {
   };
 
   const listingInfoSection = (
+    <>
+    {listing ? 
       <div className="single-listing-info">
           <div className="single-listing-priceHeading">
             <h3>
@@ -325,11 +327,13 @@ export default function SingleListing(props) {
               <img src={state.advertiser.logoUrl} alt=""></img>
             </div>
           </div>
-        </div>
+        </div> : <></>
+      }
+    </>
   );
 
   return (
-    <div>
+    <>
       <NavBar />
       <div className="back-to-search-results">
         {/* <Link to="/results" style={{ textDecoration: "none" }}> */}
@@ -368,6 +372,6 @@ export default function SingleListing(props) {
         severity={popup.severity}
         message={popup.message}
       />
-    </div>
+    </>
   );
 };

@@ -7,17 +7,13 @@ import MyPagesMenu from "../MyPagesMenu";
 // Material Design
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import IconButton from '@material-ui/core/IconButton';
+import PersonAddIcon from "@material-ui/icons/PersonAddOutlined";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-// import IconButton from '@material-ui/core/IconButton';
 // CSS
 import "./style.css";
-// Images
-// import logo from "../../images/logo.png";
-// import logoWhite from "../../images/logo-white.png";
-// import logoSmall from "../../images/logo-sm.png";
-// import logoSmallWhite from "../../images/logo-sm-white.png";
 // API routes
 import authenticationAPI from "../../utils/authenticationAPI";
 import userAPI from "../../utils/userAPI";
@@ -193,6 +189,20 @@ export default function Navbar() {
               >
                 <Link to="/signup">Sign up</Link>
               </Button>
+              <IconButton
+                id="signup-icon-nav"
+                className={
+                  window.location.href === url ||
+                  window.location.href === url + "#rating-criteria-explanation" ?
+                  classes.colorWhite :
+                  classes.colorBlack
+                }          
+              >
+                <Link to="/signup">
+                  <PersonAddIcon />
+                </Link>
+              </IconButton>
+
             </> : 
             <>
               <MyPagesMenu

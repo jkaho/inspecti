@@ -14,7 +14,7 @@
 }
 
 .results-filterdiv {
-  padding-left: 40px;
+  padding-left: 10%;
 }
 
 .results-info {
@@ -84,6 +84,13 @@
   width: 75%;
 }
 
+#no-matching-listings {
+  margin: 80px auto;
+  margin-bottom: 60%;
+  font-size: 30px;
+  text-align: center;
+}
+
 /* ------- MEDIA QUERIES ------- */
 @media (max-width: 900px) {
   .listing-search-break {
@@ -99,6 +106,11 @@
   .results-info {
     width: 500px;
   }
+
+  .results-filterdiv {
+    padding-left: 2%;
+  }
+  
 }
 
 @media (max-width: 600px) {

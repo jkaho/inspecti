@@ -28,6 +28,14 @@
   background-image: url(../../images/logo.png);
 }
 
+#signup-btn-nav {
+  display: inline-flex;
+}
+
+#signup-icon-nav {
+  display: none;
+}
+
 /* ------- MEDIA QUERIES ------ */
 @media (max-width: 600px) {
   #navbar-logo-div {
@@ -43,4 +51,13 @@
   .logo {
     background-image: url(../../images/logo-sm.png);
   }
+
+  #signup-icon-nav {
+    display: inline-flex;
+  }
+  
+  #signup-btn-nav {
+    display: none;
+    border: none;
+  }  
 }

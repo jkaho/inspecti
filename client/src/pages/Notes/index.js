@@ -1037,7 +1037,7 @@ export default function Notes(props) {
   };
 
   const reviewModalBody = (
-    <div style={modalStyle} className={classes.paper}>
+    <div id="notes-review-modal-preview" style={modalStyle} className={classes.paper}>
       <h2 id="review-modal-heading" style={{ textAlign: "center" }}>Preview</h2>
       <ReviewCard
         title={title}

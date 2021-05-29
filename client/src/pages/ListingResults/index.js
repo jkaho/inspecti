@@ -157,6 +157,7 @@ export default function ListingResults() {
     domainAPI.getPropertyListings(search)
       .then(res => {
         setSearchResults(res.data.data);
+        console.log(res.data.data)
       })
       .catch(err => console.log(err))
   };
@@ -247,13 +248,17 @@ export default function ListingResults() {
       </div>
       <hr className="listing-search-break" />
       <div className="results-info">
-        <div className="results-info-keyword">
-          Search results for&nbsp; 
-          <span style={{ fontWeight: "600" }}>"{formatLocationSuggestion(searchWord)}"</span>
-        </div>
-        <div className="results-info-pages">
-          <strong>{(page * resultsPerPage) - (resultsPerPage - 1)}-{page * resultsPerPage}</strong> out of <strong>{numOfResults}</strong> RESULTS
-        </div>
+        {results.length < 1 ? <></> : 
+          <>
+            <div className="results-info-keyword">
+              Search results for&nbsp; 
+              <span style={{ fontWeight: "600" }}>"{formatLocationSuggestion(searchWord)}"</span>
+            </div>
+            <div className="results-info-pages">
+              <strong>{(page * resultsPerPage) - (resultsPerPage - 1)}-{page === numOfPages ? numOfResults : page * resultsPerPage}</strong> out of <strong>{numOfResults}</strong> RESULTS
+            </div>
+          </>
+        }
       </div>
       <div className="results-container">
         {results ? results.map(listing => (
@@ -288,92 +293,99 @@ export default function ListingResults() {
             agencyLogo={listing.listing.advertiser.logoUrl}
           /> : ""
         )) : <></>}
+        {results.length < 1 ?
+          <div id="no-matching-listings">
+            Sorry, no listings match your search <i className="far fa-frown"></i>
+          </div> : <></>
+        }
       </div>
-      <div className="listing-page-navigator">
-        <table>
-          <tbody>
-            {
-              // If num of pages is less than five, render a page nav btn for each page
-              numOfPages <= 5 ? 
-                <tr>
-                  {page > 1 ? 
-                    <td>
-                      <button onClick={pageNavPrevButtonClick}
-                        className="prev-listing-page">Prev</button>
-                    </td> : <td></td>
-                  }
+      {results.length > 0 ?
+        <div className="listing-page-navigator">
+          <table>
+            <tbody>
+              {
+                // If num of pages is less than five, render a page nav btn for each page
+                numOfPages <= 5 ? 
+                  <tr>
+                    {page > 1 ? 
+                      <td>
+                        <button onClick={pageNavPrevButtonClick}
+                          className="prev-listing-page">Prev</button>
+                      </td> : <td></td>
+                    }
 
-                  {pageArray.map(item => (
-                    <td key={item}>
-                      <button
-                        onClick={pageNavButtonClick}
-                        value={item}
-                        className={page === item ? "selected-page" : ""}
-                      >{item}</button>
-                    </td>
-                  ))}
-                  {page < numOfPages ? 
-                    <td>
-                      <button onClick={pageNavNextButtonClick}
-                        className="next-listing-page">Next</button>
-                    </td> : <td></td>
-                  }
-                </tr>
-              :
-                <tr>
-                  {page > 1 ? 
-                    <td>
-                      <button onClick={pageNavPrevButtonClick}
-                        className="prev-listing-page">Prev</button>
-                    </td> : <td></td>
-                  }
-                  {page > 3 ?
-                    <>
-                      <td>
-                        <button 
-                          value={1}
+                    {pageArray.map(item => (
+                      <td key={item}>
+                        <button
                           onClick={pageNavButtonClick}
-                          className={page === 1 ? "selected-page" : ""}
-                          >{1}</button>
+                          value={item}
+                          className={page === item ? "selected-page" : ""}
+                        >{item}</button>
                       </td>
+                    ))}
+                    {page < numOfPages ? 
                       <td>
-                        <div>...</div>
-                      </td>
-                    </> : <></>
-                  }
-                  {currentPageArray.map(item => (
-                    <td key={item}>
-                      <button
-                        value={item}
-                        onClick={pageNavButtonClick}
-                        className={page === item ? "selected-page" : ""}
-                      >{item}</button>
-                    </td>
-                  ))}
-                  {page < numOfPages - 2 ?
-                    <>
+                        <button onClick={pageNavNextButtonClick}
+                          className="next-listing-page">Next</button>
+                      </td> : <td></td>
+                    }
+                  </tr>
+                :
+                  <tr>
+                    {page > 1 ? 
                       <td>
-                        <div>...</div>
+                        <button onClick={pageNavPrevButtonClick}
+                          className="prev-listing-page">Prev</button>
+                      </td> : <td></td>
+                    }
+                    {page > 3 ?
+                      <>
+                        <td>
+                          <button 
+                            value={1}
+                            onClick={pageNavButtonClick}
+                            className={page === 1 ? "selected-page" : ""}
+                            >{1}</button>
+                        </td>
+                        <td>
+                          <div>...</div>
+                        </td>
+                      </> : <></>
+                    }
+                    {currentPageArray.map(item => (
+                      <td key={item}>
+                        <button
+                          value={item}
+                          onClick={pageNavButtonClick}
+                          className={page === item ? "selected-page" : ""}
+                        >{item}</button>
                       </td>
+                    ))}
+                    {page < numOfPages - 2 ?
+                      <>
+                        <td>
+                          <div>...</div>
+                        </td>
+                        <td>
+                          <button 
+                            onClick={lastPageNavButtonClick}
+                            className={page === numOfPages ? "selected-page" : ""}
+                            >{numOfPages}</button>
+                        </td>
+                      </> : <></>
+                    }
+                    {page < numOfPages ? 
                       <td>
-                        <button 
-                          onClick={lastPageNavButtonClick}
-                          className={page === numOfPages ? "selected-page" : ""}
-                          >{numOfPages}</button>
-                      </td>
-                    </> : <></>
-                  }
-                  {page < numOfPages ? 
-                    <td>
-                      <button onClick={pageNavNextButtonClick}
-                        className="next-listing-page">Next</button>
-                    </td> : <td></td>
-                  }
-                </tr>
-              }
-          </tbody>
-        </table>
-      </div>
+                        <button onClick={pageNavNextButtonClick}
+                          className="next-listing-page">Next</button>
+                      </td> : <td></td>
+                    }
+                  </tr>
+                }
+            </tbody>
+          </table>
+        </div> : <></>
+      }
       <Footer />
     </div>
   );

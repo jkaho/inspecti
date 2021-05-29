@@ -211,3 +211,9 @@
     font-size: 20px;
   }
 }
+
+@media (max-width: 600px) {
+  #notes-review-modal-preview {
+    width: 95%;
+  }
+}

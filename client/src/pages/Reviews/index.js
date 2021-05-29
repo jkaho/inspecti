@@ -42,6 +42,7 @@ export default function Reviews() {
   const [pageArray, setPageArray] = useState([]);
   const [reviewsToShow, setReviewsToShow] = useState([]);
   const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4]);
+  const [numOfReviews, setNumOfReviews] = useState();
   const [page, setPage] = useState(1);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
   const reviewsPerPage = 5;
@@ -58,6 +59,7 @@ export default function Reviews() {
         setModifiedReviews(res.data);
         setReviewsToShow(res.data.slice(0, reviewsPerPage));
         createPageNav(res.data.length);
+        setNumOfReviews(res.data.length);
       })
       .catch(err => {
         console.log(err);
@@ -90,7 +92,16 @@ export default function Reviews() {
   };
 
   const handleSortButtonClick = (event) => {
-    const sortType = event.target.id.split("-")[1];
+    console.log(event.target)
+    console.log(criteria)
+    let sortType;
+    if (event.target.id) {
+      sortType = event.target.id.split("-")[1];
+    } else {
+      sortType = event.target.parentElement.id.split("-")[1];
+    }
+
+    console.log(sortType);
     let sortedResults = [];
     switch(criteria) {
       case "Date added":
@@ -217,6 +228,9 @@ export default function Reviews() {
       default:
         return;
     }
+
+    console.log(sortType);
+    console.log(sortedResults)
 
     setModifiedReviews(sortedResults);
     if (page === sortedResults.length) {
@@ -365,7 +379,7 @@ export default function Reviews() {
           <tbody>
             <tr>
               <td id="review-pages-outof">
-                <strong>{(page * reviewsPerPage) - (reviewsPerPage - 1)}-{page * reviewsPerPage}</strong> out of <strong>{reviews.length}</strong> REVIEWS
+                <strong>{(page * reviewsPerPage) - (reviewsPerPage - 1)}-{page === numOfPages ? numOfReviews : page * reviewsPerPage}</strong> out of <strong>{reviews.length}</strong> REVIEWS
               </td>
               <td className="review-sort-td">
                 {sortSelect}
@@ -393,7 +407,7 @@ export default function Reviews() {
             cars={review.carSpaces}
             land={review.landSize}
             propertyConditionRating={review.review.propertyConditionRating}
-            potentialRating={review.review.privacyRating}
+            potentialRating={review.review.potentialRating}
             surroundingsRating={review.review.surroundingsRating}
             neighbourComparisonRating={review.review.neighbourComparisonRating}
             accessibilityRating={review.review.accessibilityRating}
