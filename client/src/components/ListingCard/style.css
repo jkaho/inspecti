@@ -101,6 +101,20 @@
   }
 
   .listingCard-image {
-    height: 334px;
+    /* height: 334px; */
+  }
+}
+
+@media (max-width: 600px) {
+  .listingCard-image {
+    width: 100%
+  }
+  
+  .listingCard-image img {
+    width: 100%
+  }
+
+  .listingCard-info {
+    width: 100%;
   }
 }
