@@ -45,3 +45,18 @@
 .list-item-star {
   color: rgb(151, 81, 184);
 }
+
+/* ------- MEDIA QUERIES ------- */
+@media (max-width: 850px) {
+  /* .note-list-div {
+    width: 100%;
+  }
+
+  .list-item-text {
+    width: 75%;
+  } */
+  .list-item-text .MuiListItemText-primary {
+    width: 100%;
+  }
+  
+} 

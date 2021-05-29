@@ -110,9 +110,99 @@ export default function SideMenu(props) {
     <div>
       {/* <Toolbar /> */}
       <div className={classes.drawerContainer}>
-        <List className="link-list" style={{ paddingTop: "10px" }}>
+        <List className="link-list" style={{ paddingTop: "90px" }}>
+          {/* <ListItem>
+            <img src={logo} alt="Inspecti logo (purple)" width="200px"/>  */}
+            {/* <div style={mobileOpen ? { height: "fit-content", width: "100%" } : { height: "60px", width: "100%" }}>
+              {mobileOpen ? 
+                <img src={logo} alt="Inspecti logo (purple)" width="200px"/> 
+                : <></>
+              }
+            </div> */}
+          {/* </ListItem> */}
+          <Link to="/profile">
+            <ListItem button 
+              className={
+                window.location.href === "http://localhost:3000/profile" &&
+                window.location.href === "https://inspecti.herokuapp.com/profile" ?
+                classes.selected : ""
+              }
+            >
+              <ListItemIcon>
+                <InsertChartOutlinedIcon />
+              </ListItemIcon>
+                <ListItemText primary="Profile & Stats" />
+            </ListItem>
+          </Link>
+          <Link to="/notes">
+            <ListItem button
+              className={
+                window.location.href === "http://localhost:3000/notes" &&
+                window.location.href === "https://inspecti.herokuapp.com/notes" ?
+                classes.selected : ""
+              }
+            >
+              <ListItemIcon>
+                <DescriptionOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Notes & Reviews" />
+            </ListItem>
+          </Link>
+          <Link to="/monthly">
+            <ListItem button
+              className={
+                window.location.href === "http://localhost:3000/monthly" &&
+                window.location.href === "https://inspecti.herokuapp.com/monthly" ?
+                classes.selected : ""
+              }
+            >
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inspection Schedule" />
+            </ListItem>
+          </Link>
+          {/* <Link to="/daily">
+            <ListItem button>
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary="Daily Schedule" />
+            </ListItem>
+          </Link> */}
+          <Link to="/inspected">
+            <ListItem button
+              className={
+                window.location.href === "http://localhost:3000/inspected" &&
+                window.location.href === "https://inspecti.herokuapp.com/inspected" ?
+                classes.selected : ""
+              }
+            >
+              <ListItemIcon>
+                <TableChartOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inspected Properties" />
+            </ListItem>
+          </Link>
+        </List>
+      </div>
+    </div>
+  );
+
+  
+  const drawerResponsive = (
+    <div>
+      {/* <Toolbar /> */}
+      <div className={classes.drawerContainer}>
+        <List className="link-list">
           <ListItem>
-            <img src={logo} alt="Inspecti logo (purple)" width="200px"/>
+            <img src={logo} alt="Inspecti logo (purple)" width="200px"/> 
+            {/* <div style={mobileOpen ? { height: "fit-content", width: "100%" } : { height: "60px", width: "100%" }}>
+              {mobileOpen ? 
+                <img src={logo} alt="Inspecti logo (purple)" width="200px"/> 
+                : <></>
+              }
+            </div> */}
           </ListItem>
           <Link to="/profile">
             <ListItem button 
@@ -258,7 +348,9 @@ export default function SideMenu(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            {drawer}
+            <div className="drawer-parent">
+              {drawerResponsive}
+            </div>
           </Drawer>
         </Hidden> :  
         <Drawer
@@ -275,7 +367,7 @@ export default function SideMenu(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          {drawer}
+          {drawerResponsive}
         </Drawer>
       }
       {window.location.href !== "https://inspecti.herokuapp.com/inspected" &&

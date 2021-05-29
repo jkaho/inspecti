@@ -163,6 +163,19 @@
   border-bottom: 1px solid rgb(0, 0, 0, 0.12);
 }
 
+.current-note-responsive {
+  display: none;
+}
+
+#note-bar-responsive {
+  display: block;
+  width: 100%;
+}
+
+#note-area-responsive {
+  display: none;
+}
+
 /* ------- MEDIA QUERIES ------- */
 @media (max-width: 850px) {
   #note-bar {
@@ -171,5 +184,30 @@
 
   #note-area {
     width: 100%;
+  }
+
+  .note-list-div {
+    width: 100%;
+  }
+
+  .list-item-text {
+    width: 75%;
+  }
+  
+  .current-note-responsive {
+    display: inline-block;
+    width: 40%;
+  }
+
+  .current-note-date {
+    width: 40%;
+  }
+
+  .new-note-btn {
+    width: 20%;
+  }
+
+  .note-title-input-div input {
+    font-size: 20px;
   }
 }

@@ -12,6 +12,7 @@ import TextEditor from "../../components/TextEditor";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -177,6 +178,7 @@ export default function Notes(props) {
   const [popup, setPopupState] = useState({ open: false, type: "", severity: "success", message: "" });
   const [isShared, setSharedState] = useState(false);
   const [reviewModalIsOpen, setReviewModalState] = useState(false);
+  const [responsiveNoteListOpen, setResponsiveNoteListState] = useState(false);
   let sideTitle = "";
 
   // Refs
@@ -457,7 +459,10 @@ export default function Notes(props) {
 
   const handleNoteButtonClick = (event) => {
     setTextEditorMode(false);
-
+    if (!event.target.matches("i")) {
+      setResponsiveNoteListState(false);
+    }
+    
     let clickedNoteId;
     if (event.target.id) {
       clickedNoteId = parseInt(event.target.id.split("-")[1]);
@@ -1062,12 +1067,16 @@ export default function Notes(props) {
     </div>
   );
 
+  const handleAllNotesButtonClick = () => {
+    setResponsiveNoteListState(true);
+  };
+
   return (
     <div>
       <SideMenu />
       <BoxContainer>
         <Grid container className={classes.maxHeight}>
-          <Grid id="note-bar" item className={classes.overflow}>
+          <Grid id={responsiveNoteListOpen ? "note-bar-responsive" : "note-bar"} item className={classes.overflow}>
             <div className="note-list-div box-seg">
               <div className="note-search-div">
                 <input 
@@ -1140,9 +1149,12 @@ export default function Notes(props) {
               </div>
             </div>
           </Grid>
-          <Grid item id="note-area" className={classes.note}>
+          <Grid item id={responsiveNoteListOpen ? "note-area-responsive" : "note-area"} className={classes.note}>
             <div className="current-note-div box-seg">
               <div className="current-note-top">
+                <div className="current-note-responsive">
+                  <Button onClick={handleAllNotesButtonClick} startIcon={<ArrowBackIosIcon />}>All Notes</Button>
+                </div>
                 <div className="current-note-date">
                   {moment(dateUpdated).format("DD/MM/YY h:mma")}
                 </div>

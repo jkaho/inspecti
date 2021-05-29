@@ -33,7 +33,7 @@ export default function BottomAppBar() {
       <CssBaseline />
       <AppBar position="relative" color="primary" className={classes.appBar}>
         <Toolbar>
-          <ul>
+          <ul className="footer-ul">
             <li className="inspecti-footer-logo">
               <img src={logoWhite} alt="Inspecti logo white" />
             </li>
