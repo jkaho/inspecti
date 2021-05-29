@@ -1,6 +1,7 @@
 // React
 import React, { useEffect, useState, useRef } from "react";
 // Children components
+import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import PopupMessage from "../../components/PopupMessage";
 import ReviewCard from "../../components/ReviewCard";
@@ -492,6 +493,7 @@ export default function Reviews() {
           </tbody>
         </table>
       </div>
+      <Footer />
       <PopupMessage 
         handleClose={handlePopupClose}
         open={popup.open}

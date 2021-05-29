@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // react-router-dom
 import { useHistory, useLocation } from "react-router-dom";
 // Child components
+import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import PopupMessage from "../../components/PopupMessage";
 import SimpleModal from "../../components/Modal";
@@ -343,6 +344,7 @@ export default function SingleListing(props) {
         })}
         modalState={modalState.isOpen}
       />
+      <Footer />
       <PopupMessage 
         open={popup.open}
         handleClose={() => setPopupState({ open: false, type: "", severity: "success", message: "" })}

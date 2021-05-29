@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 // Child components 
 import FilterDiv from "../../components/FilterDiv";
+import Footer from "../../components/Footer";
 import ListingCard from "../../components/ListingCard";
 import LocationSearchBar from "../../components/LocationSearchBar";
 import NavBar from "../../components/NavBar";
@@ -194,11 +195,11 @@ export default function ListingResults() {
     event.stopPropagation();
     const listingId = event.target.dataset.listing.split("-")[1];
     let listing = {};
-    for (let i = 0; i < state.length; i++) {
-      if (state[i].type === "PropertyListing") {
-        if (state[i].listing.id === parseInt(listingId)) {
-          listing = state[i];
-          i = state.length;
+    for (let i = 0; i < state.data.length; i++) {
+      if (state.data[i].type === "PropertyListing") {
+        if (state.data[i].listing.id === parseInt(listingId)) {
+          listing = state.data[i];
+          i = state.data.length;
         }
       }
     };
@@ -372,6 +373,7 @@ export default function ListingResults() {
           </tbody>
         </table>
       </div>
+      <Footer />
     </div>
   );
 };

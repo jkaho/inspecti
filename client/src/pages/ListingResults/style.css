@@ -2,7 +2,8 @@
   text-align: center;
   margin: 0 auto;
   margin-top: 50px;
-  width: 900px;
+  width: 90%;
+  max-width: 900px;
 }
 
 .results-container {
@@ -38,7 +39,7 @@
   border-radius: 4px; */
   padding: 5px;
   margin: 10px auto;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 .listing-page-navigator table {

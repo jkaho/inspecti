@@ -1,0 +1,24 @@
+ul {
+  list-style-type: none;
+  text-align: center;
+  padding-left: 0;
+}
+
+.inspecti-footer-logo img {
+  width: 150px;
+}
+
+.powered-by-domain img {
+  width: 80px;
+}
+
+.made-by-jkaho {
+  padding-top: 10px;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.made-by-jkaho a {
+  color: white;
+  text-decoration: none;
+}
