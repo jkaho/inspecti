@@ -99,10 +99,6 @@
   .listingCard-info {
     width: 500px;
   }
-
-  .listingCard-image {
-    /* height: 334px; */
-  }
 }
 
 @media (max-width: 600px) {

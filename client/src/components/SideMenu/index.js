@@ -19,6 +19,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import LogoutIcon from "@material-ui/icons/ExitToAppOutlined";
 import MenuIcon from '@material-ui/icons/Menu';
 import TableChartOutlinedIcon from '@material-ui/icons/TableChartOutlined';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid grey",
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    // marginRight: theme.spacing(1),
     color: "black",
   },
   menuButtonToggle: {
@@ -78,6 +79,19 @@ const useStyles = makeStyles((theme) => ({
   },
   selected: {
     background: "rgb(0, 0, 0, 0.06)",
+  },
+  logOut: {
+    display: "inline-flex",
+    "@media (max-width: 600px)" : {
+      display: "none",
+    },
+  },
+  responsiveLogOut: {
+    display: "none",
+    color: "black",
+    "@media (max-width: 600px)" : {
+      display: "inline-flex",
+    },
   }
 }));
 
@@ -94,9 +108,12 @@ export default function SideMenu(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
+      {/* <Toolbar /> */}
       <div className={classes.drawerContainer}>
-        <List className="link-list" style={{ paddingTop: "30px" }}>
+        <List className="link-list" style={{ paddingTop: "10px" }}>
+          <ListItem>
+            <img src={logo} alt="Inspecti logo (purple)" width="200px"/>
+          </ListItem>
           <Link to="/profile">
             <ListItem button 
               className={
@@ -196,11 +213,12 @@ export default function SideMenu(props) {
           {/* <Typography variant="h6" noWrap className={classes.title}>
             Inspecti
           </Typography> */}
-          <Link to="/" style={{ flexGrow: 1, marginTop: "10px" }}>
-            <img src={logo} 
+          <Link to="/" style={{ flexGrow: 1 }}>
+            {/* <img src={logo} 
               alt="Inspecti logo" 
               width="200px"
-            />
+            /> */}
+            <div className="logo-sidemenu"></div>
           </Link>
           <Button className={classes.colorBlack}>
             <Link to="/">Home</Link>
@@ -212,7 +230,10 @@ export default function SideMenu(props) {
             &nbsp;&nbsp;|&nbsp;&nbsp;
           </Typography>
           <MyPagesMenu />
-          <Button className={classes.joinBtn} onClick={logOut}>Log Out</Button>
+          <IconButton className={classes.responsiveLogOut} onClick={logOut}>
+            <LogoutIcon />
+          </IconButton>
+          <Button className={classes.logOut} onClick={logOut}>Log Out</Button>
         </Toolbar>
       </AppBar>
       <nav 
