@@ -51,7 +51,6 @@ export default function ListingResults() {
 
   // Initial render
   useEffect(() => {
-    console.log(state)
     setSearchResults(state.data);
     setNumOfResults(parseInt(state.headers["x-total-count"]));
     createPageNav(parseInt(state.headers["x-total-count"]));

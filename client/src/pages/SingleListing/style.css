@@ -112,3 +112,11 @@
 .single-listing-agency {
   margin-top: 10px;
 }
+
+.domain-listing-url {
+  padding: 10px;
+}
+
+.domain-listing-url a {
+  color: rgb(219, 21, 226);
+}

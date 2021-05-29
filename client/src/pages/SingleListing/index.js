@@ -309,6 +309,12 @@ export default function SingleListing(props) {
             } 
           </div>
           <hr />
+          <div className="domain-listing-url">
+            <a href={listing.seoUrl} target="_blank" rel="noreferrer noopener">
+              View this listing at domain.com.au
+            </a>
+          </div>
+          <hr />
           <div className="single-listing-agent">
             <h4>{state.advertiser.name}</h4>
             <div className="single-listing-agent-info">
