@@ -51,6 +51,7 @@ export default function ListingResults() {
 
   // Initial render
   useEffect(() => {
+    console.log(state)
     setSearchResults(state.data);
     setNumOfResults(parseInt(state.headers["x-total-count"]));
     createPageNav(parseInt(state.headers["x-total-count"]));
@@ -206,7 +207,8 @@ export default function ListingResults() {
     history.push({
       pathname: "/listing",
       state: listing.listing,
-      results: results
+      searchWord: searchWord,
+      results: state
     })
   };
 

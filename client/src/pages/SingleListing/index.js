@@ -21,7 +21,7 @@ import eventsAPI from "../../utils/eventsAPI";
 
 export default function SingleListing(props) {
   const history = useHistory();
-  let { state, results } = useLocation();
+  let { state, results, searchWord } = useLocation();
   // States
   const [listing, setListing] = useState();
   const [eventToAdd, setEventToAdd] = useState();
@@ -53,7 +53,8 @@ export default function SingleListing(props) {
   const handleBackToSearchResultsClick = () => {
     history.push({
       pathname: "/results",
-      state: results
+      state: results,
+      searchWord: searchWord
     });
   };
 
@@ -344,7 +345,7 @@ export default function SingleListing(props) {
         })}
         modalState={modalState.isOpen}
       />
-      <Footer />
+      {listing ? <Footer /> : <></>}
       <PopupMessage 
         open={popup.open}
         handleClose={() => setPopupState({ open: false, type: "", severity: "success", message: "" })}
