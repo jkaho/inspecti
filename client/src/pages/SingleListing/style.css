@@ -26,12 +26,12 @@
   width: 530px;
 }
 
-.single-listing-info {
+/* .single-listing-info {
   display: inline-block;
   height: 100%;
   overflow: auto;
   width: calc(100% - 530px);
-}
+} */
 
 .single-listing-priceHeading,
 .single-listing-address, 
@@ -119,4 +119,84 @@
 
 .domain-listing-url a {
   color: rgb(219, 21, 226);
+}
+
+.listing-info-side {
+  display: inline-block;
+  height: 100%;
+  overflow: auto;
+  width: calc(100% - 530px);
+}
+
+.listing-info-responsive {
+  display: none;
+}
+
+.single-listing-images-responsive {
+  display: none;
+}
+
+/* ------- MEDIA QUERIES ------- */
+@media (max-width: 1000px) {
+  .single-listing-images,
+  .single-listing-images img {
+    width: 400px;
+  }
+
+  .listing-info-side {
+    width: calc(100% - 400px);
+  }
+}
+
+@media (max-width: 850px) {
+  .single-listing-box {
+    width: 92%;
+    height: 80%;
+  }
+
+  .single-listing-images {
+    display: none;
+  }
+
+  .single-listing-images-responsive {
+    display: block;
+    width: 95%;
+    overflow: auto;
+    margin: 10px auto;
+  }
+
+  .single-listing-images-responsive img{
+    width: 100%;
+  }
+
+  .back-to-search-results {
+    margin-left: 10px;
+  }
+
+  .single-listing-info {
+    height: 100%;
+    width: 100%;
+  }
+
+  .listing-info-side {
+    display: none;
+  }
+
+  .listing-info-responsive {
+    display: block;
+    height: 80%;
+    overflow: auto;
+  }
+}
+
+@media (max-width: 850px) and (min-width: 601px) {
+  .single-listing-images-responsive {
+    height: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .single-listing-images-responsive {
+    height: 250px;
+  }
 }

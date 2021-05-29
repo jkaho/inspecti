@@ -170,25 +170,8 @@ export default function SingleListing(props) {
     return propertyType;
   };
 
-  return (
-    <div>
-      <NavBar />
-      <div className="back-to-search-results">
-        {/* <Link to="/results" style={{ textDecoration: "none" }}> */}
-        <Button startIcon={<ChevronLeftIcon />}
-          onClick={handleBackToSearchResultsClick}
-        >
-          SEARCH RESULTS
-        </Button>
-        {/* </Link> */}
-      </div>
-      {listing ? <div className="single-listing-box">
-        <div className="single-listing-images">
-          {listing.media.map(image => (
-            <img key={image.url} src={image.url} alt={image.url} />
-          ))}
-        </div>
-        <div className="single-listing-info">
+  const listingInfoSection = (
+      <div className="single-listing-info">
           <div className="single-listing-priceHeading">
             <h3>
               {listing.priceDetails.displayPrice ? listing.priceDetails.displayPrice : ""}
@@ -215,6 +198,11 @@ export default function SingleListing(props) {
               {listing.buildingAreaSqm ? listing.buildingAreaSqm : "- "}m²
             </span>&nbsp;&nbsp;
             <span>{formatPropertyType(listing.propertyTypes[0])}</span>
+          </div>
+          <div className="single-listing-images-responsive">
+            {listing.media.map(image => (
+              <img key={image.url} src={image.url} alt={image.url} />
+            ))}
           </div>
           <hr />
           <div className="single-listing-heading">
@@ -338,7 +326,29 @@ export default function SingleListing(props) {
             </div>
           </div>
         </div>
-      </div> : ""}
+  );
+
+  return (
+    <div>
+      <NavBar />
+      <div className="back-to-search-results">
+        {/* <Link to="/results" style={{ textDecoration: "none" }}> */}
+        <Button startIcon={<ChevronLeftIcon />}
+          onClick={handleBackToSearchResultsClick}
+        >
+          SEARCH RESULTS
+        </Button>
+        {/* </Link> */}
+      </div>
+      {listing ? <div className="single-listing-box">
+        <div className="listing-info-responsive"> {listingInfoSection}</div>
+          <div className="single-listing-images">
+            {listing.media.map(image => (
+              <img key={image.url} src={image.url} alt={image.url} />
+            ))}
+          </div>
+          <div className="listing-info-side">{listingInfoSection}</div>
+        </div>: ""}
       <SimpleModal
         title={modalState.title}
         text={modalState.text}
