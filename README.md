@@ -4,7 +4,7 @@
 
 ## Description
 
-*Inspecti* is an Australian residential real estate application to help users keep up with the property market. Users can take notes on properties, rate properties and share reviews, as well as keep track of past and future property inspections. 
+*Inspecti* is an Australian residential real estate application to help users keep up with the property market. Users can search for property listings, take notes on properties, rate properties and share reviews, as well as keep track of past and future property inspections. 
 
 ## Table of Contents
 
@@ -23,6 +23,7 @@ This project was made for real estate enthusiasts and anyone else involved in th
 ## What you can do with Inspecti
 
 **Everyone can:** 
+- Search for property listings
 - View property reviews
 
 **Only members can:** 
