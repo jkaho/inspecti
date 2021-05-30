@@ -563,7 +563,7 @@ export default function Notes(props) {
     const address = addressRef.current.children[0].children[1].children[0].value.trim();
     // setAddressSearch(address);
     if (address !== "") {
-      domainAPI.getAddressSuggestions(address)
+      domainAPI.getAddressSuggestions(encodeURIComponent(address))
       .then(res => {
         setAddressSuggestions(res.data);
       })

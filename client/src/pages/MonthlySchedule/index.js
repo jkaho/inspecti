@@ -203,7 +203,7 @@ export default function MonthlySchedule() {
     if (newValue === "") {
       setAddressSuggestions([]);
     } else {
-      domainAPI.getAddressSuggestions(newValue)
+      domainAPI.getAddressSuggestions(encodeURIComponent(newValue))
       .then(res => {
         setAddressSuggestions(res.data.splice(0, 10));
       })

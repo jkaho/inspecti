@@ -126,7 +126,7 @@ export default function ListingResults() {
     if (newValue === "") {
       setLocationSuggestions([]);
     } else {
-      domainAPI.getLocationSuggestions(newValue)
+      domainAPI.getLocationSuggestions(encodeURIComponent(newValue))
       .then(res => {
         setLocationSuggestions(res.data);
         setLocation(res.data[0]);

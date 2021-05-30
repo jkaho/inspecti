@@ -214,7 +214,7 @@ export default function Home() {
     if (newValue === "") {
       setLocationSuggestions([]);
     } else {
-      domainAPI.getLocationSuggestions(newValue)
+      domainAPI.getLocationSuggestions(encodeURIComponent(newValue))
       .then(res => {
         setLocationSuggestions(res.data);
         // ADD BACK IN IF 229 DOESN'T WORK
