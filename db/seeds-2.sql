@@ -2597,10 +2597,22 @@ INSERT INTO inspectedProperties (
 ) VALUES (168, "2020-10-31", "7 Onyx Rd, Artarmon NSW 2064", "House", 3, 1, 1, 864, 2500000, 3230000, TRUE, 1);
 
 -- NOTES --
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2018-07-21", "Suitable for small families", 
+"<p>Auction guide was $2.5m, passed in. Surprised because I feel like $2.5m is really reasonable for a property like this...</p>", 
+"52 West St, North Sydney NSW 2060", 4, 2, 1, 247, FALSE, TRUE, 1, 1);
+
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (1, TRUE, "2019-02-07", "Next to Artarmon Reserve", 
 "<p>Pros:<br/><ul><li>Pushed back away from Artarmon Rd, backed onto the reserve</li><li>Contemporary design</li><li>10-15min walk to Artarmon station</li><li>Sizeable outdoor entertaining space</li></ul>Cons:<br/><ul><li>Possible drainage issues with the retaining wall on the lower level</li><li>Cannot turn right into the driveway if travelling east on Artarmon Rd</li><li>Lack of storage space</li></ul></p>", 
 "1/54A Artarmon Rd, Artarmon NSW 2064", 4, 2, 2, null, FALSE, TRUE, 1, 17);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2019-03-16", "97 Union St, McMahons Pt NSW 2060", 
+"<p>What I liked:<br/><ul><li>Great location</li><li>Modern & unique floor plan</li><li>Stylish courtyard</li><li>Large bedrooms w/ ensuites</li></ul><br/>What I didn't like:<br/><ul><li>Lack of non-ensuite bathroom</li><li>Several half-levels</li><li>Narrow spiral staircase to shared garage</li></ul></p>", 
+"97 Union St, McMahons Pt NSW 2060", 4, 4, 3, null, FALSE, TRUE, 1, 37);
 
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (2, TRUE, "2019-06-29", "Modern but kinda flimsy", 
@@ -2627,6 +2639,12 @@ VALUES (6, TRUE, "2019-09-07", "17 Muttama Rd, Artarmon NSW 2064",
 "<p>Price guide: $2.75m<br/>Sold price: $3.351m (before auction)<br/>Built in the 1910s, single level. Kind of underwhelming, but there's a lot of potential to add value to the property. You've gotta go down some stairs from the decking at the back of the house to the backyard, which isn't ideal, but the backyard is relatively flat and well-maintained.</p>", 
 "17 Muttama Rd, Artarmon NSW 2064", 4, 1, 3, 871, FALSE, TRUE, 1, 68);
 
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2019-10-12", "Quiet location, lack of space", 
+"<p>On the quiet end of Bank St, away from Union St and the train tracks. Very small though. Could be improved upon massively if another level could be added.</p>", 
+"85 Bank St, North Sydney NSW 2060", 3, 2, 0, 215, FALSE, TRUE, 1, 74);
+
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (7, TRUE, "2019-09-14", "Really steep driveway", 
 "<p>The home itself was okay (perhaps in need of minor updates) but the walk down the driveway would definitely be a deal-breaker for many. Not much privacy from the backyard either (overlooked by an apartment block).<br/>Initial price guide was $2.1-2.3m but later revised to $2-2.2m.</p>", 
@@ -2652,10 +2670,34 @@ VALUES (11, TRUE, "2019-10-05", "39 View St, Chatswood NSW 2067",
 "<p><em>auction guide - $2.5m</em>. brand new modern home, but didn't seem super high quality.. really long steep driveway too. but the floorplan is pretty functional and locale is convenient", 
 "39 View St, Chatswood NSW 2067", 3, 2, 2, 553, FALSE, TRUE, 1, 81);
 
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2019-10-05", "Leafy Lindfield", 
+"<p>Super leafy outlook, fairly private too. The downside of the leafiness is that there's a lack of sunlight. Indoor to outdoor flow isn't great since you've gotta walk down all these stairs to get there, but there's a little studio down there as well, which you could lease</p>", 
+"81 Bent St, Lindfield NSW 2070", 4, 3, 2, 844, FALSE, TRUE, 1, 82);
+
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (12, TRUE, "2019-10-12", "Cammeray living", 
 "<p>A contemporary and comfortable home in Cammeray ($2.8m guide). Is a bit on the small side though. The living area is also really tight and the dining area is huge, but a bit of reconfiguration could easily fix that</p>", 
 "44 Warringa Rd, Cammeray NSW 2062", 3, 2, 2, 398, FALSE, TRUE, 1, 89);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2019-10-12", "Next to train track", 
+"<p>Not a lot of space in this home, but the backyard is pretty big and even has a pool which I don't think is common in this area. Oh yeah, and it's directly next to train tracks, which I personally don't mind all that much, but know is a deal breaker for some. Price guide 2m</p>", 
+"15 Bank St, North Sydney NSW 2060", 3, 1, 0, 360, FALSE, TRUE, 1, 85);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2019-10-19", "1 Noonbinna Cres, Northbridge NSW 2063", 
+"<p>Large plot of sloped land that requires the creativity of a good architect. I think the $3.6m guide is a bit high since you'd really only buy the property for the land.</p>", 
+"1 Noonbinna Cres, Northbridge NSW 2063", 4, 3, 2, 1486, FALSE, TRUE, 1, 92);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2019-10-19", "Beautiful leafy bush views", 
+"<p>Really wide house, cul-de-sac position, ultra private. If you love looking at greenery, you'll probably like this one. Probably not the most convenient location, but at least it's quiet.<br/><br/>Guide - $2.9m.</p>", 
+"59 Noonbinna Cres, Northbridge NSW 2063", 4, 2, 1, 1106, FALSE, TRUE, 1, 93);
 
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (13, TRUE, "2019-11-03", "Cremorne auction", 
@@ -2671,6 +2713,54 @@ INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedroom
 VALUES (15, TRUE, "2020-02-01", "Guide too high", 
 "<p>Practical floorplan and well-presented with a 'resort-like' feel. 15-ish minute walk to Lane Cove village. $3.9m price guide seems a bit high for the location though tbh</p>", 
 "19 Joseph St, Lane Cove NSW 2066", 4, 3, 2, 917, FALSE, TRUE, 1, 98);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-02-29", "2B Union St, McMahons Pt NSW 2060", 
+"<p>It was recently renovated, so the home's in good condition. The kitchen is pretty generously-sized given the size of the rest of the house. Would be great if another level could be added (like its neighbour, 2A Union St).</p>", 
+"2B Union St, McMahons Pt NSW 2060", 3, 1, 0, 183, FALSE, TRUE, 1, 102);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (1, TRUE, "2020-02-29", "Conservation home in North Sydney", 
+"<p>Potential to modernise, but is also restricted due to conservation status. Across the street from North Sydney Demonstration School and also one home away from the Pacific Highway. Guide is $4.3-4.4m.</p>", 
+"30 McHatton St, North Sydney NSW 2060", 5, 3, 4, 797, FALSE, TRUE, 1, 103);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-07-07", "Lavender Bay Terrace", 
+"<p>Contemporary and well-presented, but the floorplan is quite 'townhouse-like.' There's also a really narrow winding staircase to get to the upper rumpus/office/potential-4th-bedroom. Loved the kitchen/bar/courtyard area though, great use of space! $4.5-$5.0m</p>", 
+"22 Waiwera St, Lavender Bay NSW 2060", 3, 2, 1, 175, FALSE, TRUE, 1, 109);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-07-07", "McMahons Pt Mixed-Use Semi", 
+"<p>Price guide is $2.9m but you'd definitely need to invest a bit to spruce up the place and turn it into a real home since it feels very commercial atm. There's a huge family/rumpus/office area at the back of the house that I think has the potential to be transformed into something great</p>", 
+"115 Union St, McMahons Pt NSW 2060", 3, 2, 4, 331, FALSE, TRUE, 1, 108);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-08-01", "Neutral Bay semi", 
+"<p>Well updated, good-sized master bedroom. Nice courtyard at front of house, but only directly accessible from master bedroom. Lack of living/family space, small dining area. Price guide was $2m, no bids aside from $2.2m vendor's bid, then passed in.</p>", 
+"17 Yeo St, Neutral Bay NSW 2089", 3, 2, 2, 261, FALSE, TRUE, 1, 110);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-08-01", "20 Martin St, Naremburn NSW 2065", 
+"<p><strong>$2.8m guide</strong><br/>This property is located in a very convenient location, close to St Leonard station as well as the Crows Nest shops. The home is newly renovated, but the bedrooms and living spaces are quite tight. Also, the car space takes up most of the backyard.</p>", 
+"20 Martin St, Naremburn NSW 2065", 3, 2, 1, null, FALSE, TRUE, 1, 113);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-09-06", "Single level courtyard house", 
+"<p>The front of the property is an unassuming original weatherboard house where most of the bedrooms are, and the rest of the home is an impressive extension. Unique but very practical floor plan. No backyard though.</p>", 
+"51 Park Rd, Naremburn NSW 2065", 4, 3, 2, 193, FALSE, TRUE, 1, 125);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-09-05", "Good for renovators", 
+"<p>limited space, but good bones. would be really great if you could get council approval for another level. dual street access is also a plus. guide is $2.5m</p>", 
+"39 Union St, McMahons Pt NSW 2060", 2, 1, 1, 266, FALSE, TRUE, 1, 117);
 
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (16, TRUE, "2020-09-05", "37 Muttama Rd, Artarmon NSW 2064", 
@@ -2697,6 +2787,24 @@ VALUES (20, TRUE, "2020-10-27", "Opportunity to build dream home",
 "<p>not quite in liveable condition but perfect opportunity for people looking to do one of those classic artarmon extensions. really level land. personally not a huge fan of onyx rd though, it's rlly narrow with cars parked on both sides</p>", 
 "7 Onyx Rd, Artarmon NSW 2064", 3, 1, 1, 864, FALSE, TRUE, 1, 168);
 
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-11-07", "44 Dalleys Rd, Naremburn NSW 2065", 
+"<p>Part of the same marketing campaign as 46 Dalleys Rd (don't think the owners are the same though). Original condition, in need of a renovation. Auction guide is $1.9m.</p>", 
+"44 Dalleys Rd, Naremburn NSW 2065", 2, 1, 1, 360, FALSE, TRUE, 1, 144);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-11-07", "46 Dalleys Rd, Naremburn NSW 2065", 
+"<p>Can be sold in one line with 44 Dalleys Rd. Large piece of land, lots of potential. Auction guide $2.5m.</p>", 
+"46 Dalleys Rd, Naremburn NSW 2065", 4, 2, 3, 930, FALSE, TRUE, 1, 145);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2020-11-14", "One of a kind", 
+"<p>So glad I got a chance to see this property (off-market). Great location and views and apparently is of historical significance to the local area (possibly built for Billy Blue's son in 1830). Kind of a hard sell though considering the condition of the home (still liveable, but definitely in need of updates), the fact that it's heritage-listed and the $8m suggested guide. The ceiling on the ground floor is quite low and the only decently-sized bedroom is the master... The backyard is beautiful though.</p>", 
+"3 Commodore Cres, McMahons Pt NSW 2060", 3, 2, 1, 598, FALSE, TRUE, 1, 147);
+
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (21, TRUE, "2020-11-14", "Packed auction", 
 "<p><strong>A LOT</strong> of spectators at the auction and at least 4 active bidders. Guide was $2.5m, first bid was $2.71m, sold for $3.23m...</p>", 
@@ -2711,6 +2819,18 @@ INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedroom
 VALUES (23, TRUE, "2020-10-24", "14 Godfrey St, Artarmon NSW 2064", 
 "<p>The insides need to be gutted cos the home is not in the best condition... It's also in the Artarmon conservation area so you'd have to be real creative with the reno. Price guide is 2.4-2.5m, which is considered reasonably affordable here in Artarmon</p>", 
 "14 Godfrey St, Artarmon NSW 2064", 3, 2, 2, 701, FALSE, TRUE, 1, 140);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2021-02-21", "mcmahons pt terrace passed in", 
+"<p>the home is quite nice, but it's below street-level (on the union st side). guide was around $4m and it was just passed in at the auction at $3.85m</p>", 
+"47 Union St, McMahons Pt NSW 2060", 4, 2, 2, 224, FALSE, TRUE, 1, 153);
+
+-- REVIEW NEEDED
+INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
+VALUES (16, TRUE, "2021-02-27", "Right next to North Sydney", 
+"<p>Corner position, wide street frontage. Has been updated, but still maintains an old kind of vibe. Walk-through kitchen could do with an update. Also, you can see the city from one of the top-floor bedrooms through a small window... it's not much, but it's better than nothing haha<br/>As for the auction, there were 3 active bidders. I forgot the guide (I think somewhere in the 5s range), but it sold for $6.7m</p>", 
+"20 Walker St, Lavender Bay NSW 2060", 5, 3, 2, 272, FALSE, TRUE, 1, 155);
 
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (24, TRUE, "2021-05-15", "31 Parnell St, East Killara NSW 2071", 

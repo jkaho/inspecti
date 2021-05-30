@@ -218,7 +218,7 @@ export default function Home() {
       .then(res => {
         setLocationSuggestions(res.data);
         // ADD BACK IN IF 229 DOESN'T WORK
-        // setLocation(res.data[0]);
+        setLocation(res.data[0]);
       })
       .catch(err => console.log(err))
     }
@@ -232,8 +232,9 @@ export default function Home() {
     event.preventDefault();
     // setSuggestionOpen(false);
     setLocationSuggestions([]);
+    locationRef.current.children[0].children[1].children[0].value = "";
 
-    // TEST THIS 
+    // DIDN'T WORK
     // if (locationSuggestions.length > 0 && !location) {
     //   setLocation(locationSuggestions[0]);
     // }

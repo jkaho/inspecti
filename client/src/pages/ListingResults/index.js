@@ -208,6 +208,7 @@ export default function ListingResults() {
       pathname: "/listing",
       state: listing.listing,
       searchWord: searchWord,
+      searchData: searchData,
       results: state
     })
   };

@@ -2,6 +2,10 @@
   display: inline;
 }
 
+.location-autocomplete-wrapper
+.PrivateNotchedOutline-legendLabelled-16 span {
+  visibility: hidden;
+}
 /* ------- MEDIA QUERIES ------- */
 @media (max-width: 600px) {
   #search-bar-span {

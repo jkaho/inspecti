@@ -21,7 +21,7 @@ import eventsAPI from "../../utils/eventsAPI";
 
 export default function SingleListing(props) {
   const history = useHistory();
-  let { state, results, searchWord } = useLocation();
+  let { state, results, searchWord, searchData } = useLocation();
   // States
   const [listing, setListing] = useState();
   const [eventToAdd, setEventToAdd] = useState();
@@ -54,6 +54,7 @@ export default function SingleListing(props) {
     history.push({
       pathname: "/results",
       state: results,
+      searchData: searchData,
       searchWord: searchWord
     });
   };
