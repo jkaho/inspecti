@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 function TextEditor(props) {
   const classes = useStyles();
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: ""});
+  const popupTimeout = 6000;
   const  [convertedContent, setConvertedContent] = useState(null);
   // const [editorState, setEditorState] = useState(
   //   () => EditorState.createEmpty(),
@@ -79,6 +80,9 @@ function TextEditor(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while updating data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 

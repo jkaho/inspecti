@@ -51,6 +51,7 @@ export default function Profile() {
   const [userInfo, setUserInfo] = useState({});
   const [page, setPage] = useState("inspections");
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
+  const popupTimeout = 6000;
 
   // Initial render
   useEffect(() => {
@@ -188,6 +189,9 @@ export default function Profile() {
                 open: true, type: "error", severity: "error", 
                 message: "An error was encountered while retrieving data. Please try again later." 
               });
+              setTimeout(function() {
+                setPopup({ open: false, type: "", severity: "error", message: "" });
+              }, popupTimeout);
             });
         })
         .catch(err => {
@@ -196,6 +200,9 @@ export default function Profile() {
             open: true, type: "error", severity: "error", 
             message: "An error was encountered while retrieving data. Please try again later." 
           });
+          setTimeout(function() {
+            setPopup({ open: false, type: "", severity: "error", message: "" });
+          }, popupTimeout);
         });
       })
       .catch(err => {
@@ -204,6 +211,9 @@ export default function Profile() {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   }, []);
 

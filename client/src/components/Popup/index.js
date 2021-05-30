@@ -44,32 +44,15 @@ export default function Popup(props) {
   // Render upon prop change
   useEffect(() => {
     setPopupState(props.open);
-    // if (props.open === false) {
-    //   setPopupState(props.open);
-    // } else {
-    //   autoHide();
-    // }
   }, [props.open]);
-
-  // Helper functions
-  // const autoHide = () => {
-  //   setPopupState(props.open);
-  //   setTimeout(function() {
-  //     setPopupState(!props.open);
-  //   }, 4000);
-  // };
-
-  // const handleClickAway = () => {
-  //   setPopupState(false);
-  // };
 
   return (
     <div className={`popup-bg
       ${popupOpen ? classes.show : classes.hide} 
       `}   
     >
-      {/* The popup doesn't reappear if needed when the clickaway listener is used */}
-      {/* <ClickAwayListener onClickAway={handleClickAway}>
+      {/* Click away event works, but is glitchy like the Transition Fade Material-UI component*/}
+      {/* <ClickAwayListener onClickAway={props.handleClose}>
         <div> */}
           {/* {popupOpen ?  */}
               <div className={`popup-container 

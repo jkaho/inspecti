@@ -46,6 +46,7 @@ export default function Reviews() {
   const [numOfReviews, setNumOfReviews] = useState();
   const [page, setPage] = useState(1);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
+  const popupTimeout = 6000;
   const reviewsPerPage = 5;
 
   // Refs
@@ -68,6 +69,9 @@ export default function Reviews() {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "warning", message: "" });
+        }, popupTimeout);
       });
   }, []);
 

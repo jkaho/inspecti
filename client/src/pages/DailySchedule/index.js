@@ -94,6 +94,7 @@ export default function DailySchedule(props) {
   const [open, setOpen] = useState(false);
   const [eventType, setEventType] = useState("Inspection");
   const [popup, setPopupState] = useState({ open: false, type: "", severity: "success", message: ""});
+  const popupTimeout = 6000;
   const [deleteEventModalIsOpen, setDeleteEventModalState] = useState(false);
   const [eventToModify, setEventToModify] = useState();
 
@@ -124,6 +125,9 @@ export default function DailySchedule(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -179,6 +183,9 @@ export default function DailySchedule(props) {
         setPopupState({ 
           open: true, type: "editEvent", severity: "success", message: "Event successfully updated!"
         })
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "success", message: "" });
+        }, popupTimeout);
         // setEditEventPopupState(true);
         getDailyEvents(date);
       })
@@ -188,6 +195,9 @@ export default function DailySchedule(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while updating data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -205,6 +215,9 @@ export default function DailySchedule(props) {
         setPopupState({ 
           open: true, type: "deleteEvent", severity: "success", message: "Event successfully deleted"
         })
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "success", message: "" });
+        }, popupTimeout);
         // setDeleteEventPopupState(true);
         getDailyEvents(date);
       })
@@ -215,6 +228,9 @@ export default function DailySchedule(props) {
           open: true, type: "error", severity: "error", 
           message: "An error has occurred. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 

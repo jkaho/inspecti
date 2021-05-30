@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 // Child components
 import Popup from "../Popup";
 // import PopupMessage from '../PopupMessage';
@@ -78,7 +78,8 @@ const useStyles = makeStyles((theme) => ({
 export default function FormModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
+  const [popup, setPopup] = useState({ open: false, type: "", severity: "", warning: "" });
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -174,12 +175,12 @@ export default function FormModal(props) {
       >
         {body}
       </Modal>
-      <Popup
-        open={props.addEventPopupIsOpen}
-        handleClose={props.handlePopupClose}
-        severity="success"
-        message="Event successfully created!"
-      />
+      {/* <Popup
+        open={props.popupOpen}
+        handleClose={props.popupClose}
+        severity={props.popupSeverity}
+        message={props.popupMessage}
+      /> */}
     </div>
   );
 }

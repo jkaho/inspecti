@@ -177,6 +177,7 @@ export default function Notes(props) {
   const [noteReviewToDelete, setNoteReviewToDelete] = useState();
   // const [searchword, setSearchword] = useState();
   const [popup, setPopupState] = useState({ open: false, type: "", severity: "success", message: "" });
+  const popupTimeout = 6000;
   const [isShared, setSharedState] = useState(false);
   const [reviewModalIsOpen, setReviewModalState] = useState(false);
   const [responsiveNoteListOpen, setResponsiveNoteListState] = useState(false);
@@ -228,6 +229,9 @@ export default function Notes(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while submitting your data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopupState({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
       // Else render the latest note 
       } else {
@@ -285,6 +289,9 @@ export default function Notes(props) {
         open: true, type: "error", severity: "error", 
         message: "An error was encountered while retrieving data. Please try again later." 
       });
+      setTimeout(function() {
+        setPopupState({ open: false, type: "", severity: "error", message: "" });
+      }, popupTimeout);
     });
   }, []);
 
@@ -317,6 +324,9 @@ export default function Notes(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while submitting your data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopupState({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
       // Else render the latest note 
       } else {
@@ -374,6 +384,9 @@ export default function Notes(props) {
         open: true, type: "error", severity: "error", 
         message: "An error was encountered while retrieving data. Please try again later." 
       });
+      setTimeout(function() {
+        setPopupState({ open: false, type: "", severity: "error", message: "" });
+      }, popupTimeout);
     });
   };
 
@@ -406,6 +419,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while submitting your data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -446,6 +462,9 @@ export default function Notes(props) {
             open: true, type: "error", severity: "error", 
             message: "An error was encountered while retrieving data. Please try again later." 
           });
+          setTimeout(function() {
+            setPopupState({ open: false, type: "", severity: "error", message: "" });
+          }, popupTimeout);
         });
       })
       .catch(err => {
@@ -454,6 +473,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while updating data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -544,6 +566,9 @@ export default function Notes(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while updating data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopupState({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           })
       })
       .catch(err => {
@@ -552,6 +577,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while updating data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -573,6 +601,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
     } else {
       setAddressSuggestions([]);
@@ -619,6 +650,9 @@ export default function Notes(props) {
                 open: true, type: "error", severity: "error", 
                 message: "An error was encountered while updating data. Please try again later." 
               });
+              setTimeout(function() {
+                setPopupState({ open: false, type: "", severity: "error", message: "" });
+              }, popupTimeout);
             });
         })
         .catch(err => {
@@ -627,6 +661,9 @@ export default function Notes(props) {
             open: true, type: "error", severity: "error", 
             message: "An error was encountered while retrieving data. Please try again later." 
           });
+          setTimeout(function() {
+            setPopupState({ open: false, type: "", severity: "error", message: "" });
+          }, popupTimeout);
         });
       })
       .catch(err => {
@@ -635,6 +672,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -665,6 +705,9 @@ export default function Notes(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while updating data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopupState({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
       })
       .catch(err => {
@@ -673,6 +716,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while submitting your data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -727,6 +773,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while updating data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -745,6 +794,10 @@ export default function Notes(props) {
           open: true, type: "deleteSuccess", severity: "success", 
           message: "Note successfully deleted!" 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
+
         notesAPI.getAllNotes()
           .then(res => {
             // setAllNotes(res.data.reverse());
@@ -792,6 +845,9 @@ export default function Notes(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while retrieving data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopupState({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
       })
       .catch(err => {
@@ -800,6 +856,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error has occurred. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -825,6 +884,9 @@ export default function Notes(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while updating data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopupState({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
       })
       .catch(err => {
@@ -833,6 +895,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error has occurred. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -869,6 +934,9 @@ export default function Notes(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while retrieving data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopupState({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
       })
       .catch(err => {
@@ -877,6 +945,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while updating data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -892,6 +963,9 @@ export default function Notes(props) {
         open: true, type: "error", severity: "error", 
         message: "An error was encountered while retrieving data. Please try again later." 
       });
+      setTimeout(function() {
+        setPopupState({ open: false, type: "", severity: "error", message: "" });
+      }, popupTimeout);
     });
   };
 
@@ -900,7 +974,7 @@ export default function Notes(props) {
     // setSearchword(query);
 
     if (query !== "") {
-      notesAPI.searchNotes(query)
+      notesAPI.searchNotes(encodeURIComponent(query))
       .then(res => {
         if (res.data.length > 0) {
           // res.data.reverse();
@@ -943,6 +1017,9 @@ export default function Notes(props) {
                       open: true, type: "error", severity: "error", 
                       message: "An error was encountered while retrieving data. Please try again later." 
                     });
+                    setTimeout(function() {
+                      setPopupState({ open: false, type: "", severity: "error", message: "" });
+                    }, popupTimeout);
                   });
                 setRatingSectionState(true);
               } else {
@@ -965,6 +1042,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
     } else {
       renderAllNotes();
@@ -983,6 +1063,9 @@ export default function Notes(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopupState({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -999,6 +1082,9 @@ export default function Notes(props) {
     .then(res => {
       handleModalNoClick();
       setPopupState({ open: true, type: "unshareSuccess", severity: "success", message: "Review successfully unshared"});
+      setTimeout(function() {
+        setPopupState({ open: false, type: "", severity: "error", message: "" });
+      }, popupTimeout);
       setSharedState(!isShared);
     })
     .catch(err => {
@@ -1007,6 +1093,9 @@ export default function Notes(props) {
         open: true, type: "error", severity: "error", 
         message: "An error was encountered while updating data. Please try again later." 
       });
+      setTimeout(function() {
+        setPopupState({ open: false, type: "", severity: "error", message: "" });
+      }, popupTimeout);
     });
   };
 
@@ -1018,6 +1107,9 @@ export default function Notes(props) {
     .then(res => {
       setReviewModalState(false);
       setPopupState({ open: true, type: "shareSuccess", severity: "success", message: "Review successfully shared!"});
+      setTimeout(function() {
+        setPopupState({ open: false, type: "", severity: "error", message: "" });
+      }, popupTimeout);
       setSharedState(!isShared);
     })
     .catch(err => {
@@ -1026,6 +1118,9 @@ export default function Notes(props) {
         open: true, type: "error", severity: "error", 
         message: "An error was encountered while updating data. Please try again later." 
       });
+      setTimeout(function() {
+        setPopupState({ open: false, type: "", severity: "error", message: "" });
+      }, popupTimeout);
     });
   };
 

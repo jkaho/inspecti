@@ -177,6 +177,7 @@ export default function InspectedProperties(props) {
   const [properties, setProperties] = useState([]);
   const [modifiedProperties, setModifiedProperties] = useState([]);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "success", message: "" });
+  const popupTimeout = 6000;
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   // const [addressQuery, setAddressQuery] = React.useState("");
   const [address, setAddress] = useState();
@@ -243,6 +244,9 @@ export default function InspectedProperties(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving your data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -261,6 +265,9 @@ export default function InspectedProperties(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       })
     }
   };
@@ -299,6 +306,9 @@ export default function InspectedProperties(props) {
               message: "Required fields: DATE, ADDRESS, AUCTION"
             }
           );
+          setTimeout(function() {
+            setPopup({ open: false, type: "", severity: "warning", message: "" });
+          }, popupTimeout);
           return;
         }
 
@@ -312,6 +322,9 @@ export default function InspectedProperties(props) {
                 message: "A record already exists for the property you're trying to add!"
               }
             );
+            setTimeout(function() {
+              setPopup({ open: false, type: "", severity: "warning", message: "" });
+            }, popupTimeout);
             return;
           }
         });
@@ -327,6 +340,9 @@ export default function InspectedProperties(props) {
                 message: "Property successfully added to table!"
               }
             );
+            setTimeout(function() {
+              setPopup({ open: false, type: "", severity: "success", message: "" });
+            }, popupTimeout);
           })
           .catch(err => {
             console.log(err);
@@ -334,6 +350,9 @@ export default function InspectedProperties(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while submitting your data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopup({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
       })
       .catch(err => {
@@ -342,6 +361,9 @@ export default function InspectedProperties(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
     } else {
       return;
@@ -383,6 +405,9 @@ export default function InspectedProperties(props) {
             message: "Property successfully updated!"
           }
         );
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "success", message: "" });
+        }, popupTimeout);
       })
       .catch(err => {
         console.log(err);
@@ -390,6 +415,9 @@ export default function InspectedProperties(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while updating your data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -413,6 +441,9 @@ export default function InspectedProperties(props) {
             message: "Property successfully deleted from table"
           }
         );
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "success", message: "" });
+        }, popupTimeout);
       })
       .catch(err => {
         console.log(err);
@@ -420,6 +451,9 @@ export default function InspectedProperties(props) {
           open: true, type: "error", severity: "error", 
           message: "An error occurred. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -607,6 +641,9 @@ export default function InspectedProperties(props) {
           .then(res => {
             handleModalClose();
             setPopup({ open: true, type: "createNote", severity: "success", message: "Note successfully created!" });
+            setTimeout(function() {
+              setPopup({ open: false, type: "", severity: "success", message: "" });
+            }, popupTimeout);
             getAllProperties();
           })
           .catch(err => {
@@ -615,6 +652,9 @@ export default function InspectedProperties(props) {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while submitting your data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopup({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
         
       })
@@ -624,6 +664,9 @@ export default function InspectedProperties(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving your data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 

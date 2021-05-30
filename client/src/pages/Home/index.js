@@ -3,7 +3,6 @@ import React, { useState, useRef } from "react";
 // react-router-dom
 import { Link, useHistory } from "react-router-dom";
 // Child components
-import Popup from "../../components/Popup";
 import FilterDiv from "../../components/FilterDiv";
 import Footer from "../../components/Footer";
 import InfographicCard from "../../components/InfographicCard";

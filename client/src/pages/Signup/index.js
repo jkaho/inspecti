@@ -54,6 +54,7 @@ export default function SignUp(props) {
 
   // States
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
+  const popupTimeout = 6000;
 
   // Refs
   const firstNameRef = useRef();
@@ -83,6 +84,9 @@ export default function SignUp(props) {
         open: true, type: "allInputs", severity: "warning", 
         message: "Please fill out all the form inputs" 
       });
+      setTimeout(function() {
+        setPopup({ open: false, type: "", severity: "warning", message: "" });
+      }, popupTimeout);
       return;
     }
 
@@ -116,6 +120,9 @@ export default function SignUp(props) {
         type: "shortPassword",
         message: "Your password must be at least 8 characters"
       });
+      setTimeout(function() {
+        setPopup({ open: false, type: "", severity: "warning", message: "" });
+      }, popupTimeout);
       return;
     }
 
@@ -132,6 +139,9 @@ export default function SignUp(props) {
             open: true, type: "error", severity: "error", 
             message: "An error was encountered while submitting your data. Please try again later." 
           });
+          setTimeout(function() {
+            setPopup({ open: false, type: "", severity: "warning", message: "" });
+          }, popupTimeout);
         });
       })
       .catch((err) => {
@@ -140,6 +150,9 @@ export default function SignUp(props) {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while submitting your data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "warning", message: "" });
+        }, popupTimeout);
       });
   };
 

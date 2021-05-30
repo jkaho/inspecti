@@ -32,6 +32,7 @@ export default function MonthlySchedule() {
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [addEventPopupIsOpen, setAddEventPopupState] = useState(false);
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
+  const popupTimeout = 6000;
 
   // History
   const history = useHistory();
@@ -95,6 +96,9 @@ export default function MonthlySchedule() {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
 
@@ -123,6 +127,9 @@ export default function MonthlySchedule() {
         severity: "warning",
         message: "You must input a valid property address"
       });
+      setTimeout(function() {
+        setPopup({ open: false, type: "", severity: "warning", message: "" });
+      }, popupTimeout);
       return;
     }
     
@@ -139,8 +146,9 @@ export default function MonthlySchedule() {
       // hasAuction: hasAuction,
     };
 
-    eventsAPI.getPropertyEvents(newEvent.propertyAddress)
+    eventsAPI.getPropertyEvents(encodeURIComponent(newEvent.propertyAddress))
       .then(res => {
+        console.log(res)
         if (res.data.length > 0) {
           res.data.forEach(item => {
             if (
@@ -154,6 +162,9 @@ export default function MonthlySchedule() {
                 severity: "warning",
                 message: "This event is already in your schedule"
               });
+              setTimeout(function() {
+                setPopup({ open: false, type: "", severity: "warning", message: "" });
+              }, popupTimeout);
             } else {
               eventsAPI.createEvent(newEvent)
               .then(res => {
@@ -167,6 +178,9 @@ export default function MonthlySchedule() {
                   open: true, type: "error", severity: "error", 
                   message: "An error was encountered while submitting your data. Please try again later." 
                 });
+                setTimeout(function() {
+                  setPopup({ open: false, type: "", severity: "error", message: "" });
+                }, popupTimeout);
               });
             }
           });
@@ -174,7 +188,13 @@ export default function MonthlySchedule() {
           eventsAPI.createEvent(newEvent)
           .then(res => {
             handleModalClose();
-            setAddEventPopupState(true);
+            // setAddEventPopupState(true);
+            setPopup({ open: true, type: "addEventSuccess", severity: "success",
+              message: "Event successfully added!"
+            });
+            setTimeout(function() {
+              setPopup({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
             getAllEvents();
           })
           .catch(err => {
@@ -183,14 +203,17 @@ export default function MonthlySchedule() {
               open: true, type: "error", severity: "error", 
               message: "An error was encountered while submitting your data. Please try again later." 
             });
+            setTimeout(function() {
+              setPopup({ open: false, type: "", severity: "error", message: "" });
+            }, popupTimeout);
           });
         }
       });
   };
 
-  const handlePopupClose = () => {
-    setAddEventPopupState(false);
-  };
+  // const handlePopupClose = () => {
+  //   setAddEventPopupState(false);
+  // };
 
   const handleClose = () => {
     setPopup({ open: false, type: "", severity: "error", message: "" });
@@ -213,6 +236,9 @@ export default function MonthlySchedule() {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
     }
   };
@@ -236,6 +262,9 @@ export default function MonthlySchedule() {
           open: true, type: "error", severity: "error", 
           message: "An error was encountered while retrieving data. Please try again later." 
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "error", message: "" });
+        }, popupTimeout);
       });
   };
   
@@ -277,8 +306,8 @@ export default function MonthlySchedule() {
             endTimeRef={endTimeRef}
             eventType={eventType}
             addressSuggestions={addressSuggestions}
-            addEventPopupIsOpen={addEventPopupIsOpen}
-            handlePopupClose={handlePopupClose}
+            // addEventPopupIsOpen={addEventPopupIsOpen}
+            // handlePopupClose={handlePopupClose}
           />
 
         </div>

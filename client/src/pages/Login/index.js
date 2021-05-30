@@ -60,6 +60,7 @@ export default function LogIn(props) {
   const classes = useStyles();
   // States
   const [popup, setPopup] = useState({ open: false, type: "", severity: "warning", message: "" });
+  const popupTimeout = 6000;
 
   // Refs
   const emailRef = useRef();
@@ -79,9 +80,13 @@ export default function LogIn(props) {
       !userData.email || 
       !userData.password
     ) {
+      console.log("no email or password")
       setPopup({ open: true, type: "loginError", severity: "warning",
         message: "Please enter both your email and password"
       });
+      setTimeout(function() {
+        setPopup({ open: false, type: "", severity: "warning", message: "" });
+      }, popupTimeout);
       return;
     }
 
@@ -108,6 +113,9 @@ export default function LogIn(props) {
         setPopup({ open: true, type: "loginError", severity: "warning",
         message: "We can't find your email/password combo in our database..."
         });
+        setTimeout(function() {
+          setPopup({ open: false, type: "", severity: "warning", message: "" });
+        }, popupTimeout);
       });
   };
 
