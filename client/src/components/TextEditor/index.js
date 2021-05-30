@@ -1,7 +1,8 @@
 // React
 import React, { useState, useEffect } from "react";
 // Child components
-import PopupMessage from "../../components/PopupMessage";
+import Popup from "../../components/Popup";
+// import PopupMessage from "../../components/PopupMessage";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 // react-draft-wysiwyg
@@ -183,7 +184,7 @@ function TextEditor(props) {
         dangerouslySetInnerHTML={{ __html: props.text }}
       >
       </div>
-      <PopupMessage
+      <Popup
         open={popup.open}
         handleClose={handlePopupClose}
         severity={popup.severity}

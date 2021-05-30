@@ -3,7 +3,8 @@ import React, { useRef, useState } from "react";
 // react-router-dom
 import { Link } from "react-router-dom";
 // Child components
-import PopupMessage from "../../components/PopupMessage";
+import Popup from "../../components/Popup";
+// import PopupMessage from "../../components/PopupMessage";
 // Material Design
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -234,7 +235,7 @@ export default function SignUp(props) {
           </div>
         </Grid>
       </Grid>
-      <PopupMessage 
+      <Popup 
         handleClose={handlePopupClose}
         open={popup.open}
         message={popup.message}

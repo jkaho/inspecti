@@ -1,7 +1,8 @@
 // React
 import React from 'react';
 // Child components
-import PopupMessage from '../PopupMessage';
+import Popup from "../Popup";
+// import PopupMessage from '../PopupMessage';
 import SearchAutocomplete from "../../components/SearchAutocomplete";
 // Material design
 import { makeStyles } from '@material-ui/core/styles';
@@ -173,7 +174,7 @@ export default function FormModal(props) {
       >
         {body}
       </Modal>
-      <PopupMessage
+      <Popup
         open={props.addEventPopupIsOpen}
         handleClose={props.handlePopupClose}
         severity="success"

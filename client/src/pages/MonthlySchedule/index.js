@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 // Child components
 import FormModal from "../../components/FormModal";
-import PopupMessage from "../../components/PopupMessage";
+import Popup from "../../components/Popup";
+// import PopupMessage from "../../components/PopupMessage";
 import SideMenu from "../../components/SideMenu";
 // Full Calendar
 import FullCalendar from "@fullcalendar/react";
@@ -282,7 +283,7 @@ export default function MonthlySchedule() {
 
         </div>
       </div>
-      <PopupMessage 
+      <Popup 
         handleClose={handleClose}
         open={popup.open}
         message={popup.message}

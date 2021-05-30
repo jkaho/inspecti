@@ -3,7 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 // Children components 
 import BoxContainer from "../../components/BoxContainer";
 import NoteListItem from "../../components/NoteListItem";
-import PopupMessage from "../../components/PopupMessage";
+import Popup from "../../components/Popup";
+// import PopupMessage from "../../components/PopupMessage";
 import ReviewCard from "../../components/ReviewCard";
 import SearchAutocomplete from "../../components/SearchAutocomplete";
 import SideMenu from "../../components/SideMenu";
@@ -1624,7 +1625,7 @@ export default function Notes(props) {
           </Grid>
         </Grid>
       </BoxContainer>
-      <PopupMessage 
+      <Popup 
         open={popup.open}
         handleClose={handlePopupClose}
         severity={popup.severity}

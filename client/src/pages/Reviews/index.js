@@ -3,7 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 // Children components
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
-import PopupMessage from "../../components/PopupMessage";
+import Popup from "../../components/Popup";
+// import PopupMessage from "../../components/PopupMessage";
 import ReviewCard from "../../components/ReviewCard";
 // Material Design 
 import ClearIcon from "@material-ui/icons/Clear";
@@ -508,7 +509,7 @@ export default function Reviews() {
         </table>
       </div>
       <Footer />
-      <PopupMessage 
+      <Popup 
         handleClose={handlePopupClose}
         open={popup.open}
         message={popup.message}

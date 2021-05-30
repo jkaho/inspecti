@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 // Child components
 import BoxContainer from "../../components/BoxContainer";
-import PopupMessage from "../../components/PopupMessage";
+import Popup from "../../components/Popup";
+// import PopupMessage from "../../components/PopupMessage";
 import SideMenu from "../../components/SideMenu";
 // CSS
 import "./style.css";
@@ -431,7 +432,7 @@ export default function Profile() {
             </tbody>
           </table>
       </BoxContainer>
-      <PopupMessage 
+      <Popup 
         handleClose={handlePopupClose}
         open={popup.open}
         message={popup.message}

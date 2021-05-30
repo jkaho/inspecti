@@ -4,7 +4,8 @@ import { useHistory, useLocation } from "react-router-dom";
 // Child components
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
-import PopupMessage from "../../components/PopupMessage";
+import Popup from "../../components/Popup";
+// import PopupMessage from "../../components/PopupMessage";
 import SimpleModal from "../../components/Modal";
 // Material Design 
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -367,7 +368,7 @@ export default function SingleListing(props) {
         modalState={modalState.isOpen}
       />
       {listing ? <Footer /> : <></>}
-      <PopupMessage 
+      <Popup 
         open={popup.open}
         handleClose={() => setPopupState({ open: false, type: "", severity: "success", message: "" })}
         severity={popup.severity}

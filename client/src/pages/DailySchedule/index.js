@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 // Child components
 import EventCard from "../../components/EventCard";
-import PopupMessage from "../../components/PopupMessage";
+import Popup from "../../components/Popup";
+// import PopupMessage from "../../components/PopupMessage";
 import SideMenu from "../../components/SideMenu";
 // Material Design
 import clsx from "clsx";
@@ -381,7 +382,7 @@ export default function DailySchedule(props) {
         >
           {deleteBody}
         </Modal>
-        <PopupMessage
+        <Popup
           open={popup.open}
           handleClose={handlePopupClose}
           severity={popup.severity}
