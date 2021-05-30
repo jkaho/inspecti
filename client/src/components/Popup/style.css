@@ -11,8 +11,9 @@
 .popup-container {
   display: flex;
   position: fixed;
-  bottom: 40px;
-  left: calc(50% - 150px); /* 150px = half popup width / may need to change*/
+  /* bottom: 40px; */
+  /* left: calc(50% - 150px);  */
+  /* 150px = half popup width / may need to change*/
   z-index: 20;
   min-width: 300px;
   width: fit-content;
@@ -25,21 +26,21 @@
 
 .popup-message-icon {
   display: inline-block;
-  width: 10%;
+  width: 20px;
 }
 
 .popup-message {
-  display: inline-block;
+  display: inline-flex;
   vertical-align: top;
   padding-left: 20px;
   font-weight: 600;
-  width: 70%;
+  width: 85%;
 }
 
 .popup-clear-div {
   display: inline-block;
   text-align: right;
-  width: 20%;
+  width: 20px;
 }
 
 .popup-clear {
@@ -47,4 +48,16 @@
   border: none;
   cursor: pointer;
   color: white;
+}
+
+.error {
+  background: #F44336;
+}
+
+.success {
+  background: #4CAF50;
+}
+
+.warning {
+  background: #FF9800;
 }

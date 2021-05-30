@@ -11,6 +11,17 @@ import ReportProblemOutlinedIcon from "@material-ui/icons/ReportProblemOutlined"
 // CSS
 import "./style.css";
 
+function getPopupStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top + 40}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+};
+
 const useStyles = makeStyles((theme) => ({
   hide: {
     display: "none",
@@ -28,6 +39,7 @@ export default function Popup(props) {
   const classes = useStyles();
   // States
   const [popupOpen, setPopupState] = useState(false);
+  const [popupStyle] = useState(getPopupStyle);
 
   // Render upon prop change
   useEffect(() => {
@@ -54,19 +66,26 @@ export default function Popup(props) {
   return (
     <div className={`popup-bg
       ${popupOpen ? classes.show : classes.hide} 
-      `}    
+      `}   
     >
       {/* The popup doesn't reappear if needed when the clickaway listener is used */}
       {/* <ClickAwayListener onClickAway={handleClickAway}>
         <div> */}
           {/* {popupOpen ?  */}
-              <div className="popup-container"
-                style={
-                  props.severity === "error" ? { background: "#F44336" } : 
-                  props.severity === "success" ? { background: "#4CAF50" } :
-                  props.severity === "warning" ? { background: "#FF9800" } : 
-                  { background: "#2196F3" }
-                }
+              <div className={`popup-container 
+                ${props.severity === "error" ? "error" :
+                  props.severity === "success" ? "success" :
+                  props.severity === "warning" ? "warning" :
+                  ""
+                }`
+              }
+                // style={
+                //   props.severity === "error" ? { background: "#F44336" } : 
+                //   props.severity === "success" ? { background: "#4CAF50" } :
+                //   props.severity === "warning" ? { background: "#FF9800" } : 
+                //   { background: "#2196F3" }
+                // }
+                style={popupStyle}
               >
                 <div className="popup-message-icon">
                   {
