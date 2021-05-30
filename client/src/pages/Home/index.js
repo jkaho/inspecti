@@ -28,6 +28,7 @@ import propertyImage from "../../images/house.png";
 import ratingImage from "../../images/rating.png";
 import reviewsImage from "../../images/social.png";
 import scheduleImage from "../../images/calendar.png";
+import searchImage from "../../images/search.png";
 import shareImage from "../../images/share.png";
 // API routes
 import domainAPI from "../../utils/domainAPI";
@@ -78,7 +79,7 @@ const infographicData = {
     src: propertyImage,
     alt: "Graphic of white house in front of tall trees",
     title: "Look back",
-    text: "Keep track of all the properties you inspect by adding entries to your inspected properties table."
+    text: "Keep track of all the properties you inspect by adding them to your inspected properties table."
   },
   schedule: {
     src: scheduleImage,
@@ -123,6 +124,12 @@ const infographicData = {
     title: "4. Share your note",
     text: "Click on the share button to share your thoughts with the world!"
   },
+  search: {
+    src: searchImage,
+    alt: "Graphic of blue smartphone with search icon coming out of screen",
+    title: "Search listings",
+    text: "Search for property listings via location to see what's currently on the market."
+  }
 };
 
 const ratingCriteria = [
@@ -351,6 +358,12 @@ export default function Home() {
             </Typography>
           </div>
           <div className="infographics-everyone">
+            <InfographicCard
+              src={infographicData.search.src}
+              alt={infographicData.search.alt}
+              title={infographicData.search.title}
+              text={infographicData.search.text}
+            />
             <InfographicCard
               src={infographicData.reviews.src}
               alt={infographicData.reviews.alt}
