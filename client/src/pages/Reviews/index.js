@@ -91,8 +91,13 @@ export default function Reviews() {
       });
   
       setModifiedReviews(searchResults);
+      setReviewsToShow(modifiedReviews.slice((page - 1) * reviewsPerPage, (page - 1) * reviewsPerPage + reviewsPerPage));
+      createPageNav(searchResults.length);
+      setNumOfReviews(searchResults.length);
     } else {
       setModifiedReviews(reviews);
+      setNumOfReviews(reviews.length);
+      setReviewsToShow(reviews.slice((page - 1) * reviewsPerPage, (page - 1) * reviewsPerPage + reviewsPerPage));
     }
   };
 
@@ -384,8 +389,15 @@ export default function Reviews() {
           <tbody>
             <tr>
               <td id="review-pages-outof">
-                <strong>{(page * reviewsPerPage) - (reviewsPerPage - 1)}-{page === numOfPages ? numOfReviews : page * reviewsPerPage}</strong> out of <strong>{reviews.length}</strong> REVIEWS
-              </td>
+                {numOfReviews > 0 ? 
+                  <>
+                    <strong>{`${(page * reviewsPerPage) - (reviewsPerPage - 1)}-${page === numOfPages ? numOfReviews : page * reviewsPerPage}`}</strong> out of <strong>{numOfReviews}</strong> REVIEWS
+                  </> : 
+                  <>
+                    <strong>0</strong> REVIEWS
+                  </>
+                }
+              </td> 
               <td className="review-sort-td">
                 {sortSelect}
               </td>
