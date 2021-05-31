@@ -80,7 +80,7 @@ export default function Profile() {
               monthlyPropertyData[4].push(item);
             } else if (monthYearInspected === recentMonths.oneMonthAgo.format("MMYY")) {
               monthlyPropertyData[5].push(item);
-            } else {
+            } else if (monthYearInspected === recentMonths.thisMonth.format("MMYY")) {
               monthlyPropertyData[6].push(item);
             } 
 

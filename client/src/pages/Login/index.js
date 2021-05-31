@@ -85,7 +85,7 @@ export default function LogIn(props) {
         message: "Please enter both your email and password"
       });
       setTimeout(function() {
-        setPopup({ open: false, type: "", severity: "warning", message: "" });
+        setPopup({ open: false, type: "", severity: "", message: "" });
       }, popupTimeout);
       return;
     }
@@ -114,7 +114,7 @@ export default function LogIn(props) {
         message: "We can't find your email/password combo in our database..."
         });
         setTimeout(function() {
-          setPopup({ open: false, type: "", severity: "warning", message: "" });
+          setPopup({ open: false, type: "", severity: "", message: "" });
         }, popupTimeout);
       });
   };
