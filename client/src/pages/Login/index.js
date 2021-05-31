@@ -107,7 +107,7 @@ export default function LogIn(props) {
     };
 
     userAPI.logInUser(userData)
-      .then(() => props.onSuccess())
+      .then((res) => props.onSuccess(res))
       .catch(err => {
         console.log(err);
         setPopup({ open: true, type: "loginError", severity: "warning",

@@ -9,6 +9,7 @@ const propertiesController = require("../../controllers/propertiesController");
 
 // User routes
 router.get("/authenticated", (req, res) => {
+  console.log(req.user)
   if (req.user) {
     return res.json({ isAuthenticated: true, 
       id: req.user.id,
@@ -28,7 +29,12 @@ router.post("/signup", usersController.signUp, (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local", { session: true }), (req, res) => {
-  return res.json(req.user);
+  return res.json({
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
+    id: req.user.id,
+    email: req.user.email,
+  });
 });
 
 router.get("/logout", (req, res) => {

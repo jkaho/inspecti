@@ -24,6 +24,7 @@ function App() {
       .then(res => {
         setAuthentication(res.data.isAuthenticated);
         setUserId(res.data.id);
+        console.log(res.data)
         setUserInfo({
           firstName: res.data.firstName,
           lastName: res.data.lastName,
@@ -33,8 +34,14 @@ function App() {
       .catch(err => console.log(err));
   }, []);
 
-  const userIsLoggedIn = () => {
+  const userIsLoggedIn = (res) => {
     setAuthentication(true);
+    setUserId(res.data.id);
+    setUserInfo({
+      firstName: res.data.firstName,
+      lastName: res.data.lastName,
+      email: res.data.email,
+    })
   };
   
   return (

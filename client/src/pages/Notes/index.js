@@ -201,6 +201,7 @@ export default function Notes(props) {
 
   // Initial render
   useEffect(() => {
+    console.log(props)
     // Check user's saved notes 
     notesAPI.getNotesWithReviews()
     .then(res => {
@@ -1052,6 +1053,7 @@ export default function Notes(props) {
   };
 
   const handleShareButtonClick = () => {
+    console.log(props.id)
     userAPI.getOneUser(props.id)
       .then(res => {
         setAuthor({ firstName: res.data.firstName, lastName: res.data.lastName });
