@@ -201,7 +201,6 @@ export default function Notes(props) {
 
   // Initial render
   useEffect(() => {
-    console.log(props)
     // Check user's saved notes 
     notesAPI.getNotesWithReviews()
     .then(res => {
@@ -401,6 +400,8 @@ export default function Notes(props) {
     setAddressInputState(false);
     setAddressInfoState(false);
     setRatingButtonState(false);
+    setSharedState(false);
+    setRatingSectionState(false);
     setRatingEditState(false);
 
     const noteData = {
@@ -682,6 +683,7 @@ export default function Notes(props) {
   const handleRatingButtonClick = () => {
     setRatingSectionState(true);
     setRatingButtonState(false);
+    
     const review = {
       propertyConditionRating: null,
       potentialRating: null,
@@ -694,6 +696,8 @@ export default function Notes(props) {
       indoorOutdoorFlowRating: null,
       naturalLightRating: null,
     };
+
+    setPropertyReview(review);
     reviewsAPI.createReview(currentNoteId, review)
       .then(res => {
         notesAPI.updateNote(currentNoteId, {
@@ -728,34 +732,44 @@ export default function Notes(props) {
     const review = propertyReview;
     switch(target) {
       case "condition":
-        review.propertyConditionRating = parseInt(conditionRef.current.value);
+        review.propertyConditionRating = isNaN(parseInt(conditionRef.current.value)) ? 
+        null : parseInt(conditionRef.current.value);
         break;
       case "potential":
-        review.potentialRating = parseInt(potentialRef.current.value);
+        review.potentialRating = isNaN(parseInt(potentialRef.current.value)) ?
+        null: parseInt(potentialRef.current.value);
         break;
       case "surroundings":
-        review.surroundingsRating = parseInt(surroundingsRef.current.value);
+        review.surroundingsRating = isNaN(parseInt(surroundingsRef.current.value)) ?
+        null: parseInt(surroundingsRef.current.value);
         break;
       case "neighbours":
-        review.neighbourComparisonRating = parseInt(neighboursRef.current.value);
+        review.neighbourComparisonRating = isNaN(parseInt(neighboursRef.current.value)) ?
+        null: parseInt(neighboursRef.current.value);
         break;
       case "accessibility":
-        review.accessibilityRating = parseInt(accessibilityRef.current.value);
+        review.accessibilityRating = isNaN(parseInt(accessibilityRef.current.value)) ? 
+        null: parseInt(accessibilityRef.current.value);
         break;
       case "privacy":
-        review.privacyRating = parseInt(privacyRef.current.value);
+        review.privacyRating = isNaN(parseInt(privacyRef.current.value)) ?
+        null: parseInt(privacyRef.current.value);
         break;
       case "floorplan":
-        review.floorplanRating = parseInt(floorplanRef.current.value);
+        review.floorplanRating = isNaN(parseInt(floorplanRef.current.value)) ?
+        null: parseInt(floorplanRef.current.value);
         break;
       case "outdoorSpace":
-        review.outdoorSpaceRating = parseInt(outdoorSpaceRef.current.value);
+        review.outdoorSpaceRating = isNaN(parseInt(outdoorSpaceRef.current.value)) ?
+        null: parseInt(outdoorSpaceRef.current.value);
         break;
       case "indoorOutdoor":
-        review.indoorOutdoorFlowRating = parseInt(indoorOutdoorRef.current.value);
+        review.indoorOutdoorFlowRating = isNaN(parseInt(indoorOutdoorRef.current.value)) ?
+        null: parseInt(indoorOutdoorRef.current.value);
         break;
       case "lighting":
-        review.naturalLightRating = parseInt(lightingRef.current.value);
+        review.naturalLightRating = isNaN(parseInt(lightingRef.current.value)) ?
+        null: parseInt(lightingRef.current.value);
         break;
       default: 
         break;
