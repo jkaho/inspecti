@@ -45,6 +45,10 @@
   padding: 0 10px;
 }
 
+.single-listing-description {
+  white-space: pre-wrap;
+}
+
 .single-listing-address {
   padding: 5px 10px;
 }

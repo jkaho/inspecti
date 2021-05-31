@@ -74,6 +74,7 @@ export default function ListingResults() {
     setPage(pageClicked);
     getListingsPage(pageClicked);
     setNavigationNumbers(pageClicked);
+    backToTop();
   };
 
   const lastPageNavButtonClick = () => {
@@ -81,25 +82,33 @@ export default function ListingResults() {
     setPage(pageClicked);
     getListingsPage(pageClicked);
     setNavigationNumbers(pageClicked);
+    backToTop();
   };
 
   const pageNavNextButtonClick = () => {
     setPage(page + 1);
     getListingsPage(page + 1);
     setNavigationNumbers(page + 1);
+    backToTop();
   };
 
   const pageNavPrevButtonClick = () => {
     setPage(page - 1);
     getListingsPage(page - 1);
     setNavigationNumbers(page - 1);
+    backToTop();
+  };
+
+  const backToTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   };
 
   const getListingsPage = (pageNumber) => {
     domainAPI.getPropertyListings(searchData, pageNumber)
       .then(res => {
-        console.log(res.data)
         setSearchResults(res.data.data);
+        state = res.data; // Not changing state?
       })
       .catch(err => {
         console.log(err);
@@ -109,7 +118,6 @@ export default function ListingResults() {
   const setNavigationNumbers = (pageClicked) => {
     if (numOfPages >= 6) {
       if (pageClicked < 4) {
-        console.log("first")
         setCurrentPageArray([1, 2, 3, 4])
       } else if (pageClicked >= 4 && pageClicked < numOfPages - 2) {
         console.log("middle")
@@ -196,14 +204,24 @@ export default function ListingResults() {
     event.stopPropagation();
     const listingId = event.target.dataset.listing.split("-")[1];
     let listing = {};
-    for (let i = 0; i < state.data.length; i++) {
-      if (state.data[i].type === "PropertyListing") {
-        if (state.data[i].listing.id === parseInt(listingId)) {
-          listing = state.data[i];
-          i = state.data.length;
+    // for (let i = 0; i < state.data.length; i++) {
+    //   if (state.data[i].type === "PropertyListing") {
+    //     console.log(state.data[i].listing.id, parseInt(listingId))
+    //     if (state.data[i].listing.id === parseInt(listingId)) {
+    //       listing = state.data[i];
+    //       i = state.data.length;
+    //     }
+    //   }
+    // };
+    for (let i = 0; i < results.length; i++) {
+      if (results[i].type === "PropertyListing") {
+        if (results[i].listing.id === parseInt(listingId)) {
+          listing = results[i];
+          i = results.length;
         }
       }
     };
+    console.log(listing)
     history.push({
       pathname: "/listing",
       state: listing.listing,

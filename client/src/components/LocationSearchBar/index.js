@@ -17,8 +17,6 @@ export default function LocationSearchBar(props) {
   
   // Format locations from API data 
   function formatLocationSuggestion(obj) {
-    console.log(props.locationSuggestions)
-    console.log(obj)
     let location = `${obj.name}, ${obj.state.toUpperCase()}`;
     if (obj.type === "suburb") {
       location += ` ${obj.postcode}`;
