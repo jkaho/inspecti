@@ -1003,10 +1003,18 @@ export default function Notes(props) {
             }
             setStarredNotes(starredNotes);
             setNonStarredNotes(nonStarredNotes);
-
-            let topSearchResult = starredNotes[0];
-            setTitle(topSearchResult.title);
-            setText(topSearchResult.text);
+            
+            let topSearchResult;
+            if (starredNotes.length > 0) {
+              topSearchResult = starredNotes[0];
+              setTitle(topSearchResult.title);
+              setText(topSearchResult.text);
+            } else {
+              topSearchResult = nonStarredNotes[0];
+              setTitle(topSearchResult.title);
+              setText(topSearchResult.text);
+            }
+            
             if (topSearchResult.propertyAddress) {
               setAddress(topSearchResult.propertyAddress);
               setPropertySpecs({
