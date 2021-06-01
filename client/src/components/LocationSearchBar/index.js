@@ -4,8 +4,6 @@ import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
 import "./style.css";
-const url = window.location.hostname.includes("localhost") ?
-  "http://localhost:3001" : "https://inspecti.herokuapp.com"
 
 export default function LocationSearchBar(props) {
   // States
