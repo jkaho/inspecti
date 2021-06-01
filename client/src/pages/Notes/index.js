@@ -615,20 +615,17 @@ export default function Notes(props) {
   const handleAddressSuggestionClick = (value) => {
     let propertyId;
     setAddress(value.address);
-    console.log(value);
 
     propertiesAPI.getAllProperties()
       .then(res => {
         res.data.forEach(item => {
-          if (address === item.propertyAddress) {
+          if (value.address === item.propertyAddress) {
             propertyId = item.id;
           }
         });
 
-        console.log(value.id)
         domainAPI.getPropertyInfo(value.id)
         .then(res => {
-          console.log(value.id)
           const propertyInfo = {
             bedrooms: res.data.bedrooms,
             bathrooms: res.data.bathrooms,

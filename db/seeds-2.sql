@@ -2863,26 +2863,21 @@ VALUES (53, TRUE, "2021-05-15", "31 Parnell Street, East Killara NSW 2071",
 "<p>The upstairs living area is limited, but I guess the downstairs rumpus area kind of makes up for that. The backyard area is sloped, so you have to walk down some stairs to get there. But the vista from the home is spectacular!</p>", 
 "31 Parnell Street, East Killara NSW 2071", 4, 4, 2, 841, FALSE, TRUE, 1, 161);
 
--- REVIEW NEEDED
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (54, TRUE, "2021-05-15", "price guide is $2.3m", 
 "<p>Floor plan is alright, could be opened up a little by moving the kitchen away from the centre of the house.</p>", 
 "15 Barra Brui Crescent, St Ives NSW 2075", 5, 3, 2, 930, FALSE, TRUE, 1, 163);
 
--- REVIEW NEEDED
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (55, TRUE, "2021-05-15", "Vistas in St Ives", 
 "<p>Current house is just okay but there's a lot of scope to improve. Don't love the downstairs bedroom that's accessed via a spiral staircase and doesn't have a bathroom. Relatively affordable with guide of $1.85m.</p>", 
 "42 Burdekin Crescent, St Ives NSW 2075", 4, 2, 2, 1201, FALSE, TRUE, 1, 166);
 
--- REVIEW NEEDED
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (56, TRUE, "2021-05-15", "Super quiet location", 
 "<p>Good-sized living area, but could make better use of front-decking. Bedrooms are a bit small. Well maintained backyard.</p>", 
 "15 Tudor Pl, St Ives Chase NSW 2075", 4, 2, 2, 1186, FALSE, TRUE, 1, 165);
 
-
--- REVIEW NEEDED
 INSERT INTO notes (id, shared, dateShared, title, text, propertyAddress, bedrooms, bathrooms, carSpaces, landSize, starred, hasReview, userId, propertyId)
 VALUES (57, TRUE, "2021-05-31", "Renovation required", 
 "<p>Good plot of land, house needs to be completely redone. I inspected this property a few weeks ago, surprised that the guide was $2.6m considering it sold for only $2.035m last year, but apparently it ended up selling for <em>$2.976m</em>.... the market is crazy.</p>", 
@@ -3736,6 +3731,70 @@ INSERT INTO reviews (
   userId,
   noteId
 ) VALUES (53, 4, 2, 3, null, 4, 3, 3, 5, 1, 5, 1, 53);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (54, 4, 3, 2, null, 2, 4, 3, 5, 3, 3, 1, 54);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (55, 4, 5, 3, 4, 2, 3, 4, 2, 5, 1, 1, 55);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (56, 4, 2, 3, 3, 2, 5, 2, 5, 2, 3, 1, 56);
+
+INSERT INTO reviews (
+  id, 
+  propertyConditionRating,
+  potentialRating,
+  surroundingsRating,
+  neighbourComparisonRating,
+  accessibilityRating,
+  privacyRating,
+  floorplanRating,
+  outdoorSpaceRating,
+  indoorOutdoorFlowRating,
+  naturalLightRating,
+  userId,
+  noteId
+) VALUES (57, 3, 5, 4, null, 5, 3, 2, 5, 3, 2, 1, 57);
 
 -- SCHEDULED EVENTS --
 INSERT INTO scheduledEvents (

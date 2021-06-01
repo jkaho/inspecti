@@ -287,10 +287,9 @@ export default function Reviews() {
   };
 
   const lastPageNavButtonClick = () => {
-    const pageClicked = Math.ceilnumOfPages;
-    setPage(pageClicked);
-    setReviewsToShow(modifiedReviews.slice((pageClicked - 1) * reviewsPerPage));
-    setNavigationNumbers(pageClicked);
+    setPage(numOfPages);
+    setReviewsToShow(modifiedReviews.slice((numOfPages - 1) * reviewsPerPage));
+    setNavigationNumbers(numOfPages);
     backToTop();
   };
 
