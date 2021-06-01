@@ -9,7 +9,6 @@ const propertiesController = require("../../controllers/propertiesController");
 
 // User routes
 router.get("/authenticated", (req, res) => {
-  console.log(req.user)
   if (req.user) {
     return res.json({ isAuthenticated: true, 
       id: req.user.id,

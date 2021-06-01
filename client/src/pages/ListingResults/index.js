@@ -39,6 +39,9 @@ export default function ListingResults() {
   });
   const [results, setSearchResults] = useState([]);
   // const [totalResults, setTotalResults] = useState();
+  const [keyword, setKeyword] = useState(searchWord);
+  const [filters, setFilters] = useState(searchData);
+  const [updatedResults, setUpdatedResults] = useState(state);
   const [numOfPages, setNumOfPages] = useState();
   const [pageArray, setPageArray] = useState([]);
   const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4]);
@@ -78,10 +81,10 @@ export default function ListingResults() {
   };
 
   const lastPageNavButtonClick = () => {
-    const pageClicked = Math.ceil(numOfResults / resultsPerPage);
-    setPage(pageClicked);
-    getListingsPage(pageClicked);
-    setNavigationNumbers(pageClicked);
+    setPage(numOfPages);
+    getListingsPage(numOfPages);
+    setNavigationNumbers(numOfPages);
+    console.log(numOfPages)
     backToTop();
   };
 
@@ -105,10 +108,10 @@ export default function ListingResults() {
   };
 
   const getListingsPage = (pageNumber) => {
-    domainAPI.getPropertyListings(searchData, pageNumber)
+    domainAPI.getPropertyListings(filters, pageNumber)
       .then(res => {
         setSearchResults(res.data.data);
-        state = res.data; // Not changing state?
+        console.log(res.data.data)
       })
       .catch(err => {
         console.log(err);
@@ -120,10 +123,8 @@ export default function ListingResults() {
       if (pageClicked < 4) {
         setCurrentPageArray([1, 2, 3, 4])
       } else if (pageClicked >= 4 && pageClicked < numOfPages - 2) {
-        console.log("middle")
         setCurrentPageArray([pageClicked - 1, pageClicked, pageClicked + 1]);
       } else if (pageClicked >= numOfPages - 2) {
-        console.log("last")
         setCurrentPageArray([numOfPages - 3, numOfPages - 2, numOfPages - 1, numOfPages])
       }
     }
@@ -137,7 +138,7 @@ export default function ListingResults() {
       domainAPI.getLocationSuggestions(encodeURIComponent(newValue))
       .then(res => {
         setLocationSuggestions(res.data);
-        setLocation(res.data[0]);
+        // setLocation(res.data[0]);
       })
       .catch(err => console.log(err));
     }
@@ -150,6 +151,17 @@ export default function ListingResults() {
   const handleLocationFormSubmit = (event) => {
     event.preventDefault();
     // setSuggestionOpen(false);
+    setPage(1);
+    setNavigationNumbers(1);
+    if (locationSuggestions.length > 0 && !location) {
+      setLocation(locationSuggestions[0]);
+      setKeyword(locationSuggestions[0])
+    } else if (locationSuggestions.length < 1 && !location) {
+      return;
+    } else {
+      setKeyword(location);
+    }
+
     setLocationSuggestions([]);
     const search = {
       location: location,
@@ -162,10 +174,17 @@ export default function ListingResults() {
       price: price.state === "" ? null : price.state,
     }
 
+    setFilters(search);
+
     domainAPI.getPropertyListings(search)
       .then(res => {
         setSearchResults(res.data.data);
-        console.log(res.data.data)
+        setUpdatedResults(res.data);
+        setNumOfResults(parseInt(res.data.headers["x-total-count"]));
+        createPageNav(parseInt(res.data.headers["x-total-count"]));
+        // const numOfPagesB = Math.ceil(res.data.data.length / resultsPerPage);
+        // setNumOfPages(numOfPagesB);
+        // setNumOfResults(res.data.data.length);
       })
       .catch(err => console.log(err))
   };
@@ -221,13 +240,13 @@ export default function ListingResults() {
         }
       }
     };
-    console.log(listing)
+
     history.push({
       pathname: "/listing",
       state: listing.listing,
-      searchWord: searchWord,
-      searchData: searchData,
-      results: state
+      searchWord: keyword,
+      searchData: filters,
+      results: updatedResults
     })
   };
 
@@ -271,7 +290,7 @@ export default function ListingResults() {
           <>
             <div className="results-info-keyword">
               Search results for&nbsp; 
-              <span style={{ fontWeight: "600" }}>"{formatLocationSuggestion(searchWord)}"</span>
+              <span style={{ fontWeight: "600" }}>"{formatLocationSuggestion(keyword)}"</span>
             </div>
             <div className="results-info-pages">
               <strong>{(page * resultsPerPage) - (resultsPerPage - 1)}-{page === numOfPages ? numOfResults : page * resultsPerPage}</strong> out of <strong>{numOfResults}</strong> RESULTS

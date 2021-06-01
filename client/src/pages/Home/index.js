@@ -224,7 +224,7 @@ export default function Home() {
       .then(res => {
         setLocationSuggestions(res.data);
         // ADD BACK IN IF 229 DOESN'T WORK
-        setLocation(res.data[0]);
+        // setLocation(res.data[0]);
       })
       .catch(err => console.log(err))
     }
@@ -240,17 +240,19 @@ export default function Home() {
     setLocationSuggestions([]);
     locationRef.current.children[0].children[1].children[0].value = "";
 
-    // DIDN'T WORK
-    // if (locationSuggestions.length > 0 && !location) {
-    //   setLocation(locationSuggestions[0]);
-    // }
-
-    if (!location) {
+    // DIDN'T WORK FOR NO-CLICK BUG
+    if (locationSuggestions.length > 0 && !location) {
+      setLocation(locationSuggestions[0]);
+    } else if (locationSuggestions.length < 1 && !location) {
       return;
     }
+
+    // if (!location) {
+    //   return;
+    // }
     
     const search = {
-      location: location,
+      location: location ? location : locationSuggestions[0],
       minMax: minMax,
       beds: beds.state === "" ? null : beds.state,
       baths: baths.state === "" ? null : baths.state,

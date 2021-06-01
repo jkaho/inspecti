@@ -11,10 +11,6 @@ export default function LocationSearchBar(props) {
   // States
   const [inputFocus, setInputFocusState] = useState(false);
 
-  // useEffect(() => {
-  //   console.log(props.locationSuggestions);
-  // }, [props.locationSuggestions]);
-  
   // Format locations from API data 
   function formatLocationSuggestion(obj) {
     let location = `${obj.name}, ${obj.state.toUpperCase()}`;
@@ -23,6 +19,11 @@ export default function LocationSearchBar(props) {
     } 
 
     return location;
+  };
+
+  const handleInputBlur = () => {
+    props.locationRef.current.children[0].children[1].children[0].value.trim() !== "" ?
+    setInputFocusState(true) : setInputFocusState(false);
   };
 
   return (
@@ -34,7 +35,7 @@ export default function LocationSearchBar(props) {
           fullWidth={false}
           ref={props.locationRef}
           onFocus={() => setInputFocusState(true)}
-          onBlur={() => setInputFocusState(false)}
+          onBlur={handleInputBlur}
           onInputChange={props.handleLocationInputChange}
           onChange={(event, value) => props.handleSuggestionClick(value)}
           options={props.locationSuggestions}
