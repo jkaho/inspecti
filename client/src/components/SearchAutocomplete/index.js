@@ -29,7 +29,7 @@ export default function SearchAutocomplete(props) {
       onChange={(event, value) => props.onChange(value)}
       options={props.suggestions}
       getOptionLabel={(option) => option.address}
-      style={{ width: 300, padding: 0 }}
+      style={{ padding: 0 }}
       renderInput={(params) => <TextField {...params} label="Search for an address" variant="outlined"
       />}
     />

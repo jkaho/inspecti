@@ -2,6 +2,18 @@ import axios from "axios";
 const url = window.location.hostname.includes("localhost") ?
   "http://localhost:3001" : ""
 
+const determinePropertyType = (propertyType) => {
+  if (propertyType === "Apartment") {
+    return ["apartmentUnitFlat"];
+  } else if (propertyType === "House") {
+    return ["house"];
+  } else if (propertyType === "Townhouse") {
+    return ["townhouse"];
+  } else {
+    return ["apartmentUnitFlat", "house", "townhouse"];
+  }
+}
+
 const domainAPI = {
   getLocationSuggestions: function(query) {
     return axios.get(url + "/api/user/domain/location/q=" + query);
@@ -13,14 +25,12 @@ const domainAPI = {
     return axios.get(url + "/api/user/domain/property/q=" + propertyId)
   },
   getPropertyListings: function(search, pageNumber) {
+    let propertyType = search.type;
     return axios.post(url + "/api/user/domain/listings", {
         "listingType": "Sale",
-        "propertyTypes": [
-          search.type === "Apartment" ? "apartmentUnitFlat" :
-          search.type === "House" ? "house" :
-          search.type === "Townhouse" ? "townhouse" :
-          "apartmentUnitFlat", "house", "townhouse"
-        ],
+        "propertyTypes": 
+          determinePropertyType(propertyType)
+        ,
         "listingAttributes": [
           "HasPhotos"
         ],

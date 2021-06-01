@@ -261,6 +261,8 @@ export default function Home() {
       type: type.state === "" ? null : type.state,
       price: price.state === "" ? null : price.state,
     }
+    console.log(type.state)
+    console.log(search)
 
     domainAPI.getPropertyListings(search, 1)
       .then(res => {
@@ -293,7 +295,6 @@ export default function Home() {
   };
 
   const handleCategoryChange = (event) => {
-    console.log(event.target.value)
     const category = event.target.id;
     switch (category) {
       case "beds":

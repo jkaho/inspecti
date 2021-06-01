@@ -92,7 +92,7 @@
 }
 
 .note-address-input input {
-  height: 30px;
+  /* height: 30px; */
   width: 100%;
   outline: none;
   border-radius: 5px;
