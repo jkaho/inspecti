@@ -3809,6 +3809,131 @@ INSERT INTO scheduledEvents (
   carSpaces,
   landSize,
 --   priceGuide,
-  hasAuction,
+  -- hasAuction,
   userId
-) VALUES (1000, "Inspection", "2021-05-15 13:45:00", "2021-05-15 14:15:00", "93 Michael St North Sydney, NSW 2060", "House", 4, 2, 2, 457, TRUE, 1);
+) VALUES (1, "Inspection", "2021-06-05 10:00:00", "2021-06-05 10:30:00", "96B Lucinda Avenue, Wahroonga NSW 2075", "House", 4, 4, 2, 1985, 1);
+
+INSERT INTO scheduledEvents (
+  id, 
+  eventType,
+  startTime, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+--   priceGuide,
+  -- hasAuction,
+  userId
+) VALUES (2, "Auction", "2021-06-05 10:30:00", "3 Hinkler Street, Greenwich NSW 2065", "House", 4, 3, 2, null, 1);
+
+INSERT INTO scheduledEvents (
+  id, 
+  eventType,
+  startTime, 
+  endTime, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+--   priceGuide,
+  -- hasAuction,
+  userId
+) VALUES (3, "Inspection", "2021-06-05 11:00:00", "2021-06-05 11:30:00", "51 Blytheswood Avenue, Wahroonga NSW 2075", "House", 5, 3, 3, 936, 1);
+
+INSERT INTO scheduledEvents (
+  id, 
+  eventType,
+  startTime, 
+  endTime, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+--   priceGuide,
+  -- hasAuction,
+  userId
+) VALUES (4, "Inspection", "2021-06-05 12:30:00", "2021-06-05 13:00:00", "15 Muttama Road, Artarmon NSW 2064", "House", 5, 3, 1, 955, 1);
+
+INSERT INTO scheduledEvents (
+  id, 
+  eventType,
+  startTime, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+--   priceGuide,
+  -- hasAuction,
+  userId
+) VALUES (5, "Auction", "2021-06-05 13:30:00", "1&2/39 Queen Street, Woollahra NSW 2025", "House", 4, 3, 2, 172, 1);
+
+INSERT INTO scheduledEvents (
+  id, 
+  eventType,
+  startTime, 
+  endTime, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+--   priceGuide,
+  -- hasAuction,
+  userId
+) VALUES (6, "Inspection", "2021-06-09 11:30:00", "2021-06-09 12:00:00", "99 Glenmore Road, Paddington NSW 2021", "Terrace", 3, 2, 1, 155, 1);
+
+INSERT INTO scheduledEvents (
+  id, 
+  eventType,
+  startTime, 
+  endTime, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+--   priceGuide,
+  -- hasAuction,
+  userId
+) VALUES (7, "Inspection", "2021-06-10 11:30:00", "2021-06-10 12:00:00", "150 Boundary Street, Paddington NSW 2021", "Terrace", 4, 3, 1, 152, 1);
+
+INSERT INTO scheduledEvents (
+  id, 
+  eventType,
+  startTime, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+--   priceGuide,
+  -- hasAuction,
+  userId
+) VALUES (8, "Auction", "2021-06-19 9:45:00", "19 William Edward Street, Longueville NSW 2066", "House", 4, 3, 2, 1514, 1);
+
+INSERT INTO scheduledEvents (
+  id, 
+  eventType,
+  startTime, 
+  endTime, 
+  propertyAddress, 
+  propertyType,
+  bedrooms,
+  bathrooms,
+  carSpaces,
+  landSize,
+--   priceGuide,
+  -- hasAuction,
+  userId
+) VALUES (9, "Inspection", "2021-06-23 11:45:00", "2021-06-23 12:30:00", "3 Rockley Street, Castlecrag NSW 2068", "House", 4, 2, 2, 626, 1);
