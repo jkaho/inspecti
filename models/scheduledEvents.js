@@ -47,11 +47,11 @@ module.exports = function(sequelize, DataTypes) {
     //   type: DataTypes.INTEGER,
     //   allowNull: true,
     // },
-    hasAuction: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
+    // hasAuction: {
+    //   type: DataTypes.BOOLEAN,
+    //   allowNull: false,
+    //   defaultValue: false,
+    // },
   }, { freezeTableName: true });
 
   ScheduledEvents.associate = models => {

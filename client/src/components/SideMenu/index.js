@@ -139,7 +139,7 @@ export default function SideMenu(props) {
           <Link to="/notes">
             <ListItem button
               className={
-                window.location.href === url + "notes" ?
+                window.location.href === url + "/notes" ?
                 classes.selected : ""
               }
             >

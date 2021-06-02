@@ -261,8 +261,6 @@ export default function Home() {
       type: type.state === "" ? null : type.state,
       price: price.state === "" ? null : price.state,
     }
-    console.log(type.state)
-    console.log(search)
 
     domainAPI.getPropertyListings(search, 1)
       .then(res => {
@@ -271,7 +269,7 @@ export default function Home() {
           pathname: "/results",
           state: res.data,
           searchData: search,
-          searchWord: location,
+          searchWord: location ? location : locationSuggestions[0],
         })
       })
       .catch(err => console.log(err))
