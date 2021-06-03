@@ -11,6 +11,11 @@ export default function LocationSearchBar(props) {
 
   // Format locations from API data 
   function formatLocationSuggestion(obj) {
+    console.log(props.locationSuggestions, obj, props.locationRef.current.children[0].children[1].children[0].value);
+    // if (typeof(obj) === "string") {
+    //   obj = props.locationSuggestions[0];
+    // }
+
     let location = `${obj.name}, ${obj.state.toUpperCase()}`;
     if (obj.type === "suburb") {
       location += ` ${obj.postcode}`;
@@ -27,6 +32,7 @@ export default function LocationSearchBar(props) {
   return (
     <form onSubmit={props.handleLocationFormSubmit}>
       <div className="location-autocomplete-wrapper">
+
         <Autocomplete
           id="location-autocomplete"
           freeSolo

@@ -84,7 +84,6 @@ export default function ListingResults() {
     setPage(numOfPages);
     getListingsPage(numOfPages);
     setNavigationNumbers(numOfPages);
-    console.log(numOfPages)
     backToTop();
   };
 
