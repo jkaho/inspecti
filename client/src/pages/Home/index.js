@@ -1,5 +1,5 @@
 // React
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 // react-router-dom
 import { Link, useHistory } from "react-router-dom";
 // Child components
@@ -209,16 +209,10 @@ export default function Home() {
   const [type, setType] = useState({
     state: "",
   });
-  const [removeSearchBar, setRemoveSearchBarStatus] = useState(false);
   // const [searchResults, setSearchResults] = useState([]);
 
   // Refs
   const locationRef = useRef();
-
-  // Initial render
-  useEffect(() => {
-    setRemoveSearchBarStatus(false);
-  }, []);
 
   // Helper functions
   const handleLocationInputChange = () => {
@@ -237,13 +231,16 @@ export default function Home() {
   };
 
   const handleSuggestionClick = (value) => {
+    if (typeof(value) === "string") {
+      setLocation(locationSuggestions[0]);
+      return;
+    } 
     setLocation(value);
   };
 
   const handleLocationFormSubmit = (event) => {
     event.preventDefault();
     // setSuggestionOpen(false);
-    setRemoveSearchBarStatus(true);
     setLocationSuggestions([]);
     locationRef.current.children[0].children[1].children[0].value = "";
 
