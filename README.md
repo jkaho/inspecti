@@ -23,12 +23,12 @@ This project was made for real estate enthusiasts and anyone else involved in th
 ## What you can do with Inspecti
 
 **Everyone can:** 
-- Search for property listings
+- Search for property listings (for sale)
 - View property reviews
 
 **Only members can:** 
 - Access a personalised profile/stats page
-- Use Inspecti's property note-taking functionality
+- Use Inspecti's property note-taking and review-sharing functionality
 - Keep a schedule of property events (inspections and auctions)
 - Keep a table of previously inspected properties
 
