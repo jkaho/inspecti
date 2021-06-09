@@ -144,7 +144,15 @@ export default function ListingResults() {
   };
 
   const handleSuggestionClick = (value) => {
-    setLocation(value);
+    if (typeof(value) === "object") {
+      setLocation(value);
+      return;
+    }
+    
+    if (typeof(value) === "string" && locationSuggestions.length > 0) {
+      setLocation(locationSuggestions[0]);
+      return;
+    }
   };
 
   const handleLocationFormSubmit = (event) => {
@@ -289,7 +297,7 @@ export default function ListingResults() {
           <>
             <div className="results-info-keyword">
               Search results for&nbsp; 
-              <span style={{ fontWeight: "600" }}>"{formatLocationSuggestion(keyword)}"</span>
+              <span style={{ fontWeight: "600" }}>"{typeof(keyword) === "string" ? keyword : formatLocationSuggestion(keyword)}"</span>
             </div>
             <div className="results-info-pages">
               <strong>{(page * resultsPerPage) - (resultsPerPage - 1)}-{page === numOfPages ? numOfResults : page * resultsPerPage}</strong> out of <strong>{numOfResults}</strong> RESULTS
