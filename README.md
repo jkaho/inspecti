@@ -12,6 +12,7 @@
 - [What you can do with Inspecti](#What-you-can-do-with-Inspecti)
 - [Testing](#Testing)
 - [Technologies used](#Technologies-used)
+- [Link to Deployed App](#Link)
 - [Screenshots](#Screenshots)
 - [License](#License)
 - [Questions](#Questions)
@@ -55,6 +56,10 @@ Use the following login credentials for functionality testing purposes:
 - [Chart.js](https://www.chartjs.org/docs/latest/)
 - [number-abbreviate](https://www.npmjs.com/package/number-abbreviate)
 - [Canva](https://www.canva.com/)
+
+## Link 
+
+Link to deployed application: [inspecti.herokuapp.com/](https://inspecti.herokuapp.com/)
 
 ## Screenshots
 
