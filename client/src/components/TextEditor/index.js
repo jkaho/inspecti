@@ -34,6 +34,7 @@ function TextEditor(props) {
   // const [editorState, setEditorState] = useState(
   //   () => EditorState.createEmpty(),
   // );
+  // Set rich text editor content to current note text 
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(
       ContentState.createFromBlockArray(
@@ -50,22 +51,26 @@ function TextEditor(props) {
     )));
   }, [props.text]);
 
+  // Called when the editor state is changed - obj argument of type EditorState
   const handleEditorChange = (state) => {
-    setEditorState(state);
+    setEditorState(state); // editorState represents the text content, selection, undo/redo stacks, most recent change
     convertContentToHTML();
   };
 
+  // Takes content of editor and converts to HTML
   const convertContentToHTML = () => {
     let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
     setConvertedContent(currentContentAsHTML);
   };
 
+  // Returns sanitized HTML
   const createMarkup = (html) => {
     return  {
       __html: DOMPurify.sanitize(html)
     }
   };
 
+  // When text is entered into the editor, save converted content to the db
   const handleTextInputChange = () => {
     const textValue = createMarkup(convertedContent).__html;
     const textData = {

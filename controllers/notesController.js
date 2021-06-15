@@ -104,7 +104,6 @@ const notesController = {
       .catch(err => res.status(422).json(err))
   },
   searchNoteAddress: function(req, res) {
-    console.log(req.body)
     db.note
       .findAll({
         where: {
