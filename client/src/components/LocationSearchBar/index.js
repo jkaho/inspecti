@@ -15,7 +15,6 @@ export default function LocationSearchBar(props) {
     if (obj.type === "suburb") {
       location += ` ${obj.postcode}`;
     } 
-
     return location;
   };
 
@@ -35,18 +34,12 @@ export default function LocationSearchBar(props) {
           onFocus={() => setInputFocusState(true)}
           onBlur={handleInputBlur}
           onInputChange={props.handleLocationInputChange}
-          onChange={(event, value) => {
-            props.handleSuggestionClick(value)
-          }}
+          onChange={(event, value) => props.handleSuggestionClick(value)}
           options={props.locationSuggestions}
           getOptionLabel={(option) => typeof(option) !== "string" ? formatLocationSuggestion(option) : option}
           // renderInput={(params) => <TextField {...params} label="Search for a suburb, state or postcode" variant="outlined"
           // TextField must have label or doesn't work (even just whitespace)
           renderInput={(params) => <TextField {...params} label={inputFocus ? " " : "Search for a suburb, state or postcode"} variant="outlined"
-          InputLabelProps={{ shrink: false }}  
-          // InputProps={{
-            //   endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>,
-            // }}
           />}
         />
       </div>
@@ -59,7 +52,6 @@ export default function LocationSearchBar(props) {
       >
         <span id="search-bar-span">Search</span>
       </Button>
-      {/* <button type="submit"></button> */}
     </form>
   );
 };

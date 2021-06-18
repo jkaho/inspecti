@@ -185,38 +185,22 @@ export default function Home() {
   const classes = useStyles();
   const history = useHistory();
   // States
-  // const searchRef = useRef();
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [location, setLocation] = useState();
-  // const [search, setSearch] = useState("");
-  // const [showLabel, setLabelState] = useState(true);
   const [minMax, setMinMax] = useState("min");
-  const [beds, setBeds] = useState({
-    state: "",
-  });
-  const [baths, setBaths] = useState({
-    state: "",
-  });
-  const [cars, setCars] = useState({
-    state: "",
-  });
-  const [size, setSize] = useState({
-    state: "",
-  });
-  const [price, setPrice] = useState({
-    state: "",
-  });
-  const [type, setType] = useState({
-    state: "",
-  });
-  // const [searchResults, setSearchResults] = useState([]);
+  const [beds, setBeds] = useState({ state: "" });
+  const [baths, setBaths] = useState({ state: "" });
+  const [cars, setCars] = useState({ state: "" });
+  const [size, setSize] = useState({ state: "" });
+  const [price, setPrice] = useState({ state: "" });
+  const [type, setType] = useState({ state: "" });
 
   // Refs
   const locationRef = useRef();
 
   // Helper functions
-  const handleLocationInputChange = () => {
-    const newValue = locationRef.current.children[0].children[1].children[0].value;
+  const handleLocationInputChange = (e) => {
+    const newValue = e.target.value;
     if (newValue === "") {
       setLocationSuggestions([]);
     } else {
@@ -240,7 +224,6 @@ export default function Home() {
 
   const handleLocationFormSubmit = (event) => {
     event.preventDefault();
-    // setSuggestionOpen(false);
     setLocationSuggestions([]);
     locationRef.current.children[0].children[1].children[0].value = "";
 
@@ -250,10 +233,6 @@ export default function Home() {
     } else if (locationSuggestions.length < 1 && !location) {
       return;
     }
-
-    // if (!location) {
-    //   return;
-    // }
     
     const search = {
       location: location ? location : locationSuggestions[0],
@@ -279,19 +258,6 @@ export default function Home() {
       .catch(err => console.log(err))
   };
 
-  // const handleLocationSuggestionClick = (event) => {
-  //   event.stopPropagation();
-  //   const locationEl = event.target;
-  //   let locationQuery = "";
-  //   if (locationEl.value) {
-  //     locationQuery += locationEl.value.trim();
-  //   } else {
-  //     locationQuery += locationEl.textContent.trim();
-  //   }
-
-  //   setSearch(locationQuery);
-  //   searchRef.current.value = locationQuery;
-  // };
   const handleRadioChange = (event) => {
     setMinMax(event.target.value);
   };
