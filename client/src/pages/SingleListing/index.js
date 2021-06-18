@@ -152,16 +152,6 @@ export default function SingleListing(props) {
       });
   };
 
-  // const handleAddAuctionButtonClick = (event) => {
-  //   if (event.target.matches("svg")) {
-  //     console.log("svg!")
-  //     console.log(event.target.parentElement.parentElement.dataset)
-  //   } else if (event.target.matches("path")) {
-  //     console.log("path!")
-  //     console.log(event.target.parentElement.parentElement.parentElement.dataset)
-  //   }
-  // };
-
   const formatPropertyType = (str) => {
     let propertyType;
     str.toLowerCase() === "apartmentunitflat" ? propertyType = "Apartment" :

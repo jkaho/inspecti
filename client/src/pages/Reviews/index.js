@@ -39,15 +39,17 @@ export default function Reviews() {
   const [criteria, setCriteria] = useState('Date added');
   const [reviews, setReviews] = useState([]);
   const [modifiedReviews, setModifiedReviews] = useState([]);
+    // Pagination states
+  const [reviewsToShow, setReviewsToShow] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const [pageArray, setPageArray] = useState([]);
-  const [reviewsToShow, setReviewsToShow] = useState([]);
   const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4]);
   const [numOfReviews, setNumOfReviews] = useState();
   const [page, setPage] = useState(1);
+  const reviewsPerPage = 5;
+    // Pop up state
   const [popup, setPopup] = useState({ open: false, type: "", severity: "error", message: "" });
   const popupTimeout = 6000;
-  const reviewsPerPage = 5;
 
   // Refs
   const inputRef = useRef();
@@ -102,8 +104,6 @@ export default function Reviews() {
   };
 
   const handleSortButtonClick = (event) => {
-    console.log(event.target)
-    console.log(criteria)
     let sortType;
     if (event.target.id) {
       sortType = event.target.id.split("-")[1];
@@ -111,7 +111,6 @@ export default function Reviews() {
       sortType = event.target.parentElement.id.split("-")[1];
     }
 
-    console.log(sortType);
     let sortedResults = [];
     switch(criteria) {
       case "Date added":
@@ -238,10 +237,7 @@ export default function Reviews() {
       default:
         return;
     }
-
-    console.log(sortType);
-    console.log(sortedResults)
-
+    
     setModifiedReviews(sortedResults);
     if (page === sortedResults.length) {
       setReviewsToShow(sortedResults.slice((page * reviewsPerPage) - reviewsPerPage));
