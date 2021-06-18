@@ -13,35 +13,23 @@ import "./style.css";
 import domainAPI from "../../utils/domainAPI";
 
 export default function ListingResults() {
-  let { state, searchWord, searchData } = useLocation();
+  let { state, searchWord, searchData } = useLocation(); // Data from home 
   const history = useHistory();
   // States 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [location, setLocation] = useState({});
   const [minMax, setMinMax] = useState("min");
-  const [beds, setBeds] = useState({
-    state: "",
-  });
-  const [baths, setBaths] = useState({
-    state: "",
-  });
-  const [cars, setCars] = useState({
-    state: "",
-  });
-  const [size, setSize] = useState({
-    state: "",
-  });
-  const [price, setPrice] = useState({
-    state: "",
-  });
-  const [type, setType] = useState({
-    state: "",
-  });
+  const [beds, setBeds] = useState({ state: "" });
+  const [baths, setBaths] = useState({ state: "" });
+  const [cars, setCars] = useState({ state: "" });
+  const [size, setSize] = useState({ state: "" });
+  const [price, setPrice] = useState({ state: "" });
+  const [type, setType] = useState({ state: "" });
   const [results, setSearchResults] = useState([]);
-  // const [totalResults, setTotalResults] = useState();
   const [keyword, setKeyword] = useState(searchWord);
   const [filters, setFilters] = useState(searchData);
   const [updatedResults, setUpdatedResults] = useState(state);
+    // Pagination states
   const [numOfPages, setNumOfPages] = useState();
   const [pageArray, setPageArray] = useState([]);
   const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4]);
@@ -61,7 +49,6 @@ export default function ListingResults() {
 
   // Helper functions 
   const createPageNav = (totalResults) => {
-    // 20 listings on each page 
     const numOfPagesB = Math.ceil(totalResults / resultsPerPage);
     setNumOfPages(numOfPagesB);
     let pageArrayB = [];
@@ -71,7 +58,6 @@ export default function ListingResults() {
     setPageArray(pageArrayB);
   };
 
-  
   const pageNavButtonClick = (event) => {
     const pageClicked = parseInt(event.target.value);
     setPage(pageClicked);
@@ -110,7 +96,6 @@ export default function ListingResults() {
     domainAPI.getPropertyListings(filters, pageNumber)
       .then(res => {
         setSearchResults(res.data.data);
-        console.log(res.data.data)
       })
       .catch(err => {
         console.log(err);
@@ -129,35 +114,29 @@ export default function ListingResults() {
     }
   };
 
-  const handleLocationInputChange = () => {
-    const newValue = locationRef.current.children[0].children[1].children[0].value;
+  const handleLocationInputChange = (e) => {
+    const newValue = e.target.value;
     if (newValue === "") {
       setLocationSuggestions([]);
     } else {
       domainAPI.getLocationSuggestions(encodeURIComponent(newValue))
       .then(res => {
         setLocationSuggestions(res.data);
-        // setLocation(res.data[0]);
       })
       .catch(err => console.log(err));
     }
   };
 
-  const handleSuggestionClick = (value) => {
-    if (typeof(value) === "object") {
-      setLocation(value);
-      return;
-    }
-    
+  const handleSuggestionClick = (value) => {    
     if (typeof(value) === "string" && locationSuggestions.length > 0) {
       setLocation(locationSuggestions[0]);
       return;
     }
+    setLocation(value);
   };
 
   const handleLocationFormSubmit = (event) => {
     event.preventDefault();
-    // setSuggestionOpen(false);
     setPage(1);
     setNavigationNumbers(1);
     if (locationSuggestions.length > 0 && !location) {
@@ -189,9 +168,6 @@ export default function ListingResults() {
         setUpdatedResults(res.data);
         setNumOfResults(parseInt(res.data.headers["x-total-count"]));
         createPageNav(parseInt(res.data.headers["x-total-count"]));
-        // const numOfPagesB = Math.ceil(res.data.data.length / resultsPerPage);
-        // setNumOfPages(numOfPagesB);
-        // setNumOfResults(res.data.data.length);
       })
       .catch(err => console.log(err))
   };
@@ -230,15 +206,6 @@ export default function ListingResults() {
     event.stopPropagation();
     const listingId = event.target.dataset.listing.split("-")[1];
     let listing = {};
-    // for (let i = 0; i < state.data.length; i++) {
-    //   if (state.data[i].type === "PropertyListing") {
-    //     console.log(state.data[i].listing.id, parseInt(listingId))
-    //     if (state.data[i].listing.id === parseInt(listingId)) {
-    //       listing = state.data[i];
-    //       i = state.data.length;
-    //     }
-    //   }
-    // };
     for (let i = 0; i < results.length; i++) {
       if (results[i].type === "PropertyListing") {
         if (results[i].listing.id === parseInt(listingId)) {
@@ -262,7 +229,6 @@ export default function ListingResults() {
     if (obj.type === "suburb") {
       location += ` ${obj.postcode}`;
     } 
-
     return location;
   };
 
