@@ -12,6 +12,7 @@
 - [What you can do with Inspecti](#What-you-can-do-with-Inspecti)
 - [Testing](#Testing)
 - [Technologies used](#Technologies-used)
+- [Link to Deployed App](#Link)
 - [Screenshots](#Screenshots)
 - [License](#License)
 - [Questions](#Questions)
@@ -23,12 +24,12 @@ This project was made for real estate enthusiasts and anyone else involved in th
 ## What you can do with Inspecti
 
 **Everyone can:** 
-- Search for property listings
+- Search for property listings (for sale)
 - View property reviews
 
 **Only members can:** 
 - Access a personalised profile/stats page
-- Use Inspecti's property note-taking functionality
+- Use Inspecti's property note-taking and review-sharing functionality
 - Keep a schedule of property events (inspections and auctions)
 - Keep a table of previously inspected properties
 
@@ -54,6 +55,11 @@ Use the following login credentials for functionality testing purposes:
 - [FullCalendar React](https://www.npmjs.com/package/@fullcalendar/react)
 - [Chart.js](https://www.chartjs.org/docs/latest/)
 - [number-abbreviate](https://www.npmjs.com/package/number-abbreviate)
+- [Canva](https://www.canva.com/)
+
+## Link 
+
+Link to deployed application: [inspecti.herokuapp.com/](https://inspecti.herokuapp.com/)
 
 ## Screenshots
 
