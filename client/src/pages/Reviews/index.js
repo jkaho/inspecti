@@ -42,8 +42,8 @@ export default function Reviews() {
     // Pagination states
   const [reviewsToShow, setReviewsToShow] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
-  const [pageArray, setPageArray] = useState([]);
-  const [currentPageArray, setCurrentPageArray] = useState([1, 2, 3, 4]);
+  const [below5PageNavNums, setBelow5PageNavNums] = useState([]);
+  const [above5PageNavNums, setAbove5PageNavNums] = useState([1, 2, 3, 4]);
   const [numOfReviews, setNumOfReviews] = useState();
   const [page, setPage] = useState(1);
   const reviewsPerPage = 5;
@@ -85,6 +85,7 @@ export default function Reviews() {
   const handleSearchChange = () => {
     const search = inputRef.current.value.trim();
     let searchResults = [];
+    let initialPage = page;
     if (search !== "") {
       reviews.forEach(review => {
         if (review.propertyAddress.toLowerCase().includes(search)) {
@@ -96,10 +97,14 @@ export default function Reviews() {
       setReviewsToShow(modifiedReviews.slice((page - 1) * reviewsPerPage, (page - 1) * reviewsPerPage + reviewsPerPage));
       createPageNav(searchResults.length);
       setNumOfReviews(searchResults.length);
+      // Set page to 1 on search
+      setPage(1);
     } else {
       setModifiedReviews(reviews);
       setNumOfReviews(reviews.length);
       setReviewsToShow(reviews.slice((page - 1) * reviewsPerPage, (page - 1) * reviewsPerPage + reviewsPerPage));
+      setNavigationNumbers(1);
+      setPage(1);
     }
   };
 
@@ -271,7 +276,7 @@ export default function Reviews() {
     for (let i = 1; i <= numOfPagesB; i++) {
       pageArrayB.push(i);
     };
-    setPageArray(pageArrayB);
+    setBelow5PageNavNums(pageArrayB);
   };
 
   const pageNavButtonClick = (event) => {
@@ -311,14 +316,11 @@ export default function Reviews() {
   const setNavigationNumbers = (pageClicked) => {
     if (numOfPages >= 6) {
       if (pageClicked < 4) {
-        console.log("first")
-        setCurrentPageArray([1, 2, 3, 4])
+        setAbove5PageNavNums([1, 2, 3, 4])
       } else if (pageClicked >= 4 && pageClicked < numOfPages - 2) {
-        console.log("middle")
-        setCurrentPageArray([pageClicked - 1, pageClicked, pageClicked + 1]);
+        setAbove5PageNavNums([pageClicked - 1, pageClicked, pageClicked + 1]);
       } else if (pageClicked >= numOfPages - 2) {
-        console.log("last")
-        setCurrentPageArray([numOfPages - 3, numOfPages - 2, numOfPages - 1, numOfPages])
+        setAbove5PageNavNums([numOfPages - 3, numOfPages - 2, numOfPages - 1, numOfPages])
       }
     }
   };
@@ -448,7 +450,7 @@ export default function Reviews() {
                         className="prev-review-page">Prev</button>
                     </td> : <td></td>
                   }
-                  {pageArray.map(item => (
+                  {below5PageNavNums.map(item => (
                     <td key={item}>
                       <button
                         onClick={pageNavButtonClick}
@@ -465,6 +467,7 @@ export default function Reviews() {
                   }
                 </tr>
               :
+              // If there are more than 5 pages
                 <tr>
                   {page > 1 ? 
                     <td>
@@ -486,7 +489,7 @@ export default function Reviews() {
                       </td>
                     </> : <></>
                   }
-                  {currentPageArray.map(item => (
+                  {above5PageNavNums.map(item => (
                     <td key={item}>
                       <button
                         value={item}
