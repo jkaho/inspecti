@@ -85,7 +85,6 @@ export default function Reviews() {
   const handleSearchChange = () => {
     const search = inputRef.current.value.trim();
     let searchResults = [];
-    let initialPage = page;
     if (search !== "") {
       reviews.forEach(review => {
         if (review.propertyAddress.toLowerCase().includes(search)) {
@@ -94,7 +93,7 @@ export default function Reviews() {
       });
   
       setModifiedReviews(searchResults);
-      setReviewsToShow(modifiedReviews.slice((page - 1) * reviewsPerPage, (page - 1) * reviewsPerPage + reviewsPerPage));
+      setReviewsToShow(searchResults.slice((page - 1) * reviewsPerPage, (page - 1) * reviewsPerPage + reviewsPerPage));
       createPageNav(searchResults.length);
       setNumOfReviews(searchResults.length);
       // Set page to 1 on search
