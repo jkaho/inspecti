@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     background: "white",
-    borderBottom: "1px solid grey"
+    // borderBottom: "1px solid grey"
+    borderBottom: "1px solid rgb(0, 0, 0, 0.12)"
   },
   appBarHome: {
     background: "rgb(195, 63, 232)",
