@@ -143,28 +143,17 @@ const ratingTooltips = {
 export default function Notes(props) {
   // States
   const classes = useStyles();
+    // Displayed note 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [author, setAuthor] = useState({});
   const [dateUpdated, setDateUpdated] = useState();
   const [currentNoteId, setCurrentNoteId] = useState();
-  // const [allNotes, setAllNotes] = useState([]);
-  const [starredNotes, setStarredNotes] = useState([]);
-  const [nonStarredNotes, setNonStarredNotes] = useState([]);
   const [addressInputIsOpen, setAddressInputState] = useState(false);
   const [ratingButtonIsOpen, setRatingButtonState] = useState(false);
   const [ratingSectionIsOpen, setRatingSectionState] = useState(false);
-  // const [addressSearch, setAddressSearch] = useState("");
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressInfoIsOpen, setAddressInfoState] = useState(false);
-  const [modalStyle] = useState(getModalStyle);
-  const [modalState, setModalState] = useState({
-    isOpen: false,
-    type: "",
-    title: "",
-    text: ""
-  });
   const [propertySpecs, setPropertySpecs] = useState({
     bedrooms: 1,
     bathrooms: 1,
@@ -175,18 +164,31 @@ export default function Notes(props) {
   const [ratingEditIsOpen, setRatingEditState] = useState(false);
   const [textEditorModeOn, setTextEditorMode] = useState(false);
   const [noteReviewToDelete, setNoteReviewToDelete] = useState();
-  // const [searchword, setSearchword] = useState();
+  const [isShared, setSharedState] = useState(false);
+    // Shared notes
+  const [author, setAuthor] = useState({});
+  const [reviewModalIsOpen, setReviewModalState] = useState(false);
+    // Sidebar 
+  const [starredNotes, setStarredNotes] = useState([]);
+  const [nonStarredNotes, setNonStarredNotes] = useState([]);
+    // Modal 
+  const [modalStyle] = useState(getModalStyle);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    type: "",
+    title: "",
+    text: ""
+  });
+    // Pop up
   const [popup, setPopupState] = useState({ open: false, type: "", severity: "success", message: "" });
   const popupTimeout = 6000;
-  const [isShared, setSharedState] = useState(false);
-  const [reviewModalIsOpen, setReviewModalState] = useState(false);
+    // Misc
   const [responsiveNoteListOpen, setResponsiveNoteListState] = useState(false);
   let sideTitle = "";
 
   // Refs
   const searchRef = useRef();
   const titleRef = useRef();
-  // const textRef = useRef();
   const addressRef = useRef();
   const conditionRef = useRef();
   const potentialRef = useRef();
@@ -207,7 +209,6 @@ export default function Notes(props) {
       // If there are no existing notes, create a new blank note
       if (res.data.length < 1) {
         titleRef.current.value = "";
-        // textRef.current.value = "";
         setTitle("");
         setText("");
         setDateUpdated(moment());
@@ -233,7 +234,7 @@ export default function Notes(props) {
               setPopupState({ open: false, type: "", severity: "", message: "" });
             }, popupTimeout);
           });
-      // Else render the latest note 
+      // If there are existing notes, render the latest note 
       } else {
         // Separate starred and non-starred notes 
         let starredNotes = [];
@@ -246,10 +247,6 @@ export default function Notes(props) {
           };
         });
 
-        // Reverse order of notes to display newest first 
-        // res.data.reverse(); // to display latest note
-        // starredNotes.reverse(); // to display starred notes list
-        // nonStarredNotes.reverse(); // to display all notes list 
         setStarredNotes(starredNotes);
         setNonStarredNotes(nonStarredNotes);
 
@@ -341,10 +338,6 @@ export default function Notes(props) {
           };
         });
 
-        // Reverse order of notes to display newest first 
-        // res.data.reverse(); // to display latest note
-        // starredNotes.reverse(); // to display starred notes list
-        // nonStarredNotes.reverse(); // to display all notes list 
         setStarredNotes(starredNotes);
         setNonStarredNotes(nonStarredNotes);
 
@@ -391,8 +384,6 @@ export default function Notes(props) {
   };
 
   const handleNewNoteButtonClick = () => {
-    // titleRef.current.value = "";
-    // textRef.current.value = "";
     setTitle("");
     setText("");
     setAddress("");
@@ -435,28 +426,25 @@ export default function Notes(props) {
       title: titleValue
     };
 
+    // Update sidebar 
     notesAPI.updateNote(currentNoteId, titleData)
       .then(res => {
         // Check user's saved notes to update list
         notesAPI.getNotesWithReviews()
         .then(res => {    
-        // Separate starred and non-starred notes 
-        let starredNotes = [];
-        let nonStarredNotes = [];
-        res.data.forEach(note => {
-          if (note.starred) {
-            starredNotes.push(note);
-          } else {
-            nonStarredNotes.push(note);
-          };
-        });
+          // Separate starred and non-starred notes 
+          let starredNotes = [];
+          let nonStarredNotes = [];
+          res.data.forEach(note => {
+            if (note.starred) {
+              starredNotes.push(note);
+            } else {
+              nonStarredNotes.push(note);
+            };
+          });
 
-        // Reverse order of notes to display newest first 
-        // res.data.reverse(); // to display latest note
-        // starredNotes.reverse(); // to display starred notes list
-        // nonStarredNotes.reverse(); // to display all notes list 
-        setStarredNotes(starredNotes);
-        setNonStarredNotes(nonStarredNotes);
+          setStarredNotes(starredNotes);
+          setNonStarredNotes(nonStarredNotes);
         })
         .catch(err => {
           console.log(err);
@@ -1187,6 +1175,12 @@ export default function Notes(props) {
   const handleAllNotesButtonClick = () => {
     setResponsiveNoteListState(true);
   };
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 850) {
+      setResponsiveNoteListState(false);
+    }
+  });
 
   return (
     <div>
