@@ -65,9 +65,7 @@ function TextEditor(props) {
 
   // Returns sanitized HTML
   const createMarkup = (html) => {
-    return  {
-      __html: DOMPurify.sanitize(html)
-    }
+    return { __html: DOMPurify.sanitize(html) }
   };
 
   // When text is entered into the editor, save converted content to the db

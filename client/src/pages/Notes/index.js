@@ -920,11 +920,6 @@ export default function Notes(props) {
                 nonStarredNotes.push(note);
               };
             });
-
-            // Reverse order of notes to display newest first 
-            // res.data.reverse(); // to display latest note
-            // starredNotes.reverse(); // to display starred notes list
-            // nonStarredNotes.reverse(); // to display all notes list 
             setStarredNotes(starredNotes);
             setNonStarredNotes(nonStarredNotes);
           })
@@ -1060,7 +1055,6 @@ export default function Notes(props) {
   };
 
   const handleShareButtonClick = () => {
-    console.log(props.id)
     userAPI.getOneUser(props.id)
       .then(res => {
         setAuthor({ firstName: res.data.firstName, lastName: res.data.lastName });
