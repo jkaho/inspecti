@@ -188,7 +188,6 @@ export default function MonthlySchedule() {
           eventsAPI.createEvent(newEvent)
           .then(res => {
             handleModalClose();
-            // setAddEventPopupState(true);
             setPopup({ open: true, type: "addEventSuccess", severity: "success",
               message: "Event successfully added!"
             });
@@ -211,18 +210,12 @@ export default function MonthlySchedule() {
       });
   };
 
-  // const handlePopupClose = () => {
-  //   setAddEventPopupState(false);
-  // };
-
   const handleClose = () => {
     setPopup({ open: false, type: "", severity: "error", message: "" });
   };
 
   const handleAddressInputChange = () => {
     const newValue = addressRef.current.children[0].children[1].children[0].value;
-    // setAddressQuery(newValue);
-
     if (newValue === "") {
       setAddressSuggestions([]);
     } else {
@@ -306,8 +299,6 @@ export default function MonthlySchedule() {
             endTimeRef={endTimeRef}
             eventType={eventType}
             addressSuggestions={addressSuggestions}
-            // addEventPopupIsOpen={addEventPopupIsOpen}
-            // handlePopupClose={handlePopupClose}
           />
 
         </div>

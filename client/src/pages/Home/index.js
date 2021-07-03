@@ -207,8 +207,6 @@ export default function Home() {
       domainAPI.getLocationSuggestions(encodeURIComponent(newValue))
       .then(res => {
         setLocationSuggestions(res.data);
-        // ADD BACK IN IF 229 DOESN'T WORK
-        // setLocation(res.data[0]);
       })
       .catch(err => console.log(err))
     }
@@ -247,7 +245,6 @@ export default function Home() {
 
     domainAPI.getPropertyListings(search, 1)
       .then(res => {
-        // setSearchResults(res.data);
         history.push({
           pathname: "/results",
           state: res.data,

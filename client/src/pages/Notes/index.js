@@ -300,7 +300,6 @@ export default function Notes(props) {
       // If there are no existing notes, create a new blank note
       if (res.data.length < 1) {
         titleRef.current.value = "";
-        // textRef.current.value = "";
         setTitle("");
         setText("");
         
